@@ -10,7 +10,7 @@ This document supplements, but does not replace, the existing `AGENTS.md` hierar
 
 1. Read the repository-root `AGENTS.md` **in full**, followed by this `rules.md` **in full**.
 2. Find all applicable scoped `AGENTS.md` files along the paths you will edit (`app/AGENTS.md`, `docs/AGENTS.md`, `backend/AGENTS.md`, `research/AGENTS.md`, or deeper instructions if present). Read **each applicable file in full**, not just excerpts. Do not indiscriminately load unrelated folders.
-3. Read the relevant requirements and technical documents: `PRD.md`; `docs/ARCHITECTURE.md` and only the applicable `docs/architecture/*.md` guidance; `docs/DESIGN.md` for UI; and `docs/IMPLEMENTATION.md` for the current implementation plan. Where a file is absent, report itâ€”do not reconstruct obsolete instructions from Git history without permission.
+3. Read the relevant requirements and technical documents: `PRD.md`; `docs/ARCHITECTURE.md` and only the applicable `docs/architecture/*.md` guidance; `docs/DESIGN.md` for UI; and `docs/IMPLEMENTATION.md` for the current implementation plan. Where a file is absent, report it—do not reconstruct obsolete instructions from Git history without permission.
 4. Inspect current Git state: `git status --short`, `git branch --show-current`, `git log -1 --oneline`, and the diff for any existing changes. **Never discard pre-existing local modifications.**
 5. Before contributing to a feature, inspect the actual implementation, imports/callers, state ownership, affected tests, asset declarations, lint configuration, and CI workflows. Read enough of the source to understand existing behavior before proposing changes. For non-trivial cross-file or architectural work, use Graphify first **as directed by root `AGENTS.md`**, then verify conclusions in source.
 6. Read `.github/PULL_REQUEST_TEMPLATE.md` **before** preparing a PR description; populate that template faithfully, rather than inventing a generic one.
@@ -24,7 +24,7 @@ Follow the repository instruction hierarchy and source-of-truth order defined in
 
 PanganKita is a hyperlocal, pickup-oriented surplus-food product. Never invent real authentication, merchant verification, payments, inventories, pickup confirmations, maps, safety certifications, environmental impact, or regulatory compliance. Distinguish functioning integrations from placeholders, mocks, and proposals.
 
-## 3. Branch naming â€” required convention
+## 3. Branch naming — required convention
 
 For a new workstream, use **one focused branch** with a lowercase slash-prefixed type and a short hyphenated description:
 
@@ -47,7 +47,7 @@ ci/validate-dart-lints
 
 Branch names are a **repository convention inspired by Conventional Commits**, not an official part of the Conventional Commits specification. Prefer descriptive, lowercase names; avoid ambiguous names such as `update`, `final`, `test123`, or `new-branch`. Before creating a branch, verify the active branch, local changes, target base, and whether an appropriate branch already exists. **Never switch branches, reset, rebase, delete branches, or rewrite history without considering the current working tree and obtaining authorization when appropriate.**
 
-## 4. Commit messages â€” Conventional Commits
+## 4. Commit messages — Conventional Commits
 
 Use the canonical format:
 
@@ -68,7 +68,7 @@ chore(flutter): remove obsolete prototype screens
 
 Use a specific scope only when useful. Keep the subject truthful, concise, and imperative. Use `!` plus a `BREAKING CHANGE:` footer when a truly incompatible interface or behavior is introduced. Do not use `feat` for documentation-only changes. Do not mix unrelated changes in one commit. Review staged content with `git diff --cached --check` and `git diff --cached` before committing. **Do not stage, commit, amend, push, or force-push unless the user explicitly authorizes it.**
 
-## 5. Pull requests â€” use the actual repository template
+## 5. Pull requests — use the actual repository template
 
 Before creating or drafting a PR, open `.github/PULL_REQUEST_TEMPLATE.md` and retain its actual sections, including:
 
@@ -88,7 +88,7 @@ When the user supplies a screenshot or HTML reference **with the task**, use `do
 
 **References stay outside the repository unless the user explicitly approves committing them.** Do not create `docs/design/reference/` or reintroduce stale Stitch phase plans merely because previous history used those paths.
 
-Preserve the approved PanganKita brand identity and brand guidelinesâ€”logos, palette, typography decisions, and asset integrity. Do not treat an unapproved screenshot's incidental color or font difference as an automatic brand change. Never claim a font is installed unless its licensed font asset and Flutter configuration exist.
+Preserve the approved PanganKita brand identity and brand guidelines—logos, palette, typography decisions, and asset integrity. Do not treat an unapproved screenshot's incidental color or font difference as an automatic brand change. Never claim a font is installed unless its licensed font asset and Flutter configuration exist.
 
 ## 7. Architecture, readability, and maintainability
 
