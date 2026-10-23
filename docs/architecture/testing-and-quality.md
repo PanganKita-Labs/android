@@ -5,6 +5,10 @@ Read `docs/ARCHITECTURE.md` first.
 This document defines testing boundaries, test doubles, quality gates,
 structural verification, and Graphify expectations.
 
+**Current implementation:** only a branded bootstrap smoke test is present.
+Unit, feature widget, and integration tests described below become necessary
+when those behaviors are actually implemented.
+
 ## Testing principle
 
 Test behavior at the narrowest useful level.
@@ -50,7 +54,8 @@ Prefer a small number of meaningful journeys over a large brittle suite.
 
 Prefer simple fakes/mocks only where necessary.
 
-The deterministic prototype repositories may often be sufficient for tests.
+When a future task introduces deterministic mock repositories, they may be
+sufficient for the relevant tests; none exist in the current baseline.
 
 Do not build elaborate mocking infrastructure when a small in-memory fake is
 clearer.
@@ -166,7 +171,7 @@ Before accepting a non-trivial change, ask:
 
 Coverage is evidence, not the goal.
 
-Prioritize meaningful tests for:
+Once these capabilities exist, prioritize meaningful tests for:
 
 - critical state transitions;
 - repository contracts;

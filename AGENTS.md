@@ -546,3 +546,10 @@ Passing checks does not grant permission to commit, push, merge, open a pull
 request, or modify remote state.
 
 Only perform those actions when the user has explicitly authorized them.
+
+## Additional AI agent contribution guardrails
+
+After reading this root `AGENTS.md`, read [`rules.md`](rules.md) in full before
+starting a contribution. Read every **applicable** scoped `AGENTS.md` and
+the relevant source, tests, architecture, design, and PR template before editing.
+The guardrails supplement but do not weaken existing repository instructions.

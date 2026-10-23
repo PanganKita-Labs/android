@@ -5,23 +5,18 @@ Read `docs/ARCHITECTURE.md` first.
 This document records current architectural guardrails and how significant
 changes should be evaluated.
 
-## Current prototype boundary
+## Current implementation boundary
 
-The active implementation plan converts the accepted design into a Flutter
-prototype using deterministic mock data.
+The active application is a **branded Flutter bootstrap** with a single smoke
+test. Previous feature UI, mock repositories, domain models, fixtures, local
+state transitions, and feature-specific tests were intentionally retired. No
+backend, real authentication, location integration, payment, analytics,
+merchant verification, or marketplace flow exists in the active source tree.
 
-Current scope includes:
-
-- Flutter app structure;
-- theme/design system;
-- feature UI;
-- mock repositories;
-- deterministic fixtures;
-- local prototype state transitions;
-- tests;
-- accessibility/responsiveness.
-
-It does not include production infrastructure.
+Feature-first patterns and mock examples elsewhere in this documentation are
+**prospective engineering guidance**, not a record of currently working code.
+Introduce only the features and supporting dependencies approved for the task;
+preserve the established brand, accessibility, product truth and quality gates.
 
 ## Dependency policy
 
@@ -60,7 +55,7 @@ Code generation adds:
 - dependency coupling;
 - repository noise.
 
-Handwritten models are preferred for the current prototype unless generation
+Prefer handwritten models when models are introduced, unless generation
 clearly improves maintainability.
 
 ## State-management framework
@@ -88,36 +83,35 @@ construction.
 
 ## Persistence
 
-Prototype state may remain in memory.
+When a real feature needs state, a simple in-memory owner may be sufficient.
 
 Do not add persistent local storage unless restart durability becomes a current
 requirement.
 
 ## Backend
 
-The Flutter prototype must remain independent of a specific backend
-implementation.
+Flutter must remain independent of any unapproved backend implementation.
 
-Real networking belongs to a later backend/API integration plan.
+Introduce real networking only in an explicitly approved integration task.
 
 ## Authentication
 
-Production authentication is outside current prototype architecture.
+No production authentication exists; add it only under approved requirements
+and appropriate security review.
 
 Do not introduce fake JWT, token-refresh, OAuth, or secure-session systems.
 
 ## Payment
 
-Current MVP baseline is reservation in PanganKita with payment at pickup.
+The PRD describes reservation with payment at pickup as an intended MVP
+product flow; neither is implemented in the active Flutter baseline.
 
-Do not create payment/wallet/settlement architecture during prototype
-conversion.
+Do not create payment/wallet/settlement architecture without an approved current requirement.
 
 ## Maps and geolocation
 
-Static/dummy location is sufficient for the prototype.
-
-Do not add a live map/geolocation SDK solely to reproduce Stitch visuals.
+An approved UI-only task may use a clearly labeled static location example.
+No live geolocation exists. Do not add a maps SDK solely to reproduce a screenshot.
 
 ## Analytics
 
@@ -129,10 +123,8 @@ not be scattered directly through UI widgets.
 
 ## WebSockets / real-time infrastructure
 
-Do not introduce WebSocket/event-stream infrastructure during the mock
-prototype.
-
-Local deterministic transitions are enough for current validation.
+Do not introduce WebSocket/event-stream infrastructure without an approved
+real-time requirement. No former local state transitions remain implemented.
 
 ## Significant architecture changes
 
@@ -166,7 +158,7 @@ Do not silently introduce a second architectural style.
 Stop and report instead of guessing when:
 
 - PRD and architecture appear incompatible;
-- a change requires production infrastructure outside the active phase;
+- a change requires production infrastructure outside the approved task;
 - a new dependency materially changes architecture;
 - a cross-feature cycle appears necessary;
 - the only way forward seems to require a global singleton/service locator;

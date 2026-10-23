@@ -1,8 +1,8 @@
 # PanganKita Flutter Architecture
 
-**Document:** `docs/ARCHITECTURE.md`\
-**Product:** PanganKita\
-**Status:** Architecture director / orchestration layer\
+**Document:** `docs/ARCHITECTURE.md`
+**Product:** PanganKita
+**Status:** Active architecture director / clean Flutter bootstrap
 **Scope:** Flutter application architecture
 
 > Build the smallest architecture that keeps PanganKita easy to understand,
@@ -23,13 +23,13 @@ When instructions conflict:
 
 1. `PRD.md`
 2. Official PanganKita Brand Guidelines
-3. `AGENTS.md`
+3. `AGENTS.md`, `rules.md`, and applicable scoped `AGENTS.md`
 4. `app/AGENTS.md`
 5. `docs/ARCHITECTURE.md`
 6. relevant `docs/architecture/*.md`
-7. `docs/DESIGN.md` and relevant scoped design instructions
-8. `docs/IMPLEMENTATION.md` and the active implementation phase
-9. accepted HTML/PNG design references
+7. `docs/DESIGN.md` - active screenshot-to-Flutter contract
+8. `docs/IMPLEMENTATION.md` - current implementation plan
+9. approved screenshots/HTML supplied with the task (not committed to Git)
 
 Architecture supports product behavior. It must not silently redefine the PRD.
 
@@ -106,8 +106,8 @@ feature state owner
 ↓
 repository contract
 ↑
-mock repository today
-real repository later
+a data implementation only when justified
+a real backend integration only when approved
 ```
 
 Cross-feature dependencies should remain narrow and acyclic.
@@ -122,28 +122,36 @@ shared/core
 
 Avoid feature dependency cycles.
 
-## Current prototype boundary
+## Current implementation baseline
 
-The current Flutter implementation uses deterministic mock data.
-
-Preferred flow:
+The active Flutter source is an intentionally minimal **branded bootstrap**:
 
 ```text
-presentation
-    ↓
-typed domain/view state
-    ↓
-repository contract
-    ↓
-mock repository
-    ↓
-fixtures
+app/lib/main.dart
+app/lib/app/pangan_kita_app.dart
+app/lib/app/pangan_kita_theme.dart
+app/test/widget_test.dart
 ```
 
-Do not spread fixture values directly through widgets.
+At this baseline, there are **no implemented features** under `app/lib/features/`:
+no authentication, discovery feed, reservation or merchant journey, domain
+models, mock repositories, routing shell, or real backend integration. The
+existing test is a bootstrap/theme smoke test, **not** evidence that future
+product flows work. Old commits document retired code, not live behavior.
 
-Do not introduce production backend, auth, payment, live maps, analytics,
-WebSockets, or persistence merely to make the prototype appear production-like.
+Brand foundations, Android/Flutter configuration, lint/complexity rules, CI,
+and the scoped engineering and architecture contracts remain in force.
+
+## Future implementation boundaries
+
+The feature-first diagrams and repository/state patterns in this document are
+**design guidance for approved future work**, not a claim that those files
+already exist. Add a layer, contract, fake, or feature directory only when it
+solves a current requirement. Test it when introduced. Approved reference
+screenshots are supplied with the task, not stored in the repository.
+
+Do not invent live backend, auth, payments, geolocation, regulatory compliance,
+food-safety guarantees, or impact reporting to make a screenshot interactive.
 
 ## Barrel policy summary
 

@@ -65,7 +65,10 @@ abstract final class PanganKitaTheme {
     inputDecorationTheme: const InputDecorationTheme(
       filled: true,
       fillColor: Colors.white,
-      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: PanganKitaSpacing.md,
+        vertical: 14,
+      ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(PanganKitaRadii.control),
