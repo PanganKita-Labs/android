@@ -1,158 +1,49 @@
-# PanganKita Flutter Prototype Implementation Plan
+# PanganKita Flutter From-Scratch Implementation Plan
 
-**Document:** `docs/IMPLEMENTATION.md`
-**Product:** PanganKita
-**Status:** Flutter prototype conversion orchestrator
-**Scope:** Accepted design → tested Flutter prototype using deterministic mock data
-**Backend:** Explicitly out of scope for this plan
+**Status:** Fresh-start baseline. Previous Flutter prototype was intentionally
+removed as obsolete; this is not a continuation of its six development phases.
 
-> This plan controls implementation order. It does not replace `PRD.md`,
-> `docs/DESIGN.md`, or the repository `AGENTS.md` hierarchy.
+## Current application baseline
 
-## 1. Purpose
+The Flutter app now contains only `main.dart`, `app/pangan_kita_app.dart`,
+`app/pangan_kita_theme.dart`, and one minimal bootstrap test. It displays a
+placeholder, not a marketplace, auth flow, reservation feature or business UI.
+All previous application implementations, mock repositories, domain models,
+fixture images and UI-specific tests have been removed from the active tree.
+Old commits remain reachable through Git history and safety backups.
 
-This document is the implementation director for converting the accepted
-PanganKita product/design baseline into a maintainable Flutter prototype.
+Retained infrastructure: `app/android/`, Flutter/Dart package manifest and
+lockfile, strict analyzer/DCL/Dartrics rules, pinned development tool versions,
+CI workflows, root/scoped `AGENTS.md` guidance, brand assets, and theme tokens.
+No backend integration has been added. Preserve `PRD.md`, research and unrelated
+repository subtrees unchanged.
 
-The six phases are intentionally incremental. Each phase must be completed,
-reviewed, and pass the repository quality gate before Codex proceeds to the next
-phase.
+## Implementation stages
 
-This plan is **not** the backend implementation plan.
+1. Receive user-approved screenshot(s) or HTML with the specific task. References
+   are provided in the conversation or privately, not committed to Git.
+2. Confirm intended screen flow and compare visual references with brand and PRD.
+3. Implement a small, usable screen/flow using focused Flutter widgets and
+   native layouts; avoid godfiles and speculative infrastructure.
+4. Add the smallest real state/data abstraction required by observed behavior;
+   create data/domain layers only where there are real responsibilities.
+5. Add or replace relevant widget, state and domain tests for new behavior.
+6. Render on a device/emulator, compare side-by-side to the supplied screenshot
+   at the reference viewport, then check 320/360/390/412 widths and text scale.
+7. Run complete CI quality gate; do not claim visual parity from code review.
+8. Report exactly what is working, still demo-only and not yet implemented.
 
-## 2. Source-of-truth hierarchy
+Possible future screen order **only when matching approved references are
+provided**: Splash -> Welcome -> Login/Register -> OTP/Reset -> Consumer Home.
+Do not assume these interfaces constitute real auth or a backend; do not invent
+screens or silently restore the obsolete Flutter implementation.
 
-When instructions disagree, use:
+## Engineering quality gates
 
-1. `PRD.md` — product behavior, requirements, scope, state, safety, privacy.
-2. Official PanganKita Brand Guidelines — visual identity.
-3. `AGENTS.md` — repository-wide engineering rules.
-4. `app/AGENTS.md` — Flutter-specific engineering rules.
-5. `docs/DESIGN.md` — design orchestration.
-6. Relevant `docs/design/instructions/*.md`.
-7. Current `docs/implementation/phases/phase-XX-*.md`.
-8. Matching HTML design reference.
-9. Matching PNG screenshot as visual fallback.
-
-A phase file narrows implementation scope; it does not override higher-level
-product, brand, security, or engineering rules.
-
-## 3. Prototype-only boundary
-
-All six phases use deterministic mock data.
-
-Included:
-
-```text
-Flutter architecture
-theme/design system
-consumer UI
-reservation/pickup UI
-merchant UI
-mock repositories
-deterministic fixtures
-local prototype state transitions
-responsive behavior
-accessibility
-tests
-polish
-```
-
-Not included:
-
-```text
-real backend/API
-database/PostgreSQL
-production authentication server
-payment gateway
-real merchant onboarding/verification service
-live reservation concurrency
-real maps/location SDK
-push notifications
-production analytics
-production deployment infrastructure
-```
-
-Do not introduce backend infrastructure during these phases unless this plan is
-explicitly revised.
-
-## 4. Phase order
-
-| Phase | Focus | Primary result |
-|---|---|---|
-| 01 | Foundation | Theme, app shell, typed mock architecture, shared primitives |
-| 02 | Consumer discovery | Discover + listing detail on mock data |
-| 03 | Reservation & pickup | Reservation confirmation, active pickup, history/basic reservation flow |
-| 04 | Business experience | Merchant dashboard, listing creation/management, reservation queue, pickup verification |
-| 05 | Cross-cutting quality | Accessibility, responsive states, localization structure, error/loading/offline behavior |
-| 06 | Prototype polish | End-to-end consistency, cleanup, test hardening, final prototype review |
-
-Codex must not skip ahead because a later phase appears easy.
-
-## 5. Per-phase execution rule
-
-For every phase:
-
-1. Read this file.
-2. Read only the current phase file.
-3. Read `AGENTS.md` and `app/AGENTS.md`.
-4. Read only the relevant PRD sections.
-5. Read `docs/DESIGN.md`.
-6. Read only the relevant scoped design instruction files.
-7. Read matching HTML reference first.
-8. Inspect PNG only if a genuinely visual ambiguity remains.
-9. Use Graphify first for non-trivial cross-file/architecture work as required by
-   repository instructions.
-10. Implement only current-phase scope.
-11. Add/update tests for changed behavior.
-12. Run the full quality gate.
-13. Stop and report the result. Do not continue automatically.
-
-## 6. HTML-first reference policy
-
-Normal reference order:
-
-```text
-docs/design/reference/<screen>.html
-        ↓
-cheap/searchable layout + copy reference
-
-docs/design/reference/<screen>.png
-        ↓
-fallback only for visual ambiguity
-```
-
-Do not load the original Stitch ZIP for normal implementation.
-
-Do not port generated HTML/Tailwind literally into Flutter.
-
-## 7. Mock-data architecture rule
-
-UI widgets should not own fixture values directly.
-
-Target shape:
-
-```text
-presentation
-    ↓
-typed model / view state
-    ↓
-repository contract
-    ↓
-mock repository / deterministic fixtures
-```
-
-Later backend integration should be able to replace the mock implementation
-without redesigning feature widgets.
-
-Do not build fake network/payment/auth infrastructure just to imitate
-production.
-
-## 8. Quality gate
-
-Run from `app/` after every phase:
+From `app/`:
 
 ```powershell
+flutter pub get --enforce-lockfile
 dart format --output=none --set-exit-if-changed .
 flutter analyze --fatal-infos --fatal-warnings
 dart run dart_code_linter:metrics analyze --fatal-style --fatal-performance --fatal-warnings lib
@@ -161,61 +52,27 @@ dart run dart_code_linter:metrics check-unused-files lib
 dart run dart_code_linter:metrics check-unnecessary-nullable lib
 dart run dartrics analyze lib
 flutter test --coverage
+flutter build apk --debug
 ```
 
-Then from repository root:
+From repository root:
 
 ```powershell
 git diff --check
+git status --short
 ```
 
-A phase is not complete while any required command fails.
+Do not change CI/linter rules merely to suppress a failure. The bootstrap smoke
+test is not evidence for features that have not yet been implemented.
 
-## 9. Commit discipline
+## Git discipline
 
-Prefer one reviewable commit per completed phase or a small number of coherent
-commits when the phase is too large for one safe change.
+Start each new workstream on an appropriate focused branch, following the
+Conventional branch prefixes and workflow in `AGENTS.md` and `rules.md`.
+Before changing branches, inspect `git status --short` and preserve any
+existing uncommitted work. Do not encode a temporary cleanup branch name into
+lasting repository instructions.
 
-Suggested commit style:
-
-```text
-feat(app): establish prototype foundations
-feat(app): implement consumer discovery flow
-feat(app): implement reservation pickup flow
-feat(app): implement merchant prototype flow
-refactor(app): harden responsive accessible states
-chore(app): polish Flutter prototype
-```
-
-Actual commit boundaries should follow the completed diff.
-
-## 10. Stop conditions
-
-Codex must stop and ask/report rather than guess when:
-
-- PRD and design instructions conflict;
-- a required reference is missing;
-- a requested screen depends on undefined product behavior;
-- food-safety wording requires unsupported assumptions;
-- a later-phase feature is necessary to complete current scope;
-- implementing the phase would require a real backend;
-- a quality gate fails and the root cause is not understood;
-- a proposed dependency materially changes architecture.
-
-## 11. Completion definition
-
-This implementation plan is complete only after Phase 06 passes.
-
-Completion means:
-
-- accepted consumer prototype flow exists;
-- accepted merchant prototype flow exists;
-- deterministic mock data drives screens;
-- shared design system is in place;
-- responsive/accessibility baseline is verified;
-- required tests pass;
-- no unsupported safety/environmental claims remain;
-- no real backend is required for the demo;
-- repository quality gate is green.
-
-Backend/API work begins under a separate future implementation plan.
+Review the full diff before staging. Commit or push only with explicit user
+authorization and after required validation. Keep external screenshots/HTML
+out of Git. Follow `.github/PULL_REQUEST_TEMPLATE.md` for every PR.

@@ -5,8 +5,8 @@ Read `docs/ARCHITECTURE.md` first.
 This document defines presentation-layer structure, widget boundaries,
 navigation ownership, naming, utilities, and UI responsibility.
 
-For visual rules, also read `docs/DESIGN.md` and the relevant scoped design
-instructions.
+For visual rules, read `docs/DESIGN.md` and inspect the approved screenshots
+or HTML supplied with the active task. Old Stitch references are retired.
 
 ## Presentation responsibility
 
@@ -168,14 +168,17 @@ Refactor when a file:
 
 Configured complexity/lint thresholds remain hard repository constraints.
 
-## Generated Stitch code
+## External screenshots and HTML
 
-Do not copy generated Stitch HTML/Tailwind into Flutter.
+Treat approved screenshots or HTML supplied with the task as **visual evidence**,
+not source code to copy. Do not reintroduce retired Stitch reference folders or
+commit task-provided screenshots. Use idiomatic Flutter widgets rather than an
+HTML port, WebView, or a full-screen image.
 
-Use generated HTML as a low-cost design reference only.
-
-Flutter implementation should be idiomatic, responsive, accessible, and
-consistent with the architecture/design contracts.
+Match application-owned geometry and content at the reference viewport; let
+Flutter/Android own the system status bar and gesture navigation area. Support
+SafeArea, keyboard insets, scrolling, text scaling, and accessible semantics.
+Do not claim 1:1 parity without comparing rendered Flutter output.
 
 ## UI anti-patterns
 

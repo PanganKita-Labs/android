@@ -76,3 +76,14 @@ pnpm-debug.log*
 # Graphify
 **/graphify/
 **/graphify-out/
+
+# Local-only UI reference artifacts (not stored in Git)
+docs/design/reference/
+docs/design/references/
+docs/design/prototypes/
+docs/design/current/
+docs/design/**/*.html
+docs/design/**/*.png
+docs/design/**/*.jpg
+docs/design/**/*.jpeg
+docs/design/**/*.webp

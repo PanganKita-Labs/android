@@ -31,7 +31,7 @@ A simple class or function is often better than a pattern stack.
 
 Do not implement infrastructure because it may be useful later.
 
-During the prototype, do not add without a current requirement:
+During the from-scratch rebuild, do not add without a current requirement:
 
 - dependency-injection framework;
 - event bus;

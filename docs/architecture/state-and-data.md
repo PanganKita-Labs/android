@@ -3,7 +3,10 @@
 Read `docs/ARCHITECTURE.md` first.
 
 This document defines state ownership, repository seams, mock-data rules, DTO
-policy, dependency injection, time handling, and future data-source boundaries.
+policy, dependency injection, time handling, and potential data-source boundaries.
+
+**Current implementation:** no domain/data features, repositories, fixtures, or
+feature state exist. Examples below are hypothetical until implemented.
 
 ## State ownership
 
@@ -69,75 +72,41 @@ explicit architecture decision based on current requirements.
 
 ## Repository pattern
 
-Repository boundaries are useful when they isolate a data source that will
-genuinely change.
+Introduce a repository contract only when it provides a real source-of-truth
+boundary, test seam, or justified choice of implementations. Do not build
+interfaces solely because a future backend is imaginable.
 
-Prototype:
-
-```text
-ListingRepository
-      ↑
-MockListingRepository
-```
-
-Future:
+**Illustrative example (not implemented):**
 
 ```text
 ListingRepository
-      ↑
-ApiListingRepository
+    ↑
+MockListingRepository (only for an approved deterministic prototype)
+    or
+ApiListingRepository (only for an approved backend integration)
 ```
 
-This is a justified abstraction because mock data is explicitly temporary.
-
-Do not automatically add service/use-case/manager/facade layers around every
+Do not automatically add service/use-case/manager/facade layers around a
 repository.
 
-## Mock-data architecture
+## Optional mock data and fixtures
 
-Current prototype data must be deterministic.
-
-Preferred:
+If a future approved task genuinely needs local-only demo data, keep it
+explicitly illustrative and deterministic. A possible shape is:
 
 ```text
 presentation
     ↓
 typed model / feature state
     ↓
-repository contract
+(optional) repository contract
     ↓
-mock repository
-    ↓
-fixtures
+mock data source / fixtures
 ```
 
-Fixture values must not be scattered directly through widgets.
-
-Good:
-
-```dart
-Text(listing.businessName)
-```
-
-Avoid repeated production-widget literals such as:
-
-```dart
-Text('Mon Petit Bakery')
-```
-
-Fixtures may contain:
-
-- merchants;
-- listings;
-- prices;
-- inventory;
-- pickup windows;
-- addresses;
-- reservation codes;
-- distances;
-- operational metrics.
-
-These remain prototype data.
+Keep fixture values out of production widgets. Merchant, listing, price,
+quantity, pickup time and reservation examples must be clearly labeled demo
+content, not verified operations. No fixtures or such repositories exist now.
 
 ## Models
 
@@ -169,7 +138,7 @@ AbstractDomainObject
 
 ## DTO policy
 
-DTOs are generally unnecessary during mock-only work.
+DTOs are unnecessary until a real serialization or external data boundary justifies them.
 
 Introduce DTOs when:
 
@@ -193,8 +162,8 @@ Do not expose raw API maps/JSON to widgets.
 
 ## Dependency injection
 
-Do not introduce a DI framework during the prototype unless a real complexity
-problem requires it.
+Do not introduce a DI framework unless a real complexity problem
+requires it.
 
 Prefer constructor injection.
 
@@ -204,7 +173,8 @@ Conceptually:
 DiscoverController(repository: listingRepository)
 ```
 
-Top-level application composition may construct mock implementations.
+Top-level application composition may construct explicit dependencies when
+real feature requirements justify them.
 
 Avoid hidden global service locators.
 
@@ -225,10 +195,10 @@ Do not create a large time service solely for formatting.
 
 ## Persistence
 
-In-memory state is acceptable for the current prototype.
+When state is needed, in-memory state may be sufficient for an approved UI-only demo.
 
 Do not add SQLite, Hive, Isar, or another persistence layer only to make the
-prototype appear production-ready.
+UI-only demo appear production-ready.
 
 Add persistence when a current requirement needs restart durability.
 
@@ -241,12 +211,12 @@ When persistence becomes necessary, define:
 
 ## Backend boundary
 
-The Flutter prototype must not assume a specific backend implementation.
+The Flutter client must not assume an unapproved backend implementation.
 
 Flutter should depend on narrow domain/repository contracts instead of concrete
 HTTP details.
 
-Desired future seam:
+Illustrative future seam (not implemented):
 
 ```text
 MockListingRepository
@@ -258,39 +228,32 @@ without redesigning feature widgets.
 
 ## Authentication boundary
 
-Production authentication is outside the current prototype architecture.
+No authentication or authorization feature currently exists. When an approved
+reference includes Login, Daftar, or OTP, UI-only implementation is not proof
+of a real identity service. Do not invent fake JWTs, refresh-token machinery,
+OAuth providers, or secure-session claims to support a visual mockup.
 
-Do not create:
-
-- fake JWT services;
-- token refresh infrastructure;
-- secure-storage abstraction;
-- OAuth providers.
-
-Prototype role switching may remain local and explicit.
+The previous local consumer/business role-switching demo was intentionally
+removed; do not recreate it merely because this architecture once described it.
 
 ## Payment boundary
 
-Current MVP baseline uses reservation in PanganKita and payment at pickup.
+The PRD describes a pickup-oriented marketplace; any payment-at-pickup behavior
+is a **product direction**, not an implemented payment integration.
 
-Do not create:
-
-- payment repository;
-- wallet state;
-- payment SDK abstraction;
-- settlement architecture;
-
-during prototype conversion.
+Do not create a payment repository, wallet state, payment SDK, or settlement
+architecture without approved requirements for that capability.
 
 ## Location/maps boundary
 
-Dummy/static location data is sufficient for the current prototype.
-
-Do not add a live maps/geolocation SDK solely to reproduce a visual mockup.
+No live map, geolocation permission flow, or location service currently exists.
+A future UI-only task may use an explicitly labeled static example. Do not
+claim the user's actual location or introduce a maps SDK solely to imitate a
+screenshot.
 
 ## Analytics boundary
 
-Do not add production analytics during mock-design conversion.
+Do not add production analytics during screenshot-driven UI reconstruction.
 
 When analytics is selected later, avoid scattering provider-specific calls
 directly through widgets.

@@ -1,42 +1,34 @@
-# PanganKita Flutter prototype
+# PanganKita Flutter app
 
-PanganKita is an Indonesia-first, pickup-oriented surplus-food project. This
-repository currently contains a **local Flutter prototype**, not a live
-marketplace. Listings, businesses, locations, prices, pickup codes, and
-reservations shown in the app are examples.
+PanganKita is a pickup-first surplus-food project for Indonesia. The current
+Flutter application is intentionally reset to a **minimal branded bootstrap**
+for a new screenshot-driven implementation. The previous prototype screens,
+mock repositories and flows have been removed from the active source tree.
 
-## Run the prototype
+## Run
 
-Install the Flutter version specified in [`app/AGENTS.md`](app/AGENTS.md), then
-start an Android emulator or connect a device. From `app/`:
+Using the pinned Flutter version from `app/AGENTS.md`:
 
 ```powershell
-flutter pub get
-flutter devices
+cd app
+flutter pub get --enforce-lockfile
 flutter run
 ```
 
-The app opens in Consumer mode. Select a listing in **Jelajahi**, confirm a
-sample reservation, and find its pickup code under **Reservasi**. Return to
-the reservation list, switch to **Mode Bisnis**, open **Reservasi**, mark the
-reservation ready, and enter that code to simulate pickup completion. Switch
-back to Consumer mode to see it in history. The Business dashboard also lets
-you create and publish a sample listing that appears in Consumer discovery.
+The current app displays only a placeholder. No authentication, discovery,
+reservation, merchant dashboard, payment or backend integration exists in the
+new active implementation yet. Brand theme/assets, CI, lint and tooling remain.
 
-Both modes share in-memory mock repositories. Changes last only while the app
-process is running; fully stopping and restarting the app restores the sample
-data. Mode switching is a demo control, not account verification. Pickup-code
-matching is local and is not secure verification. No real reservation or
-payment is sent to a merchant; the intended MVP payment method is payment at
-pickup using a method accepted by the merchant.
+Read [`PRD.md`](PRD.md), [`docs/DESIGN.md`](docs/DESIGN.md),
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and
+[`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) before adding screens.
+Provide approved reference screenshots in a development task; they are not
+committed to this repository. Follow screenshot fidelity, accessibility and
+no-godfile requirements in `docs/DESIGN.md` and `app/AGENTS.md`.
 
-The prototype has no backend, sign-in, database, live location or maps,
-payment gateway, production analytics, or push notifications. Consumer
-**Dampak** and **Profil** are labelled as unavailable prototype destinations.
+## Quality
 
-## Check the app
-
-Run the application quality gate from `app/`:
+From `app/`:
 
 ```powershell
 dart format --output=none --set-exit-if-changed .
@@ -49,6 +41,5 @@ dart run dartrics analyze lib
 flutter test --coverage
 ```
 
-From the repository root, run `git diff --check`. Product and architecture
-context is in [`PRD.md`](PRD.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
-and [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md).
+For an Android smoke build, run `flutter build apk --debug`. The GitHub Actions
+workflow remains unchanged.

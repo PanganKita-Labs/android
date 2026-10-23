@@ -5,49 +5,38 @@ Read `docs/ARCHITECTURE.md` first.
 This document defines where Flutter code belongs and which dependency
 directions are preferred.
 
-## Target structure
+## Current structure and future examples
 
-Preferred direction:
+The **current** source tree is intentionally small:
 
 ```text
-app/
-└── lib/
-    ├── main.dart
-    │
-    ├── app/
-    │   ├── app.dart
-    │   ├── routing/
-    │   └── theme/
-    │
-    ├── core/
-    │   ├── errors/
-    │   ├── extensions/
-    │   └── utils/
-    │
-    ├── shared/
-    │   ├── models/
-    │   └── widgets/
-    │
-    └── features/
-        ├── discovery/
-        │   ├── data/
-        │   ├── domain/
-        │   └── presentation/
-        │
-        ├── reservations/
-        │   ├── data/
-        │   ├── domain/
-        │   └── presentation/
-        │
-        └── business/
-            ├── data/
-            ├── domain/
-            └── presentation/
+app/lib/
+├── main.dart
+└── app/
+    ├── pangan_kita_app.dart
+    └── pangan_kita_theme.dart
 ```
 
-This is a direction, not a requirement to create every directory immediately.
+There are no active `features/`, `core/`, `shared/` or routing directories.
+Do **not** create folders just to match a template.
 
-Create only folders that contain real code.
+If real product features are approved, a possible **illustrative** shape is:
+
+```text
+app/lib/
+├── main.dart
+├── app/
+│   ├── pangan_kita_app.dart
+│   └── pangan_kita_theme.dart
+└── features/
+    └── <approved-feature>/
+        ├── presentation/
+        ├── domain/  # only if meaningful domain rules exist
+        └── data/    # only if a data source exists
+```
+
+Create only the folders and boundaries needed by the requested behavior. The
+codebase is not committed to these example names or a complete folder tree.
 
 ## `main.dart`
 
@@ -76,7 +65,7 @@ directly in `main.dart`.
 
 `app/` owns application-wide composition.
 
-### `app/app.dart`
+### `app/pangan_kita_app.dart`
 
 May own:
 
@@ -88,13 +77,13 @@ May own:
 
 Do not put feature business logic here.
 
-### `app/routing/`
+### Optional `app/routing/` (not created yet)
 
-Own route definitions and application navigation composition.
+When routing becomes necessary, own route definitions and application navigation composition.
 
 Feature internals should not need the entire application route graph.
 
-### `app/theme/`
+### Theme ownership: `app/pangan_kita_theme.dart`
 
 Own the Flutter mapping of the design system:
 
@@ -111,7 +100,7 @@ colors.
 
 Product behavior belongs under `features/`.
 
-Current likely boundaries:
+Illustrative future boundaries (not current source files):
 
 ```text
 features/discovery/
@@ -165,7 +154,7 @@ Do not wrap every primitive in a value object without meaningful behavior.
 
 Contains data-source implementations.
 
-Prototype examples:
+Examples of optional future mock-only data sources (not currently present):
 
 ```text
 mock_listing_repository.dart
@@ -174,7 +163,7 @@ mock_reservation_repository.dart
 reservation_fixtures.dart
 ```
 
-Future API implementations may be added only when backend integration begins.
+API implementations may be added only if an approved task requires backend integration.
 
 Do not build fake HTTP/data-source layers during mock-only work.
 
