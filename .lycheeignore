@@ -9,3 +9,6 @@
 
 # Email links are not HTTP resources
 ^mailto:
+
+# Flutter replaces this exact base-href token when building app/web/index.html.
+^file:///.*/app/web/\$FLUTTER_BASE_HREF$
