@@ -1,0 +1,29 @@
+/// Routes for the local HTML reference conversion.
+abstract final class AppRoutes {
+  /// Initial brand screen.
+  static const splash = '/';
+
+  /// Introduction.
+  static const welcome = '/welcome';
+
+  /// Demo sign in.
+  static const login = '/login';
+
+  /// Demo account form.
+  static const register = '/register';
+
+  /// Demo registration verification.
+  static const verify = '/verify';
+
+  /// Demo recovery verification.
+  static const recover = '/recover';
+
+  /// Demo password replacement.
+  static const password = '/password';
+
+  /// Demo recovery confirmation.
+  static const success = '/success';
+
+  /// Local food examples.
+  static const home = '/home';
+}

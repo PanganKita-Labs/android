@@ -48,5 +48,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get --enforce-lockfile
 
+      - name: Fetch licensed Satoshi font
+        run: python3 ../.github/scripts/fetch_satoshi.py
+
       - name: Build debug APK
         run: flutter build apk --debug

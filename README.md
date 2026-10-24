@@ -1,9 +1,10 @@
 # PanganKita Flutter app
 
 PanganKita is a pickup-first surplus-food project for Indonesia. The current
-Flutter application is intentionally reset to a **minimal branded bootstrap**
-for a new screenshot-driven implementation. The previous prototype screens,
-mock repositories and flows have been removed from the active source tree.
+Flutter application now includes the user-supplied Flutter prototype.
+It includes splash/welcome, login, registration,
+local OTP verification (demo code **5102**), password recovery, and a searchable
+home feed with category filters and food detail sheets.
 
 ## Run
 
@@ -11,20 +12,38 @@ Using the pinned Flutter version from `app/AGENTS.md`:
 
 ```powershell
 cd app
+python ../.github/scripts/fetch_satoshi.py
 flutter pub get --enforce-lockfile
 flutter run
 ```
 
-The current app displays only a placeholder. No authentication, discovery,
-reservation, merchant dashboard, payment or backend integration exists in the
-new active implementation yet. Brand theme/assets, CI, lint and tooling remain.
+All authentication and listing content is **local demonstration only**.
+No server accounts are created, no SMS/email is sent, and no orders or payments
+can be placed. Social login, cart, chat, notifications, promotions, and merchant
+browsing show unavailable feedback. Passwords are neither transmitted nor persisted.
+Prices, ratings, quantities, and locations are static reference examples.
+Homepage pickup-clock labels and merchant badges are illustrative too; they
+do not establish pickup availability or merchant verification.
+
+The supplied artwork is bundled under `app/assets/prototype/`. Typography uses
+**Geist Semibold/Bold** for headings, product names, current prices, emphasized
+numbers, CTA, action links, and navigation. **Satoshi Regular/Medium** is used
+for body copy, metadata, inputs, captions, categories, and badge labels.
+Savings badges keep "Hemat" in Satoshi and emphasize the percentage with Geist.
+
+Geist is bundled from the [official project](https://github.com/vercel/geist-font)
+with its SIL Open Font License in `app/assets/fonts/Geist-OFL.txt`.
+Satoshi comes directly from [Fontshare](https://www.fontshare.com/fonts/satoshi).
+Run the setup command above before building or testing. Satoshi's font and
+license files are downloaded locally and ignored by Git because its ITF Free
+Font License permits app embedding but restricts public font-file redistribution.
+CI runs the same setup script. Both families appear in Flutter's license registry.
+The full role mapping is in [`docs/DESIGN.md`](docs/DESIGN.md).
+No new package dependencies were added.
 
 Read [`PRD.md`](PRD.md), [`docs/DESIGN.md`](docs/DESIGN.md),
 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and
-[`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) before adding screens.
-Provide approved reference screenshots in a development task; they are not
-committed to this repository. Follow screenshot fidelity, accessibility and
-no-godfile requirements in `docs/DESIGN.md` and `app/AGENTS.md`.
+[`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) before extending the app.
 
 ## Quality
 
@@ -42,4 +61,4 @@ flutter test --coverage
 ```
 
 For an Android smoke build, run `flutter build apk --debug`. The GitHub Actions
-workflow remains unchanged.
+workflows fetch Satoshi directly from its official source before validation.

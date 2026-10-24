@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 
 /// Material mapping of the PanganKita design foundations.
 abstract final class PanganKitaTheme {
-  /// The light prototype theme.
-  // Geist Sans and Satoshi can be added here after licensed assets are present.
+  /// Geist owns headings, actions, navigation, prices, and emphasized numbers.
+  static const emphasisFontFamily = 'Geist';
+
+  /// Satoshi owns body copy, metadata, inputs, captions, and badge labels.
+  static const bodyFontFamily = 'Satoshi';
+
+  /// The light prototype theme with the approved two-family typography roles.
   static final light = ThemeData(
     useMaterial3: true,
+    fontFamily: bodyFontFamily,
     scaffoldBackgroundColor: PanganKitaColors.surfaceWarm,
     colorScheme: const ColorScheme.light(
       primary: PanganKitaColors.brandPrimary,
@@ -16,28 +22,53 @@ abstract final class PanganKitaTheme {
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
+        fontFamily: emphasisFontFamily,
         fontSize: 36,
         height: 44 / 36,
         fontWeight: FontWeight.w700,
       ),
       headlineLarge: TextStyle(
+        fontFamily: emphasisFontFamily,
         fontSize: 28,
         height: 34 / 28,
         fontWeight: FontWeight.w700,
       ),
       headlineMedium: TextStyle(
+        fontFamily: emphasisFontFamily,
         fontSize: 22,
         height: 28 / 22,
         fontWeight: FontWeight.w600,
       ),
       headlineSmall: TextStyle(
+        fontFamily: emphasisFontFamily,
         fontSize: 18,
         height: 24 / 18,
         fontWeight: FontWeight.w600,
       ),
       titleMedium: TextStyle(
+        fontFamily: emphasisFontFamily,
         fontSize: 16,
         height: 24 / 16,
+        fontWeight: FontWeight.w600,
+      ),
+      displayMedium: TextStyle(
+        fontFamily: emphasisFontFamily,
+        fontSize: 32,
+        fontWeight: FontWeight.w700,
+      ),
+      displaySmall: TextStyle(
+        fontFamily: emphasisFontFamily,
+        fontSize: 28,
+        fontWeight: FontWeight.w700,
+      ),
+      titleLarge: TextStyle(
+        fontFamily: emphasisFontFamily,
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+      ),
+      titleSmall: TextStyle(
+        fontFamily: emphasisFontFamily,
+        fontSize: 14,
         fontWeight: FontWeight.w600,
       ),
       bodyLarge: TextStyle(fontSize: 16, height: 24 / 16),
@@ -46,13 +77,14 @@ abstract final class PanganKitaTheme {
       labelLarge: TextStyle(
         fontSize: 14,
         height: 20 / 14,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
       ),
       labelMedium: TextStyle(
         fontSize: 12,
         height: 16 / 12,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
       ),
+      labelSmall: TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: PanganKitaColors.surfaceWarm,
@@ -63,6 +95,11 @@ abstract final class PanganKitaTheme {
       surfaceTintColor: Colors.transparent,
     ),
     inputDecorationTheme: const InputDecorationTheme(
+      labelStyle: TextStyle(
+        fontFamily: bodyFontFamily,
+        fontWeight: FontWeight.w500,
+      ),
+      hintStyle: TextStyle(fontFamily: bodyFontFamily),
       filled: true,
       fillColor: Colors.white,
       contentPadding: EdgeInsets.symmetric(
@@ -90,17 +127,43 @@ abstract final class PanganKitaTheme {
       ),
       labelTextStyle: WidgetStateProperty.resolveWith(
         (states) => TextStyle(
+          fontFamily: emphasisFontFamily,
           color: states.contains(WidgetState.selected)
               ? PanganKitaColors.brandPrimary
               : PanganKitaColors.textPrimary,
           fontWeight: states.contains(WidgetState.selected)
               ? FontWeight.w700
-              : FontWeight.w500,
+              : FontWeight.w600,
+        ),
+      ),
+    ),
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        minimumSize: const Size.fromHeight(52),
+        textStyle: const TextStyle(
+          fontFamily: emphasisFontFamily,
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(13)),
+        ),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        textStyle: const TextStyle(
+          fontFamily: emphasisFontFamily,
+          fontWeight: FontWeight.w600,
         ),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        textStyle: const TextStyle(
+          fontFamily: emphasisFontFamily,
+          fontWeight: FontWeight.w600,
+        ),
         minimumSize: const Size.fromHeight(48),
         backgroundColor: PanganKitaColors.brandPrimary,
         foregroundColor: Colors.white,
@@ -113,6 +176,10 @@ abstract final class PanganKitaTheme {
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
+        textStyle: const TextStyle(
+          fontFamily: emphasisFontFamily,
+          fontWeight: FontWeight.w600,
+        ),
         minimumSize: const Size.fromHeight(48),
         foregroundColor: PanganKitaColors.brandPrimary,
         side: const BorderSide(color: PanganKitaColors.brandPrimary),

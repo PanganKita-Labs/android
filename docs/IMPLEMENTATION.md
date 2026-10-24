@@ -1,16 +1,21 @@
 # PanganKita Flutter From-Scratch Implementation Plan
 
-**Status:** Fresh-start baseline. Previous Flutter prototype was intentionally
-removed as obsolete; this is not a continuation of its six development phases.
+**Status:** Local Flutter prototype imported from the user-supplied ZIP.
+This is not a continuation of the retired six development phases.
 
 ## Current application baseline
 
-The Flutter app now contains only `main.dart`, `app/pangan_kita_app.dart`,
-`app/pangan_kita_theme.dart`, and one minimal bootstrap test. It displays a
-placeholder, not a marketplace, auth flow, reservation feature or business UI.
-All previous application implementations, mock repositories, domain models,
-fixture images and UI-specific tests have been removed from the active tree.
-Old commits remain reachable through Git history and safety backups.
+The Flutter app includes splash/welcome, local login and registration forms,
+demo OTP verification (code `5102`), simulated password recovery, and a static
+food feed with local search, category filters, and read-only details. Named
+routes live in `app/app_routes.dart`; widgets own their local interaction state.
+The supplied images and licensed Geist fonts are bundled assets. Satoshi is
+downloaded during setup; text roles follow `docs/DESIGN.md`.
+
+These are demonstration flows: no server accounts, SMS/email, persisted
+passwords, live location, orders, reservations, or payments are implemented.
+Unavailable integrations show feedback rather than performing remote actions.
+Tests cover the demo flows, responsive layouts, typography, and social artwork.
 
 Retained infrastructure: `app/android/`, Flutter/Dart package manifest and
 lockfile, strict analyzer/DCL/Dartrics rules, pinned development tool versions,
