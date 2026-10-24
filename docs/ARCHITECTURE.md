@@ -2,7 +2,7 @@
 
 **Document:** `docs/ARCHITECTURE.md`
 **Product:** PanganKita
-**Status:** Active architecture director / clean Flutter bootstrap
+**Status:** Active architecture director / local Flutter prototype
 **Scope:** Flutter application architecture
 
 > Build the smallest architecture that keeps PanganKita easy to understand,
@@ -124,20 +124,31 @@ Avoid feature dependency cycles.
 
 ## Current implementation baseline
 
-The active Flutter source is an intentionally minimal **branded bootstrap**:
+The active Flutter source implements a **local demonstration prototype**:
 
 ```text
 app/lib/main.dart
+app/lib/app/app_routes.dart
 app/lib/app/pangan_kita_app.dart
 app/lib/app/pangan_kita_theme.dart
+app/lib/features/onboarding/
+app/lib/features/discovery/
+app/lib/shared/
 app/test/widget_test.dart
+app/test/reference_typography_test.dart
+app/test/social_sign_in_test.dart
 ```
 
-At this baseline, there are **no implemented features** under `app/lib/features/`:
-no authentication, discovery feed, reservation or merchant journey, domain
-models, mock repositories, routing shell, or real backend integration. The
-existing test is a bootstrap/theme smoke test, **not** evidence that future
-product flows work. Old commits document retired code, not live behavior.
+App composition owns named routes and the theme. Onboarding owns splash,
+welcome, local form validation, demo OTP, and simulated password recovery.
+Discovery owns static listing examples, local search/category filtering, and
+read-only detail sheets. Shared widgets provide reference icons and feedback
+for unavailable integrations. State remains local to the relevant widgets.
+
+There is no server authentication, persistence, live location, ordering,
+reservation, payment, or backend integration. Tests exercise demo navigation,
+validation, search, responsive layouts, typography, and social artwork; they
+do not establish production authentication or transaction correctness.
 
 Brand foundations, Android/Flutter configuration, lint/complexity rules, CI,
 and the scoped engineering and architecture contracts remain in force.
@@ -145,8 +156,8 @@ and the scoped engineering and architecture contracts remain in force.
 ## Future implementation boundaries
 
 The feature-first diagrams and repository/state patterns in this document are
-**design guidance for approved future work**, not a claim that those files
-already exist. Add a layer, contract, fake, or feature directory only when it
+**design guidance for future work**, not a claim that every layer or integration
+already exists. Add a layer, contract, fake, or feature directory only when it
 solves a current requirement. Test it when introduced. Approved reference
 screenshots are supplied with the task, not stored in the repository.
 

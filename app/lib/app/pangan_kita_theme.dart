@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 /// Material mapping of the PanganKita design foundations.
 abstract final class PanganKitaTheme {
-  /// The light prototype theme.
-  // Geist Sans and Satoshi can be added here after licensed assets are present.
+  /// Bundled Arial-compatible face used to match the supplied HTML reference.
+  static const referenceFontFamily = 'Liberation Sans';
+
+  /// The light prototype theme with consistent, offline reference typography.
+  // The reference uses Arial. Geist Sans and Satoshi remain unbundled.
   static final light = ThemeData(
     useMaterial3: true,
+    fontFamily: referenceFontFamily,
     scaffoldBackgroundColor: PanganKitaColors.surfaceWarm,
     colorScheme: const ColorScheme.light(
       primary: PanganKitaColors.brandPrimary,

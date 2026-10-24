@@ -1,9 +1,10 @@
 # PanganKita Flutter app
 
 PanganKita is a pickup-first surplus-food project for Indonesia. The current
-Flutter application is intentionally reset to a **minimal branded bootstrap**
-for a new screenshot-driven implementation. The previous prototype screens,
-mock repositories and flows have been removed from the active source tree.
+Flutter application now includes the user-supplied Flutter prototype.
+It includes splash/welcome, login, registration,
+local OTP verification (demo code **5102**), password recovery, and a searchable
+home feed with category filters and food detail sheets.
 
 ## Run
 
@@ -11,20 +12,35 @@ Using the pinned Flutter version from `app/AGENTS.md`:
 
 ```powershell
 cd app
+python ../.github/scripts/fetch_satoshi.py
 flutter pub get --enforce-lockfile
 flutter run
 ```
 
-The current app displays only a placeholder. No authentication, discovery,
-reservation, merchant dashboard, payment or backend integration exists in the
-new active implementation yet. Brand theme/assets, CI, lint and tooling remain.
+All authentication and listing content is **local demonstration only**.
+No server accounts are created, no SMS/email is sent, and no orders or payments
+can be placed. Social login, cart, chat, notifications, and merchant browsing
+show unavailable feedback. Passwords are neither transmitted nor persisted.
+Prices, ratings, quantities, and locations are static reference examples.
+
+The supplied artwork is bundled under `app/assets/prototype/`. Social logos
+and interface symbols use the artwork included in the ZIP. Brand colors
+use the existing project theme. Typography uses bundled **Liberation Sans**
+(regular and bold), an Arial-compatible font. It is not the proprietary Arial
+font. Its SIL Open Font License and
+copyright notices are included in `app/assets/fonts/OFL.txt` and registered
+with Flutter's license registry. The welcome screen's Daftar label uses
+**Satoshi Bold (700)** from [Fontshare](https://www.fontshare.com/fonts/satoshi).
+Run the setup command above before building or testing. Satoshi's font and
+license are downloaded locally and ignored by Git because the ITF Free Font
+License permits app embedding but restricts font-file redistribution through
+public repositories. Both CI workflows run the same setup script. Geist Sans
+remains unbundled.
+No new package dependencies were added.
 
 Read [`PRD.md`](PRD.md), [`docs/DESIGN.md`](docs/DESIGN.md),
 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and
-[`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) before adding screens.
-Provide approved reference screenshots in a development task; they are not
-committed to this repository. Follow screenshot fidelity, accessibility and
-no-godfile requirements in `docs/DESIGN.md` and `app/AGENTS.md`.
+[`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) before extending the app.
 
 ## Quality
 
@@ -42,4 +58,4 @@ flutter test --coverage
 ```
 
 For an Android smoke build, run `flutter build apk --debug`. The GitHub Actions
-workflow remains unchanged.
+workflows fetch Satoshi directly from its official source before validation.

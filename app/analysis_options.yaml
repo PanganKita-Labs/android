@@ -16,6 +16,7 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/*.mocks.dart"
     - android/**
+    - web/**
 
 # ============================================================
 # Analysis-server plugins
