@@ -5,8 +5,8 @@ import 'package:pangankita/app/pangan_kita_app.dart';
 
 void main() {
   LicenseRegistry.addLicense(() async* {
-    final license = await rootBundle.loadString('assets/fonts/OFL.txt');
-    yield LicenseEntryWithLineBreaks(['Liberation Sans'], license);
+    final license = await rootBundle.loadString('assets/fonts/Geist-OFL.txt');
+    yield LicenseEntryWithLineBreaks(['Geist'], license);
     final satoshiLicense = await rootBundle.loadString(
       'assets/fonts/Satoshi-FFL.txt',
     );

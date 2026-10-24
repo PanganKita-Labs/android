@@ -9,7 +9,8 @@ The Flutter app includes splash/welcome, local login and registration forms,
 demo OTP verification (code `5102`), simulated password recovery, and a static
 food feed with local search, category filters, and read-only details. Named
 routes live in `app/app_routes.dart`; widgets own their local interaction state.
-The supplied images and licensed Liberation Sans fonts are bundled assets.
+The supplied images and licensed Geist fonts are bundled assets. Satoshi is
+downloaded during setup; text roles follow `docs/DESIGN.md`.
 
 These are demonstration flows: no server accounts, SMS/email, persisted
 passwords, live location, orders, reservations, or payments are implemented.

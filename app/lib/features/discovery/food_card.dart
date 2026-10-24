@@ -4,135 +4,193 @@ import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/food_detail_sheet.dart';
 import 'package:pangankita/shared/reference_icon.dart';
 
-const _photoGap = 11.0;
-const _compactWidth = 380.0;
+const _compactWidth = 360.0;
 const _compactPhoto = 87.0;
-const _regularPhoto = 108.0;
-const _priceGap = 7.0;
+const _regularPhoto = 104.0;
+const _photoGap = 10.0;
+const _priceGap = 6.0;
 const _badgeGap = 5.0;
 const _badgeIconGap = 3.0;
-const _badgeIconSize = 13.0;
-const _footerIconSize = 15.0;
+const _badgeIconSize = 14.0;
+const _footerIconSize = 14.0;
+const _badgeBorderWidth = .7;
 
-double _photoHeight(BuildContext context) =>
-    MediaQuery.sizeOf(context).width < _compactWidth
-    ? _compactPhoto
-    : _regularPhoto;
-
-/// Content-sized listing card from the HTML reference.
+/// Read-only listing card matching the pickup-oriented home reference.
 class FoodCard extends StatelessWidget {
-  /// Creates a reference card.
+  /// Creates a card for an illustrative local offer.
   const new({required this.food, super.key});
 
-  /// Read-only local example.
+  /// Display data, not live stock or a verified merchant.
   final DemoFood food;
 
   @override
-  Widget build(BuildContext context) => Card(
-    margin: EdgeInsets.zero,
-    child: InkWell(
-      borderRadius: const BorderRadius.all(Radius.circular(15)),
-      onTap: () => FoodDetailSheet.show(context, food),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(14, 13, 14, 9),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: _photoGap,
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(13)),
-                  child: Image.asset(
-                    food.image,
-                    width: MediaQuery.sizeOf(context).width < _compactWidth
-                        ? _compactPhoto
-                        : _regularPhoto,
-                    height: _photoHeight(context),
-                    fit: BoxFit.cover,
-                    excludeFromSemantics: true,
+  Widget build(BuildContext context) {
+    final photoSize = MediaQuery.sizeOf(context).width < _compactWidth
+        ? _compactPhoto
+        : _regularPhoto;
+    return Card(
+      margin: EdgeInsets.zero,
+      child: InkWell(
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        onTap: () => FoodDetailSheet.show(context, food),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(14, 13, 14, 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: _photoGap,
+                children: [
+                  SizedBox.square(
+                    dimension: photoSize,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      child: Image.asset(
+                        food.image,
+                        fit: BoxFit.cover,
+                        excludeFromSemantics: true,
+                      ),
+                    ),
                   ),
-                ),
-                Expanded(child: _FoodSummary(food: food)),
-              ],
-            ),
-            const Divider(height: 19, thickness: 1, color: Color(0xFFDFDFDE)),
-            _FoodFooter(food: food),
-          ],
+                  Expanded(
+                    child: _FoodSummary(food: food, minHeight: photoSize),
+                  ),
+                ],
+              ),
+              const Divider(
+                height: 20,
+                thickness: .5,
+                color: Color(0xFFDFDFDE),
+              ),
+              _FoodFooter(food: food),
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class _FoodSummary extends StatelessWidget {
+  const new({required this.food, required this.minHeight});
+  final DemoFood food;
+  final double minHeight;
+
+  @override
+  Widget build(BuildContext context) => ConstrainedBox(
+    constraints: BoxConstraints(minHeight: minHeight),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _MerchantLine(food: food),
+            const SizedBox(height: 4),
+            Text(
+              food.cardTitle,
+              style: const TextStyle(
+                fontFamily: PanganKitaTheme.emphasisFontFamily,
+                fontSize: 14,
+                height: 1.15,
+                fontWeight: FontWeight.w700,
+                letterSpacing: -.15,
+              ),
+            ),
+            const SizedBox(height: 5),
+            _FoodBadges(food: food),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 9),
+          child: _FoodPrice(food: food),
+        ),
+      ],
     ),
   );
 }
 
-class _FoodSummary extends StatelessWidget {
+class _MerchantLine extends StatelessWidget {
   const new({required this.food});
   final DemoFood food;
 
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
+  Widget build(BuildContext context) => Wrap(
+    alignment: WrapAlignment.spaceBetween,
+    spacing: PanganKitaSpacing.xs,
+    runSpacing: _badgeGap,
+    crossAxisAlignment: WrapCrossAlignment.center,
     children: [
-      Wrap(
-        alignment: WrapAlignment.spaceBetween,
-        spacing: PanganKitaSpacing.xs,
-        crossAxisAlignment: WrapCrossAlignment.center,
+      Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 2,
         children: [
-          Text(
-            food.merchant,
-            style: const TextStyle(fontSize: 9.2, color: Colors.black54),
+          Flexible(
+            child: Text(
+              food.merchant,
+              style: const TextStyle(fontSize: 8.5, color: Colors.black54),
+            ),
           ),
-          _FoodRating(rating: food.rating),
+          Semantics(
+            label: 'Badge contoh; merchant belum diverifikasi',
+            child: const Icon(
+              Icons.check_circle,
+              size: 9,
+              color: PanganKitaColors.brandPrimary,
+            ),
+          ),
         ],
       ),
-      const SizedBox(height: 4),
+      _FoodRating(rating: food.rating),
+    ],
+  );
+}
+
+class _FoodBadges extends StatelessWidget {
+  const new({required this.food});
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Wrap(
+    spacing: _badgeGap,
+    runSpacing: PanganKitaSpacing.xs,
+    children: [
+      if (!food.flash) const _FoodBadge(label: 'Promo QRIS', icon: 'tag'),
+      _FoodBadge(label: food.saving, icon: 'badge'),
+      if (food.flash) const _FoodBadge(label: 'Flash Sale', icon: 'bolt'),
+    ],
+  );
+}
+
+class _FoodPrice extends StatelessWidget {
+  const new({required this.food});
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Wrap(
+    spacing: _priceGap,
+    crossAxisAlignment: WrapCrossAlignment.center,
+    children: [
       Text(
-        food.title,
+        food.price,
         style: const TextStyle(
-          fontSize: 14.6,
-          letterSpacing: -.15,
-          height: 1.16,
+          fontFamily: PanganKitaTheme.emphasisFontFamily,
+          fontSize: 20,
+          height: 1.15,
+          color: PanganKitaColors.brandPrimary,
           fontWeight: FontWeight.w700,
+          letterSpacing: -.35,
         ),
       ),
-      const SizedBox(height: 5),
-      Wrap(
-        spacing: _badgeGap,
-        runSpacing: PanganKitaSpacing.xs,
-        children: [
-          _FoodBadge(label: food.saving, icon: 'badge'),
-          _FoodBadge(
-            label: food.flash ? 'Flash Sale' : 'Promo QRIS',
-            icon: food.flash ? 'bolt' : 'tag',
-          ),
-        ],
-      ),
-      const SizedBox(height: 6),
-      Wrap(
-        spacing: _priceGap,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          Text(
-            food.price,
-            style: const TextStyle(
-              fontSize: 20.5,
-              letterSpacing: -.35,
-              height: 1.15,
-              color: PanganKitaColors.brandPrimary,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          Text(
-            food.original,
-            style: const TextStyle(
-              fontSize: 9.5,
-              height: 1.2,
-              color: Colors.grey,
-              decoration: TextDecoration.lineThrough,
-            ),
-          ),
-        ],
+      Text(
+        food.original,
+        style: const TextStyle(
+          fontSize: 9,
+          color: Colors.grey,
+          decoration: TextDecoration.lineThrough,
+        ),
       ),
     ],
   );
@@ -146,11 +204,14 @@ class _FoodBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
-      border: Border.all(color: PanganKitaColors.borderNeutral),
+      border: Border.all(
+        color: PanganKitaColors.borderNeutral,
+        width: _badgeBorderWidth,
+      ),
       borderRadius: const BorderRadius.all(Radius.circular(15)),
     ),
     child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         spacing: _badgeIconGap,
@@ -162,9 +223,24 @@ class _FoodBadge extends StatelessWidget {
                 ? PanganKitaColors.brandPrimary
                 : PanganKitaColors.brandAccent,
           ),
-          Text(
-            label,
-            style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
+          Flexible(
+            child: Text.rich(
+              TextSpan(
+                children: icon == 'badge' && label.startsWith('Hemat ')
+                    ? [
+                        const TextSpan(text: 'Hemat '),
+                        TextSpan(
+                          text: label.substring('Hemat '.length),
+                          style: const TextStyle(
+                            fontFamily: PanganKitaTheme.emphasisFontFamily,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ]
+                    : [TextSpan(text: label)],
+              ),
+              style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w500),
+            ),
           ),
         ],
       ),
@@ -183,41 +259,34 @@ class _FoodFooter extends StatelessWidget {
     runSpacing: _badgeGap,
     crossAxisAlignment: WrapCrossAlignment.center,
     children: [
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        spacing: _badgeGap,
-        children: [
-          const ReferenceIcon(
-            'truck',
-            size: _footerIconSize,
-            color: PanganKitaColors.brandAccent,
-          ),
-          Text(
-            'Ongkir ${food.shipping}',
-            style: const TextStyle(
-              fontSize: 9.7,
-              height: 1.2,
-              color: PanganKitaColors.brandAccent,
-              fontWeight: FontWeight.w700,
+      Text.rich(
+        TextSpan(
+          children: [
+            const WidgetSpan(
+              alignment: PlaceholderAlignment.middle,
+              child: Icon(
+                Icons.schedule_outlined,
+                size: _footerIconSize,
+                color: PanganKitaColors.brandAccent,
+              ),
             ),
-          ),
-        ],
-      ),
-      Text(
-        food.distance,
-        style: const TextStyle(
-          fontSize: 9.7,
-          height: 1.2,
-          color: Color(0xFF999D9F),
+            TextSpan(
+              text: '  ${food.pickupTime}',
+              style: const TextStyle(color: PanganKitaColors.brandAccent),
+            ),
+            TextSpan(text: '  |  ${food.distance}'),
+          ],
         ),
+        style: const TextStyle(fontSize: 9.5, height: 1.3, color: Colors.grey),
+        semanticsLabel: 'Pickup contoh ${food.pickupTime}, ${food.distance}',
       ),
       Text(
         food.stock,
         style: const TextStyle(
           fontSize: 9.5,
-          height: 1.2,
+          height: 1.3,
           color: PanganKitaColors.danger,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w500,
         ),
       ),
     ],
@@ -233,15 +302,11 @@ class _FoodRating extends StatelessWidget {
     mainAxisSize: MainAxisSize.min,
     spacing: 2,
     children: [
-      const ReferenceIcon(
-        'star',
-        size: 12,
-        color: PanganKitaColors.brandAccent,
-      ),
+      const ReferenceIcon('star', size: 9, color: PanganKitaColors.brandAccent),
       Flexible(
         child: Text(
           rating,
-          style: const TextStyle(fontSize: 7.4, color: Color(0xFF686868)),
+          style: const TextStyle(fontSize: 5.5, color: Color(0xFF686868)),
         ),
       ),
     ],

@@ -43,6 +43,8 @@ key.properties
 # Flutter / Dart generated files
 # Fontshare permits app embedding, but not public font-file redistribution.
 app/assets/fonts/Satoshi-Bold.ttf
+app/assets/fonts/Satoshi-Regular.ttf
+app/assets/fonts/Satoshi-Medium.ttf
 app/assets/fonts/Satoshi-FFL.txt
 **/.dart_tool/
 **/.pub/

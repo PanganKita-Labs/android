@@ -11,7 +11,7 @@ class DemoFood {
     required this.saving,
     required this.price,
     required this.original,
-    required this.shipping,
+    required this.pickupTime,
     required this.distance,
     required this.stock,
     this.flash = false,
@@ -41,8 +41,8 @@ class DemoFood {
   /// Reference formatted original price.
   final String original;
 
-  /// Illustrative delivery fee retained from HTML; no delivery is offered.
-  final String shipping;
+  /// Illustrative pickup clock label; not an authoritative deadline.
+  final String pickupTime;
 
   /// Reference distance or countdown, not a live timer.
   final String distance;
@@ -55,6 +55,14 @@ class DemoFood {
 
   /// Asset used by both the card and detail sheet.
   String get image => 'assets/prototype/$id.webp';
+
+  /// Reference line breaks for compact cards; search uses the original title.
+  String get cardTitle => switch (id) {
+    'buns' => title.replaceFirst(' Buns', '\nBuns'),
+    'chicken' => title.replaceFirst(' Tanpa', '\nTanpa'),
+    'rendang' => title.replaceFirst(' Rendang', '\nRendang'),
+    _ => title,
+  };
 
   /// Case-insensitive reference search; no remote requests.
   bool matches(String query, String selectedCategory) =>
@@ -86,7 +94,7 @@ class DemoFood {
       saving: 'Hemat 60%',
       price: 'Rp32.000',
       original: 'Rp65.000',
-      shipping: 'Rp5.000',
+      pickupTime: '20.30',
       distance: '30 menit lagi',
       stock: 'Sisa 2 kotak',
       flash: true,
@@ -100,7 +108,7 @@ class DemoFood {
       saving: 'Hemat 51%',
       price: 'Rp28.500',
       original: 'Rp58.000',
-      shipping: 'Rp7.000',
+      pickupTime: '21.30',
       distance: '50 menit lagi',
       stock: 'Tersisa 1 porsi',
       flash: true,
@@ -114,7 +122,7 @@ class DemoFood {
       saving: 'Hemat 41%',
       price: 'Rp18.500',
       original: 'Rp38.000',
-      shipping: 'Rp3.000',
+      pickupTime: '19.20',
       distance: '800 m',
       stock: 'Tersisa 3 kotak',
     ),
@@ -127,7 +135,7 @@ class DemoFood {
       saving: 'Hemat 70%',
       price: 'Rp8.500',
       original: 'Rp38.000',
-      shipping: 'Rp6.000',
+      pickupTime: '21.00',
       distance: '400 m',
       stock: 'Tersisa 4 potong',
     ),
@@ -140,7 +148,7 @@ class DemoFood {
       saving: 'Hemat 16%',
       price: 'Rp26.700',
       original: 'Rp38.000',
-      shipping: 'Rp2.000',
+      pickupTime: '20.50',
       distance: '100 m',
       stock: 'Tersisa 3 porsi',
     ),

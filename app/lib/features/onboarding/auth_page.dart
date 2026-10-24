@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
+import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/onboarding/auth_field.dart';
 import 'package:pangankita/features/onboarding/auth_validation.dart';
 import 'package:pangankita/features/onboarding/social_sign_in.dart';
@@ -124,6 +125,7 @@ class _AuthHeading extends StatelessWidget {
             ? TextAlign.center
             : TextAlign.start,
         style: const TextStyle(
+          fontFamily: PanganKitaTheme.emphasisFontFamily,
           fontSize: 27,
           height: 1.18,
           fontWeight: FontWeight.w700,

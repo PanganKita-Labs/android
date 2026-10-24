@@ -11,10 +11,11 @@ import 'package:pangankita/shared/reference_icon.dart';
 
 const _categoryGap = 5.0;
 const _categoryLabelGap = 6.0;
-const _categoryFontSize = 11.0;
-const _navigationHeight = 70.0;
-const _navigationFontSize = 12.5;
+const _categoryFontSize = 9.0;
+const _navigationHeight = 54.0;
+const _navigationFontSize = 12.0;
 const _navigationLineHeight = 1.2;
+const _nearbySectionGap = 12.0;
 
 /// Searchable local reference feed with category filtering.
 class HomePage extends StatefulWidget {
@@ -41,7 +42,13 @@ class _HomePageState extends State<HomePage> {
           children: [
             for (final category in DemoFood.categories)
               ListTile(
-                title: Text(category),
+                title: Text(
+                  category,
+                  style: const TextStyle(
+                    fontFamily: PanganKitaTheme.bodyFontFamily,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 selected: category == _category,
                 onTap: () {
                   _selectCategory(category);
@@ -63,29 +70,31 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         bottom: false,
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(24, 10, 24, 37),
+          padding: const EdgeInsets.fromLTRB(23, 12, 23, 37),
           children: [
             const HomeHeader(),
-            const SizedBox(height: 18),
+            const SizedBox(height: 14),
             _HomeSearch(
               onChanged: (value) => setState(() => _query = value),
               onFilter: () {
                 unawaited(_filter());
               },
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 10),
             const HeroBanner(),
-            const SizedBox(height: 28),
+            const SizedBox(height: 20),
             const Text(
               'Kategori',
               style: TextStyle(
+                fontFamily: PanganKitaTheme.emphasisFontFamily,
                 fontSize: 23,
                 height: 1.16,
                 letterSpacing: -.45,
                 fontWeight: FontWeight.w700,
+                color: Color(0xFF14313A),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 2),
             _HomeCategories(selected: _category, onSelected: _selectCategory),
             _FeedSection(
               title: 'Flash Sale',
@@ -97,7 +106,7 @@ class _HomePageState extends State<HomePage> {
               flash: false,
               foods: filtered.where((food) => !food.flash).toList(),
             ),
-            const SizedBox(height: 26),
+            const SizedBox(height: 8),
             const _MerchantBanner(),
             const SizedBox(height: 12),
             const Text(
@@ -125,28 +134,32 @@ class _FeedSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 24),
+    padding: EdgeInsets.only(top: flash ? 0 : _nearbySectionGap),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (flash) const _PickupSignal(),
-                  const SizedBox(height: 3),
                   Text(
                     title,
                     style: const TextStyle(
-                      fontSize: 21,
+                      fontFamily: PanganKitaTheme.emphasisFontFamily,
+                      fontSize: 18,
                       height: 1.2,
                       fontWeight: FontWeight.w700,
                       letterSpacing: -.45,
+                      color: Color(0xFF14313A),
                     ),
                   ),
+                  if (!flash)
+                    const Text(
+                      'Diurutkan dari jarak pickup terdekat',
+                      style: TextStyle(fontSize: 9, color: Colors.blueGrey),
+                    ),
                 ],
               ),
             ),
@@ -161,22 +174,21 @@ class _FeedSection extends StatelessWidget {
               ),
               child: const Text(
                 'Lihat Semua',
-                style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                  fontFamily: PanganKitaTheme.emphasisFontFamily,
+                  fontSize: 9,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],
         ),
-        if (!flash)
-          const Text(
-            'Diurutkan dari jarak pickup terdekat',
-            style: TextStyle(fontSize: 10.8, color: Colors.blueGrey),
-          ),
-        const SizedBox(height: 11),
+        const SizedBox(height: 2),
         if (foods.isEmpty)
           const Text('Tidak ada makanan yang cocok dengan pencarianmu.'),
         for (final food in foods) ...[
           FoodCard(food: food),
-          const SizedBox(height: 9),
+          const SizedBox(height: 8),
         ],
       ],
     ),
@@ -189,6 +201,7 @@ class _MerchantBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FilledButton(
     style: FilledButton.styleFrom(
+      backgroundColor: PanganKitaColors.brandPrimaryStrong,
       padding: const EdgeInsets.all(16),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -198,18 +211,36 @@ class _MerchantBanner extends StatelessWidget {
     child: const Row(
       spacing: 15,
       children: [
-        ReferenceIcon('store', size: 25),
+        DecoratedBox(
+          decoration: BoxDecoration(
+            color: Color(0x22FFFFFF),
+            borderRadius: BorderRadius.all(Radius.circular(9)),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: ReferenceIcon('store', size: 21),
+          ),
+        ),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Mau lihat berdasarkan toko?',
-                style: TextStyle(fontSize: 13.2, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                  fontFamily: PanganKitaTheme.emphasisFontFamily,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               Text(
                 'Jelajahi semua merchant di dekatmu',
-                style: TextStyle(fontSize: 10.8),
+                style: TextStyle(
+                  fontFamily: PanganKitaTheme.bodyFontFamily,
+                  fontSize: 9,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xCCFFFFFF),
+                ),
               ),
             ],
           ),
@@ -228,12 +259,12 @@ class _HomeSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) => TextField(
     onChanged: onChanged,
-    style: const TextStyle(fontSize: 13),
+    style: const TextStyle(fontSize: 11),
     decoration: InputDecoration(
       hintText: 'Temukan makanan lezat di sekitarmu...',
       semanticCounterText: 'Cari makanan atau toko',
-      hintStyle: const TextStyle(fontSize: 13, color: Colors.grey),
-      contentPadding: const EdgeInsets.symmetric(vertical: 8),
+      hintStyle: const TextStyle(fontSize: 11, color: Colors.grey),
+      contentPadding: const EdgeInsets.symmetric(vertical: 6),
       focusedBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(24)),
         borderSide: BorderSide(color: PanganKitaColors.brandPrimary),
@@ -242,7 +273,7 @@ class _HomeSearch extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(24)),
         borderSide: BorderSide(color: PanganKitaColors.borderNeutral),
       ),
-      prefixIcon: const ReferenceIcon('search'),
+      prefixIcon: const ReferenceIcon('search', size: 18),
       suffixIcon: IconButton(
         tooltip: 'Filter makanan',
         onPressed: onFilter,
@@ -279,10 +310,13 @@ class _HomeCategories extends StatelessWidget {
             shape: const StadiumBorder(),
             side: BorderSide.none,
             backgroundColor: Colors.white,
-            selectedColor: PanganKitaColors.brandPrimary,
+            selectedColor: PanganKitaColors.brandPrimaryStrong,
+            padding: const EdgeInsets.symmetric(horizontal: 3),
+            labelPadding: const EdgeInsets.symmetric(horizontal: 6),
             labelStyle: TextStyle(
+              fontFamily: PanganKitaTheme.bodyFontFamily,
               fontSize: _categoryFontSize,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
               color: selected == category
                   ? Colors.white
                   : PanganKitaColors.textPrimary,
@@ -298,18 +332,16 @@ class _HomeNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => NavigationBar(
-    height: _navigationHeight,
+    height: MediaQuery.textScalerOf(context).scale(_navigationHeight),
     labelTextStyle: WidgetStateProperty.resolveWith(
       (states) => TextStyle(
-        fontFamily: PanganKitaTheme.referenceFontFamily,
+        fontFamily: PanganKitaTheme.emphasisFontFamily,
         fontSize: _navigationFontSize,
         height: _navigationLineHeight,
         color: states.contains(WidgetState.selected)
-            ? PanganKitaColors.brandPrimary
+            ? const Color(0xFF52A963)
             : const Color(0xFF8D8F90),
-        fontWeight: states.contains(WidgetState.selected)
-            ? FontWeight.w700
-            : FontWeight.w400,
+        fontWeight: FontWeight.w600,
       ),
     ),
     onDestinationSelected: (index) {
@@ -318,46 +350,12 @@ class _HomeNavigation extends StatelessWidget {
     destinations: const [
       NavigationDestination(
         icon: ReferenceIcon('home'),
-        selectedIcon: ReferenceIcon('home-filled'),
+        selectedIcon: ReferenceIcon('home-filled', color: Color(0xFF52A963)),
         label: 'Beranda',
       ),
       NavigationDestination(icon: ReferenceIcon('bag'), label: 'Pesanan'),
       NavigationDestination(icon: ReferenceIcon('chat'), label: 'Chat'),
       NavigationDestination(icon: ReferenceIcon('bell'), label: 'Notifikasi'),
-    ],
-  );
-}
-
-class _PickupSignal extends StatelessWidget {
-  const new();
-
-  @override
-  Widget build(BuildContext context) => const Row(
-    spacing: 9,
-    children: [
-      SizedBox(
-        width: 8,
-        height: 8,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: PanganKitaColors.brandAccent,
-            shape: BoxShape.circle,
-            boxShadow: [BoxShadow(color: Color(0x30E9AE50), spreadRadius: 4)],
-          ),
-        ),
-      ),
-      Flexible(
-        child: Text(
-          'PICKUP SEGERA',
-          style: TextStyle(
-            fontSize: 10.5,
-            letterSpacing: .22,
-            height: 1.2,
-            color: PanganKitaColors.brandAccent,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
     ],
   );
 }
@@ -372,7 +370,12 @@ class _ReferenceCategoryCount extends StatelessWidget {
       padding: EdgeInsets.all(5),
       child: Text(
         DemoFood.referenceCategoryCount,
-        style: TextStyle(fontSize: 9, height: 1),
+        style: TextStyle(
+          fontFamily: PanganKitaTheme.emphasisFontFamily,
+          fontSize: 9,
+          height: 1,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     ),
   );

@@ -41,6 +41,7 @@ class _AuthFieldState extends State<AuthField> {
     return TextFormField(
       controller: widget.controller,
       style: const TextStyle(
+        fontFamily: PanganKitaTheme.bodyFontFamily,
         fontSize: 15,
         height: 1.2,
         color: Color(0xFF20242A),
@@ -56,6 +57,7 @@ class _AuthFieldState extends State<AuthField> {
       decoration: InputDecoration(
         labelText: widget.label,
         labelStyle: const TextStyle(
+          fontFamily: PanganKitaTheme.bodyFontFamily,
           fontSize: 15,
           height: 1.2,
           color: Color(0xFF8695A5),

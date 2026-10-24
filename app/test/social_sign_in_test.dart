@@ -1,21 +1,17 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/onboarding/social_sign_in.dart';
 
+import 'font_test_utils.dart';
+
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(loadBrandFonts);
   testWidgets('social artwork matches the reference and stays demo-only', (
     tester,
   ) async {
-    await tester.runAsync(() async {
-      final font = FontLoader(PanganKitaTheme.referenceFontFamily)
-        ..addFont(rootBundle.load('assets/fonts/LiberationSans-Regular.ttf'))
-        ..addFont(rootBundle.load('assets/fonts/LiberationSans-Bold.ttf'));
-      await font.load();
-    });
     await tester.pumpWidget(
       MaterialApp(
         theme: PanganKitaTheme.light,
@@ -44,15 +40,33 @@ void main() {
       }
     });
     await tester.pumpAndSettle();
-    await expectLater(
+    final caption = find.text('Lanjutkan dengan');
+    final captionStyle = DefaultTextStyle.of(tester.element(caption)).style
+        .merge(tester.widget<Text>(caption).style);
+    expect(captionStyle.fontFamily, 'Satoshi');
+    expect(captionStyle.fontWeight, FontWeight.w500);
+    final boundary = tester.renderObject<RenderRepaintBoundary>(
       find.byType(RepaintBoundary).last,
-      matchesGoldenFile(
-        // Text rasterization differs on Windows; keep both exact baselines.
-        Platform.isWindows
-            ? 'goldens/social_sign_in.windows.png'
-            : 'goldens/social_sign_in.png',
+    );
+    final providerRow = tester.renderObject<RenderBox>(
+      find.descendant(
+        of: find.byType(SocialSignIn),
+        matching: find.byType(Row),
       ),
     );
+    final origin = providerRow.localToGlobal(Offset.zero, ancestor: boundary);
+    final layer = boundary.debugLayer! as OffsetLayer;
+    final artwork = await tester.runAsync(
+      () => layer.toImage(origin & providerRow.size),
+    );
+    try {
+      await expectLater(
+        artwork,
+        matchesGoldenFile('goldens/social_provider_buttons.png'),
+      );
+    } finally {
+      artwork?.dispose();
+    }
     expect(find.text('G'), findsNothing);
     final google = find.descendant(
       of: find.byType(SocialSignIn),

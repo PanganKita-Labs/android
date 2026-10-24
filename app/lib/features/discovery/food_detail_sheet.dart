@@ -57,16 +57,23 @@ class FoodDetailSheet extends StatelessWidget {
         const SizedBox(height: 8),
         const Text(
           'Informasi penawaran ini hanya konten prototipe. '
-          'Harga, rating, ongkir, stok, dan waktu bukan penawaran langsung.',
+          'Harga, rating, badge merchant, stok, dan waktu bukan penawaran '
+          'langsung atau bukti verifikasi.',
         ),
         const SizedBox(height: 16),
         Wrap(
           spacing: _detailColumnGap,
           runSpacing: _detailRowGap,
           children: [
-            Text('Harga surplus\n${food.price}'),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Harga surplus'),
+                Text(food.price, style: Theme.of(context).textTheme.titleLarge),
+              ],
+            ),
             Text('Harga awal\n${food.original}'),
-            Text('Ongkir (contoh)\n${food.shipping}'),
+            Text('Waktu pickup (contoh)\n${food.pickupTime}'),
             Text('Stok pada referensi\n${food.stock}'),
           ],
         ),

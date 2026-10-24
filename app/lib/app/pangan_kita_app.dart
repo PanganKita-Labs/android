@@ -18,21 +18,7 @@ class PanganKitaApp extends StatelessWidget {
     title: 'PanganKita',
     debugShowCheckedModeBanner: false,
     initialRoute: AppRoutes.splash,
-    theme: PanganKitaTheme.light.copyWith(
-      filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          minimumSize: const Size.fromHeight(52),
-          textStyle: const TextStyle(
-            fontFamily: PanganKitaTheme.referenceFontFamily,
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-          ),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(13)),
-          ),
-        ),
-      ),
-    ),
+    theme: PanganKitaTheme.light,
     routes: {
       AppRoutes.splash: (context) => const SplashPage(),
       AppRoutes.welcome: (context) => const WelcomePage(),

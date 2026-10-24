@@ -11,7 +11,11 @@ import 'package:pangankita/features/onboarding/password_success_page.dart';
 import 'package:pangankita/features/onboarding/splash_page.dart';
 import 'package:pangankita/features/onboarding/welcome_page.dart';
 
+import 'font_test_utils.dart';
+
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(loadBrandFonts);
   Future<void> welcome(WidgetTester tester) async {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(390, 844);
@@ -38,11 +42,11 @@ void main() {
     expect(find.byType(WelcomePage), findsOneWidget);
     final app = tester.widget<MaterialApp>(find.byType(MaterialApp));
     expect(app.title, 'PanganKita');
-    expect(app.theme?.textTheme.bodyMedium?.fontFamily, 'Liberation Sans');
-    expect(app.theme?.textTheme.headlineLarge?.fontFamily, 'Liberation Sans');
+    expect(app.theme?.textTheme.bodyMedium?.fontFamily, 'Satoshi');
+    expect(app.theme?.textTheme.headlineLarge?.fontFamily, 'Geist');
     expect(
       app.theme?.filledButtonTheme.style?.textStyle?.resolve({})?.fontFamily,
-      'Liberation Sans',
+      'Geist',
     );
     expect(app.theme?.colorScheme.primary, PanganKitaColors.brandPrimary);
   });
@@ -75,7 +79,7 @@ void main() {
     expect(find.byType(SplashPage), findsNothing);
     expect(find.text('Daftar'), findsOneWidget);
     final registerLabel = tester.widget<Text>(find.text('Daftar'));
-    expect(registerLabel.style?.fontFamily, 'Satoshi');
+    expect(registerLabel.style?.fontFamily, 'Geist');
     expect(registerLabel.style?.fontWeight, FontWeight.w700);
   });
 
@@ -164,10 +168,10 @@ void main() {
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField), 'Mawar');
     await tester.pumpAndSettle();
-    expect(find.text('Mawar Coconut Buns (Isi 5 pcs)'), findsOneWidget);
-    await tester.ensureVisible(find.text('Mawar Coconut Buns (Isi 5 pcs)'));
+    expect(find.text('Mawar Coconut\nBuns (Isi 5 pcs)'), findsOneWidget);
+    await tester.ensureVisible(find.text('Mawar Coconut\nBuns (Isi 5 pcs)'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Mawar Coconut Buns (Isi 5 pcs)'));
+    await tester.tap(find.text('Mawar Coconut\nBuns (Isi 5 pcs)'));
     await tester.pumpAndSettle();
     expect(find.byType(FoodDetailSheet), findsOneWidget);
     await tester.scrollUntilVisible(
@@ -214,7 +218,7 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('Roti Abon Ayam'), findsOneWidget);
-    expect(find.text('Mawar Coconut Buns (Isi 5 pcs)'), findsNothing);
+    expect(find.text('Mawar Coconut\nBuns (Isi 5 pcs)'), findsNothing);
   });
 
   for (final width in [320.0, 360.0, 390.0, 412.0]) {

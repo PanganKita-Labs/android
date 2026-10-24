@@ -13,7 +13,7 @@ class HomeHeader extends StatelessWidget {
     spacing: PanganKitaSpacing.sm,
     children: [
       const CircleAvatar(
-        radius: 23,
+        radius: 22,
         backgroundImage: AssetImage('assets/prototype/avatar.webp'),
       ),
       const Expanded(
@@ -30,7 +30,13 @@ class HomeHeader extends StatelessWidget {
                   ),
                 ],
               ),
-              style: TextStyle(fontSize: 14, height: 1.26, letterSpacing: -.2),
+              style: TextStyle(
+                fontFamily: PanganKitaTheme.emphasisFontFamily,
+                fontSize: 13,
+                height: 1.26,
+                letterSpacing: -.2,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             SizedBox(height: 3),
             Row(
@@ -40,7 +46,7 @@ class HomeHeader extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Mandala by Pass, Medan',
-                    style: TextStyle(fontSize: 11.5, height: 1.3),
+                    style: TextStyle(fontSize: 11, height: 1.3),
                   ),
                 ),
               ],

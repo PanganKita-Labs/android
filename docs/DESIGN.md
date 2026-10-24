@@ -17,9 +17,27 @@ identity, typography, and semantic colors. Canonical brand palette:
 - Charcoal: `#2D2D2D` (text)
 - Light Gray: `#E8E4DF` (border)
 
-Official type families: **Geist Sans** for headings and **Satoshi** for body.
-Do not falsely claim those fonts are bundled: configure them in Flutter only
-when the approved font files and their usage rights are available.
+Official typography roles:
+
+| Role | Family and weight |
+|---|---|
+| Display, headings, titles, product names, current prices | Geist Semibold/Bold (600/700) |
+| CTA, action links, bottom navigation, important numbers | Geist Semibold/Bold (600/700) |
+| Body, descriptions, captions, helper text | Satoshi Regular/Medium (400/500) |
+| Merchant names, ratings, addresses, timestamps, stock, original prices | Satoshi Regular/Medium (400/500) |
+| Form fields, labels, search placeholders, category chips, badge labels | Satoshi Regular/Medium (400/500) |
+
+Savings badges use Satoshi for the word "Hemat" and Geist for the percentage.
+The role determines the face: form values (including OTP), ratings, timestamps,
+and stock labels remain Satoshi even when they contain numbers.
+The latest role specification also applies to Daftar/Login actions: use Geist.
+
+Geist Semibold/Bold are bundled from the [official Geist project](https://github.com/vercel/geist-font)
+with `app/assets/fonts/Geist-OFL.txt`. Satoshi faces are fetched directly from
+Fontshare by `.github/scripts/fetch_satoshi.py`; the font files and ITF license
+remain Git-ignored. Run that setup before builds and tests. Both families are
+registered with Flutter's license registry. Do not silently substitute a system
+font or require Arial/Liberation Sans metrics in typography tests.
 Preserve the existing `app/lib/app/pangan_kita_theme.dart` brand theme as the
 starting point. A screenshot-specific color difference is not an automatic
 brand change: resolve it explicitly against the official brand guidelines.

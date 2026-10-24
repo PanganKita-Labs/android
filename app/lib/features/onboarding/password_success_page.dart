@@ -26,7 +26,11 @@ class PasswordSuccessPage extends StatelessWidget {
           const Text(
             'Password Berhasil Diperbarui!',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              fontFamily: PanganKitaTheme.emphasisFontFamily,
+              fontSize: 25,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const Text(
             'Silakan masuk kembali menggunakan\npassword baru.',

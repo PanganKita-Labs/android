@@ -19,23 +19,26 @@ flutter run
 
 All authentication and listing content is **local demonstration only**.
 No server accounts are created, no SMS/email is sent, and no orders or payments
-can be placed. Social login, cart, chat, notifications, and merchant browsing
-show unavailable feedback. Passwords are neither transmitted nor persisted.
+can be placed. Social login, cart, chat, notifications, promotions, and merchant
+browsing show unavailable feedback. Passwords are neither transmitted nor persisted.
 Prices, ratings, quantities, and locations are static reference examples.
+Homepage pickup-clock labels and merchant badges are illustrative too; they
+do not establish pickup availability or merchant verification.
 
-The supplied artwork is bundled under `app/assets/prototype/`. Social logos
-and interface symbols use the artwork included in the ZIP. Brand colors
-use the existing project theme. Typography uses bundled **Liberation Sans**
-(regular and bold), an Arial-compatible font. It is not the proprietary Arial
-font. Its SIL Open Font License and
-copyright notices are included in `app/assets/fonts/OFL.txt` and registered
-with Flutter's license registry. The welcome screen's Daftar label uses
-**Satoshi Bold (700)** from [Fontshare](https://www.fontshare.com/fonts/satoshi).
+The supplied artwork is bundled under `app/assets/prototype/`. Typography uses
+**Geist Semibold/Bold** for headings, product names, current prices, emphasized
+numbers, CTA, action links, and navigation. **Satoshi Regular/Medium** is used
+for body copy, metadata, inputs, captions, categories, and badge labels.
+Savings badges keep "Hemat" in Satoshi and emphasize the percentage with Geist.
+
+Geist is bundled from the [official project](https://github.com/vercel/geist-font)
+with its SIL Open Font License in `app/assets/fonts/Geist-OFL.txt`.
+Satoshi comes directly from [Fontshare](https://www.fontshare.com/fonts/satoshi).
 Run the setup command above before building or testing. Satoshi's font and
-license are downloaded locally and ignored by Git because the ITF Free Font
-License permits app embedding but restricts font-file redistribution through
-public repositories. Both CI workflows run the same setup script. Geist Sans
-remains unbundled.
+license files are downloaded locally and ignored by Git because its ITF Free
+Font License permits app embedding but restricts public font-file redistribution.
+CI runs the same setup script. Both families appear in Flutter's license registry.
+The full role mapping is in [`docs/DESIGN.md`](docs/DESIGN.md).
 No new package dependencies were added.
 
 Read [`PRD.md`](PRD.md), [`docs/DESIGN.md`](docs/DESIGN.md),
