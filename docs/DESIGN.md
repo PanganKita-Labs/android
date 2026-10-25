@@ -32,6 +32,44 @@ The role determines the face: form values (including OTP), ratings, timestamps,
 and stock labels remain Satoshi even when they contain numbers.
 The latest role specification also applies to Daftar/Login actions: use Geist.
 
+## Component typography mapping
+
+These designer-approved component examples make the typography roles above
+explicit. They define **visual treatment**, not product features, data truth,
+or permission to change the official brand assets.
+
+| UI component or text | Typography | Reason |
+|---|---|---|
+| Greeting and section headings (e.g., Selamat Pagi, Flash Sale, Kategori, Promo Hari Ini, Dekat dari Lokasimu) | Geist Semibold/Bold | Display, headline, and section hierarchy |
+| Product names (e.g., Croissant Favoritmu) | Geist Semibold/Bold | Primary product identity |
+| Current prices and emphasized savings or discounts (e.g., Rp32.000, 60%) | Geist Semibold/Bold | Price and prominent numeric emphasis |
+| Primary CTAs (e.g., Pesan Sekarang, Checkout, Bayar, Tambah ke Keranjang) | Geist Semibold/Bold | Action emphasis; only show supported actions |
+| Action links (e.g., Lihat Semua) | Geist Semibold/Bold | Navigation or actionable emphasis |
+| Bottom-navigation labels (e.g., Beranda, Pesanan, Chat, Notifikasi) | Geist Semibold/Bold | Primary navigation, where these destinations exist |
+| Merchant name, rating, review count, address, and location metadata | Satoshi Regular/Medium | Supporting metadata |
+| Search placeholder, text-field contents, form labels, helper text, and OTP input | Satoshi Regular/Medium | Readability in form controls |
+| Category-chip labels (e.g., Semua, Aneka Nasi) | Satoshi Regular/Medium | Control labels rather than headings |
+| Product descriptions, delivery-fee or timing labels where applicable, and stock labels (e.g., Sisa 2 kotak) | Satoshi Regular/Medium | Supporting product information |
+| Original or struck-through prices | Satoshi Regular/Medium | Secondary price context |
+| Badge text (e.g., Promo QRIS, Flash Sale, Pickup) | Satoshi Regular/Medium | Compact badge labels |
+| Caption and supporting copy (e.g., Temukan makanan lezat di sekitarmu) | Satoshi Regular/Medium | Readable explanatory text |
+| Savings badge (e.g., Hemat 60%) | Satoshi for Hemat; Geist Semibold/Bold for 60% | Mixed hierarchy within one component |
+
+**Context determines the font, not the characters.** An emphasized numeric
+statistic such as `2 km` or `5 item` may use Geist when presented as a
+prominent value. The same numbers remain Satoshi inside an address, rating,
+stock, input, timestamp, or other supporting metadata. The section
+heading `Flash Sale` uses Geist; a `Flash Sale` badge label uses Satoshi.
+Category section headings use Geist, while category labels use Satoshi.
+
+Treat sample greetings, names, prices, offers, ratings, merchants, locations,
+shipping fees, delivery estimates, inventory and navigation destinations as
+**illustrative typography examples**, not evidence of live product behavior.
+PanganKita remains pickup-first. Do not introduce unsupported delivery,
+payment, checkout, QRIS, chat, or other functionality merely because a label
+appears in this table. Keep the approved brand colors and current Flutter
+font setup unchanged.
+
 Geist Semibold/Bold are bundled from the [official Geist project](https://github.com/vercel/geist-font)
 with `app/assets/fonts/Geist-OFL.txt`. Satoshi faces are fetched directly from
 Fontshare by `.github/scripts/fetch_satoshi.py`; the font files and ITF license
