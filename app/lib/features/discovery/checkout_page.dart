@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/checkout_order_details.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
@@ -509,11 +510,9 @@ class _CheckoutFooter extends StatelessWidget {
                   ),
                 ),
                 onPressed: enabled
-                    ? () => DemoNotice.show(
+                    ? () => Navigator.pushNamed<void>(
                         context,
-                        'Pembayaran belum tersedia. '
-                        'Tidak ada tagihan, pesanan, '
-                        'atau reservasi dibuat.',
+                        AppRoutes.paymentStatus,
                       )
                     : null,
                 child: const Text(

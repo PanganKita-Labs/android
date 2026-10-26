@@ -36,6 +36,9 @@ abstract final class AppRoutes {
   /// Local order-screen preview; no order is created by checkout.
   static const orders = '/orders';
 
+  /// Status of the local checkout preview; no payment is created.
+  static const paymentStatus = '/checkout/status';
+
   /// Local food examples.
   static const home = '/home';
 }

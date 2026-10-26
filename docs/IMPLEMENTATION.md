@@ -24,8 +24,8 @@ groups, illustrative pickup labels, and a zero demo service fee. Notes are a
 local input exercise and are not sent or retained after leaving the page.
 The `/checkout` page reads the same session cart and shows merchant pickup
 labels, a sample pickup person, item details, a QRIS display example, and the
-integer-rupiah payment summary. Its acknowledgement checkbox only enables a
-simulated payment notice; it never submits, reserves, charges, or clears items.
+integer-rupiah payment summary. Its acknowledgement checkbox only enables
+navigation to a payment preview; it never submits, reserves, charges, or clears items.
 The pickup agreement links to an explanatory demo dialog, not a real service
 policy. Checkout displays the user-supplied QRIS logo, not a scannable payment
 code. The artwork came from Zonalogo; the contributor confirmed permission to
@@ -35,6 +35,13 @@ Empty carts cannot continue. Payment/profile/location actions remain demo
 feedback rather than integrations. The review card, add-ons,
 location, prices, and pickup clocks remain explicitly illustrative. There is
 no actual ordering, reservation, payment, or merchant verification.
+
+After the checkout acknowledgement, the demo button opens `/checkout/status`.
+This page follows the middle panel of the payment design while explicitly
+showing that no payment or order exists. The QR, countdown, and order ID areas
+display "belum tersedia" placeholders. No scannable code, live countdown,
+pickup code, or completed-order claim is presented. Back navigation leaves
+the cart intact; the Home action returns to discovery without creating state.
 
 These are demonstration flows: no server accounts, SMS/email, persisted
 passwords, live location, orders, reservations, or payments are implemented.
