@@ -7,10 +7,15 @@ This is not a continuation of the retired six development phases.
 
 The Flutter app includes splash/welcome, local login and registration forms,
 demo OTP verification (code `5102`), simulated password recovery, and a static
-food feed with local search, category filters, and read-only details. Named
+food feed with local search, category filters, and read-only product pages. Named
 routes live in `app/app_routes.dart`; widgets own their local interaction state.
 The supplied images and licensed Geist fonts are bundled assets. Satoshi is
 downloaded during setup; text roles follow `docs/DESIGN.md`.
+
+Product cards open `/products/<id>` using the selected local fixture. The detail
+page owns temporary favorites and a bounded 1-10 quantity preview; neither
+persists nor changes inventory. Product text can be copied to the clipboard.
+Add-ons, real reviews, merchant location, cart, and ordering remain unavailable.
 
 These are demonstration flows: no server accounts, SMS/email, persisted
 passwords, live location, orders, reservations, or payments are implemented.

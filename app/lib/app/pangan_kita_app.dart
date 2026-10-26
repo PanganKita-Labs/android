@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
+import 'package:pangankita/features/discovery/product_detail_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
 import 'package:pangankita/features/onboarding/password_success_page.dart';
@@ -29,6 +31,8 @@ class PanganKitaApp extends StatelessWidget {
       AppRoutes.password: (context) => const AuthPage.password(),
       AppRoutes.success: (context) => const PasswordSuccessPage(),
       AppRoutes.home: (context) => const HomePage(),
+      for (final food in DemoFood.examples)
+        AppRoutes.product(food.id): (context) => ProductDetailPage(food: food),
     },
   );
 }

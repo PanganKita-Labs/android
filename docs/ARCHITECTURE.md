@@ -142,7 +142,7 @@ app/test/social_sign_in_test.dart
 App composition owns named routes and the theme. Onboarding owns splash,
 welcome, local form validation, demo OTP, and simulated password recovery.
 Discovery owns static listing examples, local search/category filtering, and
-read-only detail sheets. Shared widgets provide reference icons and feedback
+read-only product pages. Shared widgets provide reference icons and feedback
 for unavailable integrations. State remains local to the relevant widgets.
 
 There is no server authentication, persistence, live location, ordering,
