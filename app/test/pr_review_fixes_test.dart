@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_app.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/food_detail_sheet.dart';
 import 'package:pangankita/features/discovery/hero_banner.dart';
+import 'package:pangankita/features/discovery/product_detail_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
 
@@ -234,7 +234,7 @@ void main() {
         find.textContaining('Promo croissant belum tersedia'),
         findsOneWidget,
       );
-      expect(find.byType(FoodDetailSheet), findsNothing);
+      expect(find.byType(ProductDetailPage), findsNothing);
     },
   );
 }

@@ -24,6 +24,9 @@ abstract final class AppRoutes {
   /// Demo recovery confirmation.
   static const success = '/success';
 
+  /// Details for one local example; not a public deep link.
+  static String product(String id) => '/products/$id';
+
   /// Local food examples.
   static const home = '/home';
 }

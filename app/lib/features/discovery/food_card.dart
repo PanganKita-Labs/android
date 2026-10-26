@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
-import 'package:pangankita/features/discovery/food_detail_sheet.dart';
 import 'package:pangankita/shared/reference_icon.dart';
 
 const _compactWidth = 360.0;
@@ -32,7 +32,8 @@ class FoodCard extends StatelessWidget {
       margin: EdgeInsets.zero,
       child: InkWell(
         borderRadius: const BorderRadius.all(Radius.circular(16)),
-        onTap: () => FoodDetailSheet.show(context, food),
+        onTap: () =>
+            Navigator.pushNamed<void>(context, AppRoutes.product(food.id)),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(14, 13, 14, 10),
           child: Column(

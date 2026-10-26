@@ -4,7 +4,7 @@ PanganKita is a pickup-first surplus-food project for Indonesia. The current
 Flutter application now includes the user-supplied Flutter prototype.
 It includes splash/welcome, login, registration,
 local OTP verification (demo code **5102**), password recovery, and a searchable
-home feed with category filters and food detail sheets.
+home feed with category filters and full-screen product details.
 
 ## Run
 

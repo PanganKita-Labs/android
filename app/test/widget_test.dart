@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_app.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/food_detail_sheet.dart';
+import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
+import 'package:pangankita/features/discovery/product_detail_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/auth_validation.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
@@ -163,7 +165,15 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
     await tester.pumpWidget(
-      MaterialApp(theme: PanganKitaTheme.light, home: const HomePage()),
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: const HomePage(),
+        routes: {
+          for (final food in DemoFood.examples)
+            AppRoutes.product(food.id): (context) =>
+                ProductDetailPage(food: food),
+        },
+      ),
     );
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField), 'Mawar');
@@ -173,26 +183,9 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Mawar Coconut\nBuns (Isi 5 pcs)'));
     await tester.pumpAndSettle();
-    expect(find.byType(FoodDetailSheet), findsOneWidget);
-    await tester.scrollUntilVisible(
-      find.text('Simulasi Saja — Tidak Bisa Dipesan'),
-      100,
-      scrollable: find.descendant(
-        of: find.byType(FoodDetailSheet),
-        matching: find.byType(Scrollable),
-      ),
-    );
-    expect(find.text('Simulasi Saja — Tidak Bisa Dipesan'), findsOneWidget);
-    await tester.scrollUntilVisible(
-      find.byTooltip('Tutup detail'),
-      -100,
-      scrollable: find.descendant(
-        of: find.byType(FoodDetailSheet),
-        matching: find.byType(Scrollable),
-      ),
-    );
-    await tester.pumpAndSettle();
-    await tester.tap(find.byTooltip('Tutup detail'));
+    expect(find.byType(ProductDetailPage), findsOneWidget);
+    expect(find.text('Mawar Coconut Buns (Isi 5 pcs)'), findsOneWidget);
+    await tester.tap(find.byType(BackButton));
     await tester.pumpAndSettle();
     await tester.scrollUntilVisible(
       find.byType(TextField),
