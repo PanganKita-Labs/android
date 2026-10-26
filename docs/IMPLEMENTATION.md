@@ -15,7 +15,10 @@ downloaded during setup; text roles follow `docs/DESIGN.md`.
 Product cards open `/products/<id>` using the selected local fixture. The detail
 page owns temporary favorites and a bounded 1-10 quantity preview; neither
 persists nor changes inventory. Product text can be copied to the clipboard.
-Add-ons, real reviews, merchant location, cart, and ordering remain unavailable.
+The detail page includes selectable reference add-ons and an explicitly labeled
+example review. These do not represent live availability, change pricing, or
+persist. Merchant location is illustrative; real reviews, cart, and ordering
+remain unavailable.
 
 These are demonstration flows: no server accounts, SMS/email, persisted
 passwords, live location, orders, reservations, or payments are implemented.

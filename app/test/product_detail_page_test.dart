@@ -43,6 +43,25 @@ void main() {
     await tester.tap(find.byTooltip('Favoritkan sementara'));
     await tester.pump();
     expect(find.byTooltip('Hapus favorit sementara'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('Keju ekstra'), 100);
+    await tester.ensureVisible(find.text('Keju ekstra'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Keju ekstra'));
+    await tester.pumpAndSettle();
+    expect(
+      tester
+          .widget<CheckboxListTile>(
+            find.widgetWithText(CheckboxListTile, 'Keju ekstra'),
+          )
+          .value,
+      isTrue,
+    );
+    await tester.scrollUntilVisible(
+      find.text(DemoFood.examples.first.price),
+      -100,
+    );
+    await tester.pumpAndSettle();
+    expect(find.text(DemoFood.examples.first.price), findsOneWidget);
     await tester.scrollUntilVisible(
       find.widgetWithIcon(IconButton, Icons.add),
       150,
@@ -53,6 +72,8 @@ void main() {
           .onPressed,
       isNull,
     );
+    await tester.ensureVisible(find.byTooltip('Tambah jumlah contoh'));
+    await tester.pumpAndSettle();
     for (var index = 0; index < 9; index++) {
       await tester.tap(find.byTooltip('Tambah jumlah contoh'));
       await tester.pump();
