@@ -17,6 +17,7 @@ class DemoFood {
     required this.distance,
     required this.stock,
     this.flash = false,
+    this.pickupAddress = 'Lokasi toko contoh',
   });
 
   /// Asset identifier.
@@ -27,6 +28,9 @@ class DemoFood {
 
   /// Reference merchant name.
   final String merchant;
+
+  /// Illustrative pickup address; not a real location integration.
+  final String pickupAddress;
 
   /// Reference food name.
   final String title;
@@ -94,6 +98,7 @@ class DemoFood {
       id: 'buns',
       category: 'Kue & Dessert',
       merchant: 'Mawar Bakery & Cake',
+      pickupAddress: 'Mandala by Pass, Medan',
       title: 'Mawar Coconut Buns (Isi 5 pcs)',
       rating: '4.8 (106+ ratings)',
       saving: 'Hemat 60%',

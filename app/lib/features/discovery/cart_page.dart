@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/cart_line_card.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
@@ -392,11 +393,8 @@ class _CartFooter extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                onPressed: () => DemoNotice.show(
-                  context,
-                  'Checkout belum tersedia. '
-                  'Tidak ada pesanan atau pembayaran dibuat.',
-                ),
+                onPressed: () =>
+                    Navigator.pushNamed<void>(context, AppRoutes.checkout),
                 child: const Text(
                   'Lanjut Checkout',
                   textAlign: TextAlign.center,

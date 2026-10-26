@@ -142,10 +142,11 @@ app/test/social_sign_in_test.dart
 App composition owns named routes and the theme. Onboarding owns splash,
 welcome, local form validation, demo OTP, and simulated password recovery.
 Discovery owns static listing examples, local search/category filtering, and
-product pages, and the local cart preview. App composition owns and disposes
-one `DemoCart` notifier shared by product routes and `/cart`; no global
-singleton or persistence is used. Cart lines retain typed add-ons and integer
-rupiah amounts. Quantity limits are preview bounds, not inventory rules.
+product pages, the local cart preview, and pickup checkout. App composition
+owns and disposes one `DemoCart` notifier shared by product routes, `/cart`,
+and `/checkout`; no global singleton or persistence is used. Cart lines retain
+typed add-ons and integer rupiah amounts. Quantity limits are preview bounds,
+not inventory rules.
 Shared widgets provide reference icons and unavailable-action feedback.
 Other presentation state remains local to the relevant widgets.
 

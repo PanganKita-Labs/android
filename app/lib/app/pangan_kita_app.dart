@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/cart_page.dart';
+import 'package:pangankita/features/discovery/checkout_page.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
@@ -47,6 +48,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.success: (context) => const PasswordSuccessPage(),
       AppRoutes.home: (context) => const HomePage(),
       AppRoutes.cart: (context) => CartPage(cart: _cart),
+      AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),
       for (final food in DemoFood.examples)
         AppRoutes.product(food.id): (context) =>
             ProductDetailPage(food: food, cart: _cart),

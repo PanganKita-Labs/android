@@ -30,6 +30,9 @@ abstract final class AppRoutes {
   /// Session-only shopping preview.
   static const cart = '/cart';
 
+  /// Read-only pickup checkout simulation.
+  static const checkout = '/checkout';
+
   /// Local food examples.
   static const home = '/home';
 }
