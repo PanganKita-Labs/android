@@ -2,9 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/features/discovery/demo_addon.dart';
+import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/shared/demo_notice.dart';
+import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/reference_icon.dart';
 
 const _reviewStarCount = 5;
@@ -26,15 +30,17 @@ const _sectionGap = 20.0;
 const _photoRatio = 2.32;
 const _titleSize = 20.0;
 const _priceSize = 22.0;
-const _previewQuantityLimit = 10;
 
 /// Full-screen details for a selected offline listing example.
 class ProductDetailPage extends StatefulWidget {
   /// Displays the same product data as its home card.
-  const new({required this.food, super.key});
+  const new({required this.food, required this.cart, super.key});
 
   /// Illustrative listing, not authoritative inventory or a live offer.
   final DemoFood food;
+
+  /// App-owned demo cart shared with the home cart entry.
+  final DemoCart cart;
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -43,6 +49,25 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends State<ProductDetailPage> {
   bool _favorite = false;
   int _quantity = 1;
+  Set<DemoAddon> _addons = {};
+
+  void _selectAddons(Set<DemoAddon> addons) => setState(() => _addons = addons);
+
+  void _addToCart() {
+    final added = widget.cart.add(
+      widget.food,
+      quantity: _quantity,
+      addons: _addons,
+    );
+    if (!added) {
+      DemoNotice.show(
+        context,
+        'Batas pratinjau 10 item per pilihan. Ubah jumlah di keranjang.',
+      );
+      return;
+    }
+    Navigator.pushNamed<void>(context, AppRoutes.cart);
+  }
 
   void _toggleFavorite() => setState(() => _favorite = !_favorite);
   void _decrease() => setState(() => _quantity--);
@@ -80,17 +105,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           const SizedBox(height: _sectionGap),
           _ProductSummary(food: widget.food),
           const Divider(height: 32, color: PanganKitaColors.borderNeutral),
-          const _ProductAddons(),
+          _ProductAddons(selected: _addons, onChanged: _selectAddons),
           const Divider(height: 32, color: PanganKitaColors.borderNeutral),
           const _ProductReviews(),
           const SizedBox(height: 36),
           _QuantityPicker(
             quantity: _quantity,
             onDecrease: _quantity > 1 ? _decrease : null,
-            onIncrease: _quantity < _previewQuantityLimit ? _increase : null,
+            onIncrease: _quantity < DemoCart.quantityLimit ? _increase : null,
           ),
           const SizedBox(height: 32),
-          const _CartAction(),
+          _CartAction(onAdd: _addToCart),
         ],
       ),
     ),
@@ -359,21 +384,16 @@ class _SavingsPill extends StatelessWidget {
   );
 }
 
-class _ProductAddons extends StatefulWidget {
-  const new();
+class _ProductAddons extends StatelessWidget {
+  const new({required this.selected, required this.onChanged});
+  final Set<DemoAddon> selected;
+  final ValueChanged<Set<DemoAddon>> onChanged;
 
-  @override
-  State<_ProductAddons> createState() => _ProductAddonsState();
-}
-
-class _ProductAddonsState extends State<_ProductAddons> {
-  Set<String> _selected = {};
-
-  void _select(String label, bool selected) => setState(() {
-    _selected = selected
-        ? {..._selected, label}
-        : _selected.where((value) => value != label).toSet();
-  });
+  void _select(DemoAddon option, bool value) => onChanged(
+    value
+        ? {...selected, option}
+        : selected.where((item) => item != option).toSet(),
+  );
 
   @override
   Widget build(BuildContext context) => Column(
@@ -392,17 +412,17 @@ class _ProductAddonsState extends State<_ProductAddons> {
         ),
         child: Column(
           children: [
-            for (final option in _addonExamples)
+            for (final option in DemoAddon.values)
               CheckboxListTile(
-                value: _selected.contains(option.label),
-                onChanged: (value) => _select(option.label, value ?? false),
+                value: selected.contains(option),
+                onChanged: (value) => _select(option, value ?? false),
                 controlAffinity: ListTileControlAffinity.leading,
                 activeColor: PanganKitaColors.brandAccent,
                 dense: true,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                 title: Text(option.label, style: const TextStyle(fontSize: 12)),
                 secondary: Text(
-                  option.price,
+                  '+${formatRupiah(option.priceRupiah)}',
                   style: const TextStyle(fontSize: 12, color: Colors.black54),
                 ),
               ),
@@ -412,12 +432,6 @@ class _ProductAddonsState extends State<_ProductAddons> {
     ],
   );
 }
-
-const List<({String label, String price})> _addonExamples = [
-  (label: 'Chili powder', price: '+Rp7.000'),
-  (label: 'Keju ekstra', price: '+Rp10.000'),
-  (label: 'Saus garlic', price: '+Rp5.000'),
-];
 
 class _ProductReviews extends StatelessWidget {
   const new();
@@ -542,7 +556,8 @@ class _QuantityPicker extends StatelessWidget {
 }
 
 class _CartAction extends StatelessWidget {
-  const new();
+  const new({required this.onAdd});
+  final VoidCallback onAdd;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -561,10 +576,7 @@ class _CartAction extends StatelessWidget {
           ),
           shape: const StadiumBorder(),
         ),
-        onPressed: () => DemoNotice.show(
-          context,
-          'Keranjang belum tersedia. Tidak ada pesanan atau reservasi dibuat.',
-        ),
+        onPressed: onAdd,
         icon: const Icon(Icons.shopping_cart_outlined),
         label: const Text('Tambah ke Keranjang (Demo)'),
       ),

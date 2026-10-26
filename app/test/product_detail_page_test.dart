@@ -3,6 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_app.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/features/discovery/cart_page.dart';
+import 'package:pangankita/features/discovery/demo_addon.dart';
+import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
 
@@ -30,13 +33,16 @@ void main() {
     }
   });
 
-  testWidgets('favorite, quantity bounds and unavailable cart are honest', (
+  testWidgets('favorite, add-ons and quantity carry into the local cart', (
     tester,
   ) async {
+    final cart = DemoCart();
+    addTearDown(cart.dispose);
     await tester.pumpWidget(
       MaterialApp(
         theme: PanganKitaTheme.light,
-        home: ProductDetailPage(food: DemoFood.examples.first),
+        home: ProductDetailPage(food: DemoFood.examples.first, cart: cart),
+        routes: {AppRoutes.cart: (context) => CartPage(cart: cart)},
       ),
     );
     await tester.pumpAndSettle();
@@ -94,18 +100,18 @@ void main() {
     );
     await tester.tap(find.text('Tambah ke Keranjang (Demo)'));
     await tester.pump();
-    expect(
-      find.text(
-        'Keranjang belum tersedia. '
-        'Tidak ada pesanan atau reservasi dibuat.',
-      ),
-      findsOneWidget,
-    );
+    await tester.pumpAndSettle();
+    expect(find.byType(CartPage), findsOneWidget);
+    expect(cart.lines.single.quantity, 9);
+    expect(cart.lines.single.addons, [DemoAddon.cheese]);
+    expect(cart.subtotal, 378000);
   });
 
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
     for (final scale in [1.0, 1.6]) {
       testWidgets('detail fits $width at scale $scale', (tester) async {
+        final cart = DemoCart();
+        addTearDown(cart.dispose);
         tester.view.devicePixelRatio = 1;
         tester.view.physicalSize = Size(width, 844);
         addTearDown(tester.view.resetPhysicalSize);
@@ -120,7 +126,7 @@ void main() {
               ),
               child: child ?? const SizedBox.shrink(),
             ),
-            home: ProductDetailPage(food: DemoFood.examples[3]),
+            home: ProductDetailPage(food: DemoFood.examples[3], cart: cart),
           ),
         );
         await tester.pumpAndSettle();

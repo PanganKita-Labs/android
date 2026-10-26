@@ -27,6 +27,9 @@ abstract final class AppRoutes {
   /// Details for one local example; not a public deep link.
   static String product(String id) => '/products/$id';
 
+  /// Session-only shopping preview.
+  static const cart = '/cart';
+
   /// Local food examples.
   static const home = '/home';
 }

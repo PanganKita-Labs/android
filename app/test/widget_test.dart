@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_app.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
@@ -160,6 +161,8 @@ void main() {
   testWidgets('search, category filters, empty results and details work', (
     tester,
   ) async {
+    final cart = DemoCart();
+    addTearDown(cart.dispose);
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(390, 844);
     addTearDown(tester.view.resetPhysicalSize);
@@ -171,7 +174,7 @@ void main() {
         routes: {
           for (final food in DemoFood.examples)
             AppRoutes.product(food.id): (context) =>
-                ProductDetailPage(food: food),
+                ProductDetailPage(food: food, cart: cart),
         },
       ),
     );

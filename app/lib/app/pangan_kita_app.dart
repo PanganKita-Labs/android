@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/features/discovery/cart_page.dart';
+import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
@@ -11,9 +13,22 @@ import 'package:pangankita/features/onboarding/splash_page.dart';
 import 'package:pangankita/features/onboarding/welcome_page.dart';
 
 /// Application composition for the native Flutter reference conversion.
-class PanganKitaApp extends StatelessWidget {
+class PanganKitaApp extends StatefulWidget {
   /// Creates the local prototype without server authentication or payments.
   const new({super.key});
+
+  @override
+  State<PanganKitaApp> createState() => _PanganKitaAppState();
+}
+
+class _PanganKitaAppState extends State<PanganKitaApp> {
+  final _cart = DemoCart();
+
+  @override
+  void dispose() {
+    _cart.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -31,8 +46,10 @@ class PanganKitaApp extends StatelessWidget {
       AppRoutes.password: (context) => const AuthPage.password(),
       AppRoutes.success: (context) => const PasswordSuccessPage(),
       AppRoutes.home: (context) => const HomePage(),
+      AppRoutes.cart: (context) => CartPage(cart: _cart),
       for (final food in DemoFood.examples)
-        AppRoutes.product(food.id): (context) => ProductDetailPage(food: food),
+        AppRoutes.product(food.id): (context) =>
+            ProductDetailPage(food: food, cart: _cart),
     },
   );
 }
