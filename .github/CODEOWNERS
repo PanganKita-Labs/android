@@ -1,0 +1,5 @@
+# PanganKita repository ownership
+* @Yoruxyv
+
+# Protect the CODEOWNERS configuration itself.
+/.github/CODEOWNERS @Yoruxyv
