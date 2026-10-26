@@ -13,12 +13,18 @@ The supplied images and licensed Geist fonts are bundled assets. Satoshi is
 downloaded during setup; text roles follow `docs/DESIGN.md`.
 
 Product cards open `/products/<id>` using the selected local fixture. The detail
-page owns temporary favorites and a bounded 1-10 quantity preview; neither
-persists nor changes inventory. Product text can be copied to the clipboard.
-The detail page includes selectable reference add-ons and an explicitly labeled
-example review. These do not represent live availability, change pricing, or
-persist. Merchant location is illustrative; real reviews, cart, and ordering
-remain unavailable.
+page owns temporary favorites, selected reference add-ons, and a bounded 1-10
+quantity preview. Adding an item opens `/cart` with that selection. Home also
+opens the cart. The app owns one in-memory `DemoCart` for the session; it is
+neither persisted nor connected to inventory. Different add-on configurations
+remain separate lines. All price arithmetic uses integer rupiah.
+
+The cart supports quantity changes, individual removal, clearing, merchant
+groups, illustrative pickup labels, and a zero demo service fee. Notes are a
+local input exercise and are not sent or retained after leaving the page.
+Checkout only shows an unavailable-action notice. The review card, add-ons,
+location, prices, and pickup clocks remain explicitly illustrative. There is
+no actual ordering, reservation, payment, or merchant verification.
 
 These are demonstration flows: no server accounts, SMS/email, persisted
 passwords, live location, orders, reservations, or payments are implemented.

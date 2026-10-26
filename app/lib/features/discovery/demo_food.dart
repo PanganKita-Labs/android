@@ -1,3 +1,5 @@
+import 'package:pangankita/shared/format_rupiah.dart';
+
 /// Illustrative listing copied from the supplied local prototype.
 /// Prices, stock, ratings, and merchants are display examples, not live offers.
 class DemoFood {
@@ -9,7 +11,7 @@ class DemoFood {
     required this.title,
     required this.rating,
     required this.saving,
-    required this.price,
+    required this.priceRupiah,
     required this.original,
     required this.pickupTime,
     required this.distance,
@@ -36,7 +38,10 @@ class DemoFood {
   final String saving;
 
   /// Reference formatted price.
-  final String price;
+  String get price => formatRupiah(priceRupiah);
+
+  /// Whole-rupiah fixture amount for local cart arithmetic.
+  final int priceRupiah;
 
   /// Reference formatted original price.
   final String original;
@@ -92,7 +97,7 @@ class DemoFood {
       title: 'Mawar Coconut Buns (Isi 5 pcs)',
       rating: '4.8 (106+ ratings)',
       saving: 'Hemat 60%',
-      price: 'Rp32.000',
+      priceRupiah: 32000,
       original: 'Rp65.000',
       pickupTime: '20.30',
       distance: '30 menit lagi',
@@ -106,7 +111,7 @@ class DemoFood {
       title: 'Paket Nasi Soto Jeroan Kesawan',
       rating: '4.9 (120+ ratings)',
       saving: 'Hemat 51%',
-      price: 'Rp28.500',
+      priceRupiah: 28500,
       original: 'Rp58.000',
       pickupTime: '21.30',
       distance: '50 menit lagi',
@@ -120,7 +125,7 @@ class DemoFood {
       title: 'Roti Abon Ayam',
       rating: '4.7 (84+ ratings)',
       saving: 'Hemat 41%',
-      price: 'Rp18.500',
+      priceRupiah: 18500,
       original: 'Rp38.000',
       pickupTime: '19.20',
       distance: '800 m',
@@ -133,7 +138,7 @@ class DemoFood {
       title: 'Ayam Paha Atas Tanpa Tulang',
       rating: '5.0 (300+ ratings)',
       saving: 'Hemat 70%',
-      price: 'Rp8.500',
+      priceRupiah: 8500,
       original: 'Rp38.000',
       pickupTime: '21.00',
       distance: '400 m',
@@ -146,7 +151,7 @@ class DemoFood {
       title: 'Paket Ayam Pop + Rendang Sapi',
       rating: '4.2 (34+ ratings)',
       saving: 'Hemat 16%',
-      price: 'Rp26.700',
+      priceRupiah: 26700,
       original: 'Rp38.000',
       pickupTime: '20.50',
       distance: '100 m',

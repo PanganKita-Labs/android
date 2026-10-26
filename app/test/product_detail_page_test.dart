@@ -3,6 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_app.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/features/discovery/cart_page.dart';
+import 'package:pangankita/features/discovery/demo_addon.dart';
+import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
 
@@ -12,6 +15,12 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(loadBrandFonts);
 
+  _registerProductNavigationTest();
+  _registerProductCartTest();
+  _registerProductResponsiveTests();
+}
+
+void _registerProductNavigationTest() {
   testWidgets('all named product routes preserve selected listing data', (
     tester,
   ) async {
@@ -29,14 +38,19 @@ void main() {
       await tester.pumpAndSettle();
     }
   });
+}
 
-  testWidgets('favorite, quantity bounds and unavailable cart are honest', (
+void _registerProductCartTest() {
+  testWidgets('favorite, add-ons and quantity carry into the local cart', (
     tester,
   ) async {
+    final cart = DemoCart();
+    addTearDown(cart.dispose);
     await tester.pumpWidget(
       MaterialApp(
         theme: PanganKitaTheme.light,
-        home: ProductDetailPage(food: DemoFood.examples.first),
+        home: ProductDetailPage(food: DemoFood.examples.first, cart: cart),
+        routes: {AppRoutes.cart: (context) => CartPage(cart: cart)},
       ),
     );
     await tester.pumpAndSettle();
@@ -62,50 +76,27 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text(DemoFood.examples.first.price), findsOneWidget);
-    await tester.scrollUntilVisible(
-      find.widgetWithIcon(IconButton, Icons.add),
-      150,
-    );
-    expect(
-      tester
-          .widget<IconButton>(find.widgetWithIcon(IconButton, Icons.remove))
-          .onPressed,
-      isNull,
-    );
-    await tester.ensureVisible(find.byTooltip('Tambah jumlah contoh'));
-    await tester.pumpAndSettle();
-    for (var index = 0; index < 9; index++) {
-      await tester.tap(find.byTooltip('Tambah jumlah contoh'));
-      await tester.pump();
-    }
-    expect(find.text('10'), findsOneWidget);
-    expect(
-      tester
-          .widget<IconButton>(find.widgetWithIcon(IconButton, Icons.add))
-          .onPressed,
-      isNull,
-    );
-    await tester.tap(find.byTooltip('Kurangi jumlah contoh'));
-    await tester.pump();
-    expect(find.text('9'), findsOneWidget);
+    await _verifyQuantityBounds(tester);
     await tester.scrollUntilVisible(
       find.text('Tambah ke Keranjang (Demo)'),
       100,
     );
     await tester.tap(find.text('Tambah ke Keranjang (Demo)'));
     await tester.pump();
-    expect(
-      find.text(
-        'Keranjang belum tersedia. '
-        'Tidak ada pesanan atau reservasi dibuat.',
-      ),
-      findsOneWidget,
-    );
+    await tester.pumpAndSettle();
+    expect(find.byType(CartPage), findsOneWidget);
+    expect(cart.lines.single.quantity, 9);
+    expect(cart.lines.single.addons, [DemoAddon.cheese]);
+    expect(cart.subtotal, 378000);
   });
+}
 
+void _registerProductResponsiveTests() {
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
     for (final scale in [1.0, 1.6]) {
       testWidgets('detail fits $width at scale $scale', (tester) async {
+        final cart = DemoCart();
+        addTearDown(cart.dispose);
         tester.view.devicePixelRatio = 1;
         tester.view.physicalSize = Size(width, 844);
         addTearDown(tester.view.resetPhysicalSize);
@@ -120,7 +111,7 @@ void main() {
               ),
               child: child ?? const SizedBox.shrink(),
             ),
-            home: ProductDetailPage(food: DemoFood.examples[3]),
+            home: ProductDetailPage(food: DemoFood.examples[3], cart: cart),
           ),
         );
         await tester.pumpAndSettle();
@@ -135,4 +126,33 @@ void main() {
       });
     }
   }
+}
+
+Future<void> _verifyQuantityBounds(WidgetTester tester) async {
+  await tester.scrollUntilVisible(
+    find.widgetWithIcon(IconButton, Icons.add),
+    150,
+  );
+  expect(
+    tester
+        .widget<IconButton>(find.widgetWithIcon(IconButton, Icons.remove))
+        .onPressed,
+    isNull,
+  );
+  await tester.ensureVisible(find.byTooltip('Tambah jumlah contoh'));
+  await tester.pumpAndSettle();
+  for (var index = 0; index < 9; index++) {
+    await tester.tap(find.byTooltip('Tambah jumlah contoh'));
+    await tester.pump();
+  }
+  expect(find.text('10'), findsOneWidget);
+  expect(
+    tester
+        .widget<IconButton>(find.widgetWithIcon(IconButton, Icons.add))
+        .onPressed,
+    isNull,
+  );
+  await tester.tap(find.byTooltip('Kurangi jumlah contoh'));
+  await tester.pump();
+  expect(find.text('9'), findsOneWidget);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/reference_icon.dart';
@@ -62,7 +63,7 @@ class HomeHeader extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(7)),
           ),
         ),
-        onPressed: () => DemoNotice.unavailable(context),
+        onPressed: () => Navigator.pushNamed<void>(context, AppRoutes.cart),
         icon: const ReferenceIcon('cart', size: 23),
       ),
       IconButton.filledTonal(
