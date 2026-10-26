@@ -14,6 +14,11 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(loadBrandFonts);
 
+  _registerCartBehaviorTests();
+  _registerCartResponsiveTests();
+}
+
+void _registerCartBehaviorTests() {
   testWidgets('cart updates totals, removes lines and shows the empty state', (
     tester,
   ) async {
@@ -72,7 +77,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Keranjangmu masih kosong'), findsOneWidget);
   });
+}
 
+void _registerCartResponsiveTests() {
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
     for (final scale in [1.0, 1.6]) {
       testWidgets('cart fits $width with text scale $scale and keyboard', (
