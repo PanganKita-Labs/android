@@ -22,7 +22,17 @@ remain separate lines. All price arithmetic uses integer rupiah.
 The cart supports quantity changes, individual removal, clearing, merchant
 groups, illustrative pickup labels, and a zero demo service fee. Notes are a
 local input exercise and are not sent or retained after leaving the page.
-Checkout only shows an unavailable-action notice. The review card, add-ons,
+The `/checkout` page reads the same session cart and shows merchant pickup
+labels, a sample pickup person, item details, a QRIS display example, and the
+integer-rupiah payment summary. Its acknowledgement checkbox only enables a
+simulated payment notice; it never submits, reserves, charges, or clears items.
+The pickup agreement links to an explanatory demo dialog, not a real service
+policy. Checkout displays the user-supplied QRIS logo, not a scannable payment
+code. The artwork came from Zonalogo; the contributor confirmed permission to
+include it in the public repository. Independent rights verification was not
+performed.
+Empty carts cannot continue. Payment/profile/location actions remain demo
+feedback rather than integrations. The review card, add-ons,
 location, prices, and pickup clocks remain explicitly illustrative. There is
 no actual ordering, reservation, payment, or merchant verification.
 

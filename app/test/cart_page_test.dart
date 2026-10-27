@@ -4,6 +4,7 @@ import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_app.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/cart_page.dart';
+import 'package:pangankita/features/discovery/checkout_page.dart';
 import 'package:pangankita/features/discovery/demo_addon.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
@@ -29,6 +30,7 @@ void _registerCartBehaviorTests() {
       MaterialApp(
         theme: PanganKitaTheme.light,
         home: CartPage(cart: cart),
+        routes: {AppRoutes.checkout: (context) => CheckoutPage(cart: cart)},
       ),
     );
     await tester.pumpAndSettle();
@@ -41,7 +43,9 @@ void _registerCartBehaviorTests() {
     expect(find.text('Rp64.000'), findsWidgets);
     await tester.tap(find.text('Lanjut Checkout'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('Checkout belum tersedia.'), findsOneWidget);
+    expect(find.byType(CheckoutPage), findsOneWidget);
+    await tester.tap(find.byType(BackButton));
+    await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Hapus ${DemoFood.examples.first.title}'));
     await tester.pumpAndSettle();
     expect(find.text('Keranjangmu masih kosong'), findsOneWidget);
