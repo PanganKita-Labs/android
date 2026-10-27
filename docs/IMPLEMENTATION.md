@@ -38,6 +38,11 @@ no actual ordering, reservation, payment, or merchant verification.
 
 These are demonstration flows: no server accounts, SMS/email, persisted
 passwords, live location, orders, reservations, or payments are implemented.
+The Home bottom navigation opens `/orders`, a preview of the supplied active
+orders screen. Its two sample cards are clearly labeled as examples; pickup
+codes remain unavailable. Completed and canceled tabs have empty states.
+Search, merchant chat, and order details give unavailable feedback. Checkout
+does not add entries to this page because it creates no order.
 Unavailable integrations show feedback rather than performing remote actions.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
 

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
+import 'package:pangankita/features/discovery/discovery_navigation.dart';
 import 'package:pangankita/features/discovery/food_card.dart';
 import 'package:pangankita/features/discovery/hero_banner.dart';
 import 'package:pangankita/features/discovery/home_header.dart';
@@ -12,9 +13,6 @@ import 'package:pangankita/shared/reference_icon.dart';
 const _categoryGap = 5.0;
 const _categoryLabelGap = 6.0;
 const _categoryFontSize = 9.0;
-const _navigationHeight = 54.0;
-const _navigationFontSize = 12.0;
-const _navigationLineHeight = 1.2;
 const _nearbySectionGap = 12.0;
 
 /// Searchable local reference feed with category filtering.
@@ -121,7 +119,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: const _HomeNavigation(),
+      bottomNavigationBar: const DiscoveryNavigation(selectedIndex: 0),
     );
   }
 }
@@ -324,39 +322,6 @@ class _HomeCategories extends StatelessWidget {
           ),
       ],
     ),
-  );
-}
-
-class _HomeNavigation extends StatelessWidget {
-  const new();
-
-  @override
-  Widget build(BuildContext context) => NavigationBar(
-    height: MediaQuery.textScalerOf(context).scale(_navigationHeight),
-    labelTextStyle: WidgetStateProperty.resolveWith(
-      (states) => TextStyle(
-        fontFamily: PanganKitaTheme.emphasisFontFamily,
-        fontSize: _navigationFontSize,
-        height: _navigationLineHeight,
-        color: states.contains(WidgetState.selected)
-            ? const Color(0xFF52A963)
-            : const Color(0xFF8D8F90),
-        fontWeight: FontWeight.w600,
-      ),
-    ),
-    onDestinationSelected: (index) {
-      if (index != 0) DemoNotice.unavailable(context);
-    },
-    destinations: const [
-      NavigationDestination(
-        icon: ReferenceIcon('home'),
-        selectedIcon: ReferenceIcon('home-filled', color: Color(0xFF52A963)),
-        label: 'Beranda',
-      ),
-      NavigationDestination(icon: ReferenceIcon('bag'), label: 'Pesanan'),
-      NavigationDestination(icon: ReferenceIcon('chat'), label: 'Chat'),
-      NavigationDestination(icon: ReferenceIcon('bell'), label: 'Notifikasi'),
-    ],
   );
 }
 

@@ -33,6 +33,9 @@ abstract final class AppRoutes {
   /// Read-only pickup checkout simulation.
   static const checkout = '/checkout';
 
+  /// Local order-screen preview; no order is created by checkout.
+  static const orders = '/orders';
+
   /// Local food examples.
   static const home = '/home';
 }
