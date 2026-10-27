@@ -1,0 +1,13 @@
+{
+  "rule_sets": [
+    {
+      "matching_content_path": "app/test/**",
+      "rules": [
+        {
+          "name": "Large Method",
+          "weight": 0.0
+        }
+      ]
+    }
+  ]
+}
