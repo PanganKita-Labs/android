@@ -7,6 +7,7 @@ import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/discovery/orders_page.dart';
+import 'package:pangankita/features/discovery/payment_status_page.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
@@ -51,6 +52,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.orders: (context) => const OrdersPage(),
       AppRoutes.cart: (context) => CartPage(cart: _cart),
       AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),
+      AppRoutes.paymentStatus: (context) => PaymentStatusPage(cart: _cart),
       for (final food in DemoFood.examples)
         AppRoutes.product(food.id): (context) =>
             ProductDetailPage(food: food, cart: _cart),

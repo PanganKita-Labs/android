@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/checkout_page.dart';
 import 'package:pangankita/features/discovery/demo_addon.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
+import 'package:pangankita/features/discovery/payment_status_page.dart';
 
 import 'font_test_utils.dart';
 
@@ -29,6 +31,9 @@ void main() {
         MaterialApp(
           theme: PanganKitaTheme.light,
           home: CheckoutPage(cart: cart),
+          routes: {
+            AppRoutes.paymentStatus: (context) => PaymentStatusPage(cart: cart),
+          },
         ),
       );
       await tester.pumpAndSettle();
@@ -57,7 +62,8 @@ void main() {
       expect(tester.widget<FilledButton>(payment).onPressed, isNotNull);
       await tester.tap(payment);
       await tester.pumpAndSettle();
-      expect(find.textContaining('Pembayaran belum tersedia.'), findsOneWidget);
+      expect(find.byType(PaymentStatusPage), findsOneWidget);
+      expect(find.text('Pembayaran belum tersedia'), findsOneWidget);
       expect(cart.itemCount, 2);
       expect(cart.subtotal, 84000);
       expect(cart.lines.single.addons, [DemoAddon.cheese]);
