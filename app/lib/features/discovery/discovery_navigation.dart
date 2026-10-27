@@ -7,10 +7,11 @@ import 'package:pangankita/shared/reference_icon.dart';
 const _navigationHeight = 54.0;
 const _navigationFontSize = 12.0;
 const _navigationLineHeight = 1.2;
+const _notificationsIndex = 3;
 
-/// Bottom destinations shared by the feed and order preview.
+/// Bottom destinations shared by the discovery previews.
 class DiscoveryNavigation extends StatelessWidget {
-  /// Selects Home (0) or Orders (1).
+  /// Selects Home (0), Orders (1), or Notifications (3).
   const new({required this.selectedIndex, super.key});
 
   /// Active destination index.
@@ -23,6 +24,11 @@ class DiscoveryNavigation extends StatelessWidget {
         Navigator.pushReplacementNamed(context, AppRoutes.home).ignore();
       case 1:
         Navigator.pushReplacementNamed(context, AppRoutes.orders).ignore();
+      case _notificationsIndex:
+        Navigator.pushReplacementNamed(
+          context,
+          AppRoutes.notifications,
+        ).ignore();
       default:
         DemoNotice.unavailable(context);
     }
