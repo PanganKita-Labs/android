@@ -30,7 +30,19 @@ void main() {
     expect(find.text('MWR-28'), findsNothing);
     await tester.tap(find.text('Selesai'));
     await tester.pumpAndSettle();
-    expect(find.text('Belum ada pesanan selesai'), findsOneWidget);
+    expect(find.textContaining('belum ada pesanan selesai'), findsOneWidget);
+    expect(find.text('Rp57.000'), findsOneWidget);
+    expect(find.text('Waktu diambil: Belum tersedia'), findsWidgets);
+    expect(find.text('Sudah diulas'), findsNothing);
+    await tester.ensureVisible(find.text('Beri Ulasan').first);
+    await tester.tap(find.text('Beri Ulasan').first);
+    await tester.pump();
+    expect(
+      find.text('Fitur ini belum tersedia dalam demo offline.'),
+      findsOneWidget,
+    );
+    await tester.drag(find.byType(ListView), const Offset(0, 1000));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Dibatalkan'));
     await tester.pumpAndSettle();
     expect(find.text('Belum ada pesanan dibatalkan'), findsOneWidget);
@@ -62,6 +74,14 @@ void main() {
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
         await tester.scrollUntilVisible(find.text('Detail Pesanan').last, 120);
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        await tester.drag(find.byType(ListView), const Offset(0, 1000));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Selesai'));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        await tester.scrollUntilVisible(find.text('Beri Ulasan').last, 120);
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
       });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/features/discovery/completed_orders_section.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/discovery_navigation.dart';
 import 'package:pangankita/shared/demo_notice.dart';
@@ -98,8 +99,10 @@ class _OrdersPageState extends State<OrdersPage> {
               _OrderExampleCard(food: food),
               const SizedBox(height: 16),
             ],
-          ] else
-            _EmptyOrderTab(title: _selectedTab == 1 ? 'selesai' : 'dibatalkan'),
+          ] else if (_selectedTab == 1)
+            const CompletedOrdersSection()
+          else
+            const _EmptyOrderTab(title: 'dibatalkan'),
         ],
       ),
     ),
