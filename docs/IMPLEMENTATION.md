@@ -53,6 +53,9 @@ canceled tab has an empty state. Search, merchant chat, and order details give
 unavailable feedback. Checkout does not add entries to this page because it
 creates no order.
 Unavailable integrations show feedback rather than performing remote actions.
+The Home merchant banner opens `/stores/nearby`, a searchable display-only list
+of four example merchants. Proximity, ratings, discounts, map, and opening hours
+are not live data; unsupported actions show unavailable feedback.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
 
 Retained infrastructure: `app/android/`, Flutter/Dart package manifest and

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/discovery_navigation.dart';
@@ -205,7 +206,8 @@ class _MerchantBanner extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
     ),
-    onPressed: () => DemoNotice.unavailable(context),
+    onPressed: () =>
+        Navigator.pushNamed(context, AppRoutes.nearbyStores).ignore(),
     child: const Row(
       spacing: 15,
       children: [
