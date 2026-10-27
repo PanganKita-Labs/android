@@ -36,6 +36,9 @@ abstract final class AppRoutes {
   /// Local order-screen preview; no order is created by checkout.
   static const orders = '/orders';
 
+  /// Display-only chat list; no messages are exchanged.
+  static const chat = '/chat';
+
   /// Status of the local checkout preview; no payment is created.
   static const paymentStatus = '/checkout/status';
 

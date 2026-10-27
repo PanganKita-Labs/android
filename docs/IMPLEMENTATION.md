@@ -53,6 +53,9 @@ canceled tab has an empty state. Search, merchant chat, and order details give
 unavailable feedback. Checkout does not add entries to this page because it
 creates no order.
 Unavailable integrations show feedback rather than performing remote actions.
+The Chat bottom tab opens `/chat`, a searchable display-only list of clearly
+labeled example merchant conversations. No messages, unread state, or timestamps
+are fetched or exchanged; tapping a conversation gives unavailable feedback.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
 
 Retained infrastructure: `app/android/`, Flutter/Dart package manifest and
