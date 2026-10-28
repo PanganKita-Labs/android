@@ -28,6 +28,11 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.textContaining('belum ada percakapan nyata'), findsOneWidget);
     expect(find.text('Mawar Bakery & Cake'), findsOneWidget);
+    expect(find.text('10.42'), findsNWidgets(2));
+    expect(find.text('Kemarin'), findsOneWidget);
+    expect(find.text('22 Okt'), findsOneWidget);
+    expect(find.text('2'), findsNWidgets(2));
+    expect(find.text('1'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'Soto');
     await tester.pumpAndSettle();
     expect(find.text('Soto Kesawan'), findsOneWidget);
@@ -63,6 +68,8 @@ void main() {
         await tester.tap(find.text('Belum dibaca'));
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
+        expect(find.text('Kemarin'), findsNothing);
+        expect(find.text('10.42'), findsNWidgets(2));
       });
     }
   }

@@ -8,13 +8,50 @@ const _ink = Color(0xFF14313A);
 const _searchRadius = 24.0;
 const _chipSpacing = 10.0;
 const _avatarRadius = 27.0;
+const _unreadBadgeRadius = 12.0;
+const _trailingWidth = 48.0;
 
-const List<({int food, String message, bool unread})> _conversations = [
-  (food: 0, message: 'Pesanan Kakak sudah siap diambil, ya', unread: true),
-  (food: 1, message: 'Baik, kak. Pesanan sedang kami siapkan.', unread: true),
-  (food: 2, message: 'Terima kasih sudah berbelanja, kak!', unread: false),
-  (food: 3, message: 'Siap, kak. Terima kasih!', unread: false),
+typedef _Conversation = ({
+  int food,
+  String message,
+  String time,
+  int unreadCount,
+  bool designMark,
+});
+
+const List<_Conversation> _conversations = [
+  (
+    food: 0,
+    message: 'Pesanan Kakak sudah siap diambil, ya',
+    time: '10.42',
+    unreadCount: 2,
+    designMark: true,
+  ),
+  (
+    food: 1,
+    message: 'Baik, kak. Pesanan sedang kami siapkan.',
+    time: '10.42',
+    unreadCount: 1,
+    designMark: false,
+  ),
+  (
+    food: 2,
+    message: 'Terima kasih sudah berbelanja, kak!',
+    time: 'Kemarin',
+    unreadCount: 0,
+    designMark: true,
+  ),
+  (
+    food: 3,
+    message: 'Siap, kak. Terima kasih!',
+    time: '22 Okt',
+    unreadCount: 0,
+    designMark: true,
+  ),
 ];
+
+int get _unreadConversationCount =>
+    _conversations.where((item) => item.unreadCount > 0).length;
 
 /// Searchable visual preview of the supplied chat list design.
 class ChatPage extends StatefulWidget {
@@ -33,7 +70,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     final visible = _conversations.where((conversation) {
       final merchant = DemoFood.examples[conversation.food].merchant;
-      return (!_unreadOnly || conversation.unread) &&
+      return (!_unreadOnly || conversation.unreadCount > 0) &&
           '$merchant ${conversation.message}'.toLowerCase().contains(
             _query.trim().toLowerCase(),
           );
@@ -75,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
 class _ConversationList extends StatelessWidget {
   const new({required this.conversations});
 
-  final Iterable<({int food, String message, bool unread})> conversations;
+  final Iterable<_Conversation> conversations;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -84,7 +121,9 @@ class _ConversationList extends StatelessWidget {
         _ConversationRow(
           food: DemoFood.examples[conversation.food],
           message: conversation.message,
-          unread: conversation.unread,
+          time: conversation.time,
+          unreadCount: conversation.unreadCount,
+          designMark: conversation.designMark,
         ),
       if (conversations.isEmpty)
         const Padding(
@@ -125,7 +164,23 @@ class _ChatFilters extends StatelessWidget {
     children: [
       for (final unread in [false, true])
         ChoiceChip(
-          label: Text(unread ? 'Belum dibaca' : 'Semua'),
+          label: unread
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('Belum dibaca'),
+                    const SizedBox(width: 8),
+                    CircleAvatar(
+                      radius: _unreadBadgeRadius,
+                      backgroundColor: Colors.red,
+                      child: Text(
+                        '$_unreadConversationCount',
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                )
+              : const Text('Semua'),
           selected: unreadOnly == unread,
           showCheckmark: false,
           selectedColor: PanganKitaColors.brandPrimaryStrong,
@@ -143,11 +198,19 @@ class _ChatFilters extends StatelessWidget {
 }
 
 class _ConversationRow extends StatelessWidget {
-  const new({required this.food, required this.message, required this.unread});
+  const new({
+    required this.food,
+    required this.message,
+    required this.time,
+    required this.unreadCount,
+    required this.designMark,
+  });
 
   final DemoFood food;
   final String message;
-  final bool unread;
+  final String time;
+  final int unreadCount;
+  final bool designMark;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -158,20 +221,47 @@ class _ConversationRow extends StatelessWidget {
           radius: _avatarRadius,
           backgroundImage: AssetImage(food.image),
         ),
-        title: Text(
-          food.merchant,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.titleMedium,
+        title: Row(
+          children: [
+            Flexible(
+              child: Text(
+                food.merchant,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+            if (designMark) ...[
+              const SizedBox(width: 4),
+              const ExcludeSemantics(
+                child: Icon(
+                  Icons.check_circle,
+                  size: 15,
+                  color: PanganKitaColors.brandPrimaryStrong,
+                ),
+              ),
+            ],
+          ],
         ),
         subtitle: Text(message, maxLines: 1, overflow: TextOverflow.ellipsis),
-        trailing: unread
-            ? const Icon(
-                Icons.circle,
-                size: 12,
-                color: PanganKitaColors.brandPrimary,
-              )
-            : null,
+        trailing: SizedBox(
+          width: _trailingWidth,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(time, style: Theme.of(context).textTheme.bodySmall),
+              if (unreadCount > 0)
+                CircleAvatar(
+                  radius: _unreadBadgeRadius,
+                  backgroundColor: PanganKitaColors.brandPrimaryStrong,
+                  child: Text(
+                    '$unreadCount',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+            ],
+          ),
+        ),
         onTap: () => DemoNotice.unavailable(context),
       ),
       const Divider(height: 1),
