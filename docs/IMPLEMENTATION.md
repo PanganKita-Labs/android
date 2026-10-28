@@ -54,6 +54,9 @@ an unavailable cancellation reason, and a return-to-discovery action. Search,
 merchant chat, and order details give unavailable feedback. Checkout does not
 add entries to these tabs because it creates no order.
 Unavailable integrations show feedback rather than performing remote actions.
+The Notifications bottom tab opens `/notifications`, a filterable, explicitly
+labeled visual preview. Its read markers change only in local widget state;
+there is no push delivery, persisted notification, or actual order event.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
 
 Retained infrastructure: `app/android/`, Flutter/Dart package manifest and
