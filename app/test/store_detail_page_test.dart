@@ -29,6 +29,7 @@ void main() {
         },
       ),
     );
+    expect(find.text('2'), findsOneWidget);
     await tester.tap(find.text('Mawar Bakery & Cake'));
     await tester.pumpAndSettle();
     expect(find.text('Detail Toko'), findsOneWidget);
@@ -45,6 +46,57 @@ void main() {
     await tester.tap(find.textContaining('Lihat Keranjang'));
     await tester.pumpAndSettle();
     expect(find.text('Keranjang'), findsOneWidget);
+  });
+
+  testWidgets('non-Mawar store does not show garlic-bread copy', (
+    tester,
+  ) async {
+    final cart = DemoCart();
+    addTearDown(cart.dispose);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: StoreDetailPage(food: DemoFood.examples[1], cart: cart),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Soto Kesawan'), findsOneWidget);
+    expect(find.textContaining('garlic butter'), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('store hero and garlic photo assets decode', (tester) async {
+    final cart = DemoCart();
+    addTearDown(cart.dispose);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: StoreDetailPage(food: DemoFood.examples.first, cart: cart),
+      ),
+    );
+    final context = tester.element(find.byType(StoreDetailPage));
+    await tester.runAsync(() async {
+      await precacheImage(
+        const AssetImage('assets/prototype/store-croissants.webp'),
+        context,
+      );
+      await precacheImage(
+        const AssetImage('assets/prototype/garlic-bread.webp'),
+        context,
+      );
+    });
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is Image &&
+            widget.image is AssetImage &&
+            (widget.image as AssetImage).assetName ==
+                'assets/prototype/store-croissants.webp',
+      ),
+      findsOneWidget,
+    );
   });
 
   for (final width in [320.0, 360.0, 390.0, 412.0]) {

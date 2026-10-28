@@ -31,6 +31,9 @@ void main() {
     expect(find.text('Toko di Sekitarmu'), findsOneWidget);
     expect(find.textContaining('belum memakai lokasi'), findsOneWidget);
     expect(find.text('Mawar Bakery & Cake'), findsOneWidget);
+    expect(find.textContaining('ulasan contoh'), findsWidgets);
+    expect(find.text('jarak belum ada'), findsWidgets);
+    expect(find.text('produk contoh'), findsWidgets);
     await tester.enterText(find.byType(TextField), 'Soto');
     await tester.pumpAndSettle();
     expect(find.text('Soto Kesawan'), findsOneWidget);
@@ -60,6 +63,11 @@ void main() {
         );
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
+        final firstFilterY = tester.getTopLeft(find.text('Terdekat')).dy;
+        expect(tester.getTopLeft(find.text('Rating')).dy, firstFilterY);
+        expect(find.textContaining('ulasan contoh'), findsWidgets);
+        expect(find.text('jarak belum ada'), findsWidgets);
+        expect(find.text('produk contoh'), findsWidgets);
         await tester.scrollUntilVisible(
           find.text('Hisana Fried Chicken'),
           120,

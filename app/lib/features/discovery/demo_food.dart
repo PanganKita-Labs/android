@@ -64,7 +64,7 @@ class DemoFood {
 
   /// Asset used by both the card and detail sheet.
   String get image => id == 'garlic-bread'
-      ? 'assets/prototype/garlic-bread.png'
+      ? 'assets/prototype/garlic-bread.webp'
       : 'assets/prototype/$id.webp';
 
   /// Reference line breaks for compact cards; search uses the original title.

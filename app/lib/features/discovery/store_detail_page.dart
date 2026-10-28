@@ -78,7 +78,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
         IconButton(
           tooltip: 'Salin nama toko',
           onPressed: _copyMerchant,
-          icon: const Icon(Icons.share_outlined),
+          icon: const Icon(Icons.copy_outlined),
         ),
       ],
     ),
@@ -118,7 +118,7 @@ class _StoreTop extends StatelessWidget {
     children: [
       Image.asset(
         food.id == 'buns'
-            ? 'assets/prototype/store-croissants.png'
+            ? 'assets/prototype/store-croissants.webp'
             : food.image,
         height: _heroHeight,
         width: double.infinity,
@@ -158,13 +158,13 @@ class _MerchantSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: [
-      const CircleAvatar(
+      CircleAvatar(
         radius: _avatarRadius,
         backgroundColor: PanganKitaColors.savingsSurface,
-        child: Icon(
-          Icons.storefront,
-          color: PanganKitaColors.brandPrimaryStrong,
-        ),
+        backgroundImage: food.id == 'buns'
+            ? const AssetImage('assets/prototype/mawar-mark.webp')
+            : null,
+        child: food.id == 'buns' ? null : Text(food.merchant.substring(0, 1)),
       ),
       const SizedBox(width: 10),
       Expanded(
@@ -172,7 +172,12 @@ class _MerchantSummary extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(food.merchant, style: Theme.of(context).textTheme.titleMedium),
-            Text(food.category, style: Theme.of(context).textTheme.bodySmall),
+            Text(
+              food.id == 'buns'
+                  ? 'Roti & Pastry · contoh'
+                  : '${food.category} · contoh',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
             Row(
               children: [
                 const Icon(
@@ -190,6 +195,10 @@ class _MerchantSummary extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            Text(
+              'Jarak belum tersedia',
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
         ),
@@ -247,7 +256,13 @@ class _PickupSummary extends StatelessWidget {
               color: PanganKitaColors.brandAccent,
             ),
             const SizedBox(width: 7),
-            Expanded(child: Text('Batas pickup contoh: ${food.pickupTime}')),
+            Expanded(
+              child: Text(
+                food.id == 'buns'
+                    ? 'Ambil 19.30–20.30 · contoh'
+                    : 'Batas pickup contoh: ${food.pickupTime}',
+              ),
+            ),
           ],
         ),
       ],
@@ -351,7 +366,7 @@ class _ProductText extends StatelessWidget {
       ),
       if (food.id == 'buns')
         const Text('Isi 5 pcs', style: TextStyle(color: Colors.black54))
-      else
+      else if (food.id == 'garlic-bread')
         const Text(
           'Roti panggang dengan garlic butter dan keju · contoh',
           maxLines: 2,
