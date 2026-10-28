@@ -9,7 +9,8 @@ const _cardRadius = 20.0;
 const _imageHeight = 126.0;
 const _avatarRadius = 20.0;
 const _chipGap = 7.0;
-const _chipRunGap = 8.0;
+const _statDividerHeight = 32.0;
+const _statIconSize = 14.0;
 
 const _storeIds = ['buns', 'soto', 'roti', 'chicken'];
 
@@ -78,6 +79,10 @@ class _StoresHeader extends StatelessWidget {
       IconButton.filledTonal(
         tooltip: 'Kembali',
         onPressed: () => Navigator.pop(context),
+        style: IconButton.styleFrom(
+          backgroundColor: Colors.white,
+          foregroundColor: PanganKitaColors.textPrimary,
+        ),
         icon: const Icon(Icons.arrow_back),
       ),
       const SizedBox(width: 12),
@@ -122,30 +127,33 @@ class _StoresFilters extends StatelessWidget {
   const new();
 
   @override
-  Widget build(BuildContext context) => Wrap(
-    spacing: _chipGap,
-    runSpacing: _chipRunGap,
-    children: [
-      for (final label in [
-        'Terdekat',
-        'Buka Sekarang',
-        'Diskon Terbesar',
-        'Rating',
-      ])
-        ChoiceChip(
-          label: Text(label),
-          selected: label == 'Terdekat',
-          showCheckmark: false,
-          selectedColor: PanganKitaColors.brandPrimaryStrong,
-          backgroundColor: Colors.white,
-          labelStyle: TextStyle(
-            fontFamily: PanganKitaTheme.bodyFontFamily,
-            color: label == 'Terdekat' ? Colors.white : _ink,
+  Widget build(BuildContext context) => SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: Row(
+      children: [
+        for (final label in [
+          'Terdekat',
+          'Buka Sekarang',
+          'Diskon Terbesar',
+          'Rating',
+        ]) ...[
+          ChoiceChip(
+            label: Text(label),
+            selected: label == 'Terdekat',
+            showCheckmark: false,
+            selectedColor: PanganKitaColors.brandPrimaryStrong,
+            backgroundColor: Colors.white,
+            labelStyle: TextStyle(
+              fontFamily: PanganKitaTheme.bodyFontFamily,
+              color: label == 'Terdekat' ? Colors.white : _ink,
+            ),
+            side: BorderSide.none,
+            onSelected: (_) => DemoNotice.unavailable(context),
           ),
-          side: BorderSide.none,
-          onSelected: (_) => DemoNotice.unavailable(context),
-        ),
-    ],
+          const SizedBox(width: _chipGap),
+        ],
+      ],
+    ),
   );
 }
 
@@ -181,6 +189,8 @@ class _StoreCard extends StatelessWidget {
 
   final DemoFood food;
 
+  String get _reviewCount => food.rating.split('(').last.split(' ').first;
+
   @override
   Widget build(BuildContext context) => Card(
     margin: EdgeInsets.zero,
@@ -197,7 +207,9 @@ class _StoreCard extends StatelessWidget {
             alignment: Alignment.bottomRight,
             children: [
               Image.asset(
-                food.image,
+                food.id == 'buns'
+                    ? 'assets/prototype/store-croissants.webp'
+                    : food.image,
                 height: _imageHeight,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -231,7 +243,19 @@ class _StoreCard extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: _avatarRadius,
-                      backgroundImage: AssetImage(food.image),
+                      backgroundColor: PanganKitaColors.savingsSurface,
+                      backgroundImage: food.id == 'buns'
+                          ? const AssetImage('assets/prototype/mawar-mark.webp')
+                          : null,
+                      child: food.id == 'buns'
+                          ? null
+                          : Text(
+                              food.merchant.substring(0, 1),
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(
+                                    color: PanganKitaColors.brandPrimaryStrong,
+                                  ),
+                            ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -242,7 +266,9 @@ class _StoreCard extends StatelessWidget {
                             food.merchant,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          Text(food.category),
+                          Text(
+                            food.id == 'buns' ? 'Roti & Pastry' : food.category,
+                          ),
                         ],
                       ),
                     ),
@@ -250,9 +276,42 @@ class _StoreCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                Text(
-                  'Rating ${food.rating} · contoh',
-                  style: const TextStyle(color: Colors.black54),
+                DecoratedBox(
+                  decoration: const BoxDecoration(
+                    color: PanganKitaColors.surfaceWarm,
+                    borderRadius: BorderRadius.all(Radius.circular(14)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: _StoreStat(
+                            value: food.rating.split(' ').first,
+                            label: '$_reviewCount ulasan contoh',
+                            isRating: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: _statDividerHeight,
+                          child: VerticalDivider(),
+                        ),
+                        const Expanded(
+                          child: _StoreStat(
+                            value: '—',
+                            label: 'jarak belum ada',
+                          ),
+                        ),
+                        const SizedBox(
+                          height: _statDividerHeight,
+                          child: VerticalDivider(),
+                        ),
+                        const Expanded(
+                          child: _StoreStat(value: '1', label: 'produk contoh'),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -260,5 +319,45 @@ class _StoreCard extends StatelessWidget {
         ],
       ),
     ),
+  );
+}
+
+class _StoreStat extends StatelessWidget {
+  const new({required this.value, required this.label, this.isRating = false});
+
+  final String value;
+  final String label;
+  final bool isRating;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (isRating)
+            const Icon(
+              Icons.star,
+              size: _statIconSize,
+              color: PanganKitaColors.brandAccent,
+            ),
+          Flexible(
+            child: Text(
+              value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+          ),
+        ],
+      ),
+      Text(
+        label,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
+    ],
   );
 }
