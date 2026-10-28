@@ -54,6 +54,9 @@ an unavailable cancellation reason, and a return-to-discovery action. Search,
 merchant chat, and order details give unavailable feedback. Checkout does not
 add entries to these tabs because it creates no order.
 Unavailable integrations show feedback rather than performing remote actions.
+The Home merchant banner opens `/stores/nearby`, a searchable display-only list
+of four example merchants. Proximity, ratings, discounts, map, and opening hours
+are not live data; unsupported actions show unavailable feedback.
 The Chat bottom tab opens `/chat`, a searchable display-only list of clearly
 labeled example merchant conversations. Sample timestamps and unread counts
 are display-only; no messages or chat state are fetched or exchanged. Tapping

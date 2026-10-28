@@ -47,4 +47,7 @@ abstract final class AppRoutes {
 
   /// Local food examples.
   static const home = '/home';
+
+  /// Display-only nearby merchant examples; no live location is used.
+  static const nearbyStores = '/stores/nearby';
 }
