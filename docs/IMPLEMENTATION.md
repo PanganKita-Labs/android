@@ -49,9 +49,10 @@ The Home bottom navigation opens `/orders`, a preview of the supplied active
 orders screen. Its two sample cards are clearly labeled as examples; pickup
 codes remain unavailable. The completed tab follows the supplied screenshot
 with two labeled sample cards and unavailable pickup/review history; the
-canceled tab has an empty state. Search, merchant chat, and order details give
-unavailable feedback. Checkout does not add entries to this page because it
-creates no order.
+canceled tab follows its supplied screenshot with one labeled sample card,
+an unavailable cancellation reason, and a return-to-discovery action. Search,
+merchant chat, and order details give unavailable feedback. Checkout does not
+add entries to these tabs because it creates no order.
 Unavailable integrations show feedback rather than performing remote actions.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
