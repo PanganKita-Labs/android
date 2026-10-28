@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/features/discovery/canceled_orders_section.dart';
 import 'package:pangankita/features/discovery/completed_orders_section.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/discovery_navigation.dart';
@@ -102,7 +103,7 @@ class _OrdersPageState extends State<OrdersPage> {
           ] else if (_selectedTab == 1)
             const CompletedOrdersSection()
           else
-            const _EmptyOrderTab(title: 'dibatalkan'),
+            const CanceledOrdersSection(),
         ],
       ),
     ),
@@ -263,32 +264,6 @@ class _ExampleBadge extends StatelessWidget {
         'Contoh',
         style: TextStyle(color: PanganKitaColors.brandPrimary),
       ),
-    ),
-  );
-}
-
-class _EmptyOrderTab extends StatelessWidget {
-  const new({required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 48),
-    child: Column(
-      children: [
-        const Icon(
-          Icons.receipt_long_outlined,
-          size: 54,
-          color: Colors.black38,
-        ),
-        const SizedBox(height: 12),
-        Text(
-          'Belum ada pesanan $title',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        const Text('Riwayat pesanan belum tersedia dalam demo offline.'),
-      ],
     ),
   );
 }
