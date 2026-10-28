@@ -50,13 +50,16 @@ orders screen. Its two sample cards are clearly labeled as examples; pickup
 codes remain unavailable. The completed tab follows the supplied screenshot
 with two labeled sample cards and unavailable pickup/review history; the
 canceled tab follows its supplied screenshot with one labeled sample card,
-an unavailable cancellation reason, and a return-to-discovery action. Search,
+an unavailable cancellation reason, and a return-to-discovery action. Order search,
 merchant chat, and order details give unavailable feedback. Checkout does not
 add entries to these tabs because it creates no order.
 Unavailable integrations show feedback rather than performing remote actions.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.
+Submitting Home search opens `/search`, which filters local example foods.
+Category, price range, and price order work locally; distance and open-store
+filters remain unavailable without live location or merchant hours.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
 
 Retained infrastructure: `app/android/`, Flutter/Dart package manifest and

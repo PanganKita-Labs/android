@@ -17,6 +17,7 @@ class DemoFood {
     required this.distance,
     required this.stock,
     this.flash = false,
+    this.searchTerms = '',
     this.pickupAddress = 'Lokasi toko contoh',
   });
 
@@ -62,6 +63,9 @@ class DemoFood {
   /// Whether this reference item belongs to Flash Sale.
   final bool flash;
 
+  /// Additional local keywords for illustrative search.
+  final String searchTerms;
+
   /// Asset used by both the card and detail sheet.
   String get image => 'assets/prototype/$id.webp';
 
@@ -76,13 +80,29 @@ class DemoFood {
   /// Case-insensitive reference search; no remote requests.
   bool matches(String query, String selectedCategory) =>
       (selectedCategory == 'Semua' || category == selectedCategory) &&
-      '$title $merchant $category'.toLowerCase().contains(
+      '$title $merchant $category $searchTerms'.toLowerCase().contains(
         query.trim().toLowerCase(),
       );
 
   /// Display-only count shown in the HTML.
   /// The local fixture subset contains five examples.
   static const referenceCategoryCount = '18';
+
+  /// Additional display-only bakery product for the search preview.
+  static const garlicBread = DemoFood(
+    id: 'garlic-bread',
+    category: 'Roti & Pastry',
+    merchant: 'Mawar Bakery & Cake',
+    pickupAddress: 'Mandala by Pass, Medan',
+    title: 'Best Cheesy Garlic Bread',
+    rating: '4.8 (contoh)',
+    saving: 'Hemat (contoh)',
+    priceRupiah: 32000,
+    original: 'Rp32.000',
+    pickupTime: '20.30',
+    distance: 'Belum tersedia',
+    stock: 'Stok contoh',
+  );
 
   /// Categories from the reference.
   static const categories = [
@@ -100,6 +120,7 @@ class DemoFood {
       merchant: 'Mawar Bakery & Cake',
       pickupAddress: 'Mandala by Pass, Medan',
       title: 'Mawar Coconut Buns (Isi 5 pcs)',
+      searchTerms: 'roti',
       rating: '4.8 (106+ ratings)',
       saving: 'Hemat 60%',
       priceRupiah: 32000,

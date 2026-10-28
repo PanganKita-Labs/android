@@ -44,4 +44,7 @@ abstract final class AppRoutes {
 
   /// Local food examples.
   static const home = '/home';
+
+  /// Search across local listing examples.
+  static const search = '/search';
 }
