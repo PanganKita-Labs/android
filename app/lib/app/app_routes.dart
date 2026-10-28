@@ -50,4 +50,7 @@ abstract final class AppRoutes {
 
   /// Display-only nearby merchant examples; no live location is used.
   static const nearbyStores = '/stores/nearby';
+
+  /// Detail for one illustrative merchant; no live store data.
+  static String store(String id) => '/stores/$id';
 }

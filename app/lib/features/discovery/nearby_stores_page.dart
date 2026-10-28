@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/shared/demo_notice.dart';
@@ -189,6 +190,9 @@ class _StoreCard extends StatelessWidget {
 
   final DemoFood food;
 
+  void _openStore(BuildContext context) =>
+      Navigator.pushNamed(context, AppRoutes.store(food.id)).ignore();
+
   String get _reviewCount => food.rating.split('(').last.split(' ').first;
 
   @override
@@ -199,7 +203,7 @@ class _StoreCard extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(_cardRadius)),
     ),
     child: InkWell(
-      onTap: () => DemoNotice.unavailable(context),
+      onTap: () => _openStore(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -306,8 +310,11 @@ class _StoreCard extends StatelessWidget {
                           height: _statDividerHeight,
                           child: VerticalDivider(),
                         ),
-                        const Expanded(
-                          child: _StoreStat(value: '1', label: 'produk contoh'),
+                        Expanded(
+                          child: _StoreStat(
+                            value: food.id == 'buns' ? '2' : '1',
+                            label: 'produk contoh',
+                          ),
                         ),
                       ],
                     ),
