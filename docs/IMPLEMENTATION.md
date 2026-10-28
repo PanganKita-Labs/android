@@ -54,6 +54,10 @@ an unavailable cancellation reason, and a return-to-discovery action. Search,
 merchant chat, and order details give unavailable feedback. Checkout does not
 add entries to these tabs because it creates no order.
 Unavailable integrations show feedback rather than performing remote actions.
+The Chat bottom tab opens `/chat`, a searchable display-only list of clearly
+labeled example merchant conversations. Sample timestamps and unread counts
+are display-only; no messages or chat state are fetched or exchanged. Tapping
+a conversation gives unavailable feedback.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.
