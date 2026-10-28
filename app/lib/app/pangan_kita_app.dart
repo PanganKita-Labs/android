@@ -10,6 +10,7 @@ import 'package:pangankita/features/discovery/nearby_stores_page.dart';
 import 'package:pangankita/features/discovery/orders_page.dart';
 import 'package:pangankita/features/discovery/payment_status_page.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
+import 'package:pangankita/features/discovery/store_detail_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
 import 'package:pangankita/features/onboarding/password_success_page.dart';
@@ -58,6 +59,9 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       for (final food in DemoFood.examples)
         AppRoutes.product(food.id): (context) =>
             ProductDetailPage(food: food, cart: _cart),
+      for (final food in DemoFood.examples)
+        AppRoutes.store(food.id): (context) =>
+            StoreDetailPage(food: food, cart: _cart),
     },
   );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/shared/demo_notice.dart';
@@ -181,6 +182,9 @@ class _StoreCard extends StatelessWidget {
 
   final DemoFood food;
 
+  void _openStore(BuildContext context) =>
+      Navigator.pushNamed(context, AppRoutes.store(food.id)).ignore();
+
   @override
   Widget build(BuildContext context) => Card(
     margin: EdgeInsets.zero,
@@ -189,7 +193,7 @@ class _StoreCard extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(_cardRadius)),
     ),
     child: InkWell(
-      onTap: () => DemoNotice.unavailable(context),
+      onTap: () => _openStore(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
