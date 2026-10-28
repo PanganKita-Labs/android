@@ -45,8 +45,13 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Dibatalkan'));
     await tester.pumpAndSettle();
-    expect(find.text('Belum ada pesanan dibatalkan'), findsOneWidget);
-    await tester.tap(find.text('Beranda'));
+    expect(find.textContaining('belum ada pesanan dibatalkan'), findsOneWidget);
+    expect(find.text('Alasan pembatalan: Belum tersedia'), findsOneWidget);
+    expect(find.text('Pembayaran melewati batas waktu.'), findsNothing);
+    await tester.pump(const Duration(seconds: 5));
+    await tester.ensureVisible(find.text('Cari Menu Lain'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, 'Cari Menu Lain'));
     await tester.pumpAndSettle();
     expect(find.text('Kategori'), findsOneWidget);
   });
@@ -82,6 +87,17 @@ void main() {
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
         await tester.scrollUntilVisible(find.text('Beri Ulasan').last, 120);
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        await tester.drag(find.byType(ListView), const Offset(0, 1000));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Dibatalkan'));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        await tester.scrollUntilVisible(
+          find.text('Pesanan yang dibatalkan akan muncul di sini.'),
+          120,
+        );
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
       });
