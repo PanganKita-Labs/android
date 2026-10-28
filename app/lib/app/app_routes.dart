@@ -39,6 +39,9 @@ abstract final class AppRoutes {
   /// Display-only chat list; no messages are exchanged.
   static const chat = '/chat';
 
+  /// Display-only notification examples; no push service is connected.
+  static const notifications = '/notifications';
+
   /// Status of the local checkout preview; no payment is created.
   static const paymentStatus = '/checkout/status';
 
