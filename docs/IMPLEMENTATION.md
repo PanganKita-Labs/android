@@ -57,6 +57,9 @@ Unavailable integrations show feedback rather than performing remote actions.
 The Home merchant banner opens `/stores/nearby`, a searchable display-only list
 of four example merchants. Proximity, ratings, discounts, map, and opening hours
 are not live data; unsupported actions show unavailable feedback.
+The list's Lihat Peta action opens `/stores/map`, an illustrative map with
+selectable example merchant pins and a link to the existing store detail. Pin
+positions are fixed artwork, not device coordinates or live distance data.
 Selecting a merchant opens a display-only store detail. Mawar shows two sample
 products and generated bakery preview photos. The add button changes only the
 session cart; reviews, map, and merchant data are not connected to a service.

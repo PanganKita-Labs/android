@@ -7,6 +7,7 @@ import 'package:pangankita/features/discovery/checkout_page.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
+import 'package:pangankita/features/discovery/nearby_map_page.dart';
 import 'package:pangankita/features/discovery/nearby_stores_page.dart';
 import 'package:pangankita/features/discovery/notifications_page.dart';
 import 'package:pangankita/features/discovery/orders_page.dart';
@@ -54,6 +55,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.success: (context) => const PasswordSuccessPage(),
       AppRoutes.home: (context) => const HomePage(),
       AppRoutes.nearbyStores: (context) => const NearbyStoresPage(),
+      AppRoutes.nearbyMap: (context) => const NearbyMapPage(),
       AppRoutes.orders: (context) => const OrdersPage(),
       AppRoutes.chat: (context) => const ChatPage(),
       AppRoutes.notifications: (context) => const NotificationsPage(),

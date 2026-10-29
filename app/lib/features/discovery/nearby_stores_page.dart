@@ -178,7 +178,8 @@ class _StoresSectionHeader extends StatelessWidget {
         ),
       ),
       TextButton(
-        onPressed: () => DemoNotice.unavailable(context),
+        onPressed: () =>
+            Navigator.pushNamed(context, AppRoutes.nearbyMap).ignore(),
         child: const Text('Lihat Peta'),
       ),
     ],
