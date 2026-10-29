@@ -63,7 +63,9 @@ class DemoFood {
   final bool flash;
 
   /// Asset used by both the card and detail sheet.
-  String get image => 'assets/prototype/$id.webp';
+  String get image => id == 'garlic-bread'
+      ? 'assets/prototype/garlic-bread.webp'
+      : 'assets/prototype/$id.webp';
 
   /// Reference line breaks for compact cards; search uses the original title.
   String get cardTitle => switch (id) {
@@ -83,6 +85,22 @@ class DemoFood {
   /// Display-only count shown in the HTML.
   /// The local fixture subset contains five examples.
   static const referenceCategoryCount = '18';
+
+  /// Additional display-only product on the Mawar store preview.
+  static const garlicBread = DemoFood(
+    id: 'garlic-bread',
+    category: 'Roti & Pastry',
+    merchant: 'Mawar Bakery & Cake',
+    pickupAddress: 'Mandala by Pass, Medan',
+    title: 'Best Cheesy Garlic Bread',
+    rating: '4.8 (contoh)',
+    saving: 'Hemat (contoh)',
+    priceRupiah: 32000,
+    original: 'Rp32.000',
+    pickupTime: '20.30',
+    distance: 'Belum tersedia',
+    stock: 'Stok contoh',
+  );
 
   /// Categories from the reference.
   static const categories = [
