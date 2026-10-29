@@ -11,7 +11,7 @@ const _notificationsIndex = 3;
 
 /// Bottom destinations shared by the discovery previews.
 class DiscoveryNavigation extends StatelessWidget {
-  /// Selects Home (0), Orders (1), or Notifications (3).
+  /// Selects Home (0), Orders (1), Chat (2), or Notifications (3).
   const new({required this.selectedIndex, super.key});
 
   /// Active destination index.
@@ -24,6 +24,8 @@ class DiscoveryNavigation extends StatelessWidget {
         Navigator.pushReplacementNamed(context, AppRoutes.home).ignore();
       case 1:
         Navigator.pushReplacementNamed(context, AppRoutes.orders).ignore();
+      case 2:
+        Navigator.pushReplacementNamed(context, AppRoutes.chat).ignore();
       case _notificationsIndex:
         Navigator.pushReplacementNamed(
           context,

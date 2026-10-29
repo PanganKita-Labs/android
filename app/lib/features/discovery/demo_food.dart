@@ -67,7 +67,9 @@ class DemoFood {
   final String searchTerms;
 
   /// Asset used by both the card and detail sheet.
-  String get image => 'assets/prototype/$id.webp';
+  String get image => id == 'garlic-bread'
+      ? 'assets/prototype/garlic-bread.webp'
+      : 'assets/prototype/$id.webp';
 
   /// Reference line breaks for compact cards; search uses the original title.
   String get cardTitle => switch (id) {
@@ -88,7 +90,7 @@ class DemoFood {
   /// The local fixture subset contains five examples.
   static const referenceCategoryCount = '18';
 
-  /// Additional display-only bakery product for the search preview.
+  /// Additional display-only product on the Mawar store and search previews.
   static const garlicBread = DemoFood(
     id: 'garlic-bread',
     category: 'Roti & Pastry',

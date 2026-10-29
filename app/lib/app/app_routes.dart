@@ -36,6 +36,9 @@ abstract final class AppRoutes {
   /// Local order-screen preview; no order is created by checkout.
   static const orders = '/orders';
 
+  /// Display-only chat list; no messages are exchanged.
+  static const chat = '/chat';
+
   /// Display-only notification examples; no push service is connected.
   static const notifications = '/notifications';
 
@@ -47,4 +50,10 @@ abstract final class AppRoutes {
 
   /// Search across local listing examples.
   static const search = '/search';
+
+  /// Display-only nearby merchant examples; no live location is used.
+  static const nearbyStores = '/stores/nearby';
+
+  /// Detail for one illustrative merchant; no live store data.
+  static String store(String id) => '/stores/$id';
 }

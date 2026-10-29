@@ -211,7 +211,8 @@ class _MerchantBanner extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
     ),
-    onPressed: () => DemoNotice.unavailable(context),
+    onPressed: () =>
+        Navigator.pushNamed(context, AppRoutes.nearbyStores).ignore(),
     child: const Row(
       spacing: 15,
       children: [
