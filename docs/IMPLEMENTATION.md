@@ -68,8 +68,11 @@ The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.
 Submitting Home search opens `/search`, which filters local example foods.
-Category, price range, and price order work locally; distance and open-store
-filters remain unavailable without live location or merchant hours.
+Category, nonnegative price range, and price order work locally; invalid and
+reversed price ranges are rejected. Empty results offer a search edit action,
+filter reset, and example recommendations. Result cards label distance as
+unavailable and pickup times as examples. Distance and open-store filters
+remain unavailable without live location or merchant hours.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
 
 Retained infrastructure: `app/android/`, Flutter/Dart package manifest and

@@ -46,7 +46,9 @@ void main() {
     expect(find.text('Hasil untuk “Roti”'), findsOneWidget);
   });
 
-  testWidgets('empty search offers local suggestions', (tester) async {
+  testWidgets('empty search offers actions and recommendations', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         theme: PanganKitaTheme.light,
@@ -55,9 +57,23 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('Belum ketemu makananmu'), findsOneWidget);
-    await tester.tap(find.text('Roti'));
+    expect(find.text('Ubah Pencarian'), findsOneWidget);
+    expect(find.text('Reset Filter'), findsOneWidget);
+    expect(find.text('Mungkin Kamu Suka'), findsOneWidget);
+    await tester.tap(find.text('Ubah Pencarian'));
     await tester.pumpAndSettle();
-    expect(find.text('Hasil untuk “Roti”'), findsOneWidget);
+    expect(
+      tester
+          .widget<TextField>(find.byType(TextField).first)
+          .focusNode
+          ?.hasFocus,
+      isTrue,
+    );
+    tester.testTextInput.hide();
+    await tester.ensureVisible(find.text('Mawar Coconut Buns (Isi 5 pcs)'));
+    await tester.tap(find.text('Mawar Coconut Buns (Isi 5 pcs)'));
+    await tester.pumpAndSettle();
+    expect(find.text('1 makanan contoh ditemukan'), findsOneWidget);
   });
 
   testWidgets('bakery search result opens its product example', (tester) async {
@@ -104,6 +120,71 @@ void main() {
     await tester.tap(find.text('Tampilkan Hasil'));
     await tester.pumpAndSettle();
     expect(find.text('3 makanan contoh ditemukan'), findsOneWidget);
+  });
+
+  testWidgets('price filter rejects negative and reversed ranges', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(390, 844);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: const SearchPage(initialQuery: 'Roti'),
+      ),
+    );
+    await tester.tap(find.byTooltip('Filter pencarian'));
+    await tester.pumpAndSettle();
+    final minimum = find.byType(TextField).at(1);
+    final maximum = find.byType(TextField).at(2);
+    await tester.enterText(minimum, '-1');
+    await tester.ensureVisible(find.text('Tampilkan Hasil'));
+    await tester.tap(find.text('Tampilkan Hasil'));
+    await tester.pumpAndSettle();
+    expect(find.text('Masukkan rentang harga yang valid.'), findsOneWidget);
+    await tester.enterText(minimum, '10000');
+    await tester.enterText(maximum, '-5');
+    await tester.tap(find.text('Tampilkan Hasil'));
+    await tester.pumpAndSettle();
+    expect(find.text('Masukkan rentang harga yang valid.'), findsOneWidget);
+    await tester.enterText(minimum, '50000');
+    await tester.enterText(maximum, '10000');
+    await tester.tap(find.text('Tampilkan Hasil'));
+    await tester.pumpAndSettle();
+    expect(find.text('Masukkan rentang harga yang valid.'), findsOneWidget);
+    await tester.enterText(minimum, '10000');
+    await tester.enterText(maximum, '50000');
+    await tester.tap(find.text('Tampilkan Hasil'));
+    await tester.pumpAndSettle();
+    expect(find.text('Filter Pencarian'), findsNothing);
+  });
+
+  testWidgets('empty result reset restores locally filtered cards', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(390, 844);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: const SearchPage(initialQuery: 'Roti'),
+      ),
+    );
+    await tester.tap(find.byTooltip('Filter pencarian'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).at(1), '90000');
+    await tester.ensureVisible(find.text('Tampilkan Hasil'));
+    await tester.tap(find.text('Tampilkan Hasil'));
+    await tester.pumpAndSettle();
+    expect(find.text('Belum ketemu makananmu'), findsOneWidget);
+    await tester.tap(find.text('Reset Filter'));
+    await tester.pumpAndSettle();
+    expect(find.text('3 makanan contoh ditemukan'), findsOneWidget);
+    expect(find.text('Jarak belum tersedia'), findsWidgets);
   });
 
   for (final width in [320.0, 360.0, 390.0, 412.0]) {

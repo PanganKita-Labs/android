@@ -18,6 +18,8 @@ const _badgeTopInset = 6.0;
 const _favoriteIconSize = 20.0;
 const _merchantAvatarRadius = 10.0;
 const _priceGap = 4.0;
+const _recommendationCount = 2;
+const _recommendationImageSize = 48.0;
 
 /// Search and filter preview over local listing examples.
 class SearchPage extends StatefulWidget {
@@ -34,6 +36,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _controller = TextEditingController();
   final _favorites = <String>{};
+  final _searchFocus = FocusNode();
   String _query = '';
   String _category = 'Semua';
   int? _minimum;
@@ -50,6 +53,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void dispose() {
     _controller.dispose();
+    _searchFocus.dispose();
     super.dispose();
   }
 
@@ -104,6 +108,15 @@ class _SearchPageState extends State<SearchPage> {
     Navigator.pop(context);
   }
 
+  void _resetFilters() => setState(() {
+    _category = 'Semua';
+    _minimum = null;
+    _maximum = null;
+    _lowestPriceFirst = false;
+  });
+
+  void _editSearch() => _searchFocus.requestFocus();
+
   void _toggleFavorite(String id) => setState(
     () => _favorites.contains(id) ? _favorites.remove(id) : _favorites.add(id),
   );
@@ -120,6 +133,7 @@ class _SearchPageState extends State<SearchPage> {
           children: [
             _SearchBar(
               controller: _controller,
+              focusNode: _searchFocus,
               onChanged: (value) => setState(() => _query = value.trim()),
               onFilter: _openFilters,
             ),
@@ -140,6 +154,8 @@ class _SearchPageState extends State<SearchPage> {
             const SizedBox(height: 24),
             if (results.isEmpty)
               _EmptySearch(
+                onEditSearch: _editSearch,
+                onResetFilters: _resetFilters,
                 onSuggestion: (query) {
                   _controller.text = query;
                   setState(() => _query = query);
@@ -171,11 +187,13 @@ class _SearchPageState extends State<SearchPage> {
 class _SearchBar extends StatelessWidget {
   const new({
     required this.controller,
+    required this.focusNode,
     required this.onChanged,
     required this.onFilter,
   });
 
   final TextEditingController controller;
+  final FocusNode focusNode;
   final ValueChanged<String> onChanged;
   final VoidCallback onFilter;
 
@@ -195,6 +213,7 @@ class _SearchBar extends StatelessWidget {
       Expanded(
         child: TextField(
           controller: controller,
+          focusNode: focusNode,
           onChanged: onChanged,
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
@@ -389,6 +408,12 @@ class _SearchResultInfo extends StatelessWidget {
             backgroundImage: AssetImage(food.image),
           ),
           const SizedBox(width: 5),
+          const Icon(
+            Icons.storefront_outlined,
+            size: 14,
+            color: PanganKitaColors.brandPrimaryStrong,
+          ),
+          const SizedBox(width: 3),
           Expanded(
             child: Text(
               food.merchant,
@@ -417,51 +442,107 @@ class _SearchResultInfo extends StatelessWidget {
         ],
       ),
       const SizedBox(height: 8),
-      Text(
-        'Pickup contoh: ${food.pickupTime}',
-        style: Theme.of(context).textTheme.bodySmall
-            ?.copyWith(color: PanganKitaColors.brandAccent),
+      _SearchPickupMeta(pickupTime: food.pickupTime),
+    ],
+  );
+}
+
+class _SearchPickupMeta extends StatelessWidget {
+  const new({required this.pickupTime});
+
+  final String pickupTime;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    children: [
+      const Row(
+        children: [
+          Icon(Icons.location_on_outlined, size: 14),
+          Expanded(child: Text('Jarak belum tersedia')),
+        ],
+      ),
+      Row(
+        children: [
+          const Icon(
+            Icons.schedule,
+            size: 14,
+            color: PanganKitaColors.brandAccent,
+          ),
+          Expanded(child: Text('Ambil $pickupTime (contoh)')),
+        ],
       ),
     ],
   );
 }
 
 class _EmptySearch extends StatelessWidget {
-  const new({required this.onSuggestion});
+  const new({
+    required this.onSuggestion,
+    required this.onEditSearch,
+    required this.onResetFilters,
+  });
 
   final ValueChanged<String> onSuggestion;
+  final VoidCallback onEditSearch;
+  final VoidCallback onResetFilters;
 
   @override
   Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      const SizedBox(height: 55),
-      const CircleAvatar(
-        radius: 65,
-        backgroundColor: PanganKitaColors.savingsSurface,
-        child: Icon(
-          Icons.search,
-          size: 70,
-          color: PanganKitaColors.brandPrimaryStrong,
+      const SizedBox(height: 35),
+      const Center(
+        child: CircleAvatar(
+          radius: 55,
+          backgroundColor: PanganKitaColors.savingsSurface,
+          child: Icon(
+            Icons.search,
+            size: 60,
+            color: PanganKitaColors.brandPrimaryStrong,
+          ),
         ),
       ),
-      const SizedBox(height: 20),
+      const SizedBox(height: 16),
       Text(
         'Belum ketemu makananmu',
+        textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headlineSmall,
       ),
-      const Text('Coba kata kunci lain dari contoh makanan yang tersedia.'),
-      const SizedBox(height: 26),
-      const Text('Coba cari'),
-      Wrap(
-        spacing: _chipGap,
+      const Text(
+        'Coba kata kunci lain dari contoh makanan yang tersedia.',
+        textAlign: TextAlign.center,
+      ),
+      const SizedBox(height: 16),
+      Row(
         children: [
-          for (final query in ['Roti', 'Nasi', 'Ayam'])
-            ActionChip(
-              label: Text(query),
-              onPressed: () => onSuggestion(query),
+          Expanded(
+            child: OutlinedButton(
+              onPressed: onEditSearch,
+              child: const Text('Ubah Pencarian'),
             ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: TextButton(
+              onPressed: onResetFilters,
+              child: const Text('Reset Filter'),
+            ),
+          ),
         ],
       ),
+      const SizedBox(height: 18),
+      Text('Mungkin Kamu Suka', style: Theme.of(context).textTheme.titleLarge),
+      for (final food in DemoFood.examples.take(_recommendationCount))
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: SizedBox.square(
+            dimension: _recommendationImageSize,
+            child: Image.asset(food.image, fit: BoxFit.cover),
+          ),
+          title: Text(food.title, maxLines: 2, overflow: TextOverflow.ellipsis),
+          subtitle: Text(food.price),
+          onTap: () => onSuggestion(food.title),
+        ),
     ],
   );
 }
@@ -516,6 +597,8 @@ class _SearchFiltersState extends State<_SearchFilters> {
     final max = int.tryParse(_maximum.text.trim());
     if ((_minimum.text.isNotEmpty && min == null) ||
         (_maximum.text.isNotEmpty && max == null) ||
+        (min != null && min < 0) ||
+        (max != null && max < 0) ||
         (min != null && max != null && min > max)) {
       setState(() => _error = 'Masukkan rentang harga yang valid.');
       return;
