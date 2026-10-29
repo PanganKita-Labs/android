@@ -30,7 +30,10 @@ const _mainRoadEnd = .57;
 /// Local preview of the location selection design; no GPS or map service runs.
 class LocationSelectionPage extends StatefulWidget {
   /// Creates the area selector.
-  const new({super.key});
+  const new({this.initialArea = 'Mandala by Pass, Medan', super.key});
+
+  /// Example area currently selected in this app session.
+  final String initialArea;
 
   @override
   State<LocationSelectionPage> createState() => _LocationSelectionPageState();
@@ -39,6 +42,13 @@ class LocationSelectionPage extends StatefulWidget {
 class _LocationSelectionPageState extends State<LocationSelectionPage> {
   final _search = TextEditingController();
   String _selected = _sampleAreas.first.name;
+
+  @override
+  void initState() {
+    super.initState();
+    _selected = widget.initialArea;
+  }
+
   String _query = '';
 
   @override
@@ -49,11 +59,10 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final recent = _sampleAreas
-        .skip(1)
-        .where(
-          (area) => area.name.toLowerCase().contains(_query.toLowerCase()),
-        );
+    final matches = _sampleAreas.where(
+      (area) => area.name.toLowerCase().contains(_query.toLowerCase()),
+    );
+    final recent = matches.where((area) => area.name != _selected);
     return Scaffold(
       backgroundColor: PanganKitaColors.surfaceWarm,
       body: SafeArea(
@@ -82,7 +91,7 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
                     controller: _search,
                     onChanged: (value) => setState(() => _query = value.trim()),
                     decoration: InputDecoration(
-                      hintText: 'Cari area atau nama jalan',
+                      hintText: 'Cari area contoh',
                       prefixIcon: const Icon(Icons.search),
                       suffixIcon: _query.isEmpty
                           ? null
@@ -125,19 +134,21 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 8),
-                  _AreaTile(
-                    name: _selected,
-                    subtitle: 'Medan, Sumatera Utara · contoh',
-                    selected: true,
-                    onTap: null,
-                  ),
+                  if (_query.isEmpty ||
+                      matches.any((area) => area.name == _selected))
+                    _AreaTile(
+                      name: _selected,
+                      subtitle: 'Medan, Sumatera Utara · contoh',
+                      selected: true,
+                      onTap: null,
+                    ),
                   const SizedBox(height: 20),
                   Text(
                     'Pencarian terakhir',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 8),
-                  if (recent.isEmpty)
+                  if (matches.isEmpty)
                     const Padding(
                       padding: EdgeInsets.all(16),
                       child: Text('Area contoh tidak ditemukan.'),
@@ -245,11 +256,40 @@ class _IllustrativeMap extends StatelessWidget {
         children: [
           CustomPaint(painter: _MapPainter()),
           const Center(
-            child: Icon(
-              Icons.location_on,
-              size: 44,
-              color: PanganKitaColors.brandPrimaryStrong,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Color(0x3345A6A3),
+                shape: BoxShape.circle,
+              ),
+              child: SizedBox.square(
+                dimension: 90,
+                child: Icon(
+                  Icons.location_on,
+                  size: 44,
+                  color: PanganKitaColors.brandPrimaryStrong,
+                ),
+              ),
             ),
+          ),
+          const Positioned(
+            top: 16,
+            left: 55,
+            child: _MapStreetLabel('Jl. Setia Budi'),
+          ),
+          const Positioned(
+            top: 24,
+            right: 12,
+            child: _MapStreetLabel('Jl. Gatot Subroto'),
+          ),
+          const Positioned(
+            bottom: 38,
+            left: 88,
+            child: _MapStreetLabel('Mandala by Pass'),
+          ),
+          const Positioned(
+            top: 82,
+            right: 12,
+            child: _MapStreetLabel('Taman Cadika'),
           ),
           const Positioned(
             right: 12,
@@ -258,13 +298,31 @@ class _IllustrativeMap extends StatelessWidget {
               decoration: BoxDecoration(color: Colors.white),
               child: Padding(
                 padding: EdgeInsets.all(5),
-                child: Text('Ilustrasi peta · bukan lokasi langsung'),
+                child: SizedBox(
+                  width: 155,
+                  child: Text(
+                    'Peta ilustrasi - bukan lokasi langsung',
+                    textAlign: TextAlign.right,
+                  ),
+                ),
               ),
             ),
           ),
         ],
       ),
     ),
+  );
+}
+
+class _MapStreetLabel extends StatelessWidget {
+  const new(this.label);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) => Text(
+    label,
+    style: const TextStyle(color: Color(0xFF14313A), fontSize: 10),
   );
 }
 

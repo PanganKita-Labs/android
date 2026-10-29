@@ -31,6 +31,7 @@ class PanganKitaApp extends StatefulWidget {
 
 class _PanganKitaAppState extends State<PanganKitaApp> {
   final _cart = DemoCart();
+  String _selectedArea = 'Mandala by Pass, Medan';
 
   @override
   void dispose() {
@@ -53,8 +54,15 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.recover: (context) => const OtpPage(recovery: true),
       AppRoutes.password: (context) => const AuthPage.password(),
       AppRoutes.success: (context) => const PasswordSuccessPage(),
-      AppRoutes.home: (context) => const HomePage(),
-      AppRoutes.location: (context) => const LocationSelectionPage(),
+      AppRoutes.home: (context) => HomePage(
+        initialLocation: _selectedArea,
+        onLocationChanged: (area) => setState(() => _selectedArea = area),
+      ),
+      AppRoutes.location: (context) => LocationSelectionPage(
+        initialArea:
+            ModalRoute.of(context)?.settings.arguments as String? ??
+            _selectedArea,
+      ),
       AppRoutes.nearbyStores: (context) => const NearbyStoresPage(),
       AppRoutes.orders: (context) => const OrdersPage(),
       AppRoutes.chat: (context) => const ChatPage(),

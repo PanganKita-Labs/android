@@ -70,7 +70,7 @@ there is no push delivery, persisted notification, or actual order event.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
 Home's area label opens `/location`, an illustrative local area selector. It
 does not request device location, display live map tiles, or filter food by
-distance. Selecting an example area changes only the Home header label.
+distance. Selecting an example area changes only the Home header label for the current app session; it survives Home tab navigation and selector reopening without persistence.
 
 Retained infrastructure: `app/android/`, Flutter/Dart package manifest and
 lockfile, strict analyzer/DCL/Dartrics rules, pinned development tool versions,
