@@ -13,6 +13,7 @@ import 'package:pangankita/features/discovery/notifications_page.dart';
 import 'package:pangankita/features/discovery/orders_page.dart';
 import 'package:pangankita/features/discovery/payment_status_page.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
+import 'package:pangankita/features/discovery/profile_page.dart';
 import 'package:pangankita/features/discovery/store_detail_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
@@ -58,6 +59,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
         initialLocation: _selectedArea,
         onLocationChanged: (area) => setState(() => _selectedArea = area),
       ),
+      AppRoutes.profile: (context) => const ProfilePage(),
       AppRoutes.location: (context) => LocationSelectionPage(
         initialArea:
             ModalRoute.of(context)?.settings.arguments as String? ??

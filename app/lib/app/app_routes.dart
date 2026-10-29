@@ -48,6 +48,9 @@ abstract final class AppRoutes {
   /// Local food examples.
   static const home = '/home';
 
+  /// Display-only profile example; no account data is loaded.
+  static const profile = '/profile';
+
   /// Selects an illustrative area without device location access.
   static const location = '/location';
 
