@@ -47,4 +47,7 @@ abstract final class AppRoutes {
 
   /// Local food examples.
   static const home = '/home';
+
+  /// Selects an illustrative area without device location access.
+  static const location = '/location';
 }

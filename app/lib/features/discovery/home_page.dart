@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/discovery_navigation.dart';
@@ -27,6 +28,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String _query = '';
   String _category = 'Semua';
+  String _location = 'Mandala by Pass, Medan';
+
+  Future<void> _chooseLocation() async {
+    final selected = await Navigator.pushNamed(context, AppRoutes.location);
+    if (mounted && selected is String) setState(() => _location = selected);
+  }
 
   void _selectCategory(String category) => setState(() => _category = category);
 
@@ -70,7 +77,10 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(23, 12, 23, 37),
           children: [
-            const HomeHeader(),
+            HomeHeader(
+              location: _location,
+              onLocationTap: () => unawaited(_chooseLocation()),
+            ),
             const SizedBox(height: 14),
             _HomeSearch(
               onChanged: (value) => setState(() => _query = value),

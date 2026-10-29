@@ -62,6 +62,9 @@ The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
+Home's area label opens `/location`, an illustrative local area selector. It
+does not request device location, display live map tiles, or filter food by
+distance. Selecting an example area changes only the Home header label.
 
 Retained infrastructure: `app/android/`, Flutter/Dart package manifest and
 lockfile, strict analyzer/DCL/Dartrics rules, pinned development tool versions,
