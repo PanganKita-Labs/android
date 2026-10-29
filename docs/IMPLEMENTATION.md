@@ -60,6 +60,9 @@ are not live data; unsupported actions show unavailable feedback.
 The list's Lihat Peta action opens `/stores/map`, an illustrative map with
 selectable example merchant pins and a link to the existing store detail. Pin
 positions are fixed artwork, not device coordinates or live distance data.
+The merchant sheet also opens `/stores/<id>/directions`, an illustrative route
+with local travel-mode selection. Origin, route, distance, and travel time are
+not live; opening an external map remains unavailable.
 Selecting a merchant opens a display-only store detail. Mawar shows two sample
 products and generated bakery preview photos. The add button changes only the
 session cart; reviews, map, and merchant data are not connected to a service.
