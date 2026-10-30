@@ -50,6 +50,14 @@ class _HomePageState extends State<HomePage> {
     _location = widget.initialLocation;
   }
 
+  @override
+  void didUpdateWidget(covariant HomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialLocation != widget.initialLocation) {
+      _location = widget.initialLocation;
+    }
+  }
+
   Future<void> _chooseLocation() async {
     final selected = await Navigator.pushNamed(
       context,
@@ -111,6 +119,11 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 14),
             _HomeSearch(
               onChanged: (value) => setState(() => _query = value),
+              onSubmitted: (value) => Navigator.pushNamed(
+                context,
+                AppRoutes.search,
+                arguments: value.trim(),
+              ).ignore(),
               onFilter: () {
                 unawaited(_filter());
               },
@@ -288,13 +301,20 @@ class _MerchantBanner extends StatelessWidget {
 }
 
 class _HomeSearch extends StatelessWidget {
-  const new({required this.onChanged, required this.onFilter});
+  const new({
+    required this.onChanged,
+    required this.onSubmitted,
+    required this.onFilter,
+  });
   final ValueChanged<String> onChanged;
+  final ValueChanged<String> onSubmitted;
   final VoidCallback onFilter;
 
   @override
   Widget build(BuildContext context) => TextField(
     onChanged: onChanged,
+    onSubmitted: onSubmitted,
+    textInputAction: TextInputAction.search,
     style: const TextStyle(fontSize: 11),
     decoration: InputDecoration(
       hintText: 'Temukan makanan lezat di sekitarmu...',

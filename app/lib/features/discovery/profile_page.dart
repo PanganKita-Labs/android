@@ -6,10 +6,35 @@ import 'package:pangankita/shared/demo_notice.dart';
 const Color _profileGreen = PanganKitaColors.brandPrimaryStrong;
 const _profileInk = Color(0xFF10283C);
 
+void _ignoreAreaChange(String area) {
+  if (area.isEmpty) throw ArgumentError.value(area, 'area');
+}
+
 /// Display-only profile based on the first panel of the account reference.
 class ProfilePage extends StatelessWidget {
   /// Creates the local example without loading account information.
-  const new({super.key});
+  const new({
+    this.initialLocation = 'Mandala by Pass, Medan',
+    this.onLocationChanged = _ignoreAreaChange,
+    super.key,
+  });
+
+  /// Current example area from the app session.
+  final String initialLocation;
+
+  /// Reports a confirmed area to the app-session owner.
+  final ValueChanged<String> onLocationChanged;
+
+  Future<void> _chooseLocation(BuildContext context) async {
+    final selected = await Navigator.pushNamed(
+      context,
+      AppRoutes.location,
+      arguments: initialLocation,
+    );
+    if (context.mounted && selected is String) {
+      onLocationChanged(selected);
+    }
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -107,7 +132,7 @@ class ProfilePage extends StatelessWidget {
               _ProfileItem(
                 Icons.location_on_outlined,
                 'Lokasi Saya',
-                () => Navigator.pushNamed(context, AppRoutes.location).ignore(),
+                () => _chooseLocation(context).ignore(),
               ),
               _ProfileItem(
                 Icons.settings_outlined,

@@ -50,13 +50,19 @@ orders screen. Its two sample cards are clearly labeled as examples; pickup
 codes remain unavailable. The completed tab follows the supplied screenshot
 with two labeled sample cards and unavailable pickup/review history; the
 canceled tab follows its supplied screenshot with one labeled sample card,
-an unavailable cancellation reason, and a return-to-discovery action. Search,
+an unavailable cancellation reason, and a return-to-discovery action. Order search,
 merchant chat, and order details give unavailable feedback. Checkout does not
 add entries to these tabs because it creates no order.
 Unavailable integrations show feedback rather than performing remote actions.
 The Home merchant banner opens `/stores/nearby`, a searchable display-only list
 of four example merchants. Proximity, ratings, discounts, map, and opening hours
 are not live data; unsupported actions show unavailable feedback.
+The list's Lihat Peta action opens `/stores/map`, an illustrative map with
+selectable example merchant pins and a link to the existing store detail. Pin
+positions are fixed artwork, not device coordinates or live distance data.
+The merchant sheet also opens `/stores/<id>/directions`, an illustrative route
+with local travel-mode selection. Origin, route, distance, and travel time are
+not live; opening an external map remains unavailable.
 Selecting a merchant opens a display-only store detail. Mawar shows two sample
 products and generated bakery preview photos. The add button changes only the
 session cart; reviews, map, and merchant data are not connected to a service.
@@ -66,11 +72,18 @@ are display-only; no messages or chat state are fetched or exchanged. Tapping
 a conversation gives unavailable feedback.
 The Home avatar opens `/profile`, a display-only example matching the first
 account-design panel. Its name, email, and photo are sample data. Order history
-and area selection open existing previews; other account actions report that
-they are unavailable. No account record is loaded or changed.
+and area selection open existing previews; confirming an example area from
+Profile updates the Home area for the current app session. Other account actions
+report that they are unavailable. No account record is loaded or changed.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.
+Submitting Home search opens `/search`, which filters local example foods.
+Category, nonnegative price range, and price order work locally; invalid and
+reversed price ranges are rejected. Empty results offer a search edit action,
+filter reset, and example recommendations. Result cards label distance as
+unavailable and pickup times as examples. Distance and open-store filters
+remain unavailable without live location or merchant hours.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
 Home's area label opens `/location`, an illustrative local area selector. It
 does not request device location, display live map tiles, or filter food by
