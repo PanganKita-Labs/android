@@ -48,6 +48,12 @@ abstract final class AppRoutes {
   /// Local food examples.
   static const home = '/home';
 
+  /// Display-only profile example; no account data is loaded.
+  static const profile = '/profile';
+
+  /// Local edit-form preview; changes are not saved to an account.
+  static const editProfile = '/profile/edit';
+
   /// Search across local listing examples.
   static const search = '/search';
 
