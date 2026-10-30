@@ -6,6 +6,7 @@ import 'package:pangankita/features/discovery/chat_page.dart';
 import 'package:pangankita/features/discovery/checkout_page.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
+import 'package:pangankita/features/discovery/directions_page.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/discovery/location_selection_page.dart';
 import 'package:pangankita/features/discovery/nearby_map_page.dart';
@@ -82,6 +83,8 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
             ProductDetailPage(food: food, cart: _cart),
       AppRoutes.product(DemoFood.garlicBread.id): (context) =>
           ProductDetailPage(food: DemoFood.garlicBread, cart: _cart),
+      for (final food in DemoFood.examples)
+        AppRoutes.directions(food.id): (context) => DirectionsPage(food: food),
       for (final food in DemoFood.examples)
         AppRoutes.store(food.id): (context) =>
             StoreDetailPage(food: food, cart: _cart),
