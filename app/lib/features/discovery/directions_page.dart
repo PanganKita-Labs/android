@@ -264,6 +264,7 @@ class _DirectionsSheet extends StatelessWidget {
             icon: const Icon(Icons.open_in_new),
             label: const Text('Buka di Aplikasi Peta'),
           ),
+          const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: () =>
                 Navigator.pushNamed(context, AppRoutes.store(food.id)).ignore(),
