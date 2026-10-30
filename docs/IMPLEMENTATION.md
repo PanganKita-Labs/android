@@ -50,7 +50,7 @@ orders screen. Its two sample cards are clearly labeled as examples; pickup
 codes remain unavailable. The completed tab follows the supplied screenshot
 with two labeled sample cards and unavailable pickup/review history; the
 canceled tab follows its supplied screenshot with one labeled sample card,
-an unavailable cancellation reason, and a return-to-discovery action. Search,
+an unavailable cancellation reason, and a return-to-discovery action. Order search,
 merchant chat, and order details give unavailable feedback. Checkout does not
 add entries to these tabs because it creates no order.
 Unavailable integrations show feedback rather than performing remote actions.
@@ -67,6 +67,12 @@ a conversation gives unavailable feedback.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.
+Submitting Home search opens `/search`, which filters local example foods.
+Category, nonnegative price range, and price order work locally; invalid and
+reversed price ranges are rejected. Empty results offer a search edit action,
+filter reset, and example recommendations. Result cards label distance as
+unavailable and pickup times as examples. Distance and open-store filters
+remain unavailable without live location or merchant hours.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
 Home's area label opens `/location`, an illustrative local area selector. It
 does not request device location, display live map tiles, or filter food by
