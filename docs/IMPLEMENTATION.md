@@ -74,6 +74,9 @@ filter reset, and example recommendations. Result cards label distance as
 unavailable and pickup times as examples. Distance and open-store filters
 remain unavailable without live location or merchant hours.
 Tests cover the demo flows, responsive layouts, typography, and social artwork.
+Home's area label opens `/location`, an illustrative local area selector. It
+does not request device location, display live map tiles, or filter food by
+distance. Selecting an example area changes only the Home header label for the current app session; it survives Home tab navigation and selector reopening without persistence.
 
 Retained infrastructure: `app/android/`, Flutter/Dart package manifest and
 lockfile, strict analyzer/DCL/Dartrics rules, pinned development tool versions,

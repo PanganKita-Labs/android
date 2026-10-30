@@ -16,10 +16,24 @@ const _categoryLabelGap = 6.0;
 const _categoryFontSize = 9.0;
 const _nearbySectionGap = 12.0;
 
+void _ignoreAreaChange(String area) {
+  if (area.isEmpty) throw ArgumentError.value(area, 'area');
+}
+
 /// Searchable local reference feed with category filtering.
 class HomePage extends StatefulWidget {
   /// Creates the demo feed.
-  const new({super.key});
+  const new({
+    this.initialLocation = 'Mandala by Pass, Medan',
+    this.onLocationChanged = _ignoreAreaChange,
+    super.key,
+  });
+
+  /// The example area selected for this app session.
+  final String initialLocation;
+
+  /// Reports an area change to the app-session owner.
+  final ValueChanged<String> onLocationChanged;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -28,6 +42,25 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String _query = '';
   String _category = 'Semua';
+  String _location = 'Mandala by Pass, Medan';
+
+  @override
+  void initState() {
+    super.initState();
+    _location = widget.initialLocation;
+  }
+
+  Future<void> _chooseLocation() async {
+    final selected = await Navigator.pushNamed(
+      context,
+      AppRoutes.location,
+      arguments: _location,
+    );
+    if (mounted && selected is String) {
+      setState(() => _location = selected);
+      widget.onLocationChanged(selected);
+    }
+  }
 
   void _selectCategory(String category) => setState(() => _category = category);
 
@@ -71,7 +104,10 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(23, 12, 23, 37),
           children: [
-            const HomeHeader(),
+            HomeHeader(
+              location: _location,
+              onLocationTap: () => unawaited(_chooseLocation()),
+            ),
             const SizedBox(height: 14),
             _HomeSearch(
               onChanged: (value) => setState(() => _query = value),

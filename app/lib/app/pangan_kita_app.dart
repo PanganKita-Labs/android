@@ -7,6 +7,7 @@ import 'package:pangankita/features/discovery/checkout_page.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
+import 'package:pangankita/features/discovery/location_selection_page.dart';
 import 'package:pangankita/features/discovery/nearby_stores_page.dart';
 import 'package:pangankita/features/discovery/notifications_page.dart';
 import 'package:pangankita/features/discovery/orders_page.dart';
@@ -31,6 +32,7 @@ class PanganKitaApp extends StatefulWidget {
 
 class _PanganKitaAppState extends State<PanganKitaApp> {
   final _cart = DemoCart();
+  String _selectedArea = 'Mandala by Pass, Medan';
 
   @override
   void dispose() {
@@ -53,7 +55,15 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.recover: (context) => const OtpPage(recovery: true),
       AppRoutes.password: (context) => const AuthPage.password(),
       AppRoutes.success: (context) => const PasswordSuccessPage(),
-      AppRoutes.home: (context) => const HomePage(),
+      AppRoutes.home: (context) => HomePage(
+        initialLocation: _selectedArea,
+        onLocationChanged: (area) => setState(() => _selectedArea = area),
+      ),
+      AppRoutes.location: (context) => LocationSelectionPage(
+        initialArea:
+            ModalRoute.of(context)?.settings.arguments as String? ??
+            _selectedArea,
+      ),
       AppRoutes.search: (context) => SearchPage(
         initialQuery:
             ModalRoute.of(context)?.settings.arguments as String? ?? '',
