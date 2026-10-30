@@ -12,6 +12,7 @@ import 'package:pangankita/features/discovery/notifications_page.dart';
 import 'package:pangankita/features/discovery/orders_page.dart';
 import 'package:pangankita/features/discovery/payment_status_page.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
+import 'package:pangankita/features/discovery/search_page.dart';
 import 'package:pangankita/features/discovery/store_detail_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
@@ -53,6 +54,10 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.password: (context) => const AuthPage.password(),
       AppRoutes.success: (context) => const PasswordSuccessPage(),
       AppRoutes.home: (context) => const HomePage(),
+      AppRoutes.search: (context) => SearchPage(
+        initialQuery:
+            ModalRoute.of(context)?.settings.arguments as String? ?? '',
+      ),
       AppRoutes.nearbyStores: (context) => const NearbyStoresPage(),
       AppRoutes.orders: (context) => const OrdersPage(),
       AppRoutes.chat: (context) => const ChatPage(),
@@ -63,6 +68,8 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       for (final food in DemoFood.examples)
         AppRoutes.product(food.id): (context) =>
             ProductDetailPage(food: food, cart: _cart),
+      AppRoutes.product(DemoFood.garlicBread.id): (context) =>
+          ProductDetailPage(food: DemoFood.garlicBread, cart: _cart),
       for (final food in DemoFood.examples)
         AppRoutes.store(food.id): (context) =>
             StoreDetailPage(food: food, cart: _cart),
