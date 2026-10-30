@@ -51,11 +51,17 @@ abstract final class AppRoutes {
   /// Display-only profile example; no account data is loaded.
   static const profile = '/profile';
 
+  /// Search across local listing examples.
+  static const search = '/search';
+
   /// Selects an illustrative area without device location access.
   static const location = '/location';
 
   /// Display-only nearby merchant examples; no live location is used.
   static const nearbyStores = '/stores/nearby';
+
+  /// Illustrative map of local merchant examples.
+  static const nearbyMap = '/stores/map';
 
   /// Detail for one illustrative merchant; no live store data.
   static String store(String id) => '/stores/$id';
