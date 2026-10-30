@@ -66,6 +66,23 @@ void main() {
     );
   });
 
+  testWidgets('email rejects missing local and domain parts', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(theme: PanganKitaTheme.light, home: const EditProfilePage()),
+    );
+    for (final email in ['abc@', '@example.com', 'abc@example']) {
+      await tester.enterText(find.byType(TextFormField).at(1), email);
+      await tester.scrollUntilVisible(
+        find.text('Simpan Perubahan'),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.tap(find.text('Simpan Perubahan'));
+      await tester.pumpAndSettle();
+      expect(find.text('Masukkan email yang valid.'), findsOneWidget);
+    }
+  });
+
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
     for (final scale in [1.0, 1.6]) {
       testWidgets('edit profile fits $width at scale $scale', (tester) async {

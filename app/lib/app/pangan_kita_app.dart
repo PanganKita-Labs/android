@@ -6,6 +6,7 @@ import 'package:pangankita/features/discovery/chat_page.dart';
 import 'package:pangankita/features/discovery/checkout_page.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
+import 'package:pangankita/features/discovery/directions_page.dart';
 import 'package:pangankita/features/discovery/edit_profile_page.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/discovery/location_selection_page.dart';
@@ -35,11 +36,12 @@ class PanganKitaApp extends StatefulWidget {
 
 class _PanganKitaAppState extends State<PanganKitaApp> {
   final _cart = DemoCart();
-  String _selectedArea = 'Mandala by Pass, Medan';
+  final _selectedArea = ValueNotifier<String>('Mandala by Pass, Medan');
 
   @override
   void dispose() {
     _cart.dispose();
+    _selectedArea.dispose();
     super.dispose();
   }
 
@@ -58,16 +60,22 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.recover: (context) => const OtpPage(recovery: true),
       AppRoutes.password: (context) => const AuthPage.password(),
       AppRoutes.success: (context) => const PasswordSuccessPage(),
-      AppRoutes.home: (context) => HomePage(
-        initialLocation: _selectedArea,
-        onLocationChanged: (area) => setState(() => _selectedArea = area),
+      AppRoutes.home: (context) => ValueListenableBuilder<String>(
+        valueListenable: _selectedArea,
+        builder: (context, area, child) => HomePage(
+          initialLocation: area,
+          onLocationChanged: (selected) => _selectedArea.value = selected,
+        ),
       ),
-      AppRoutes.profile: (context) => const ProfilePage(),
+      AppRoutes.profile: (context) => ProfilePage(
+        initialLocation: _selectedArea.value,
+        onLocationChanged: (area) => _selectedArea.value = area,
+      ),
       AppRoutes.editProfile: (context) => const EditProfilePage(),
       AppRoutes.location: (context) => LocationSelectionPage(
         initialArea:
             ModalRoute.of(context)?.settings.arguments as String? ??
-            _selectedArea,
+            _selectedArea.value,
       ),
       AppRoutes.search: (context) => SearchPage(
         initialQuery:
@@ -86,6 +94,8 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
             ProductDetailPage(food: food, cart: _cart),
       AppRoutes.product(DemoFood.garlicBread.id): (context) =>
           ProductDetailPage(food: DemoFood.garlicBread, cart: _cart),
+      for (final food in DemoFood.examples)
+        AppRoutes.directions(food.id): (context) => DirectionsPage(food: food),
       for (final food in DemoFood.examples)
         AppRoutes.store(food.id): (context) =>
             StoreDetailPage(food: food, cart: _cart),

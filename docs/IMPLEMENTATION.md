@@ -60,6 +60,9 @@ are not live data; unsupported actions show unavailable feedback.
 The list's Lihat Peta action opens `/stores/map`, an illustrative map with
 selectable example merchant pins and a link to the existing store detail. Pin
 positions are fixed artwork, not device coordinates or live distance data.
+The merchant sheet also opens `/stores/<id>/directions`, an illustrative route
+with local travel-mode selection. Origin, route, distance, and travel time are
+not live; opening an external map remains unavailable.
 Selecting a merchant opens a display-only store detail. Mawar shows two sample
 products and generated bakery preview photos. The add button changes only the
 session cart; reviews, map, and merchant data are not connected to a service.
@@ -69,8 +72,9 @@ are display-only; no messages or chat state are fetched or exchanged. Tapping
 a conversation gives unavailable feedback.
 The Home avatar opens `/profile`, a display-only example matching the first
 account-design panel. Its name, email, and photo are sample data. Order history
-and area selection open existing previews; other account actions report that
-they are unavailable. No account record is loaded or changed.
+and area selection open existing previews; confirming an example area from
+Profile updates the Home area for the current app session. Other account actions
+report that they are unavailable. No account record is loaded or changed.
 The Edit Profil action opens `/profile/edit`, a local form preview based on the
 second account-design panel. Input stays in the widget only and is discarded on
 leaving; photo and password actions are unavailable, and save gives explicit

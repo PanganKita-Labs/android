@@ -389,6 +389,15 @@ class _MapStoreSheet extends StatelessWidget {
           ),
           _MapStoreSummary(food: food),
           const SizedBox(height: 14),
+          OutlinedButton.icon(
+            onPressed: () => Navigator.pushNamed(
+              context,
+              AppRoutes.directions(food.id),
+            ).ignore(),
+            icon: const Icon(Icons.directions_outlined),
+            label: const Text('Petunjuk Arah'),
+          ),
+          const SizedBox(height: 8),
           FilledButton(
             style: FilledButton.styleFrom(
               backgroundColor: PanganKitaColors.brandPrimaryStrong,
