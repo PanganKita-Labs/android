@@ -34,8 +34,9 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               IconButton(
-                tooltip: 'Pengaturan belum tersedia',
-                onPressed: () => DemoNotice.unavailable(context),
+                tooltip: 'Buka Pengaturan',
+                onPressed: () =>
+                    Navigator.pushNamed(context, AppRoutes.settings).ignore(),
                 icon: const Icon(Icons.settings_outlined, color: _profileInk),
               ),
             ],
@@ -113,7 +114,7 @@ class ProfilePage extends StatelessWidget {
               _ProfileItem(
                 Icons.settings_outlined,
                 'Pengaturan',
-                () => DemoNotice.unavailable(context),
+                () => Navigator.pushNamed(context, AppRoutes.settings).ignore(),
               ),
               _ProfileItem(
                 Icons.help_outline,

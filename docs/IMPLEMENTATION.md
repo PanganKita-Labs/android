@@ -75,6 +75,10 @@ The Edit Profil action opens `/profile/edit`, a local form preview based on the
 second account-design panel. Input stays in the widget only and is discarded on
 leaving; photo and password actions are unavailable, and save gives explicit
 feedback that no account was updated.
+Both Pengaturan actions open `/profile/settings`, matching the third account
+design panel. Notification switches change only local widget state and reset
+when the page closes. No push preference, account setting, legal document, or
+support service is connected; unavailable links show local feedback.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.
