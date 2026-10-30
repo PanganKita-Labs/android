@@ -69,6 +69,9 @@ abstract final class AppRoutes {
   /// Illustrative map of local merchant examples.
   static const nearbyMap = '/stores/map';
 
+  /// Illustrative directions to one example merchant.
+  static String directions(String id) => '/stores/$id/directions';
+
   /// Detail for one illustrative merchant; no live store data.
   static String store(String id) => '/stores/$id';
 }

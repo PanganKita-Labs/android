@@ -25,6 +25,10 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(SettingsPage), findsOneWidget);
     expect(
+      find.text('Pengaturan notifikasi hanya contoh dan tidak disimpan.'),
+      findsOneWidget,
+    );
+    expect(
       tester.widget<SwitchListTile>(find.byType(SwitchListTile).at(2)).value,
       isFalse,
     );

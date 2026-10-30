@@ -45,6 +45,11 @@ class SettingsPage extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           const _SectionTitle('Notifikasi'),
+          const SizedBox(height: 6),
+          Text(
+            'Pengaturan notifikasi hanya contoh dan tidak disimpan.',
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
           const SizedBox(height: 10),
           const _NotificationCard(),
           const SizedBox(height: 30),

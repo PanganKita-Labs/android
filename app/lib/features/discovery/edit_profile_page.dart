@@ -17,6 +17,7 @@ const _focusedFieldBorder = OutlineInputBorder(
   borderRadius: BorderRadius.all(Radius.circular(9)),
   borderSide: BorderSide(color: PanganKitaColors.brandPrimaryStrong),
 );
+final _emailShape = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
 
 /// Local edit-form preview; no account data is loaded or saved.
 class EditProfilePage extends StatefulWidget {
@@ -169,8 +170,7 @@ class _ProfileFields extends StatelessWidget {
         initialValue: 'vincent@example.com',
         keyboardType: TextInputType.emailAddress,
         decoration: const InputDecoration(hintText: 'Email contoh'),
-        validator: (value) =>
-            value == null || !value.contains('@') || value.contains(' ')
+        validator: (value) => value == null || !_emailShape.hasMatch(value)
             ? 'Masukkan email yang valid.'
             : null,
       ),
