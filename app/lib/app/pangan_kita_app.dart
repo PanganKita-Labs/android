@@ -6,6 +6,7 @@ import 'package:pangankita/features/discovery/chat_page.dart';
 import 'package:pangankita/features/discovery/checkout_page.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
+import 'package:pangankita/features/discovery/edit_profile_page.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/discovery/location_selection_page.dart';
 import 'package:pangankita/features/discovery/nearby_map_page.dart';
@@ -62,6 +63,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
         onLocationChanged: (area) => setState(() => _selectedArea = area),
       ),
       AppRoutes.profile: (context) => const ProfilePage(),
+      AppRoutes.editProfile: (context) => const EditProfilePage(),
       AppRoutes.location: (context) => LocationSelectionPage(
         initialArea:
             ModalRoute.of(context)?.settings.arguments as String? ??

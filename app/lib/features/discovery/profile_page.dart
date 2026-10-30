@@ -62,7 +62,8 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 14),
           Center(
             child: OutlinedButton.icon(
-              onPressed: () => DemoNotice.unavailable(context),
+              onPressed: () =>
+                  Navigator.pushNamed(context, AppRoutes.editProfile).ignore(),
               icon: const Icon(Icons.edit_outlined),
               label: const Text('Edit Profil'),
             ),
