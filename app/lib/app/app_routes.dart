@@ -48,6 +48,12 @@ abstract final class AppRoutes {
   /// Local food examples.
   static const home = '/home';
 
+  /// Search across local listing examples.
+  static const search = '/search';
+
+  /// Selects an illustrative area without device location access.
+  static const location = '/location';
+
   /// Display-only nearby merchant examples; no live location is used.
   static const nearbyStores = '/stores/nearby';
 

@@ -4,10 +4,16 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/reference_icon.dart';
 
-/// Reference greeting and static example location; no geolocation is collected.
+/// Reference greeting and selected example area; no geolocation is collected.
 class HomeHeader extends StatelessWidget {
   /// Creates the demo header.
-  const new({super.key});
+  const new({required this.location, required this.onLocationTap, super.key});
+
+  /// Area selected in the local preview.
+  final String location;
+
+  /// Opens the local area selector.
+  final VoidCallback onLocationTap;
 
   @override
   Widget build(BuildContext context) => Row(
@@ -17,11 +23,11 @@ class HomeHeader extends StatelessWidget {
         radius: 22,
         backgroundImage: AssetImage('assets/prototype/avatar.webp'),
       ),
-      const Expanded(
+      Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text.rich(
+            const Text.rich(
               TextSpan(
                 text: 'Selamat Pagi, ',
                 children: [
@@ -39,18 +45,27 @@ class HomeHeader extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 3),
-            Row(
-              spacing: PanganKitaSpacing.xs,
-              children: [
-                ReferenceIcon('pin', size: 13),
-                Expanded(
-                  child: Text(
-                    'Mandala by Pass, Medan',
-                    style: TextStyle(fontSize: 11, height: 1.3),
+            const SizedBox(height: 3),
+            Tooltip(
+              message: 'Pilih lokasi',
+              child: InkWell(
+                onTap: onLocationTap,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    spacing: PanganKitaSpacing.xs,
+                    children: [
+                      const ReferenceIcon('pin', size: 13),
+                      Expanded(
+                        child: Text(
+                          location,
+                          style: const TextStyle(fontSize: 11, height: 1.3),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
           ],
         ),
