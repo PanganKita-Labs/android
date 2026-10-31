@@ -7,6 +7,8 @@ import 'package:pangankita/features/discovery/checkout_page.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/directions_page.dart';
+import 'package:pangankita/features/discovery/edit_profile_page.dart';
+import 'package:pangankita/features/discovery/favorites_page.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/discovery/location_selection_page.dart';
 import 'package:pangankita/features/discovery/nearby_map_page.dart';
@@ -15,7 +17,9 @@ import 'package:pangankita/features/discovery/notifications_page.dart';
 import 'package:pangankita/features/discovery/orders_page.dart';
 import 'package:pangankita/features/discovery/payment_status_page.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
+import 'package:pangankita/features/discovery/profile_page.dart';
 import 'package:pangankita/features/discovery/search_page.dart';
+import 'package:pangankita/features/discovery/settings_page.dart';
 import 'package:pangankita/features/discovery/store_detail_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
@@ -34,11 +38,12 @@ class PanganKitaApp extends StatefulWidget {
 
 class _PanganKitaAppState extends State<PanganKitaApp> {
   final _cart = DemoCart();
-  String _selectedArea = 'Mandala by Pass, Medan';
+  final _selectedArea = ValueNotifier<String>('Mandala by Pass, Medan');
 
   @override
   void dispose() {
     _cart.dispose();
+    _selectedArea.dispose();
     super.dispose();
   }
 
@@ -57,14 +62,24 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.recover: (context) => const OtpPage(recovery: true),
       AppRoutes.password: (context) => const AuthPage.password(),
       AppRoutes.success: (context) => const PasswordSuccessPage(),
-      AppRoutes.home: (context) => HomePage(
-        initialLocation: _selectedArea,
-        onLocationChanged: (area) => setState(() => _selectedArea = area),
+      AppRoutes.home: (context) => ValueListenableBuilder<String>(
+        valueListenable: _selectedArea,
+        builder: (context, area, child) => HomePage(
+          initialLocation: area,
+          onLocationChanged: (selected) => _selectedArea.value = selected,
+        ),
       ),
+      AppRoutes.profile: (context) => ProfilePage(
+        initialLocation: _selectedArea.value,
+        onLocationChanged: (area) => _selectedArea.value = area,
+      ),
+      AppRoutes.editProfile: (context) => const EditProfilePage(),
+      AppRoutes.settings: (context) => const SettingsPage(),
+      AppRoutes.favorites: (context) => const FavoritesPage(),
       AppRoutes.location: (context) => LocationSelectionPage(
         initialArea:
             ModalRoute.of(context)?.settings.arguments as String? ??
-            _selectedArea,
+            _selectedArea.value,
       ),
       AppRoutes.search: (context) => SearchPage(
         initialQuery:
