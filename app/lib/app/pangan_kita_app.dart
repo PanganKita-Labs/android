@@ -24,6 +24,7 @@ import 'package:pangankita/features/discovery/store_detail_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
 import 'package:pangankita/features/onboarding/password_success_page.dart';
+import 'package:pangankita/features/onboarding/recovery_page.dart';
 import 'package:pangankita/features/onboarding/splash_page.dart';
 import 'package:pangankita/features/onboarding/welcome_page.dart';
 
@@ -59,7 +60,8 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.login: (context) => const AuthPage.login(),
       AppRoutes.register: (context) => const AuthPage.register(),
       AppRoutes.verify: (context) => const OtpPage(),
-      AppRoutes.recover: (context) => const OtpPage(recovery: true),
+      AppRoutes.recover: (context) => const RecoveryPage(),
+      AppRoutes.recoverOtp: (context) => const OtpPage(recovery: true),
       AppRoutes.password: (context) => const AuthPage.password(),
       AppRoutes.success: (context) => const PasswordSuccessPage(),
       AppRoutes.home: (context) => ValueListenableBuilder<String>(

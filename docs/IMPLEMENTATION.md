@@ -87,6 +87,9 @@ Favorit Saya opens `/profile/favorites`, a local preview of the first panel in
 the favorites design. The food and store examples are seeded for display; heart
 removal and tab selection last only while this page is open. They do not read or
 save account favorites, and the sample prices and availability are not live.
+The login recovery link opens `/recover`, an email-entry preview matching the
+middle panel of the favorites/recovery design. A valid email advances to the
+existing demo OTP route; no email or code is sent, and no account is recovered.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.

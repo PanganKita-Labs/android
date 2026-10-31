@@ -15,8 +15,11 @@ abstract final class AppRoutes {
   /// Demo registration verification.
   static const verify = '/verify';
 
-  /// Demo recovery verification.
+  /// Demo recovery email form.
   static const recover = '/recover';
+
+  /// Demo recovery verification; no code is sent.
+  static const recoverOtp = '/recover/verify';
 
   /// Demo password replacement.
   static const password = '/password';
