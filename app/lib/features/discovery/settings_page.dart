@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
@@ -68,7 +69,11 @@ class SettingsPage extends StatelessWidget {
             rows: [
               _SettingsRow(Icons.description_outlined, 'Syarat & Ketentuan'),
               _SettingsRow(Icons.verified_user_outlined, 'Kebijakan Privasi'),
-              _SettingsRow(Icons.help_outline, 'Pusat Bantuan'),
+              _SettingsRow(
+                Icons.help_outline,
+                'Pusat Bantuan',
+                route: AppRoutes.support,
+              ),
             ],
           ),
           const SizedBox(height: 22),
@@ -161,11 +166,12 @@ class _NotificationCardState extends State<_NotificationCard> {
 }
 
 class _SettingsRow {
-  const new(this.icon, this.label, {this.detail});
+  const new(this.icon, this.label, {this.detail, this.route});
 
   final IconData icon;
   final String label;
   final String? detail;
+  final String? route;
 }
 
 class _SettingsCard extends StatelessWidget {
@@ -206,7 +212,13 @@ class _SettingsCard extends StatelessWidget {
                   const Icon(Icons.chevron_right),
                 ],
               ),
-              onTap: () => DemoNotice.unavailable(context),
+              onTap: () => switch (rows[index].route) {
+                final String route => Navigator.pushNamed(
+                  context,
+                  route,
+                ).ignore(),
+                null => DemoNotice.unavailable(context),
+              },
             ),
           ],
         ],

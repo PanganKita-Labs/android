@@ -90,6 +90,11 @@ save account favorites, and the sample prices and availability are not live.
 The login recovery link opens `/recover`, an email-entry preview matching the
 middle panel of the favorites/recovery design. A valid email advances to the
 existing demo OTP route; no email or code is sent, and no account is recovered.
+Both Pusat Bantuan entries open `/profile/support`, a display-only example of
+the support conversation panel. The product photo, order status, messages, and
+timestamps are illustrative.
+Suggested prompts fill only the local text field; send and attachment actions
+do not contact customer service or save a conversation.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.

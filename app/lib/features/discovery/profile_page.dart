@@ -145,7 +145,7 @@ class ProfilePage extends StatelessWidget {
               _ProfileItem(
                 Icons.help_outline,
                 'Pusat Bantuan',
-                () => DemoNotice.unavailable(context),
+                () => Navigator.pushNamed(context, AppRoutes.support).ignore(),
               ),
             ],
           ),

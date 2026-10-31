@@ -21,6 +21,7 @@ import 'package:pangankita/features/discovery/profile_page.dart';
 import 'package:pangankita/features/discovery/search_page.dart';
 import 'package:pangankita/features/discovery/settings_page.dart';
 import 'package:pangankita/features/discovery/store_detail_page.dart';
+import 'package:pangankita/features/discovery/support_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
 import 'package:pangankita/features/onboarding/password_success_page.dart';
@@ -78,6 +79,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.editProfile: (context) => const EditProfilePage(),
       AppRoutes.settings: (context) => const SettingsPage(),
       AppRoutes.favorites: (context) => const FavoritesPage(),
+      AppRoutes.support: (context) => const SupportPage(),
       AppRoutes.location: (context) => LocationSelectionPage(
         initialArea:
             ModalRoute.of(context)?.settings.arguments as String? ??
