@@ -11,6 +11,7 @@ import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/auth_validation.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
 import 'package:pangankita/features/onboarding/password_success_page.dart';
+import 'package:pangankita/features/onboarding/recovery_page.dart';
 import 'package:pangankita/features/onboarding/splash_page.dart';
 import 'package:pangankita/features/onboarding/welcome_page.dart';
 
@@ -144,6 +145,16 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Lupa Password?'));
     await tester.pumpAndSettle();
+    expect(find.text('Lupa Password?'), findsOneWidget);
+    await tester.tap(find.text('Kirim Kode OTP'));
+    await tester.pumpAndSettle();
+    expect(find.text('Kolom wajib diisi.'), findsOneWidget);
+    await tester.enterText(
+      find.byType(TextFormField).first,
+      'vincent@example.com',
+    );
+    await tester.tap(find.text('Kirim Kode OTP'));
+    await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField).first, '5102');
     await tester.tap(find.text('Verifikasi'));
     await tester.pumpAndSettle();
@@ -230,6 +241,7 @@ void main() {
           const WelcomePage(),
           const AuthPage.login(),
           const AuthPage.register(),
+          const RecoveryPage(),
           const OtpPage(),
           const AuthPage.password(),
           const PasswordSuccessPage(),
