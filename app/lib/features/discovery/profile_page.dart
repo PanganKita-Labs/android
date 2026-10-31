@@ -129,7 +129,8 @@ class ProfilePage extends StatelessWidget {
               _ProfileItem(
                 Icons.favorite_border,
                 'Favorit Saya',
-                () => DemoNotice.unavailable(context),
+                () =>
+                    Navigator.pushNamed(context, AppRoutes.favorites).ignore(),
               ),
               _ProfileItem(
                 Icons.location_on_outlined,

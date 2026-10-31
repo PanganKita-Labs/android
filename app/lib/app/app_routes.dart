@@ -57,6 +57,9 @@ abstract final class AppRoutes {
   /// Local account-settings preview without saved preferences.
   static const settings = '/profile/settings';
 
+  /// Local example favorites; no saved account preferences.
+  static const favorites = '/profile/favorites';
+
   /// Search across local listing examples.
   static const search = '/search';
 
