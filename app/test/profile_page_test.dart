@@ -32,7 +32,7 @@ void main() {
     expect(find.byType(HomePage), findsOneWidget);
   });
 
-  testWidgets('area selected from Profile updates Home session location', (
+  testWidgets('two Profile area selections update the same Home session', (
     tester,
   ) async {
     await tester.pumpWidget(const PanganKitaApp());
@@ -72,6 +72,28 @@ void main() {
     await tester.tap(find.text('Medan Tembung'));
     await tester.tap(find.text('Gunakan Lokasi Ini'));
     await tester.pumpAndSettle();
+    expect(find.byType(ProfilePage), findsOneWidget);
+    await tester.tap(find.text('Lokasi Saya'));
+    await tester.pumpAndSettle();
+    expect(
+      tester
+          .widget<LocationSelectionPage>(find.byType(LocationSelectionPage))
+          .initialArea,
+      'Medan Tembung',
+    );
+    await tester.scrollUntilVisible(
+      find.text('Medan Kota'),
+      180,
+      scrollable: find
+          .descendant(
+            of: find.byType(LocationSelectionPage),
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
+    await tester.tap(find.text('Medan Kota'));
+    await tester.tap(find.text('Gunakan Lokasi Ini'));
+    await tester.pumpAndSettle();
     await tester.scrollUntilVisible(
       find.byTooltip('Kembali ke Beranda'),
       -180,
@@ -84,7 +106,7 @@ void main() {
     );
     await tester.tap(find.byTooltip('Kembali ke Beranda'));
     await tester.pumpAndSettle();
-    expect(find.text('Medan Tembung'), findsOneWidget);
+    expect(find.text('Medan Kota'), findsOneWidget);
   });
 
   for (final width in [320.0, 360.0, 390.0, 412.0]) {

@@ -73,8 +73,10 @@ a conversation gives unavailable feedback.
 The Home avatar opens `/profile`, a display-only example matching the first
 account-design panel. Its name, email, and photo are sample data. Order history
 and area selection open existing previews; confirming an example area from
-Profile updates the Home area for the current app session. Other account actions
-report that they are unavailable. No account record is loaded or changed.
+Profile updates the Home area for the current app session. Reopening the area
+selector from the same Profile page reads that latest session value. Other
+account actions report that they are unavailable. No account record is loaded
+or changed.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.
