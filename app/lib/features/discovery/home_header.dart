@@ -19,9 +19,16 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     spacing: PanganKitaSpacing.sm,
     children: [
-      const CircleAvatar(
-        radius: 22,
-        backgroundImage: AssetImage('assets/prototype/avatar.webp'),
+      InkWell(
+        onTap: () => Navigator.pushNamed(context, AppRoutes.profile).ignore(),
+        customBorder: const CircleBorder(),
+        child: const Tooltip(
+          message: 'Buka profil contoh',
+          child: CircleAvatar(
+            radius: 22,
+            backgroundImage: AssetImage('assets/prototype/avatar.webp'),
+          ),
+        ),
       ),
       Expanded(
         child: Column(

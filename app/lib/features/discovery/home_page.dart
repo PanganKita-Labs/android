@@ -50,6 +50,14 @@ class _HomePageState extends State<HomePage> {
     _location = widget.initialLocation;
   }
 
+  @override
+  void didUpdateWidget(covariant HomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialLocation != widget.initialLocation) {
+      _location = widget.initialLocation;
+    }
+  }
+
   Future<void> _chooseLocation() async {
     final selected = await Navigator.pushNamed(
       context,
