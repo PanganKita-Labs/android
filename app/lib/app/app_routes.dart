@@ -15,10 +15,10 @@ abstract final class AppRoutes {
   /// Demo registration verification.
   static const verify = '/verify';
 
-  /// Demo recovery email form.
+  /// Demo recovery verification.
   static const recover = '/recover';
 
-  /// Demo recovery verification; no code is sent.
+  /// Recovery OTP preview.
   static const recoverOtp = '/recover/verify';
 
   /// Demo password replacement.
@@ -57,10 +57,10 @@ abstract final class AppRoutes {
   /// Local edit-form preview; changes are not saved to an account.
   static const editProfile = '/profile/edit';
 
-  /// Local account-settings preview without saved preferences.
+  /// Local settings preview without persistence.
   static const settings = '/profile/settings';
 
-  /// Local example favorites; no saved account preferences.
+  /// Local favorites example without persistence.
   static const favorites = '/profile/favorites';
 
   /// Display-only customer support conversation example.

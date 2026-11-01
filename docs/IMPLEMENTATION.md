@@ -75,26 +75,11 @@ account-design panel. Its name, email, and photo are sample data. Order history
 and area selection open existing previews; confirming an example area from
 Profile updates the Home area for the current app session. Other account actions
 report that they are unavailable. No account record is loaded or changed.
-The Edit Profil action opens `/profile/edit`, a local form preview based on the
-second account-design panel. Input stays in the widget only and is discarded on
-leaving; photo and password actions are unavailable, and save gives explicit
-feedback that no account was updated.
-Both Pengaturan actions open `/profile/settings`, matching the third account
-design panel. Notification switches change only local widget state and reset
-when the page closes. No push preference, account setting, legal document, or
-support service is connected; unavailable links show local feedback.
-Favorit Saya opens `/profile/favorites`, a local preview of the first panel in
-the favorites design. The food and store examples are seeded for display; heart
-removal and tab selection last only while this page is open. They do not read or
-save account favorites, and the sample prices and availability are not live.
-The login recovery link opens `/recover`, an email-entry preview matching the
-middle panel of the favorites/recovery design. A valid email advances to the
-existing demo OTP route; no email or code is sent, and no account is recovered.
+Edit Profil opens /profile/edit, an illustrative form. Inputs are not saved.
 Both Pusat Bantuan entries open `/profile/support`, a display-only example of
 the support conversation panel. The product photo, order status, messages, and
-timestamps are illustrative.
-Suggested prompts fill only the local text field; send and attachment actions
-do not contact customer service or save a conversation.
+timestamps are illustrative. Suggested prompts fill only the local text field;
+send and attachment actions do not contact customer service or save a conversation.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.
@@ -173,3 +158,9 @@ lasting repository instructions.
 Review the full diff before staging. Commit or push only with explicit user
 authorization and after required validation. Keep external screenshots/HTML
 out of Git. Follow `.github/PULL_REQUEST_TEMPLATE.md` for every PR.
+
+Pengaturan opens /profile/settings. Notification switches are examples and are not persisted.
+
+Favorit Saya opens /profile/favorites. Favorites are illustrative and are not saved.
+
+Recovery email opens /recover and the example OTP screen; no email is sent.
