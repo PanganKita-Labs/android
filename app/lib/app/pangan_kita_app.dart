@@ -8,6 +8,7 @@ import 'package:pangankita/features/discovery/demo_cart.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/directions_page.dart';
 import 'package:pangankita/features/discovery/edit_profile_page.dart';
+import 'package:pangankita/features/discovery/favorites_page.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/discovery/location_selection_page.dart';
 import 'package:pangankita/features/discovery/nearby_map_page.dart';
@@ -74,6 +75,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       ),
       AppRoutes.editProfile: (context) => const EditProfilePage(),
       AppRoutes.settings: (context) => const SettingsPage(),
+      AppRoutes.favorites: (context) => const FavoritesPage(),
       AppRoutes.location: (context) => LocationSelectionPage(
         initialArea:
             ModalRoute.of(context)?.settings.arguments as String? ??

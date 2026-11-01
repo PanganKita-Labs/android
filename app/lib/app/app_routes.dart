@@ -57,6 +57,9 @@ abstract final class AppRoutes {
   /// Local settings preview without persistence.
   static const settings = '/profile/settings';
 
+  /// Local favorites example without persistence.
+  static const favorites = '/profile/favorites';
+
   /// Search across local listing examples.
   static const search = '/search';
 
