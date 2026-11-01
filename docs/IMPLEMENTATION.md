@@ -51,8 +51,12 @@ codes remain unavailable. The completed tab follows the supplied screenshot
 with two labeled sample cards and unavailable pickup/review history; the
 canceled tab follows its supplied screenshot with one labeled sample card,
 an unavailable cancellation reason, and a return-to-discovery action. Order search,
-merchant chat, and order details give unavailable feedback. Checkout does not
+merchant chat and completed/canceled order details give unavailable feedback. Checkout does not
 add entries to these tabs because it creates no order.
+The active card's Detail Pesanan button opens `/orders/detail` with its selected
+example product. Status, pickup code, payment method, and actual pickup time
+remain unavailable; the displayed price and pickup deadline are examples.
+The help action remains unavailable. No order state is created or changed.
 Unavailable integrations show feedback rather than performing remote actions.
 The Home merchant banner opens `/stores/nearby`, a searchable display-only list
 of four example merchants. Proximity, ratings, discounts, map, and opening hours
