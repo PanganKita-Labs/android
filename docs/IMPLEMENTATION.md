@@ -154,3 +154,5 @@ lasting repository instructions.
 Review the full diff before staging. Commit or push only with explicit user
 authorization and after required validation. Keep external screenshots/HTML
 out of Git. Follow `.github/PULL_REQUEST_TEMPLATE.md` for every PR.
+
+Pengaturan opens /profile/settings. Notification switches are examples and are not persisted.

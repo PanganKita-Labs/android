@@ -18,6 +18,7 @@ import 'package:pangankita/features/discovery/payment_status_page.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
 import 'package:pangankita/features/discovery/profile_page.dart';
 import 'package:pangankita/features/discovery/search_page.dart';
+import 'package:pangankita/features/discovery/settings_page.dart';
 import 'package:pangankita/features/discovery/store_detail_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
@@ -72,6 +73,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
         onLocationChanged: (area) => _selectedArea.value = area,
       ),
       AppRoutes.editProfile: (context) => const EditProfilePage(),
+      AppRoutes.settings: (context) => const SettingsPage(),
       AppRoutes.location: (context) => LocationSelectionPage(
         initialArea:
             ModalRoute.of(context)?.settings.arguments as String? ??

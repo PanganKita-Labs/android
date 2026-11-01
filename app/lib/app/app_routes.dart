@@ -54,6 +54,9 @@ abstract final class AppRoutes {
   /// Local edit-form preview; changes are not saved to an account.
   static const editProfile = '/profile/edit';
 
+  /// Local settings preview without persistence.
+  static const settings = '/profile/settings';
+
   /// Search across local listing examples.
   static const search = '/search';
 
