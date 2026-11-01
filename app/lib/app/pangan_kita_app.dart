@@ -72,7 +72,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
         ),
       ),
       AppRoutes.profile: (context) => ProfilePage(
-        initialLocation: _selectedArea.value,
+        readLocation: () => _selectedArea.value,
         onLocationChanged: (area) => _selectedArea.value = area,
       ),
       AppRoutes.editProfile: (context) => const EditProfilePage(),
