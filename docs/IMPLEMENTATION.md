@@ -75,6 +75,7 @@ account-design panel. Its name, email, and photo are sample data. Order history
 and area selection open existing previews; confirming an example area from
 Profile updates the Home area for the current app session. Other account actions
 report that they are unavailable. No account record is loaded or changed.
+Edit Profil opens /profile/edit, an illustrative form. Inputs are not saved.
 The Notifications bottom tab opens `/notifications`, a filterable, explicitly
 labeled visual preview. Its read markers change only in local widget state;
 there is no push delivery, persisted notification, or actual order event.
