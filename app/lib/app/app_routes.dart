@@ -54,10 +54,10 @@ abstract final class AppRoutes {
   /// Local edit-form preview; changes are not saved to an account.
   static const editProfile = '/profile/edit';
 
-  /// Local account-settings preview without saved preferences.
+  /// Local settings preview without persistence.
   static const settings = '/profile/settings';
 
-  /// Local example favorites; no saved account preferences.
+  /// Local favorites example without persistence.
   static const favorites = '/profile/favorites';
 
   /// Search across local listing examples.
