@@ -18,6 +18,9 @@ abstract final class AppRoutes {
   /// Demo recovery verification.
   static const recover = '/recover';
 
+  /// Recovery OTP preview.
+  static const recoverOtp = '/recover/verify';
+
   /// Demo password replacement.
   static const password = '/password';
 
