@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
-import 'package:pangankita/shared/demo_notice.dart';
+import 'package:pangankita/features/discovery/order_help_sheet.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
 const _ink = Color(0xFF10283C);
@@ -28,8 +28,8 @@ class OrderDetailPage extends StatelessWidget {
       title: const Text('Detail Pesanan'),
       actions: [
         IconButton(
-          tooltip: 'Bantuan pesanan belum tersedia',
-          onPressed: () => DemoNotice.unavailable(context),
+          tooltip: 'Buka Bantuan Pesanan',
+          onPressed: () => OrderHelpSheet.show(context, food: food),
           icon: const Icon(Icons.help_outline),
         ),
       ],
@@ -69,7 +69,7 @@ class OrderDetailPage extends StatelessWidget {
           _PaymentInfoCard(food: food),
           const SizedBox(height: 20),
           OutlinedButton.icon(
-            onPressed: () => DemoNotice.unavailable(context),
+            onPressed: () => OrderHelpSheet.show(context, food: food),
             icon: const Icon(Icons.support_agent_outlined),
             label: const Text('Bantuan Pesanan'),
           ),

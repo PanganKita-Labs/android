@@ -37,12 +37,25 @@ void main() {
     expect(find.text('Mawar Coconut Buns (Isi 5 pcs)'), findsOneWidget);
     expect(find.text('Belum tersedia'), findsWidgets);
     expect(find.text('MWR-028'), findsNothing);
-    await tester.tap(find.byTooltip('Bantuan pesanan belum tersedia'));
+    await tester.tap(find.byTooltip('Buka Bantuan Pesanan'));
+    await tester.pumpAndSettle();
+    expect(find.text('Bantuan Pesanan'), findsWidgets);
+    expect(find.text('ID pesanan belum tersedia'), findsOneWidget);
+    expect(find.textContaining('Pengambilan belum tersedia'), findsOneWidget);
+    await tester.tap(find.text('Pesanan belum siap'));
+    await tester.pumpAndSettle();
+    expect(
+      find.textContaining('Status persiapan belum tersedia'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Hubungi Customer Service'));
     await tester.pump();
     expect(
       find.text('Fitur ini belum tersedia dalam demo offline.'),
       findsOneWidget,
     );
+    await tester.tap(find.byTooltip('Tutup Bantuan Pesanan'));
+    await tester.pumpAndSettle();
     await tester.pageBack();
     await tester.pumpAndSettle();
     expect(find.byType(OrdersPage), findsOneWidget);
@@ -69,6 +82,9 @@ void main() {
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
         await tester.drag(find.byType(ListView), const Offset(0, -1000));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        await tester.tap(find.text('Bantuan Pesanan'));
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
       });
