@@ -108,7 +108,10 @@ repository subtrees unchanged.
 
 The completed cards' Lihat Detail buttons open `/orders/pickup`, a read-only
 example based on the Pengambilan reference. The code and pickup time are
-unavailable; Beri Ulasan gives unavailable feedback until its page exists.
+unavailable. Beri Ulasan on either the completed card or pickup page opens
+`/orders/review`, a local form preview with rating, tags, text, and
+display-name controls. Photo and submit actions give unavailable feedback;
+no review is uploaded or saved.
 
 ## Implementation stages
 
