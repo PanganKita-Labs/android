@@ -66,6 +66,9 @@ abstract final class AppRoutes {
   /// Local favorites example without persistence.
   static const favorites = '/profile/favorites';
 
+  /// Display-only customer support conversation example.
+  static const support = '/profile/support';
+
   /// Search across local listing examples.
   static const search = '/search';
 
