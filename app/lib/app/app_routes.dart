@@ -51,6 +51,9 @@ abstract final class AppRoutes {
   /// Status of the local checkout preview; no payment is created.
   static const paymentStatus = '/checkout/status';
 
+  /// Illustrative success layout; no payment is confirmed.
+  static const paymentSuccessPreview = '/checkout/success-preview';
+
   /// Local food examples.
   static const home = '/home';
 

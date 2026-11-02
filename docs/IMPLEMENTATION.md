@@ -42,6 +42,10 @@ showing that no payment or order exists. The QR, countdown, and order ID areas
 display "belum tersedia" placeholders. No scannable code, live countdown,
 pickup code, or completed-order claim is presented. Back navigation leaves
 the cart intact; the Home action returns to discovery without creating state.
+The payment page also links to `/checkout/success-preview`, a display-only
+example of the success layout. It uses the session cart to show sample merchant,
+items, and total; payment method, status, time, and order ID remain unavailable.
+The cart is not charged or cleared. Its Orders action opens the sample orders tab.
 
 These are demonstration flows: no server accounts, SMS/email, persisted
 passwords, live location, orders, reservations, or payments are implemented.
