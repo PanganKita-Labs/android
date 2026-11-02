@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/canceled_orders_section.dart';
 import 'package:pangankita/features/discovery/completed_orders_section.dart';
@@ -185,7 +186,7 @@ class _OrderExampleCard extends StatelessWidget {
               ),
             ],
           ),
-          const _OrderCardActions(),
+          _OrderCardActions(food: food),
         ],
       ),
     ),
@@ -223,7 +224,9 @@ class _OrderItemSummary extends StatelessWidget {
 }
 
 class _OrderCardActions extends StatelessWidget {
-  const new();
+  const new({required this.food});
+
+  final DemoFood food;
 
   @override
   Widget build(BuildContext context) => Row(
@@ -237,7 +240,11 @@ class _OrderCardActions extends StatelessWidget {
       const SizedBox(width: 10),
       Expanded(
         child: FilledButton(
-          onPressed: () => DemoNotice.unavailable(context),
+          onPressed: () => Navigator.pushNamed(
+            context,
+            AppRoutes.orderDetail,
+            arguments: food,
+          ).ignore(),
           child: const Text(
             'Detail Pesanan',
             textAlign: TextAlign.center,
