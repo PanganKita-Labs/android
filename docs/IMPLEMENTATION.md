@@ -36,6 +36,11 @@ feedback rather than integrations. The review card, add-ons,
 location, prices, and pickup clocks remain explicitly illustrative. There is
 no actual ordering, reservation, payment, or merchant verification.
 
+The payment flow also includes `/checkout/failed-preview`, a display-only
+example based on the unsuccessful-payment design. It shows the session cart
+and general next steps without claiming a failed charge. Retry returns to
+the payment preview; other payment methods remain unavailable.
+
 After the checkout acknowledgement, the demo button opens `/checkout/status`.
 This page follows the middle panel of the payment design while explicitly
 showing that no payment or order exists. The QR, countdown, and order ID areas

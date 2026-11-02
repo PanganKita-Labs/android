@@ -48,6 +48,9 @@ abstract final class AppRoutes {
   /// Display-only notification examples; no push service is connected.
   static const notifications = '/notifications';
 
+  /// Illustrative unsuccessful-payment layout; no attempt is recorded.
+  static const paymentFailedPreview = '/checkout/failed-preview';
+
   /// Status of the local checkout preview; no payment is created.
   static const paymentStatus = '/checkout/status';
 

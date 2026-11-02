@@ -329,6 +329,13 @@ class _PaymentActions extends StatelessWidget {
               ),
               child: const Text('Kembali ke Beranda'),
             ),
+            TextButton(
+              onPressed: () => Navigator.pushNamed<void>(
+                context,
+                AppRoutes.paymentFailedPreview,
+              ),
+              child: const Text('Lihat contoh pembayaran belum berhasil'),
+            ),
           ],
         ),
       ),
