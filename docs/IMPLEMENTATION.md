@@ -56,7 +56,9 @@ add entries to these tabs because it creates no order.
 The active card's Detail Pesanan button opens `/orders/detail` with its selected
 example product. Status, pickup code, payment method, and actual pickup time
 remain unavailable; the displayed price and pickup deadline are examples.
-The help action remains unavailable. No order state is created or changed.
+Both help actions open an illustrative Bantuan Pesanan sheet with expandable
+offline answers. It shows no actual order ID; contacting customer service
+gives unavailable feedback. No order state is created or changed.
 Unavailable integrations show feedback rather than performing remote actions.
 The Home merchant banner opens `/stores/nearby`, a searchable display-only list
 of four example merchants. Proximity, ratings, discounts, map, and opening hours
