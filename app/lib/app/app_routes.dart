@@ -39,9 +39,6 @@ abstract final class AppRoutes {
   /// Local order-screen preview; no order is created by checkout.
   static const orders = '/orders';
 
-  /// Illustrative completed pickup; no pickup is recorded.
-  static const pickup = '/orders/pickup';
-
   /// Display-only chat list; no messages are exchanged.
   static const chat = '/chat';
 
@@ -50,6 +47,9 @@ abstract final class AppRoutes {
 
   /// Status of the local checkout preview; no payment is created.
   static const paymentStatus = '/checkout/status';
+
+  /// Illustrative completed pickup; no pickup is recorded.
+  static const pickup = '/orders/pickup';
 
   /// Local food examples.
   static const home = '/home';

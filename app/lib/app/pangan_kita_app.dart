@@ -93,6 +93,11 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.nearbyStores: (context) => const NearbyStoresPage(),
       AppRoutes.nearbyMap: (context) => const NearbyMapPage(),
       AppRoutes.orders: (context) => const OrdersPage(),
+      AppRoutes.chat: (context) => const ChatPage(),
+      AppRoutes.notifications: (context) => const NotificationsPage(),
+      AppRoutes.cart: (context) => CartPage(cart: _cart),
+      AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),
+      AppRoutes.paymentStatus: (context) => PaymentStatusPage(cart: _cart),
       AppRoutes.pickup: (context) {
         final example = ModalRoute.of(context)?.settings.arguments;
         return example is ({DemoFood food, int quantity})
@@ -101,11 +106,6 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
                 body: Center(child: Text('Contoh pengambilan tidak tersedia.')),
               );
       },
-      AppRoutes.chat: (context) => const ChatPage(),
-      AppRoutes.notifications: (context) => const NotificationsPage(),
-      AppRoutes.cart: (context) => CartPage(cart: _cart),
-      AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),
-      AppRoutes.paymentStatus: (context) => PaymentStatusPage(cart: _cart),
       for (final food in DemoFood.examples)
         AppRoutes.product(food.id): (context) =>
             ProductDetailPage(food: food, cart: _cart),
