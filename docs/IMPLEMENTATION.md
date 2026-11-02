@@ -48,11 +48,14 @@ passwords, live location, orders, reservations, or payments are implemented.
 The Home bottom navigation opens `/orders`, a preview of the supplied active
 orders screen. Its two sample cards are clearly labeled as examples; pickup
 codes remain unavailable. The completed tab follows the supplied screenshot
-with two labeled sample cards and unavailable pickup/review history; the
+with two labeled sample cards and unavailable real pickup/review history; the
 canceled tab follows its supplied screenshot with one labeled sample card,
 an unavailable cancellation reason, and a return-to-discovery action. Order search,
 merchant chat, and order details give unavailable feedback. Checkout does not
 add entries to these tabs because it creates no order.
+The completed cards' Lihat Detail buttons open `/orders/pickup`, a read-only
+example based on the Pengambilan reference. The code and pickup time are
+unavailable; Beri Ulasan gives unavailable feedback until its page exists.
 Unavailable integrations show feedback rather than performing remote actions.
 The Home merchant banner opens `/stores/nearby`, a searchable display-only list
 of four example merchants. Proximity, ratings, discounts, map, and opening hours
