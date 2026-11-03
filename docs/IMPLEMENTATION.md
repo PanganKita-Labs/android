@@ -31,15 +31,17 @@ policy. Checkout displays the user-supplied QRIS logo, not a scannable payment
 code. The artwork came from Zonalogo; the contributor confirmed permission to
 include it in the public repository. Independent rights verification was not
 performed.
-Empty carts cannot continue. Payment/profile/location actions remain demo
-feedback rather than integrations. The review card, add-ons,
+Empty carts cannot continue. The Checkout Ubah action opens a local payment
+method sheet with QRIS as the only illustrative choice. Profile/location
+actions remain demo feedback rather than integrations. The review card, add-ons,
 location, prices, and pickup clocks remain explicitly illustrative. There is
 no actual ordering, reservation, payment, or merchant verification.
 
 The payment flow also includes `/checkout/failed-preview`, a display-only
 example based on the unsuccessful-payment design. It shows the session cart
 and general next steps without claiming a failed charge. Retry returns to
-the payment preview; other payment methods remain unavailable.
+the payment preview. Ganti Metode Pembayaran opens the same QRIS-only sheet;
+other payment methods remain unavailable.
 
 After the checkout acknowledgement, the demo button opens `/checkout/status`.
 This page follows the middle panel of the payment design while explicitly
