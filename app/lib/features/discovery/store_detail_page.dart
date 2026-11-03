@@ -20,6 +20,9 @@ const _tabIndicatorHeight = 3.0;
 const _priceGap = 5.0;
 const _cardTopGap = 10.0;
 
+String _storeCategory(DemoFood food) =>
+    food.id == 'buns' ? 'Roti & Pastry' : food.category;
+
 /// Store preview based on the shopping design, using sample merchant data.
 class StoreDetailPage extends StatefulWidget {
   /// Receives one sample merchant and the app-session cart.
@@ -99,8 +102,10 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
                 food: DemoFood.garlicBread,
                 onAdd: () => _add(DemoFood.garlicBread),
               ),
-          ] else
-            _StoreTabPlaceholder(tab: _tab),
+          ] else if (_tab == 1)
+            _StoreReviews(food: widget.food)
+          else
+            _StoreAbout(food: widget.food),
         ],
       ),
     ),
@@ -173,9 +178,7 @@ class _MerchantSummary extends StatelessWidget {
           children: [
             Text(food.merchant, style: Theme.of(context).textTheme.titleMedium),
             Text(
-              food.id == 'buns'
-                  ? 'Roti & Pastry · contoh'
-                  : '${food.category} · contoh',
+              '${_storeCategory(food)} · contoh',
               style: Theme.of(context).textTheme.bodySmall,
             ),
             Row(
@@ -406,21 +409,65 @@ class _ProductText extends StatelessWidget {
   );
 }
 
-class _StoreTabPlaceholder extends StatelessWidget {
-  const new({required this.tab});
+class _StoreReviews extends StatelessWidget {
+  const new({required this.food});
 
-  final int tab;
+  final DemoFood food;
 
   @override
   Widget build(BuildContext context) => Card(
     margin: const EdgeInsets.all(_inset),
     child: Padding(
-      padding: const EdgeInsets.all(24),
-      child: Text(
-        tab == 1
-            ? 'Ulasan toko belum tersedia.'
-            : 'Informasi tambahan toko belum tersedia.',
-        textAlign: TextAlign.center,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Ulasan toko', style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              const Icon(Icons.star, color: PanganKitaColors.brandAccent),
+              const SizedBox(width: 8),
+              Text(food.rating),
+            ],
+          ),
+          const SizedBox(height: 16),
+          const Text('Rating contoh, belum diverifikasi.'),
+          const SizedBox(height: 8),
+          const Text('Belum ada ulasan toko dalam demo offline.'),
+        ],
+      ),
+    ),
+  );
+}
+
+class _StoreAbout extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Card(
+    margin: const EdgeInsets.all(_inset),
+    child: Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Tentang toko', style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 12),
+          Text(food.merchant, style: Theme.of(context).textTheme.titleSmall),
+          const SizedBox(height: 8),
+          Text('Kategori: ${_storeCategory(food)}'),
+          const SizedBox(height: 8),
+          Text('Lokasi pickup contoh: ${food.pickupAddress}'),
+          const SizedBox(height: 8),
+          Text('Batas pickup contoh: ${food.pickupTime}'),
+          const SizedBox(height: 16),
+          const Text(
+            'Informasi toko ini berasal dari data contoh demo offline.',
+          ),
+        ],
       ),
     ),
   );
