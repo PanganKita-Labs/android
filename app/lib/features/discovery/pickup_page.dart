@@ -151,7 +151,6 @@ class _PickupSummary extends StatelessWidget {
                   ],
                 ),
               ),
-              const Icon(Icons.verified, size: 20, color: _green),
             ],
           ),
           const SizedBox(height: 12),
