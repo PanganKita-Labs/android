@@ -41,6 +41,30 @@ void main() {
     expect(cart.itemCount, 1);
   });
 
+  testWidgets('multi-merchant failed preview shows every merchant', (
+    tester,
+  ) async {
+    final cart = DemoCart();
+    addTearDown(cart.dispose);
+    expect(cart.add(DemoFood.examples[0]), isTrue);
+    expect(cart.add(DemoFood.examples[1]), isTrue);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: PaymentFailedPage(cart: cart),
+      ),
+    );
+    expect(
+      find.text(
+        '${DemoFood.examples[0].merchant}, ${DemoFood.examples[1].merchant}',
+      ),
+      findsOneWidget,
+    );
+    expect(find.text(DemoFood.examples[0].merchant), findsOneWidget);
+    expect(find.text(DemoFood.examples[1].merchant), findsOneWidget);
+    expect(cart.itemCount, 2);
+  });
+
   testWidgets('empty cart cannot show a failed-payment claim', (tester) async {
     final cart = DemoCart();
     addTearDown(cart.dispose);

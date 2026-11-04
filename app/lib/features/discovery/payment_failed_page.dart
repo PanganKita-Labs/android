@@ -18,6 +18,9 @@ const _adviceIconRadius = 24.0;
 const _detailSpacing = 18.0;
 const _detailRunSpacing = 12.0;
 
+Set<String> _merchantNames(DemoCart cart) =>
+    cart.lines.map((line) => line.food.merchant).toSet();
+
 /// Displays the unsuccessful-payment reference without a real payment attempt.
 class PaymentFailedPage extends StatelessWidget {
   /// Uses the session cart only to populate the example order card.
@@ -104,12 +107,17 @@ class _ExampleOrderCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: _merchantRadius,
-                backgroundImage: AssetImage(cart.lines.first.food.image),
+                backgroundImage: _merchantNames(cart).length == 1
+                    ? AssetImage(cart.lines.first.food.image)
+                    : null,
+                child: _merchantNames(cart).length == 1
+                    ? null
+                    : const Icon(Icons.storefront_outlined),
               ),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  cart.lines.first.food.merchant,
+                  _merchantNames(cart).join(', '),
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
@@ -137,6 +145,7 @@ class _ExampleOrderCard extends StatelessWidget {
                         line.food.title,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
+                      Text(line.food.merchant),
                       const SizedBox(height: 4),
                       Text(
                         '${line.quantity} x ${formatRupiah(line.unitPrice)}',
