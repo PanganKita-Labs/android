@@ -11,6 +11,25 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(loadBrandFonts);
 
+  testWidgets('Home bell opens Notifications', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: const HomePage(),
+        routes: {
+          AppRoutes.notifications: (context) => const NotificationsPage(),
+        },
+      ),
+    );
+    await tester.tap(
+      find.byWidgetPredicate(
+        (widget) => widget is IconButton && widget.tooltip == 'Notifikasi',
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(NotificationsPage), findsOneWidget);
+  });
+
   testWidgets('Notifications opens from Home and filters local examples', (
     tester,
   ) async {

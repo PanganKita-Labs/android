@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/discovery_navigation.dart';
-import 'package:pangankita/shared/demo_notice.dart';
 
 const _ink = Color(0xFF14313A);
 const _searchRadius = 24.0;
@@ -262,7 +262,11 @@ class _ConversationRow extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () => DemoNotice.unavailable(context),
+        onTap: () => Navigator.pushNamed<void>(
+          context,
+          AppRoutes.merchantChat,
+          arguments: (food: food, message: message),
+        ),
       ),
       const Divider(height: 1),
     ],
