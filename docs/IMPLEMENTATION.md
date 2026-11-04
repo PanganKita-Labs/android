@@ -73,9 +73,11 @@ Selecting a merchant opens a display-only store detail. Mawar shows two sample
 products and generated bakery preview photos. The add button changes only the
 session cart; reviews, map, and merchant data are not connected to a service.
 The Chat bottom tab opens `/chat`, a searchable display-only list of clearly
-labeled example merchant conversations. Sample timestamps and unread counts
-are display-only; no messages or chat state are fetched or exchanged. Tapping
-a conversation gives unavailable feedback.
+labeled example merchant conversations. Tapping a row or Chat Toko on an active
+order opens `/chat/merchant` for that example merchant. Sample timestamps and
+unread counts are display-only. Typed messages appear only in the page's
+temporary local state and disappear on leaving. No messages or chat state are
+fetched, exchanged, or saved.
 The Home avatar opens `/profile`, a display-only example matching the first
 account-design panel. Its name, email, and photo are sample data. Order history
 and area selection open existing previews; confirming an example area from

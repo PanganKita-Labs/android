@@ -35,6 +35,8 @@ void main() {
     await tester.tap(find.text('Lihat Detail').first);
     await tester.pumpAndSettle();
     expect(find.byType(PickupPage), findsOneWidget);
+    expect(find.byIcon(Icons.verified), findsNothing);
+    expect(find.textContaining('Belum ada pengambilan nyata'), findsOneWidget);
     expect(find.text('Belum tersedia'), findsWidgets);
     expect(find.text('MWR-028'), findsNothing);
     await tester.pageBack();

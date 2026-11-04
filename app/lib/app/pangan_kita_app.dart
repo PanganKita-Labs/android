@@ -11,6 +11,7 @@ import 'package:pangankita/features/discovery/edit_profile_page.dart';
 import 'package:pangankita/features/discovery/favorites_page.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/discovery/location_selection_page.dart';
+import 'package:pangankita/features/discovery/merchant_chat_page.dart';
 import 'package:pangankita/features/discovery/nearby_map_page.dart';
 import 'package:pangankita/features/discovery/nearby_stores_page.dart';
 import 'package:pangankita/features/discovery/notifications_page.dart';
@@ -104,6 +105,17 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
               );
       },
       AppRoutes.chat: (context) => const ChatPage(),
+      AppRoutes.merchantChat: (context) {
+        final example = ModalRoute.of(context)?.settings.arguments;
+        return example is ({DemoFood food, String? message})
+            ? MerchantChatPage(
+                food: example.food,
+                previewMessage: example.message,
+              )
+            : const Scaffold(
+                body: Center(child: Text('Contoh chat toko tidak tersedia.')),
+              );
+      },
       AppRoutes.notifications: (context) => const NotificationsPage(),
       AppRoutes.cart: (context) => CartPage(cart: _cart),
       AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),

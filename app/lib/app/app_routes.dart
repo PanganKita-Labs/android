@@ -45,6 +45,9 @@ abstract final class AppRoutes {
   /// Display-only chat list; no messages are exchanged.
   static const chat = '/chat';
 
+  /// Local merchant conversation preview; messages are not delivered.
+  static const merchantChat = '/chat/merchant';
+
   /// Display-only notification examples; no push service is connected.
   static const notifications = '/notifications';
 
