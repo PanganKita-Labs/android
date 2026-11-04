@@ -15,6 +15,15 @@ const _merchantRadius = 26.0;
 Set<String> _merchantNames(DemoCart cart) =>
     cart.lines.map((line) => line.food.merchant).toSet();
 
+String _pickupTimeLabel(DemoCart cart) {
+  final merchants = _merchantNames(cart);
+  final times = cart.lines.map((line) => line.food.pickupTime).toSet();
+  if (merchants.length == 1 && times.length == 1) {
+    return times.single;
+  }
+  return 'per produk, lihat Checkout';
+}
+
 /// A success-layout example without payment or order confirmation.
 class PaymentSuccessPage extends StatelessWidget {
   /// Reads the session cart solely to populate the example layout.
@@ -45,17 +54,7 @@ class PaymentSuccessPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   _PaymentSummary(cart: cart),
                   const SizedBox(height: 12),
-                  _PickupNotice(
-                    time:
-                        _merchantNames(cart).length == 1 &&
-                            cart.lines
-                                    .map((line) => line.food.pickupTime)
-                                    .toSet()
-                                    .length ==
-                                1
-                        ? cart.lines.first.food.pickupTime
-                        : 'per produk, lihat Checkout',
-                  ),
+                  _PickupNotice(time: _pickupTimeLabel(cart)),
                   const SizedBox(height: 12),
                   Text(
                     'Rincian pesanan contoh',
