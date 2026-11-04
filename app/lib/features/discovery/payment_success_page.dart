@@ -12,6 +12,9 @@ const _photoRadius = 10.0;
 const _photoSize = 66.0;
 const _merchantRadius = 26.0;
 
+Set<String> _merchantNames(DemoCart cart) =>
+    cart.lines.map((line) => line.food.merchant).toSet();
+
 /// A success-layout example without payment or order confirmation.
 class PaymentSuccessPage extends StatelessWidget {
   /// Reads the session cart solely to populate the example layout.
@@ -42,7 +45,17 @@ class PaymentSuccessPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   _PaymentSummary(cart: cart),
                   const SizedBox(height: 12),
-                  _PickupNotice(time: cart.lines.first.food.pickupTime),
+                  _PickupNotice(
+                    time:
+                        _merchantNames(cart).length == 1 &&
+                            cart.lines
+                                    .map((line) => line.food.pickupTime)
+                                    .toSet()
+                                    .length ==
+                                1
+                        ? cart.lines.first.food.pickupTime
+                        : 'per produk, lihat Checkout',
+                  ),
                   const SizedBox(height: 12),
                   Text(
                     'Rincian pesanan contoh',
@@ -114,7 +127,12 @@ class _PaymentSummary extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: _merchantRadius,
-                backgroundImage: AssetImage(cart.lines.first.food.image),
+                backgroundImage: _merchantNames(cart).length == 1
+                    ? AssetImage(cart.lines.first.food.image)
+                    : null,
+                child: _merchantNames(cart).length == 1
+                    ? null
+                    : const Icon(Icons.storefront_outlined),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -122,7 +140,7 @@ class _PaymentSummary extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      cart.lines.first.food.merchant,
+                      _merchantNames(cart).join(', '),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const Text('Merchant contoh'),
@@ -221,6 +239,7 @@ class _ProductCard extends StatelessWidget {
                   line.food.title,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
+                Text(line.food.merchant),
                 Text('${line.quantity} x ${formatRupiah(line.unitPrice)}'),
               ],
             ),

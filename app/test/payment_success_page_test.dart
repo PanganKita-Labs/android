@@ -44,6 +44,29 @@ void main() {
     expect(cart.itemCount, 1);
   });
 
+  testWidgets('multi-merchant success preview does not misattribute pickup', (
+    tester,
+  ) async {
+    final cart = DemoCart();
+    addTearDown(cart.dispose);
+    expect(cart.add(DemoFood.examples[0]), isTrue);
+    expect(cart.add(DemoFood.examples[1]), isTrue);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: PaymentSuccessPage(cart: cart),
+      ),
+    );
+    expect(
+      find.text(
+        '${DemoFood.examples[0].merchant}, ${DemoFood.examples[1].merchant}',
+      ),
+      findsOneWidget,
+    );
+    expect(find.textContaining('per produk, lihat Checkout'), findsOneWidget);
+    expect(cart.itemCount, 2);
+  });
+
   testWidgets('empty cart has no success claim', (tester) async {
     final cart = DemoCart();
     addTearDown(cart.dispose);
