@@ -57,6 +57,9 @@ abstract final class AppRoutes {
   /// Illustrative completed pickup; no pickup is recorded.
   static const pickup = '/orders/pickup';
 
+  /// Local review form preview; no review is submitted.
+  static const review = '/orders/review';
+
   /// Local food examples.
   static const home = '/home';
 
