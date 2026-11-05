@@ -54,6 +54,9 @@ abstract final class AppRoutes {
   /// Status of the local checkout preview; no payment is created.
   static const paymentStatus = '/checkout/status';
 
+  /// Illustrative completed pickup; no pickup is recorded.
+  static const pickup = '/orders/pickup';
+
   /// Local food examples.
   static const home = '/home';
 

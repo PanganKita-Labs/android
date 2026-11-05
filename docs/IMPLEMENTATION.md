@@ -108,6 +108,10 @@ CI workflows, root/scoped `AGENTS.md` guidance, brand assets, and theme tokens.
 No backend integration has been added. Preserve `PRD.md`, research and unrelated
 repository subtrees unchanged.
 
+The completed cards' Lihat Detail buttons open `/orders/pickup`, a read-only
+example based on the Pengambilan reference. The code and pickup time are
+unavailable; Beri Ulasan gives unavailable feedback until its page exists.
+
 ## Implementation stages
 
 1. Receive user-approved screenshot(s) or HTML with the specific task. References

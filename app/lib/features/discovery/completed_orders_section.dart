@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/shared/demo_notice.dart';
@@ -77,7 +78,7 @@ class _DatedCompletedExample extends StatelessWidget {
                   ),
                 ],
               ),
-              const _CompletedActions(),
+              _CompletedActions(food: food, quantity: quantity),
             ],
           ),
         ),
@@ -160,14 +161,21 @@ class _CompletedItem extends StatelessWidget {
 }
 
 class _CompletedActions extends StatelessWidget {
-  const new();
+  const new({required this.food, required this.quantity});
+
+  final DemoFood food;
+  final int quantity;
 
   @override
   Widget build(BuildContext context) => Row(
     children: [
       Expanded(
         child: OutlinedButton(
-          onPressed: () => DemoNotice.unavailable(context),
+          onPressed: () => Navigator.pushNamed(
+            context,
+            AppRoutes.pickup,
+            arguments: (food: food, quantity: quantity),
+          ).ignore(),
           child: const Text('Lihat Detail'),
         ),
       ),
