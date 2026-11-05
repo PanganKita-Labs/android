@@ -57,6 +57,9 @@ abstract final class AppRoutes {
   /// Illustrative success layout; no payment is confirmed.
   static const paymentSuccessPreview = '/checkout/success-preview';
 
+  /// Illustrative unsuccessful-payment layout; no attempt is recorded.
+  static const paymentFailedPreview = '/checkout/failed-preview';
+
   /// Illustrative completed pickup; no pickup is recorded.
   static const pickup = '/orders/pickup';
 

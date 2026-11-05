@@ -185,3 +185,7 @@ Recovery email opens /recover and the example OTP screen; no email is sent.
 ## Payment-success preview (#39)
 
 Includes the local success-layout example from @Serthonss; it does not confirm payment or create an order. Multiple merchants remain individually identifiable.
+
+## Payment-failed preview (#40)
+
+Includes @Serthonss's local failed-payment layout example and multi-merchant test. No payment is attempted or recorded.
