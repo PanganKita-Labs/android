@@ -71,7 +71,9 @@ with local travel-mode selection. Origin, route, distance, and travel time are
 not live; opening an external map remains unavailable.
 Selecting a merchant opens a display-only store detail. Mawar shows two sample
 products and generated bakery preview photos. The add button changes only the
-session cart; reviews, map, and merchant data are not connected to a service.
+session cart. Ulasan shows the fixture rating and an empty review state;
+Tentang shows the fixture category, pickup address, and pickup time. Reviews,
+map, and merchant data are not connected to a service.
 The Chat bottom tab opens `/chat`, a searchable display-only list of clearly
 labeled example merchant conversations. Tapping a row or Chat Toko on an active
 order opens `/chat/merchant` for that example merchant. Sample timestamps and

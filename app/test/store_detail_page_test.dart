@@ -42,7 +42,23 @@ void main() {
     expect(cart.itemCount, 1);
     await tester.tap(find.text('Ulasan'));
     await tester.pumpAndSettle();
-    expect(find.text('Ulasan toko belum tersedia.'), findsOneWidget);
+    expect(find.text('Ulasan toko'), findsOneWidget);
+    expect(find.text('Rating contoh, belum diverifikasi.'), findsOneWidget);
+    expect(
+      find.text('Belum ada ulasan toko dalam demo offline.'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Tentang'));
+    await tester.pumpAndSettle();
+    expect(find.text('Tentang toko'), findsOneWidget);
+    expect(find.text('Kategori: Roti & Pastry'), findsOneWidget);
+    expect(
+      find.text('Lokasi pickup contoh: Mandala by Pass, Medan'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Produk'));
+    await tester.pumpAndSettle();
+    expect(find.text('Mawar Coconut Buns'), findsOneWidget);
     await tester.tap(find.textContaining('Lihat Keranjang'));
     await tester.pumpAndSettle();
     expect(find.text('Keranjang'), findsOneWidget);
@@ -126,6 +142,12 @@ void main() {
           100,
           scrollable: find.byType(Scrollable).first,
         );
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        await tester.tap(find.text('Ulasan'));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        await tester.tap(find.text('Tentang'));
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
       });
