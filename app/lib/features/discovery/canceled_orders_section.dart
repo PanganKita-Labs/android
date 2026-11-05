@@ -17,7 +17,10 @@ const _merchantRadius = 18.0;
 /// Display-only example for the canceled-orders tab.
 class CanceledOrdersSection extends StatelessWidget {
   /// Creates the preview without a real canceled order.
-  const new({super.key});
+  const new({super.key, this.query = ''});
+
+  /// Filters the local canceled example by product or merchant name.
+  final String query;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -33,7 +36,10 @@ class CanceledOrdersSection extends StatelessWidget {
         style: Theme.of(context).textTheme.titleLarge?.copyWith(color: _ink),
       ),
       const SizedBox(height: 14),
-      const _CanceledExampleCard(),
+      if (DemoFood.examples[1].matches(query, 'Semua'))
+        const _CanceledExampleCard()
+      else
+        const Text('Tidak ada pesanan contoh yang cocok.'),
       const SizedBox(height: 24),
       const DecoratedBox(
         decoration: BoxDecoration(

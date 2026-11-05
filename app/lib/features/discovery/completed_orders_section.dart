@@ -14,7 +14,10 @@ const _badgeColor = Color(0xFFE6F0EB);
 /// Display-only examples for the completed orders tab.
 class CompletedOrdersSection extends StatelessWidget {
   /// Creates the sample section without a real order history.
-  const new({super.key});
+  const new({super.key, this.query = ''});
+
+  /// Filters the two local examples by product or merchant name.
+  final String query;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -25,17 +28,22 @@ class CompletedOrdersSection extends StatelessWidget {
         style: TextStyle(color: Colors.black54),
       ),
       const SizedBox(height: 18),
-      _DatedCompletedExample(
-        date: '26 Oktober 2026 · contoh',
-        food: DemoFood.examples[1],
-        quantity: 2,
-      ),
+      if (DemoFood.examples[1].matches(query, 'Semua'))
+        _DatedCompletedExample(
+          date: '26 Oktober 2026 · contoh',
+          food: DemoFood.examples[1],
+          quantity: 2,
+        ),
       const SizedBox(height: 28),
-      _DatedCompletedExample(
-        date: '25 Oktober 2026 · contoh',
-        food: DemoFood.examples[0],
-        quantity: 1,
-      ),
+      if (DemoFood.examples[0].matches(query, 'Semua'))
+        _DatedCompletedExample(
+          date: '25 Oktober 2026 · contoh',
+          food: DemoFood.examples[0],
+          quantity: 1,
+        ),
+      if (!DemoFood.examples[0].matches(query, 'Semua') &&
+          !DemoFood.examples[1].matches(query, 'Semua'))
+        const Text('Tidak ada pesanan contoh yang cocok.'),
     ],
   );
 }

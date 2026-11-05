@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/discovery_navigation.dart';
-import 'package:pangankita/shared/demo_notice.dart';
+import 'package:pangankita/features/discovery/orders_page.dart';
 
 const _ink = Color(0xFF14313A);
 const _orderSurface = Color(0xFFE7F0EB);
@@ -10,6 +11,9 @@ const _promoIconSurface = Color(0xFFF9E7D1);
 const _cardRadius = 20.0;
 const _chipSpacing = 10.0;
 const _iconRadius = 23.0;
+const _activeOrdersTab = 0;
+const _completedOrdersTab = 1;
+const _completedNoticeId = 3;
 
 typedef _Notice = ({
   int id,
@@ -115,7 +119,12 @@ class _NotificationsPageState extends State<NotificationsPage> {
               style: TextStyle(color: Colors.black54),
             ),
             for (final today in [true, false])
-              _NotificationGroup(today: today, notices: visible, read: _read),
+              _NotificationGroup(
+                today: today,
+                notices: visible,
+                read: _read,
+                onOpened: (id) => setState(() => _read.add(id)),
+              ),
           ],
         ),
       ),
@@ -125,11 +134,36 @@ class _NotificationsPageState extends State<NotificationsPage> {
 }
 
 class _NotificationGroup extends StatelessWidget {
-  const new({required this.today, required this.notices, required this.read});
+  const new({
+    required this.today,
+    required this.notices,
+    required this.read,
+    required this.onOpened,
+  });
 
   final bool today;
   final Iterable<_Notice> notices;
   final Set<int> read;
+  final ValueChanged<int> onOpened;
+
+  void _openNotice(BuildContext context, _Notice notice) {
+    onOpened(notice.id);
+    if (notice.order) {
+      Navigator.of(context)
+          .push<void>(
+            MaterialPageRoute<void>(
+              builder: (context) => OrdersPage(
+                initialTab: notice.id == _completedNoticeId
+                    ? _completedOrdersTab
+                    : _activeOrdersTab,
+              ),
+            ),
+          )
+          .ignore();
+    } else {
+      Navigator.pushNamed<void>(context, AppRoutes.home).ignore();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +182,7 @@ class _NotificationGroup extends StatelessWidget {
           _NotificationCard(
             notice: notice,
             unread: notice.unread && !read.contains(notice.id),
-            onTap: () => DemoNotice.unavailable(context),
+            onTap: () => _openNotice(context, notice),
           ),
           const SizedBox(height: 12),
         ],

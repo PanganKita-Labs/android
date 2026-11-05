@@ -64,6 +64,27 @@ void main() {
     expect(find.text('Kategori'), findsOneWidget);
   });
 
+  testWidgets('Cari pesanan filters local order examples', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(theme: PanganKitaTheme.light, home: const OrdersPage()),
+    );
+    await tester.tap(find.byTooltip('Cari pesanan'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'Mawar');
+    await tester.pumpAndSettle();
+    expect(find.text('Mawar Bakery & Cake'), findsOneWidget);
+    expect(find.text('Soto Kesawan'), findsNothing);
+    await tester.enterText(find.byType(TextField), 'tidak ada');
+    await tester.pumpAndSettle();
+    expect(find.text('Tidak ada pesanan contoh yang cocok.'), findsOneWidget);
+    await tester.tap(find.text('Selesai'));
+    await tester.pumpAndSettle();
+    expect(find.text('Tidak ada pesanan contoh yang cocok.'), findsOneWidget);
+    await tester.tap(find.text('Dibatalkan'));
+    await tester.pumpAndSettle();
+    expect(find.text('Tidak ada pesanan contoh yang cocok.'), findsOneWidget);
+  });
+
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
     for (final scale in [1.0, 1.6]) {
       testWidgets('orders fit $width at text scale $scale', (tester) async {
