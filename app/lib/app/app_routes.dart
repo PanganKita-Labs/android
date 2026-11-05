@@ -78,6 +78,12 @@ abstract final class AppRoutes {
   /// Local settings preview without persistence.
   static const settings = '/profile/settings';
 
+  /// Status of the unpublished terms document in this local prototype.
+  static const terms = '/profile/settings/terms';
+
+  /// Status of the unpublished privacy document in this local prototype.
+  static const privacy = '/profile/settings/privacy';
+
   /// Local favorites example without persistence.
   static const favorites = '/profile/favorites';
 

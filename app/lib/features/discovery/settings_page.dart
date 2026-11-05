@@ -58,7 +58,11 @@ class SettingsPage extends StatelessWidget {
           const SizedBox(height: 10),
           const _SettingsCard(
             rows: [
-              _SettingsRow(Icons.lock_outline, 'Ubah Password'),
+              _SettingsRow(
+                Icons.lock_outline,
+                'Ubah Password',
+                route: AppRoutes.recover,
+              ),
               _SettingsRow(Icons.language, 'Bahasa', detail: 'Indonesia'),
             ],
           ),
@@ -67,8 +71,16 @@ class SettingsPage extends StatelessWidget {
           const SizedBox(height: 10),
           const _SettingsCard(
             rows: [
-              _SettingsRow(Icons.description_outlined, 'Syarat & Ketentuan'),
-              _SettingsRow(Icons.verified_user_outlined, 'Kebijakan Privasi'),
+              _SettingsRow(
+                Icons.description_outlined,
+                'Syarat & Ketentuan',
+                route: AppRoutes.terms,
+              ),
+              _SettingsRow(
+                Icons.verified_user_outlined,
+                'Kebijakan Privasi',
+                route: AppRoutes.privacy,
+              ),
               _SettingsRow(
                 Icons.help_outline,
                 'Pusat Bantuan',

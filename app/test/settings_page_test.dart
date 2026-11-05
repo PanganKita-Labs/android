@@ -3,7 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/profile_page.dart';
+import 'package:pangankita/features/discovery/settings_document_page.dart';
 import 'package:pangankita/features/discovery/settings_page.dart';
+import 'package:pangankita/features/onboarding/recovery_page.dart';
 
 import 'font_test_utils.dart';
 
@@ -48,9 +50,19 @@ void main() {
     );
   });
 
-  testWidgets('account links explain unavailable integration', (tester) async {
+  testWidgets('account links open recovery and document status pages', (
+    tester,
+  ) async {
     await tester.pumpWidget(
-      MaterialApp(theme: PanganKitaTheme.light, home: const SettingsPage()),
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: const SettingsPage(),
+        routes: {
+          AppRoutes.recover: (context) => const RecoveryPage(),
+          AppRoutes.terms: (context) => const SettingsDocumentPage.terms(),
+          AppRoutes.privacy: (context) => const SettingsDocumentPage.privacy(),
+        },
+      ),
     );
     await tester.scrollUntilVisible(
       find.text('Ubah Password'),
@@ -59,10 +71,19 @@ void main() {
     );
     await tester.tap(find.text('Ubah Password'));
     await tester.pumpAndSettle();
-    expect(
-      find.text('Fitur ini belum tersedia dalam demo offline.'),
-      findsOneWidget,
-    );
+    expect(find.byType(RecoveryPage), findsOneWidget);
+    Navigator.of(tester.element(find.byType(RecoveryPage))).pop();
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Syarat & Ketentuan'));
+    await tester.tap(find.text('Syarat & Ketentuan'));
+    await tester.pumpAndSettle();
+    expect(find.text('Syarat & Ketentuan belum tersedia'), findsOneWidget);
+    await tester.tap(find.text('Kembali ke Pengaturan'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Kebijakan Privasi'));
+    await tester.tap(find.text('Kebijakan Privasi'));
+    await tester.pumpAndSettle();
+    expect(find.text('Kebijakan Privasi belum tersedia'), findsOneWidget);
   });
 
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
