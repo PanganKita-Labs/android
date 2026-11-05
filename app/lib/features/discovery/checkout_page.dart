@@ -5,6 +5,7 @@ import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/checkout_order_details.dart';
 import 'package:pangankita/features/discovery/demo_cart.dart';
+import 'package:pangankita/features/discovery/payment_method_sheet.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
@@ -321,11 +322,7 @@ class _PaymentMethod extends StatelessWidget {
                 style: TextButton.styleFrom(padding: EdgeInsets.zero),
                 iconAlignment: IconAlignment.end,
                 icon: const Icon(Icons.chevron_right, size: 20),
-                onPressed: () => DemoNotice.show(
-                  context,
-                  'Metode pembayaran belum tersedia. '
-                  'QRIS hanya contoh tampilan.',
-                ),
+                onPressed: () => showPaymentMethodSheet(context),
                 label: const Text('Ubah'),
               ),
             ],

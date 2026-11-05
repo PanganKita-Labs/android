@@ -98,6 +98,28 @@ void main() {
     },
   );
 
+  testWidgets('Ubah shows the QRIS-only payment preview', (tester) async {
+    final cart = DemoCart();
+    addTearDown(cart.dispose);
+    cart.add(DemoFood.examples.first);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: CheckoutPage(cart: cart),
+      ),
+    );
+    await tester.scrollUntilVisible(find.text('Ubah'), 150);
+    await tester.tap(find.text('Ubah'));
+    await tester.pumpAndSettle();
+    expect(find.text('Pilih metode pembayaran'), findsOneWidget);
+    expect(find.text('Metode contoh yang ditampilkan'), findsOneWidget);
+    expect(find.textContaining('Tidak ada pembayaran'), findsWidgets);
+    await tester.tap(find.text('Gunakan QRIS (contoh)'));
+    await tester.pumpAndSettle();
+    expect(find.text('Pilih metode pembayaran'), findsNothing);
+    expect(cart.itemCount, 1);
+  });
+
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
     for (final scale in [1.0, 1.6]) {
       testWidgets('checkout fits $width with text scale $scale', (

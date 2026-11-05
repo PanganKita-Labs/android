@@ -314,6 +314,13 @@ class _PaymentActions extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: _pageGap,
           children: [
+            TextButton(
+              onPressed: () => Navigator.pushNamed<void>(
+                context,
+                AppRoutes.paymentSuccessPreview,
+              ),
+              child: const Text('Lihat contoh pembayaran berhasil'),
+            ),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -328,6 +335,13 @@ class _PaymentActions extends StatelessWidget {
                 (route) => false,
               ),
               child: const Text('Kembali ke Beranda'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pushNamed<void>(
+                context,
+                AppRoutes.paymentFailedPreview,
+              ),
+              child: const Text('Lihat contoh pembayaran belum berhasil'),
             ),
           ],
         ),
