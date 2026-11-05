@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
-import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
 const Color _green = PanganKitaColors.brandPrimaryStrong;
@@ -79,7 +78,7 @@ class PickupPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          const _PickupActions(),
+          _PickupActions(food: food, quantity: quantity),
         ],
       ),
     ),
@@ -87,7 +86,10 @@ class PickupPage extends StatelessWidget {
 }
 
 class _PickupActions extends StatelessWidget {
-  const new();
+  const new({required this.food, required this.quantity});
+
+  final DemoFood food;
+  final int quantity;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -98,7 +100,11 @@ class _PickupActions extends StatelessWidget {
           backgroundColor: PanganKitaColors.brandAccent,
           minimumSize: const Size.fromHeight(54),
         ),
-        onPressed: () => DemoNotice.unavailable(context),
+        onPressed: () => Navigator.pushNamed(
+          context,
+          AppRoutes.review,
+          arguments: (food: food, quantity: quantity),
+        ).ignore(),
         icon: const Icon(Icons.star),
         label: const Text('Beri Ulasan'),
       ),
