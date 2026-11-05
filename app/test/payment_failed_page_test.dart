@@ -78,6 +78,28 @@ void main() {
     expect(find.text('Contoh pembayaran belum berhasil'), findsNothing);
   });
 
+  testWidgets('Ganti Metode Pembayaran shows available preview method', (
+    tester,
+  ) async {
+    final cart = DemoCart();
+    addTearDown(cart.dispose);
+    cart.add(DemoFood.examples.first);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: PaymentFailedPage(cart: cart),
+      ),
+    );
+    await tester.tap(find.text('Ganti Metode Pembayaran'));
+    await tester.pumpAndSettle();
+    expect(find.text('Pilih metode pembayaran'), findsOneWidget);
+    expect(find.text('Metode contoh yang ditampilkan'), findsOneWidget);
+    await tester.tap(find.text('Gunakan QRIS (contoh)'));
+    await tester.pumpAndSettle();
+    expect(find.text('Pilih metode pembayaran'), findsNothing);
+    expect(cart.itemCount, 1);
+  });
+
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
     testWidgets('failed preview fits $width with enlarged text', (
       tester,

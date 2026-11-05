@@ -182,10 +182,6 @@ Favorit Saya opens /profile/favorites. Favorites are illustrative and are not sa
 
 Recovery email opens /recover and the example OTP screen; no email is sent.
 
-## Payment-success preview (#39)
+## Integrated payment preview examples (PRs #39, #40, #43)
 
-Includes the local success-layout example from @Serthonss; it does not confirm payment or create an order. Multiple merchants remain individually identifiable.
-
-## Payment-failed preview (#40)
-
-Includes @Serthonss's local failed-payment layout example and multi-merchant test. No payment is attempted or recorded.
+The payment-status screen links to illustrative success and unsuccessful-payment layouts. Both are previews only: no charge, confirmed order, or server transaction is created. The success example handles multiple merchants without attributing their pickup times to one merchant. The unsuccessful example also lists merchants accurately. The checkout and failure screens can open the local payment-method selection preview; no payment method is saved or charged. These screens reconcile contributions from @Serthonss in PRs #39, #40, and #43.

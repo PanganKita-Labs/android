@@ -122,10 +122,10 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.cart: (context) => CartPage(cart: _cart),
       AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),
       AppRoutes.paymentStatus: (context) => PaymentStatusPage(cart: _cart),
-      AppRoutes.paymentFailedPreview: (context) =>
-          PaymentFailedPage(cart: _cart),
       AppRoutes.paymentSuccessPreview: (context) =>
           PaymentSuccessPage(cart: _cart),
+      AppRoutes.paymentFailedPreview: (context) =>
+          PaymentFailedPage(cart: _cart),
       AppRoutes.pickup: (context) {
         final example = ModalRoute.of(context)?.settings.arguments;
         return example is ({DemoFood food, int quantity})
