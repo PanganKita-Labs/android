@@ -18,6 +18,7 @@ import 'package:pangankita/features/discovery/notifications_page.dart';
 import 'package:pangankita/features/discovery/order_detail_page.dart';
 import 'package:pangankita/features/discovery/orders_page.dart';
 import 'package:pangankita/features/discovery/payment_status_page.dart';
+import 'package:pangankita/features/discovery/payment_success_page.dart';
 import 'package:pangankita/features/discovery/pickup_page.dart';
 import 'package:pangankita/features/discovery/product_detail_page.dart';
 import 'package:pangankita/features/discovery/profile_page.dart';
@@ -120,6 +121,8 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       AppRoutes.cart: (context) => CartPage(cart: _cart),
       AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),
       AppRoutes.paymentStatus: (context) => PaymentStatusPage(cart: _cart),
+      AppRoutes.paymentSuccessPreview: (context) =>
+          PaymentSuccessPage(cart: _cart),
       AppRoutes.pickup: (context) {
         final example = ModalRoute.of(context)?.settings.arguments;
         return example is ({DemoFood food, int quantity})

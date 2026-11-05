@@ -181,3 +181,7 @@ Pengaturan opens /profile/settings. Notification switches are examples and are n
 Favorit Saya opens /profile/favorites. Favorites are illustrative and are not saved.
 
 Recovery email opens /recover and the example OTP screen; no email is sent.
+
+## Payment-success preview (#39)
+
+Includes the local success-layout example from @Serthonss; it does not confirm payment or create an order. Multiple merchants remain individually identifiable.
