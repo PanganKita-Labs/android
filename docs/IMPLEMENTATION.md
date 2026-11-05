@@ -36,11 +36,6 @@ feedback rather than integrations. The review card, add-ons,
 location, prices, and pickup clocks remain explicitly illustrative. There is
 no actual ordering, reservation, payment, or merchant verification.
 
-The payment flow also includes `/checkout/failed-preview`, a display-only
-example based on the unsuccessful-payment design. It shows the session cart
-and general next steps without claiming a failed charge. Retry returns to
-the payment preview; other payment methods remain unavailable.
-
 After the checkout acknowledgement, the demo button opens `/checkout/status`.
 This page follows the middle panel of the payment design while explicitly
 showing that no payment or order exists. The QR, countdown, and order ID areas
@@ -76,11 +71,15 @@ with local travel-mode selection. Origin, route, distance, and travel time are
 not live; opening an external map remains unavailable.
 Selecting a merchant opens a display-only store detail. Mawar shows two sample
 products and generated bakery preview photos. The add button changes only the
-session cart; reviews, map, and merchant data are not connected to a service.
+session cart. Ulasan shows the fixture rating and an empty review state;
+Tentang shows the fixture category, pickup address, and pickup time. Reviews,
+map, and merchant data are not connected to a service.
 The Chat bottom tab opens `/chat`, a searchable display-only list of clearly
-labeled example merchant conversations. Sample timestamps and unread counts
-are display-only; no messages or chat state are fetched or exchanged. Tapping
-a conversation gives unavailable feedback.
+labeled example merchant conversations. Tapping a row or Chat Toko on an active
+order opens `/chat/merchant` for that example merchant. Sample timestamps and
+unread counts are display-only. Typed messages appear only in the page's
+temporary local state and disappear on leaving. No messages or chat state are
+fetched, exchanged, or saved.
 The Home avatar opens `/profile`, a display-only example matching the first
 account-design panel. Its name, email, and photo are sample data. Order history
 and area selection open existing previews; confirming an example area from
@@ -110,6 +109,13 @@ lockfile, strict analyzer/DCL/Dartrics rules, pinned development tool versions,
 CI workflows, root/scoped `AGENTS.md` guidance, brand assets, and theme tokens.
 No backend integration has been added. Preserve `PRD.md`, research and unrelated
 repository subtrees unchanged.
+
+The completed cards' Lihat Detail buttons open `/orders/pickup`, a read-only
+example based on the Pengambilan reference. The code and pickup time are
+unavailable. Beri Ulasan on either the completed card or pickup page opens
+`/orders/review`, a local form preview with rating, tags, text, and
+display-name controls. Photo and submit actions give unavailable feedback;
+no review is uploaded or saved.
 
 ## Implementation stages
 
@@ -175,3 +181,11 @@ Pengaturan opens /profile/settings. Notification switches are examples and are n
 Favorit Saya opens /profile/favorites. Favorites are illustrative and are not saved.
 
 Recovery email opens /recover and the example OTP screen; no email is sent.
+
+## Payment-success preview (#39)
+
+Includes the local success-layout example from @Serthonss; it does not confirm payment or create an order. Multiple merchants remain individually identifiable.
+
+## Payment-failed preview (#40)
+
+Includes @Serthonss's local failed-payment layout example and multi-merchant test. No payment is attempted or recorded.
