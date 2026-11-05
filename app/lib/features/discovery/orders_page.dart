@@ -233,7 +233,11 @@ class _OrderCardActions extends StatelessWidget {
     children: [
       Expanded(
         child: OutlinedButton(
-          onPressed: () => DemoNotice.unavailable(context),
+          onPressed: () => Navigator.pushNamed<void>(
+            context,
+            AppRoutes.merchantChat,
+            arguments: (food: food, message: null),
+          ),
           child: const Text('Chat Toko'),
         ),
       ),
