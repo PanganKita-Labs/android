@@ -3,7 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/chat_page.dart';
+import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
+import 'package:pangankita/features/discovery/merchant_chat_page.dart';
 
 import 'font_test_utils.dart';
 
@@ -21,6 +23,15 @@ void main() {
         routes: {
           AppRoutes.home: (context) => const HomePage(),
           AppRoutes.chat: (context) => const ChatPage(),
+          AppRoutes.merchantChat: (context) {
+            final example =
+                ModalRoute.of(context)!.settings.arguments!
+                    as ({DemoFood food, String? message});
+            return MerchantChatPage(
+              food: example.food,
+              previewMessage: example.message,
+            );
+          },
         },
       ),
     );
@@ -38,9 +49,10 @@ void main() {
     expect(find.text('Soto Kesawan'), findsOneWidget);
     expect(find.text('Mawar Bakery & Cake'), findsNothing);
     await tester.tap(find.text('Soto Kesawan'));
-    await tester.pump();
+    await tester.pumpAndSettle();
+    expect(find.byType(MerchantChatPage), findsOneWidget);
     expect(
-      find.text('Fitur ini belum tersedia dalam demo offline.'),
+      find.text('Baik, kak. Pesanan sedang kami siapkan.'),
       findsOneWidget,
     );
   });

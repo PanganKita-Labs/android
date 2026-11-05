@@ -45,6 +45,9 @@ abstract final class AppRoutes {
   /// Display-only chat list; no messages are exchanged.
   static const chat = '/chat';
 
+  /// Local merchant conversation preview; messages are not delivered.
+  static const merchantChat = '/chat/merchant';
+
   /// Display-only notification examples; no push service is connected.
   static const notifications = '/notifications';
 
@@ -53,6 +56,12 @@ abstract final class AppRoutes {
 
   /// Illustrative success layout; no payment is confirmed.
   static const paymentSuccessPreview = '/checkout/success-preview';
+
+  /// Illustrative completed pickup; no pickup is recorded.
+  static const pickup = '/orders/pickup';
+
+  /// Local review form preview; no review is submitted.
+  static const review = '/orders/review';
 
   /// Local food examples.
   static const home = '/home';
