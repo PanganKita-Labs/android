@@ -5,7 +5,6 @@ import 'package:pangankita/features/discovery/canceled_orders_section.dart';
 import 'package:pangankita/features/discovery/completed_orders_section.dart';
 import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/discovery_navigation.dart';
-import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
 const _ink = Color(0xFF14313A);
@@ -25,14 +24,19 @@ final List<DemoFood> _sampleFoods = [
 /// Orders tab based on the supplied active-orders design, using demo examples.
 class OrdersPage extends StatefulWidget {
   /// Creates an order-preview page without a persisted order.
-  const new({super.key});
+  const new({super.key, this.initialTab = 0});
+
+  /// Tab to display when opening from an illustrative notification.
+  final int initialTab;
 
   @override
   State<OrdersPage> createState() => _OrdersPageState();
 }
 
 class _OrdersPageState extends State<OrdersPage> {
-  int _selectedTab = 0;
+  late int _selectedTab = widget.initialTab;
+  bool _searching = false;
+  String _query = '';
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -52,37 +56,29 @@ class _OrdersPageState extends State<OrdersPage> {
               ),
               IconButton(
                 tooltip: 'Cari pesanan',
-                onPressed: () => DemoNotice.unavailable(context),
-                icon: const Icon(Icons.search, size: 30, color: _ink),
+                onPressed: () => setState(() {
+                  _searching = !_searching;
+                  if (!_searching) _query = '';
+                }),
+                icon: const Image(
+                  image: AssetImage('assets/prototype/icon-search.png'),
+                  width: 26,
+                  height: 26,
+                ),
               ),
             ],
           ),
           const Text('Makanan favoritmu, siap dinikmati.'),
+          if (_searching) ...[
+            const SizedBox(height: 12),
+            _OrderSearchField(
+              onChanged: (value) => setState(() => _query = value.trim()),
+            ),
+          ],
           const SizedBox(height: 18),
-          Wrap(
-            spacing: _chipGap,
-            runSpacing: _chipRunGap,
-            children: [
-              for (final (index, label) in [
-                'Aktif',
-                'Selesai',
-                'Dibatalkan',
-              ].indexed)
-                ChoiceChip(
-                  label: Text(label),
-                  selected: _selectedTab == index,
-                  showCheckmark: false,
-                  selectedColor: PanganKitaColors.brandPrimaryStrong,
-                  backgroundColor: Colors.white,
-                  labelStyle: TextStyle(
-                    fontFamily: PanganKitaTheme.emphasisFontFamily,
-                    color: _selectedTab == index ? Colors.white : _ink,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  side: BorderSide.none,
-                  onSelected: (_) => setState(() => _selectedTab = index),
-                ),
-            ],
+          _OrderTabs(
+            selected: _selectedTab,
+            onSelected: (index) => setState(() => _selectedTab = index),
           ),
           const SizedBox(height: 22),
           if (_selectedTab == 0) ...[
@@ -97,18 +93,72 @@ class _OrdersPageState extends State<OrdersPage> {
               style: TextStyle(color: Colors.black54),
             ),
             const SizedBox(height: 16),
-            for (final food in _sampleFoods) ...[
-              _OrderExampleCard(food: food),
-              const SizedBox(height: 16),
-            ],
+            for (final food in _sampleFoods.where(
+              (food) => food.matches(_query, 'Semua'),
+            )) ...[_OrderExampleCard(food: food), const SizedBox(height: 16)],
+            if (!_sampleFoods.any((food) => food.matches(_query, 'Semua')))
+              const Text('Tidak ada pesanan contoh yang cocok.'),
           ] else if (_selectedTab == 1)
-            const CompletedOrdersSection()
+            CompletedOrdersSection(query: _query)
           else
-            const CanceledOrdersSection(),
+            CanceledOrdersSection(query: _query),
         ],
       ),
     ),
     bottomNavigationBar: const DiscoveryNavigation(selectedIndex: 1),
+  );
+}
+
+class _OrderSearchField extends StatelessWidget {
+  const new({required this.onChanged});
+
+  final ValueChanged<String> onChanged;
+
+  @override
+  Widget build(BuildContext context) => TextField(
+    autofocus: true,
+    decoration: const InputDecoration(
+      hintText: 'Cari nama produk atau toko contoh',
+      prefixIcon: Padding(
+        padding: EdgeInsets.all(14),
+        child: Image(
+          image: AssetImage('assets/prototype/icon-search.png'),
+          width: 20,
+          height: 20,
+        ),
+      ),
+    ),
+    onChanged: onChanged,
+  );
+}
+
+class _OrderTabs extends StatelessWidget {
+  const new({required this.selected, required this.onSelected});
+
+  final int selected;
+  final ValueChanged<int> onSelected;
+
+  @override
+  Widget build(BuildContext context) => Wrap(
+    spacing: _chipGap,
+    runSpacing: _chipRunGap,
+    children: [
+      for (final (index, label) in ['Aktif', 'Selesai', 'Dibatalkan'].indexed)
+        ChoiceChip(
+          label: Text(label),
+          selected: selected == index,
+          showCheckmark: false,
+          selectedColor: PanganKitaColors.brandPrimaryStrong,
+          backgroundColor: Colors.white,
+          labelStyle: TextStyle(
+            fontFamily: PanganKitaTheme.emphasisFontFamily,
+            color: selected == index ? Colors.white : _ink,
+            fontWeight: FontWeight.w600,
+          ),
+          side: BorderSide.none,
+          onSelected: (_) => onSelected(index),
+        ),
+    ],
   );
 }
 
@@ -130,7 +180,13 @@ class _OrderExampleCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: _merchantRadius,
-                backgroundImage: AssetImage(food.image),
+                backgroundColor: PanganKitaColors.savingsSurface,
+                backgroundImage: food.merchant == 'Mawar Bakery & Cake'
+                    ? const AssetImage('assets/prototype/mawar-mark.webp')
+                    : null,
+                child: food.merchant == 'Mawar Bakery & Cake'
+                    ? null
+                    : Text(food.merchant.substring(0, 1)),
               ),
               const SizedBox(width: 8),
               Expanded(
