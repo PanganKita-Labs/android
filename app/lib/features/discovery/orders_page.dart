@@ -60,19 +60,18 @@ class _OrdersPageState extends State<OrdersPage> {
                   _searching = !_searching;
                   if (!_searching) _query = '';
                 }),
-                icon: const Icon(Icons.search, size: 30, color: _ink),
+                icon: const Image(
+                  image: AssetImage('assets/prototype/icon-search.png'),
+                  width: 26,
+                  height: 26,
+                ),
               ),
             ],
           ),
           const Text('Makanan favoritmu, siap dinikmati.'),
           if (_searching) ...[
             const SizedBox(height: 12),
-            TextField(
-              autofocus: true,
-              decoration: const InputDecoration(
-                hintText: 'Cari nama produk atau toko contoh',
-                prefixIcon: Icon(Icons.search),
-              ),
+            _OrderSearchField(
               onChanged: (value) => setState(() => _query = value.trim()),
             ),
           ],
@@ -107,6 +106,29 @@ class _OrdersPageState extends State<OrdersPage> {
       ),
     ),
     bottomNavigationBar: const DiscoveryNavigation(selectedIndex: 1),
+  );
+}
+
+class _OrderSearchField extends StatelessWidget {
+  const new({required this.onChanged});
+
+  final ValueChanged<String> onChanged;
+
+  @override
+  Widget build(BuildContext context) => TextField(
+    autofocus: true,
+    decoration: const InputDecoration(
+      hintText: 'Cari nama produk atau toko contoh',
+      prefixIcon: Padding(
+        padding: EdgeInsets.all(14),
+        child: Image(
+          image: AssetImage('assets/prototype/icon-search.png'),
+          width: 20,
+          height: 20,
+        ),
+      ),
+    ),
+    onChanged: onChanged,
   );
 }
 
@@ -158,7 +180,13 @@ class _OrderExampleCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: _merchantRadius,
-                backgroundImage: AssetImage(food.image),
+                backgroundColor: PanganKitaColors.savingsSurface,
+                backgroundImage: food.merchant == 'Mawar Bakery & Cake'
+                    ? const AssetImage('assets/prototype/mawar-mark.webp')
+                    : null,
+                child: food.merchant == 'Mawar Bakery & Cake'
+                    ? null
+                    : Text(food.merchant.substring(0, 1)),
               ),
               const SizedBox(width: 8),
               Expanded(

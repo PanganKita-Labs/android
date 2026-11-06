@@ -70,6 +70,16 @@ void main() {
     );
     await tester.tap(find.byTooltip('Cari pesanan'));
     await tester.pumpAndSettle();
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is Image &&
+            widget.image is AssetImage &&
+            (widget.image as AssetImage).assetName ==
+                'assets/prototype/icon-search.png',
+      ),
+      findsNWidgets(2),
+    );
     await tester.enterText(find.byType(TextField), 'Mawar');
     await tester.pumpAndSettle();
     expect(find.text('Mawar Bakery & Cake'), findsOneWidget);
@@ -83,6 +93,33 @@ void main() {
     await tester.tap(find.text('Dibatalkan'));
     await tester.pumpAndSettle();
     expect(find.text('Tidak ada pesanan contoh yang cocok.'), findsOneWidget);
+  });
+
+  testWidgets('order cards use merchant logos or fallback initials', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(theme: PanganKitaTheme.light, home: const OrdersPage()),
+    );
+    final avatars = tester.widgetList<CircleAvatar>(find.byType(CircleAvatar));
+    expect(
+      avatars.any(
+        (avatar) =>
+            avatar.backgroundImage is AssetImage &&
+            (avatar.backgroundImage! as AssetImage).assetName ==
+                'assets/prototype/mawar-mark.webp',
+      ),
+      isTrue,
+    );
+    await tester.scrollUntilVisible(find.text('Soto Kesawan'), 150);
+    final fallbackAvatars = tester.widgetList<CircleAvatar>(
+      find.byType(CircleAvatar),
+    );
+    expect(
+      fallbackAvatars.any((avatar) => avatar.backgroundImage == null),
+      isTrue,
+    );
+    expect(find.text('S'), findsOneWidget);
   });
 
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
