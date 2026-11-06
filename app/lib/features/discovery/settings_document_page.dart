@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 
-/// Honest placeholder until approved account documents are available.
+/// Honest placeholder until an approved privacy document is available.
 class SettingsDocumentPage extends StatelessWidget {
-  /// Shows the terms status without inventing contractual text.
-  const new terms({super.key}) : title = 'Syarat & Ketentuan';
-
   /// Shows the privacy status without inventing a data policy.
-  const new privacy({super.key}) : title = 'Kebijakan Privasi';
-
-  /// Document title selected from Settings.
-  final String title;
+  const new privacy({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: PanganKitaColors.surfaceWarm,
-    appBar: AppBar(title: Text(title)),
+    appBar: AppBar(title: const Text('Kebijakan Privasi')),
     body: SafeArea(
       child: Center(
         child: Padding(
@@ -30,7 +24,7 @@ class SettingsDocumentPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                '$title belum tersedia',
+                'Kebijakan Privasi belum tersedia',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),

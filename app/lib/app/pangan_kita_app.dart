@@ -29,6 +29,7 @@ import 'package:pangankita/features/discovery/settings_document_page.dart';
 import 'package:pangankita/features/discovery/settings_page.dart';
 import 'package:pangankita/features/discovery/store_detail_page.dart';
 import 'package:pangankita/features/discovery/support_page.dart';
+import 'package:pangankita/features/discovery/terms_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
 import 'package:pangankita/features/onboarding/password_success_page.dart';
@@ -85,7 +86,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       ),
       AppRoutes.editProfile: (context) => const EditProfilePage(),
       AppRoutes.settings: (context) => const SettingsPage(),
-      AppRoutes.terms: (context) => const SettingsDocumentPage.terms(),
+      AppRoutes.terms: (context) => const TermsPage(),
       AppRoutes.privacy: (context) => const SettingsDocumentPage.privacy(),
       AppRoutes.favorites: (context) => const FavoritesPage(),
       AppRoutes.support: (context) => const SupportPage(),

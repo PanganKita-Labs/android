@@ -5,6 +5,7 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/profile_page.dart';
 import 'package:pangankita/features/discovery/settings_document_page.dart';
 import 'package:pangankita/features/discovery/settings_page.dart';
+import 'package:pangankita/features/discovery/terms_page.dart';
 import 'package:pangankita/features/onboarding/recovery_page.dart';
 
 import 'font_test_utils.dart';
@@ -59,7 +60,7 @@ void main() {
         home: const SettingsPage(),
         routes: {
           AppRoutes.recover: (context) => const RecoveryPage(),
-          AppRoutes.terms: (context) => const SettingsDocumentPage.terms(),
+          AppRoutes.terms: (context) => const TermsPage(),
           AppRoutes.privacy: (context) => const SettingsDocumentPage.privacy(),
         },
       ),
@@ -77,8 +78,9 @@ void main() {
     await tester.ensureVisible(find.text('Syarat & Ketentuan'));
     await tester.tap(find.text('Syarat & Ketentuan'));
     await tester.pumpAndSettle();
-    expect(find.text('Syarat & Ketentuan belum tersedia'), findsOneWidget);
-    await tester.tap(find.text('Kembali ke Pengaturan'));
+    expect(find.byType(TermsPage), findsOneWidget);
+    expect(find.textContaining('belum menjadi perjanjian'), findsOneWidget);
+    Navigator.of(tester.element(find.byType(TermsPage))).pop();
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.text('Kebijakan Privasi'));
     await tester.tap(find.text('Kebijakan Privasi'));
@@ -109,4 +111,29 @@ void main() {
       });
     }
   }
+
+  testWidgets('terms preview remains readable at narrow width', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(320, 640);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: const TextScaler.linear(1.6)),
+          child: child ?? const SizedBox.shrink(),
+        ),
+        home: const TermsPage(),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    await tester.scrollUntilVisible(
+      find.text('Pembayaran dan pengambilan'),
+      120,
+    );
+    expect(tester.takeException(), isNull);
+  });
 }
