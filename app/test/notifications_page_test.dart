@@ -81,6 +81,47 @@ void main() {
     expect(find.byType(HomePage), findsOneWidget);
   });
 
+  testWidgets('completed notification points to matching example order', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: const NotificationsPage(),
+      ),
+    );
+    await tester.scrollUntilVisible(
+      find.text('Pesanan selesai'),
+      140,
+      scrollable: find
+          .descendant(
+            of: find.byType(NotificationsPage),
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Pesanan selesai'));
+    await tester.pumpAndSettle();
+    expect(find.byType(OrdersPage), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('Soto Kesawan'),
+      140,
+      scrollable: find
+          .descendant(
+            of: find.byType(OrdersPage),
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Soto Kesawan'), findsOneWidget);
+    expect(
+      find.text('Contoh tampilan · belum ada pesanan selesai.'),
+      findsOneWidget,
+    );
+  });
+
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
     for (final scale in [1.0, 1.6]) {
       testWidgets('Notifications fit $width at text scale $scale', (

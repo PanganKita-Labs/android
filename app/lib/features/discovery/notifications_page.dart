@@ -60,8 +60,8 @@ const List<_Notice> _examples = [
     title: 'Pesanan selesai',
     description:
         'Terima kasih sudah menyelamatkan makanan bersama '
-        'Raihan Bakery & Cake.',
-    time: '24 Okt · Pesanan',
+        'Soto Kesawan.',
+    time: '26 Okt · Pesanan',
     order: true,
     today: false,
     unread: false,
