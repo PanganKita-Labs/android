@@ -5,38 +5,42 @@ Read `docs/ARCHITECTURE.md` first.
 This document defines where Flutter code belongs and which dependency
 directions are preferred.
 
-## Current structure and future examples
+## Current structure and next boundaries
 
-The **current** source tree is intentionally small:
-
-```text
-app/lib/
-├── main.dart
-└── app/
-    ├── pangan_kita_app.dart
-    └── pangan_kita_theme.dart
-```
-
-There are no active `features/`, `core/`, `shared/` or routing directories.
-Do **not** create folders just to match a template.
-
-If real product features are approved, a possible **illustrative** shape is:
+PanganKita's Flutter prototype uses a **shallow, feature-first structure**.
+These directories reflect the existing UI, not deployed backend capabilities:
 
 ```text
 app/lib/
 ├── main.dart
-├── app/
-│   ├── pangan_kita_app.dart
-│   └── pangan_kita_theme.dart
-└── features/
-    └── <approved-feature>/
-        ├── presentation/
-        ├── domain/  # only if meaningful domain rules exist
-        └── data/    # only if a data source exists
+├── app/                        # routes, composition and theme
+├── features/
+│   ├── onboarding/             # local authentication demonstrations
+│   ├── discovery/              # home, search, product and area selection
+│   ├── merchants/              # nearby stores, map, directions, store details
+│   ├── shopping/               # session cart, checkout and payment previews
+│   ├── orders/                 # illustrative orders, pickup and reviews
+│   ├── messaging/              # conversations and support previews
+│   ├── notifications/          # display-only notification examples
+│   └── profile/                # profile, settings, favorites and terms UI
+└── shared/
+    ├── models/                 # reused DemoFood and DemoAddon examples
+    └── ...                     # existing common UI and formatting helpers
 ```
 
-Create only the folders and boundaries needed by the requested behavior. The
-codebase is not committed to these example names or a complete folder tree.
+`DemoFood` and `DemoAddon` have real consumers across multiple feature areas.
+They remain typed **local example models**, not an API or persistence layer.
+`DemoCart` is owned by `features/shopping/`, and its lifecycle remains owned
+by `PanganKitaApp`. Other features accept the existing cart reference where
+required; no global state, new dependency, or business logic is introduced.
+
+Routes and observable behavior are unchanged by this source relocation.
+Merchant pages remain in `features/merchants/` from the initial extraction.
+Tests remain directly under `app/test/`; moving the tests into subdirectories
+is not necessary to establish the feature ownership boundaries.
+
+Do not add `data/`, `domain/`, `presentation/`, services or repositories until
+current behavior demonstrates a need for them. Avoid feature dependency cycles.
 
 ## `main.dart`
 

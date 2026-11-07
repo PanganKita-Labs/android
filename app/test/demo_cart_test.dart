@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pangankita/features/discovery/demo_addon.dart';
-import 'package:pangankita/features/discovery/demo_cart.dart';
-import 'package:pangankita/features/discovery/demo_food.dart';
+import 'package:pangankita/features/shopping/demo_cart.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
+import 'package:pangankita/shared/models/demo_addon.dart';
+import 'package:pangankita/shared/models/demo_food.dart';
 
 void main() {
   test(

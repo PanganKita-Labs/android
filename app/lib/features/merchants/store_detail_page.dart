@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/demo_cart.dart';
-import 'package:pangankita/features/discovery/demo_food.dart';
+import 'package:pangankita/features/shopping/demo_cart.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
+import 'package:pangankita/shared/models/demo_food.dart';
 
 const _inset = 16.0;
 const _heroHeight = 185.0;

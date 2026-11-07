@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/profile_page.dart';
-import 'package:pangankita/features/discovery/settings_document_page.dart';
-import 'package:pangankita/features/discovery/settings_page.dart';
-import 'package:pangankita/features/discovery/terms_page.dart';
 import 'package:pangankita/features/onboarding/recovery_page.dart';
+import 'package:pangankita/features/profile/profile_page.dart';
+import 'package:pangankita/features/profile/settings_document_page.dart';
+import 'package:pangankita/features/profile/settings_page.dart';
+import 'package:pangankita/features/profile/terms_page.dart';
 
 import 'font_test_utils.dart';
 

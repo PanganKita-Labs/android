@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/demo_food.dart';
-import 'package:pangankita/features/discovery/directions_page.dart';
-import 'package:pangankita/features/discovery/nearby_map_page.dart';
+import 'package:pangankita/features/merchants/directions_page.dart';
+import 'package:pangankita/features/merchants/nearby_map_page.dart';
+import 'package:pangankita/shared/models/demo_food.dart';
 
 import 'font_test_utils.dart';
 

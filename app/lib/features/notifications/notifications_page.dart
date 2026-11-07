@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/discovery_navigation.dart';
-import 'package:pangankita/features/discovery/orders_page.dart';
+import 'package:pangankita/features/orders/orders_page.dart';
 
 const _ink = Color(0xFF14313A);
 const _orderSurface = Color(0xFFE7F0EB);
