@@ -1,5 +1,7 @@
 # PanganKita screenshot catalog
 
+**37 unique captures**, all 1080 x 2338 physical pixels, grouped by user-facing flow.
+
 Screenshots captured from the Flutter demonstration are grouped by user-facing flow.
 They document the appearance of example screens, **not** live merchant data,
 actual reservations, payments, authentication, location, or messages.
@@ -7,6 +9,8 @@ actual reservations, payments, authentication, location, or messages.
 Images here are **app output / review evidence**, not the external design
 reference screenshots or HTML that contributors may receive for individual tasks.
 Keep those design references outside the repository unless explicitly approved.
+
+[Read the full app walkthrough](../APP_WALKTHROUGH.md) for screen-by-screen navigation and demo boundaries.
 
 ## Browse by flow
 
@@ -18,7 +22,7 @@ Keep those design references outside the repository unless explicitly approved.
 - [Cart, checkout and payment previews](#cart-checkout-and-payment-previews) (6)
 - [Order previews, pickup and review](#order-previews-pickup-and-review) (8)
 - [Messaging previews](#messaging-previews) (2)
-- [Notifications](#notifications) (2)
+- [Notifications](#notifications) (1)
 - [Profile, settings and support](#profile-settings-and-support) (6)
 - [Location selection](#location-selection) (1)
 
@@ -30,7 +34,7 @@ Keep those design references outside the repository unless explicitly approved.
 
 ### Welcome and account recovery
 
-- [welcome-360x640-widget-render.png](onboarding/welcome-360x640-widget-render.png)
+- [welcome-preview.png](onboarding/welcome-preview.png)
 - [recovery-preview.png](onboarding/recovery-preview.png)
 
 ### Search and filters
@@ -80,7 +84,6 @@ Keep those design references outside the repository unless explicitly approved.
 ### Notifications
 
 - [notifications-widget-render.png](notifications/notifications-widget-render.png)
-- [home-notifications.png](notifications/home-notifications.png)
 
 ### Profile, settings and support
 
