@@ -2,7 +2,7 @@
 
 The mobile interface for [PanganKita](../README.md), a pickup-first surplus-food marketplace concept for Indonesia. This package is an **interactive local demonstration** built with Flutter. It does not connect to production authentication, inventory, payments, maps, or messaging services.
 
-For the product story and screenshots, start with the [root README](../README.md). For all 38 organized UI captures, browse the [screenshot catalog](../docs/screenshots/README.md).
+For the product story and screenshots, start with the [root README](../README.md). For all 37 distinct UI captures, browse the [screenshot catalog](../docs/screenshots/README.md).
 
 ## Development environment
 
@@ -41,25 +41,30 @@ flutter run -d emulator-5554
 app/
 ├── lib/
 │   ├── main.dart
-│   ├── app/
-│   │   ├── app_routes.dart       # Named routes
-│   │   ├── pangan_kita_app.dart  # Top-level composition and DemoCart owner
-│   │   └── pangan_kita_theme.dart
+│   ├── app/                   # Named routes, theme, app state ownership
 │   ├── features/
-│   │   ├── onboarding/           # Local form and welcome flows
-│   │   └── discovery/            # Current screen implementations / demo state
-│   └── shared/                   # Shared UI and formatting helpers
-├── assets/
-│   ├── brand/
-│   ├── fonts/
-│   └── prototype/
-├── test/                         # Widget and local behavior coverage
+│   │   ├── onboarding/        # Welcome and local authentication demos
+│   │   ├── discovery/         # Home, search, product detail, area selection
+│   │   ├── merchants/         # Nearby shops, map, directions and details
+│   │   ├── shopping/          # Local cart, checkout and payment previews
+│   │   ├── orders/            # Example order, pickup and review screens
+│   │   ├── messaging/         # Chat and support example screens
+│   │   ├── notifications/     # Sample notifications
+│   │   └── profile/           # Profile, favorites and settings
+│   └── shared/
+│       ├── models/            # Cross-feature DemoFood and DemoAddon
+│       └── ...                # Existing presentation and format utilities
+├── assets/                    # Brand, fonts and prototype artwork
+├── test/                      # Widget and local behavior coverage
 ├── android/
 ├── pubspec.yaml
 └── pubspec.lock
 ```
 
-This is an **accurate current-state map**, not the eventual target architecture. `features/discovery/` still houses merchant, cart, order, notification, messaging and profile presentation. Those responsibilities will be separated through focused refactors only after import/state dependencies and tests are checked. Do not create placeholder layers or add a state-management package just to make folders symmetrical.
+The folder organization matches **present demonstration responsibilities**.
+Screens and tests retain their existing behavior, route names, navigation,
+assets and local state. No backend, new state-management library or generic
+repository/service layer was introduced by this refactor.
 
 ### State and data boundaries
 

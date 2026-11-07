@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
-import 'package:pangankita/features/discovery/notifications_page.dart';
-import 'package:pangankita/features/discovery/orders_page.dart';
+import 'package:pangankita/features/notifications/notifications_page.dart';
+import 'package:pangankita/features/orders/orders_page.dart';
 
 import 'font_test_utils.dart';
 

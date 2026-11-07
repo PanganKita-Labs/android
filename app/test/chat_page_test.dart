@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/chat_page.dart';
-import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
-import 'package:pangankita/features/discovery/merchant_chat_page.dart';
+import 'package:pangankita/features/messaging/chat_page.dart';
+import 'package:pangankita/features/messaging/merchant_chat_page.dart';
+import 'package:pangankita/shared/models/demo_food.dart';
 
 import 'font_test_utils.dart';
 

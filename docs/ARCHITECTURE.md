@@ -128,34 +128,34 @@ The active Flutter source implements a **local demonstration prototype**:
 
 ```text
 app/lib/main.dart
-app/lib/app/app_routes.dart
-app/lib/app/pangan_kita_app.dart
-app/lib/app/pangan_kita_theme.dart
-app/lib/features/onboarding/
-app/lib/features/discovery/
-app/lib/shared/
-app/test/widget_test.dart
-app/test/reference_typography_test.dart
-app/test/social_sign_in_test.dart
+app/lib/app/                       # composition, named routes and theme
+app/lib/features/onboarding/       # local welcome/auth UI
+app/lib/features/discovery/        # home, search, product and area selection
+app/lib/features/merchants/        # store/map/directions previews
+app/lib/features/shopping/         # local cart, checkout, payment previews
+app/lib/features/orders/           # sample orders, pickup and reviews
+app/lib/features/messaging/        # local messaging/support examples
+app/lib/features/notifications/    # illustrative notices
+app/lib/features/profile/          # account/settings demonstrations
+app/lib/shared/models/             # reused DemoFood, DemoAddon types
+app/lib/shared/                    # common UI and formatting
+app/test/                          # existing widget tests
 ```
 
-App composition owns named routes and the theme. Onboarding owns splash,
-welcome, local form validation, demo OTP, and simulated password recovery.
-Discovery owns static listing examples, local search/category filtering, and
-product pages, the local cart preview, pickup checkout, and its demo status
-page. The orders tab is a separate display-only preview, not backed by the
-cart or a reservation. App composition owns and disposes one `DemoCart`
-notifier shared by product routes, `/cart`, `/checkout`, and
-`/checkout/status`; no global singleton or persistence is used. Cart lines
-retain typed add-ons and integer rupiah amounts. Quantity limits are preview
-bounds, not inventory rules.
-Shared widgets provide reference icons and unavailable-action feedback.
-Other presentation state remains local to the relevant widgets.
+Application composition still owns named routes, theme, the selected example
+area and the lifecycle of a single session-only `DemoCart`. `DemoCart` remains
+the same notifier, now located in `features/shopping/`. Product and merchant
+screens consume it through the existing constructor contracts. `DemoFood` and
+`DemoAddon` remain typed local examples, shared by several features.
 
-There is no server authentication, persistence, live location, ordering,
-reservation, payment, or backend integration. Tests exercise demo navigation,
-validation, search, responsive layouts, typography, and social artwork; they
-do not establish production authentication or transaction correctness.
+Checkout, orders, pickup, payment, messaging, merchant-map and notification
+screens are **demonstrations only**. Order previews are not backed by cart
+reservations or transactions. Quantity limits are UI bounds rather than
+inventory rules. The move does not change behavior, routes, widgets or tests.
+
+There is no server authentication, persistence, live location, reservation,
+payment or backend integration. Tests exercise local navigation, validation,
+responsive layouts, and rendering; they do not establish production behavior.
 
 Brand foundations, Android/Flutter configuration, lint/complexity rules, CI,
 and the scoped engineering and architecture contracts remain in force.

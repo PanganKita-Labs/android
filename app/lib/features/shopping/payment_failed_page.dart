@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/demo_cart.dart';
-import 'package:pangankita/features/discovery/payment_method_sheet.dart';
+import 'package:pangankita/features/shopping/demo_cart.dart';
+import 'package:pangankita/features/shopping/payment_method_sheet.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
 const Color _green = PanganKitaColors.brandPrimaryStrong;

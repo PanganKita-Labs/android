@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/canceled_orders_section.dart';
-import 'package:pangankita/features/discovery/completed_orders_section.dart';
-import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/features/discovery/discovery_navigation.dart';
+import 'package:pangankita/features/orders/canceled_orders_section.dart';
+import 'package:pangankita/features/orders/completed_orders_section.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
+import 'package:pangankita/shared/models/demo_food.dart';
 
 const _ink = Color(0xFF14313A);
 const _orange = Color(0xFFE98412);

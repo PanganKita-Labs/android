@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:pangankita/features/discovery/demo_addon.dart';
-import 'package:pangankita/features/discovery/demo_food.dart';
+import 'package:pangankita/shared/models/demo_addon.dart';
+import 'package:pangankita/shared/models/demo_food.dart';
 
 /// App-session cart for UI demonstrations; no persistence or stock mutations.
 class DemoCart extends ChangeNotifier {

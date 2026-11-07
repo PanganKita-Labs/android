@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/demo_cart.dart';
-import 'package:pangankita/features/discovery/demo_food.dart';
-import 'package:pangankita/features/discovery/payment_failed_page.dart';
-import 'package:pangankita/features/discovery/payment_status_page.dart';
+import 'package:pangankita/features/shopping/demo_cart.dart';
+import 'package:pangankita/features/shopping/payment_failed_page.dart';
+import 'package:pangankita/features/shopping/payment_status_page.dart';
+import 'package:pangankita/shared/models/demo_food.dart';
 
 import 'font_test_utils.dart';
 

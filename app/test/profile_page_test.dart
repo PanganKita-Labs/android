@@ -5,7 +5,7 @@ import 'package:pangankita/app/pangan_kita_app.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/discovery/location_selection_page.dart';
-import 'package:pangankita/features/discovery/profile_page.dart';
+import 'package:pangankita/features/profile/profile_page.dart';
 
 import 'font_test_utils.dart';
 

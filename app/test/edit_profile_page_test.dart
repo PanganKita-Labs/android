@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/edit_profile_page.dart';
-import 'package:pangankita/features/discovery/profile_page.dart';
+import 'package:pangankita/features/profile/edit_profile_page.dart';
+import 'package:pangankita/features/profile/profile_page.dart';
 
 import 'font_test_utils.dart';
 

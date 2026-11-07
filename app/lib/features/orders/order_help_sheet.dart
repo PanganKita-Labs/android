@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pangankita/features/discovery/demo_food.dart';
 import 'package:pangankita/shared/demo_notice.dart';
+import 'package:pangankita/shared/models/demo_food.dart';
 
 const _ink = Color(0xFF10283C);
 const _paleGreen = Color(0xFFEAF7F0);

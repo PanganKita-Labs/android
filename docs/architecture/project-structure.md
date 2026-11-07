@@ -7,32 +7,40 @@ directions are preferred.
 
 ## Current structure and next boundaries
 
-The Flutter client currently has a **feature-first, shallow layout**:
+PanganKita's Flutter prototype uses a **shallow, feature-first structure**.
+These directories reflect the existing UI, not deployed backend capabilities:
 
 ```text
 app/lib/
 ├── main.dart
-├── app/                       # app composition, routes, theme
+├── app/                        # routes, composition and theme
 ├── features/
-│   ├── onboarding/            # welcome and local auth demonstrations
-│   ├── discovery/             # home, search, products and other demo flows
-│   └── merchants/             # merchant list, map, directions and detail UI
-└── shared/                    # reused UI and formatting helpers
+│   ├── onboarding/             # local authentication demonstrations
+│   ├── discovery/              # home, search, product and area selection
+│   ├── merchants/              # nearby stores, map, directions, store details
+│   ├── shopping/               # session cart, checkout and payment previews
+│   ├── orders/                 # illustrative orders, pickup and reviews
+│   ├── messaging/              # conversations and support previews
+│   ├── notifications/          # display-only notification examples
+│   └── profile/                # profile, settings, favorites and terms UI
+└── shared/
+    ├── models/                 # reused DemoFood and DemoAddon examples
+    └── ...                     # existing common UI and formatting helpers
 ```
 
-`features/merchants/` owns four merchant presentation screens. The source move
-preserves the current routes, tests and local demo behavior. Merchant screens
-still import `DemoFood` (and store detail imports `DemoCart`) from `discovery`
-because the existing fixture/cart ownership has not yet been redesigned.
-That coupling is an **explicit temporary constraint**, not a new recommended
-dependency direction. Review it before extracting cart or product state;
-do not move those models speculatively or create circular feature dependencies.
+`DemoFood` and `DemoAddon` have real consumers across multiple feature areas.
+They remain typed **local example models**, not an API or persistence layer.
+`DemoCart` is owned by `features/shopping/`, and its lifecycle remains owned
+by `PanganKitaApp`. Other features accept the existing cart reference where
+required; no global state, new dependency, or business logic is introduced.
 
-Tests currently remain directly under `app/test/`. Further test organization
-should occur only when related feature boundaries have stabilized.
+Routes and observable behavior are unchanged by this source relocation.
+Merchant pages remain in `features/merchants/` from the initial extraction.
+Tests remain directly under `app/test/`; moving the tests into subdirectories
+is not necessary to establish the feature ownership boundaries.
 
-Create `data/`, `domain/` and `presentation/` subfolders only when they provide
-real value; no new abstraction or backend is introduced by this refactor.
+Do not add `data/`, `domain/`, `presentation/`, services or repositories until
+current behavior demonstrates a need for them. Avoid feature dependency cycles.
 
 ## `main.dart`
 
