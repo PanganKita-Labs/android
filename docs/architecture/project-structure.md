@@ -5,38 +5,34 @@ Read `docs/ARCHITECTURE.md` first.
 This document defines where Flutter code belongs and which dependency
 directions are preferred.
 
-## Current structure and future examples
+## Current structure and next boundaries
 
-The **current** source tree is intentionally small:
-
-```text
-app/lib/
-├── main.dart
-└── app/
-    ├── pangan_kita_app.dart
-    └── pangan_kita_theme.dart
-```
-
-There are no active `features/`, `core/`, `shared/` or routing directories.
-Do **not** create folders just to match a template.
-
-If real product features are approved, a possible **illustrative** shape is:
+The Flutter client currently has a **feature-first, shallow layout**:
 
 ```text
 app/lib/
 ├── main.dart
-├── app/
-│   ├── pangan_kita_app.dart
-│   └── pangan_kita_theme.dart
-└── features/
-    └── <approved-feature>/
-        ├── presentation/
-        ├── domain/  # only if meaningful domain rules exist
-        └── data/    # only if a data source exists
+├── app/                       # app composition, routes, theme
+├── features/
+│   ├── onboarding/            # welcome and local auth demonstrations
+│   ├── discovery/             # home, search, products and other demo flows
+│   └── merchants/             # merchant list, map, directions and detail UI
+└── shared/                    # reused UI and formatting helpers
 ```
 
-Create only the folders and boundaries needed by the requested behavior. The
-codebase is not committed to these example names or a complete folder tree.
+`features/merchants/` owns four merchant presentation screens. The source move
+preserves the current routes, tests and local demo behavior. Merchant screens
+still import `DemoFood` (and store detail imports `DemoCart`) from `discovery`
+because the existing fixture/cart ownership has not yet been redesigned.
+That coupling is an **explicit temporary constraint**, not a new recommended
+dependency direction. Review it before extracting cart or product state;
+do not move those models speculatively or create circular feature dependencies.
+
+Tests currently remain directly under `app/test/`. Further test organization
+should occur only when related feature boundaries have stabilized.
+
+Create `data/`, `domain/` and `presentation/` subfolders only when they provide
+real value; no new abstraction or backend is introduced by this refactor.
 
 ## `main.dart`
 
