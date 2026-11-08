@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
+import 'package:pangankita/app/navigation/app_bottom_navigation.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/discovery_navigation.dart';
-import 'package:pangankita/features/orders/orders_page.dart';
 
 const _ink = Color(0xFF14313A);
 const _orderSurface = Color(0xFFE7F0EB);
@@ -11,8 +10,6 @@ const _promoIconSurface = Color(0xFFF9E7D1);
 const _cardRadius = 20.0;
 const _chipSpacing = 10.0;
 const _iconRadius = 23.0;
-const _activeOrdersTab = 0;
-const _completedOrdersTab = 1;
 const _completedNoticeId = 3;
 
 typedef _Notice = ({
@@ -128,7 +125,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: const DiscoveryNavigation(selectedIndex: 3),
+      bottomNavigationBar: const AppBottomNavigation(selectedIndex: 3),
     );
   }
 }
@@ -149,17 +146,13 @@ class _NotificationGroup extends StatelessWidget {
   void _openNotice(BuildContext context, _Notice notice) {
     onOpened(notice.id);
     if (notice.order) {
-      Navigator.of(context)
-          .push<void>(
-            MaterialPageRoute<void>(
-              builder: (context) => OrdersPage(
-                initialTab: notice.id == _completedNoticeId
-                    ? _completedOrdersTab
-                    : _activeOrdersTab,
-              ),
-            ),
-          )
-          .ignore();
+      Navigator.pushNamed<void>(
+        context,
+        AppRoutes.orders,
+        arguments: notice.id == _completedNoticeId
+            ? OrdersTab.completed
+            : OrdersTab.active,
+      ).ignore();
     } else {
       Navigator.pushNamed<void>(context, AppRoutes.home).ignore();
     }

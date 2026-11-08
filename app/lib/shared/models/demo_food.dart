@@ -71,24 +71,12 @@ class DemoFood {
       ? 'assets/prototype/garlic-bread.webp'
       : 'assets/prototype/$id.webp';
 
-  /// Reference line breaks for compact cards; search uses the original title.
-  String get cardTitle => switch (id) {
-    'buns' => title.replaceFirst(' Buns', '\nBuns'),
-    'chicken' => title.replaceFirst(' Tanpa', '\nTanpa'),
-    'rendang' => title.replaceFirst(' Rendang', '\nRendang'),
-    _ => title,
-  };
-
   /// Case-insensitive reference search; no remote requests.
   bool matches(String query, String selectedCategory) =>
       (selectedCategory == 'Semua' || category == selectedCategory) &&
       '$title $merchant $category $searchTerms'.toLowerCase().contains(
         query.trim().toLowerCase(),
       );
-
-  /// Display-only count shown in the HTML.
-  /// The local fixture subset contains five examples.
-  static const referenceCategoryCount = '18';
 
   /// Additional display-only product on the Mawar store and search previews.
   static const garlicBread = DemoFood(

@@ -101,7 +101,10 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       ),
       AppRoutes.nearbyStores: (context) => const NearbyStoresPage(),
       AppRoutes.nearbyMap: (context) => const NearbyMapPage(),
-      AppRoutes.orders: (context) => const OrdersPage(),
+      AppRoutes.orders: (context) {
+        final tab = ModalRoute.of(context)?.settings.arguments;
+        return OrdersPage(initialTab: tab is OrdersTab ? tab.index : 0);
+      },
       AppRoutes.orderDetail: (context) {
         final food = ModalRoute.of(context)?.settings.arguments;
         return food is DemoFood

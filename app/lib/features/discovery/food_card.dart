@@ -15,6 +15,14 @@ const _badgeIconSize = 14.0;
 const _footerIconSize = 14.0;
 const _badgeBorderWidth = .7;
 
+// Reference-specific card line breaks; not part of the shared listing model.
+String _cardTitle(DemoFood food) => switch (food.id) {
+  'buns' => food.title.replaceFirst(' Buns', '\nBuns'),
+  'chicken' => food.title.replaceFirst(' Tanpa', '\nTanpa'),
+  'rendang' => food.title.replaceFirst(' Rendang', '\nRendang'),
+  _ => food.title,
+};
+
 /// Read-only listing card matching the pickup-oriented home reference.
 class FoodCard extends StatelessWidget {
   /// Creates a card for an illustrative local offer.
@@ -91,7 +99,7 @@ class _FoodSummary extends StatelessWidget {
             _MerchantLine(food: food),
             const SizedBox(height: 4),
             Text(
-              food.cardTitle,
+              _cardTitle(food),
               style: const TextStyle(
                 fontFamily: PanganKitaTheme.emphasisFontFamily,
                 fontSize: 14,

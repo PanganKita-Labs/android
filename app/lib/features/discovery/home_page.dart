@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
+import 'package:pangankita/app/navigation/app_bottom_navigation.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/discovery_navigation.dart';
 import 'package:pangankita/features/discovery/food_card.dart';
 import 'package:pangankita/features/discovery/hero_banner.dart';
 import 'package:pangankita/features/discovery/home_header.dart';
@@ -15,6 +15,7 @@ const _categoryGap = 5.0;
 const _categoryLabelGap = 6.0;
 const _categoryFontSize = 9.0;
 const _nearbySectionGap = 12.0;
+const _referenceCategoryCount = '18';
 
 void _ignoreAreaChange(String area) {
   if (area.isEmpty) throw ArgumentError.value(area, 'area');
@@ -169,7 +170,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: const DiscoveryNavigation(selectedIndex: 0),
+      bottomNavigationBar: const AppBottomNavigation(selectedIndex: 0),
     );
   }
 }
@@ -392,7 +393,7 @@ class _ReferenceCategoryCount extends StatelessWidget {
     child: Padding(
       padding: EdgeInsets.all(5),
       child: Text(
-        DemoFood.referenceCategoryCount,
+        _referenceCategoryCount,
         style: TextStyle(
           fontFamily: PanganKitaTheme.emphasisFontFamily,
           fontSize: 9,

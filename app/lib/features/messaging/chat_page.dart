@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
+import 'package:pangankita/app/navigation/app_bottom_navigation.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/discovery_navigation.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
 const _ink = Color(0xFF14313A);
@@ -104,7 +104,7 @@ class _ChatPageState extends State<ChatPage> {
           ],
         ),
       ),
-      bottomNavigationBar: const DiscoveryNavigation(selectedIndex: 2),
+      bottomNavigationBar: const AppBottomNavigation(selectedIndex: 2),
     );
   }
 }

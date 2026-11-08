@@ -9,8 +9,8 @@ const _navigationFontSize = 12.0;
 const _navigationLineHeight = 1.2;
 const _notificationsIndex = 3;
 
-/// Bottom destinations shared by the discovery previews.
-class DiscoveryNavigation extends StatelessWidget {
+/// App-wide bottom destinations shared by consumer tabs.
+class AppBottomNavigation extends StatelessWidget {
   /// Selects Home (0), Orders (1), Chat (2), or Notifications (3).
   const new({required this.selectedIndex, super.key});
 

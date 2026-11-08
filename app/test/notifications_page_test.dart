@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pangankita/app/app_routes.dart';
+import 'package:pangankita/app/navigation/app_bottom_navigation.dart';
+import 'package:pangankita/app/pangan_kita_app.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/notifications/notifications_page.dart';
@@ -11,6 +13,18 @@ import 'font_test_utils.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(loadBrandFonts);
+
+  // Exercise real app route registration, not a duplicated test-only route map.
+  Future<void> openNotifications(WidgetTester tester) async {
+    await tester.pumpWidget(const PanganKitaApp());
+    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
+    tester
+        .state<NavigatorState>(find.byType(Navigator))
+        .pushNamed<void>(AppRoutes.notifications)
+        .ignore();
+    await tester.pumpAndSettle();
+  }
 
   testWidgets('Home bell opens Notifications', (tester) async {
     await tester.pumpWidget(
@@ -61,13 +75,8 @@ void main() {
   });
 
   testWidgets('notification cards open relevant preview pages', (tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: PanganKitaTheme.light,
-        home: const NotificationsPage(),
-        routes: {AppRoutes.home: (context) => const HomePage()},
-      ),
-    );
+    await openNotifications(tester);
+    expect(find.byType(AppBottomNavigation), findsOneWidget);
     await tester.tap(find.text('Pesanan siap diambil!').first);
     await tester.pumpAndSettle();
     expect(find.byType(OrdersPage), findsOneWidget);
@@ -84,12 +93,7 @@ void main() {
   testWidgets('completed notification points to matching example order', (
     tester,
   ) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: PanganKitaTheme.light,
-        home: const NotificationsPage(),
-      ),
-    );
+    await openNotifications(tester);
     await tester.scrollUntilVisible(
       find.text('Pesanan selesai'),
       140,
@@ -120,6 +124,21 @@ void main() {
       find.text('Contoh tampilan · belum ada pesanan selesai.'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('Orders tab defaults to active when opened from navigation', (
+    tester,
+  ) async {
+    await openNotifications(tester);
+    await tester.tap(
+      find.descendant(
+        of: find.byType(AppBottomNavigation),
+        matching: find.text('Pesanan'),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(OrdersPage), findsOneWidget);
+    expect(find.text('Contoh pesanan aktif'), findsOneWidget);
   });
 
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
