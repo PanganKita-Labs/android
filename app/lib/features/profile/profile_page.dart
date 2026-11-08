@@ -4,7 +4,7 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const Color _profileGreen = PanganKitaColors.brandPrimaryStrong;
-const _profileInk = Color(0xFF10283C);
+const Color _profileInk = PanganKitaColors.inkDeep;
 
 void _ignoreAreaChange(String area) {
   if (area.isEmpty) throw ArgumentError.value(area, 'area');

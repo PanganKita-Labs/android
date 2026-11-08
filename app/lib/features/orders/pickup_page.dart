@@ -5,7 +5,7 @@ import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
 const Color _green = PanganKitaColors.brandPrimaryStrong;
-const _ink = Color(0xFF10283C);
+const Color _ink = PanganKitaColors.inkDeep;
 const _noticeRadius = 16.0;
 const _photoRadius = 12.0;
 const _photoSize = 72.0;
@@ -36,7 +36,7 @@ class PickupPage extends StatelessWidget {
         children: [
           const CircleAvatar(
             radius: 52,
-            backgroundColor: Color(0xFFE7F5ED),
+            backgroundColor: PanganKitaColors.positiveSurface,
             child: Icon(Icons.shopping_bag_outlined, size: 56, color: _green),
           ),
           const SizedBox(height: 12),
@@ -57,7 +57,7 @@ class PickupPage extends StatelessWidget {
           const SizedBox(height: 12),
           DecoratedBox(
             decoration: const BoxDecoration(
-              color: Color(0xFFE7F5ED),
+              color: PanganKitaColors.positiveSurface,
               borderRadius: BorderRadius.all(Radius.circular(_noticeRadius)),
             ),
             child: Padding(

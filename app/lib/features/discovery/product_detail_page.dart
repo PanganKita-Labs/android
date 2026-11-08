@@ -593,7 +593,7 @@ class _CartAction extends StatelessWidget {
 
 final ButtonStyle _quantityStyle = IconButton.styleFrom(
   minimumSize: const Size.square(44),
-  backgroundColor: const Color(0xFFE8E4DF),
+  backgroundColor: PanganKitaColors.borderNeutral,
   foregroundColor: Colors.black54,
   disabledForegroundColor: Colors.grey,
 );

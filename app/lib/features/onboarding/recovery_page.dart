@@ -4,7 +4,7 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/onboarding/auth_validation.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
-const _ink = Color(0xFF10283C);
+const Color _ink = PanganKitaColors.inkDeep;
 
 /// Email step for the local password recovery preview.
 class RecoveryPage extends StatefulWidget {

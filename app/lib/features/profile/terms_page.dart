@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 
-const _ink = Color(0xFF10283C);
+const Color _ink = PanganKitaColors.inkDeep;
 
 /// Information about the current demo while official terms await approval.
 class TermsPage extends StatelessWidget {
@@ -25,7 +25,7 @@ class TermsPage extends StatelessWidget {
           const Text('Informasi penggunaan versi contoh PanganKita'),
           const SizedBox(height: 24),
           const Card(
-            color: Color(0xFFE7F0EB),
+            color: PanganKitaColors.informationSurface,
             child: Padding(
               padding: EdgeInsets.all(18),
               child: Text(

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-const _ink = Color(0xFF10283C);
+const Color _ink = PanganKitaColors.inkDeep;
 const _paleGreen = Color(0xFFEAF7F0);
 const _sheetHeightFactor = 0.68;
 const _merchantRadius = 22.0;

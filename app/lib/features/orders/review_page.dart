@@ -3,7 +3,7 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-const Color _ink = Color(0xFF10283C);
+const Color _ink = PanganKitaColors.inkDeep;
 const Color _green = PanganKitaColors.brandPrimaryStrong;
 const _photoSize = 72.0;
 const _photoRadius = 12.0;
@@ -199,7 +199,7 @@ class _TagPicker extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   foregroundColor: _green,
                   backgroundColor: selected.contains(label)
-                      ? const Color(0xFFE7F5ED)
+                      ? PanganKitaColors.positiveSurface
                       : Colors.white,
                   side: BorderSide(
                     color: selected.contains(label)

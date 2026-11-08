@@ -17,7 +17,7 @@ const _personVerticalPadding = 14.0;
 const _checkoutGap = 12.0;
 const _checkoutLabelGap = 4.0;
 const _checkoutPanelGap = 16.0;
-const _pickupTextColor = Color(0xFFAD5200);
+const Color _pickupTextColor = PanganKitaColors.attentionText;
 
 /// Pickup checkout preview; never submits an order or initiates payment.
 class CheckoutPage extends StatefulWidget {

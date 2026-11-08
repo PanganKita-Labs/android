@@ -4,8 +4,8 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-const _ink = Color(0xFF14313A);
-const _orange = Color(0xFFE98412);
+const Color _ink = PanganKitaColors.inkCool;
+const Color _orange = PanganKitaColors.referenceOrange;
 const _cardRadius = 20.0;
 const _imageHeight = 126.0;
 const _avatarRadius = 20.0;
