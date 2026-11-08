@@ -125,10 +125,10 @@ packages:
     dependency: "direct dev"
     description:
       name: dart_code_linter
-      sha256: c5731302467ec63afdffde430f5a23312ff638711076b7230d50747247366824
+      sha256: "7b1c61a4552a29db1869f68d9e0a6621d6fc1df14f072c7807c405fdc3fcb12b"
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.0"
+    version: "4.4.4"
   dart_style:
     dependency: transitive
     description:
@@ -141,10 +141,10 @@ packages:
     dependency: "direct dev"
     description:
       name: dartrics
-      sha256: bc8b322c3997fc7e3223df70f38b01e3148e3a9beb2797b8a79725c9d38e027a
+      sha256: c080442db83f668ab52f8046a0201809eac869fa7441633f777e99ad6f2a7249
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.0"
+    version: "1.6.1"
   fake_async:
     dependency: transitive
     description:
