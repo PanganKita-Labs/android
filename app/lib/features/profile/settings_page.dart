@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const Color _ink = PanganKitaColors.inkDeep;
@@ -12,92 +13,156 @@ const _largeTextScale = 1.5;
 /// Account-settings preview with local, non-persistent switches.
 class SettingsPage extends StatelessWidget {
   /// Creates the settings reference page without account integration.
-  const new({super.key});
+  const new({this.onLocaleChanged = _ignoreLocaleChange, super.key});
+
+  /// Called when the user selects a supported UI language.
+  final ValueChanged<Locale> onLocaleChanged;
+
+  // A standalone SettingsPage cannot persist a language choice.
+  static void _ignoreLocaleChange(Locale _) {
+    return;
+  }
+
+  Future<void> _chooseLanguage(BuildContext context) async {
+    final selected = await showModalBottomSheet<Locale>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheetContext) {
+        final strings = sheetContext.i18n;
+        final current = Localizations.localeOf(sheetContext).languageCode;
+        final languages = <({Locale locale, String label})>[
+          (
+            locale: const Locale('id'),
+            label: strings?.languageIndonesian ?? 'Bahasa Indonesia',
+          ),
+          (
+            locale: const Locale('en'),
+            label: strings?.languageEnglish ?? 'English',
+          ),
+          (
+            locale: const Locale.fromSubtags(
+              languageCode: 'zh',
+              scriptCode: 'Hans',
+            ),
+            label: strings?.languageChinese ?? '简体中文',
+          ),
+        ];
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (final language in languages)
+                ListTile(
+                  title: I18nText(language.label),
+                  selected: language.locale.languageCode == current,
+                  onTap: () => Navigator.pop(sheetContext, language.locale),
+                ),
+            ],
+          ),
+        );
+      },
+    );
+    if (selected case final locale?) onLocaleChanged(locale);
+  }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    backgroundColor: PanganKitaColors.surfaceWarm,
-    body: SafeArea(
-      child: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
-        children: [
-          Row(
-            children: [
-              IconButton.filledTonal(
-                tooltip: 'Kembali ke Profil Saya',
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(11)),
+  Widget build(BuildContext context) {
+    final i18n = context.i18n;
+    return Scaffold(
+      backgroundColor: PanganKitaColors.surfaceWarm,
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+          children: [
+            Row(
+              children: [
+                IconButton.filledTonal(
+                  tooltip: i18n?.backToProfile ?? 'Kembali ke Profil Saya',
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(11)),
+                    ),
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.arrow_back, color: _ink),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: I18nText(
+                    i18n?.settingsTitle ?? 'Pengaturan',
+                    style: Theme.of(context).textTheme.headlineLarge
+                        ?.copyWith(color: _ink),
                   ),
                 ),
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back, color: _ink),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  'Pengaturan',
-                  style: Theme.of(context).textTheme.headlineLarge
-                      ?.copyWith(color: _ink),
+              ],
+            ),
+            const SizedBox(height: 32),
+            _SectionTitle(i18n?.notificationsTitle ?? 'Notifikasi'),
+            const SizedBox(height: 6),
+            I18nText(
+              i18n?.notificationsDemo ??
+                  'Pengaturan notifikasi hanya contoh dan tidak disimpan.',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: 10),
+            const _NotificationCard(),
+            const SizedBox(height: 30),
+            _SectionTitle(i18n?.accountTitle ?? 'Akun'),
+            const SizedBox(height: 10),
+            _SettingsCard(
+              rows: [
+                _SettingsRow(
+                  Icons.lock_outline,
+                  i18n?.changePassword ?? 'Ubah Password',
+                  route: AppRoutes.recover,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 32),
-          const _SectionTitle('Notifikasi'),
-          const SizedBox(height: 6),
-          Text(
-            'Pengaturan notifikasi hanya contoh dan tidak disimpan.',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-          const SizedBox(height: 10),
-          const _NotificationCard(),
-          const SizedBox(height: 30),
-          const _SectionTitle('Akun'),
-          const SizedBox(height: 10),
-          const _SettingsCard(
-            rows: [
-              _SettingsRow(
-                Icons.lock_outline,
-                'Ubah Password',
-                route: AppRoutes.recover,
-              ),
-              _SettingsRow(Icons.language, 'Bahasa', detail: 'Indonesia'),
-            ],
-          ),
-          const SizedBox(height: 30),
-          const _SectionTitle('Tentang PanganKita'),
-          const SizedBox(height: 10),
-          const _SettingsCard(
-            rows: [
-              _SettingsRow(
-                Icons.description_outlined,
-                'Syarat & Ketentuan',
-                route: AppRoutes.terms,
-              ),
-              _SettingsRow(
-                Icons.verified_user_outlined,
-                'Kebijakan Privasi',
-                route: AppRoutes.privacy,
-              ),
-              _SettingsRow(
-                Icons.help_outline,
-                'Pusat Bantuan',
-                route: AppRoutes.support,
-              ),
-            ],
-          ),
-          const SizedBox(height: 22),
-          Text(
-            'PanganKita • Pengaturan contoh',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ],
+                _SettingsRow(
+                  Icons.language,
+                  i18n?.languageLabel ?? 'Bahasa',
+                  detail: switch (Localizations.localeOf(context)
+                      .languageCode) {
+                    'en' => 'English',
+                    'zh' => '简体中文',
+                    _ => 'Indonesia',
+                  },
+                  onTap: () => _chooseLanguage(context).ignore(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            _SectionTitle(i18n?.aboutPanganKita ?? 'Tentang PanganKita'),
+            const SizedBox(height: 10),
+            _SettingsCard(
+              rows: [
+                _SettingsRow(
+                  Icons.description_outlined,
+                  i18n?.terms ?? 'Syarat & Ketentuan',
+                  route: AppRoutes.terms,
+                ),
+                _SettingsRow(
+                  Icons.verified_user_outlined,
+                  i18n?.privacy ?? 'Kebijakan Privasi',
+                  route: AppRoutes.privacy,
+                ),
+                _SettingsRow(
+                  Icons.help_outline,
+                  i18n?.helpCenter ?? 'Pusat Bantuan',
+                  route: AppRoutes.support,
+                ),
+              ],
+            ),
+            const SizedBox(height: 22),
+            I18nText(
+              i18n?.settingsFooter ?? 'PanganKita • Pengaturan contoh',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class _SectionTitle extends StatelessWidget {
@@ -106,7 +171,7 @@ class _SectionTitle extends StatelessWidget {
   final String label;
 
   @override
-  Widget build(BuildContext context) => Text(
+  Widget build(BuildContext context) => I18nText(
     label,
     style: Theme.of(context).textTheme.titleLarge?.copyWith(color: _ink),
   );
@@ -125,71 +190,90 @@ class _NotificationCardState extends State<_NotificationCard> {
   bool _promos = false;
 
   @override
-  Widget build(BuildContext context) => Card(
-    color: Colors.white,
-    margin: EdgeInsets.zero,
-    child: Column(
-      children: [
-        SwitchListTile(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
+  Widget build(BuildContext context) {
+    final i18n = context.i18n;
+    return Card(
+      color: Colors.white,
+      margin: EdgeInsets.zero,
+      child: Column(
+        children: [
+          SwitchListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            secondary: const Icon(Icons.notifications_outlined, color: _orange),
+            title: I18nText(i18n?.ordersUpdate ?? 'Update pesanan'),
+            subtitle: I18nText(
+              i18n?.ordersUpdateDescription ??
+                  'Dapatkan notifikasi status pesanan kamu.',
+            ),
+            value: _orders,
+            activeTrackColor: _green,
+            onChanged: (value) => setState(() => _orders = value),
           ),
-          secondary: const Icon(Icons.notifications_outlined, color: _orange),
-          title: const Text('Update pesanan'),
-          subtitle: const Text('Dapatkan notifikasi status pesanan kamu.'),
-          value: _orders,
-          activeTrackColor: _green,
-          onChanged: (value) => setState(() => _orders = value),
-        ),
-        const Divider(height: 1, indent: 16, endIndent: 16),
-        SwitchListTile(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
+          const Divider(height: 1, indent: 16, endIndent: 16),
+          SwitchListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            secondary: const Icon(Icons.chat_bubble_outline, color: _green),
+            title: I18nText(i18n?.merchantMessages ?? 'Pesan dari toko'),
+            subtitle: I18nText(
+              i18n?.merchantMessagesDescription ??
+                  'Dapatkan notifikasi pesan dari toko pilihanmu.',
+            ),
+            value: _messages,
+            activeTrackColor: _green,
+            onChanged: (value) => setState(() => _messages = value),
           ),
-          secondary: const Icon(Icons.chat_bubble_outline, color: _green),
-          title: const Text('Pesan dari toko'),
-          subtitle: const Text(
-            'Dapatkan notifikasi pesan dari toko pilihanmu.',
+          const Divider(height: 1, indent: 16, endIndent: 16),
+          SwitchListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            secondary: const Icon(Icons.local_offer_outlined, color: _orange),
+            title: I18nText(i18n?.promotions ?? 'Promo & penawaran'),
+            subtitle: I18nText(
+              i18n?.promotionsDescription ??
+                  'Dapatkan info promo, diskon dan penawaran menarik.',
+            ),
+            value: _promos,
+            activeTrackColor: _green,
+            onChanged: (value) => setState(() => _promos = value),
           ),
-          value: _messages,
-          activeTrackColor: _green,
-          onChanged: (value) => setState(() => _messages = value),
-        ),
-        const Divider(height: 1, indent: 16, endIndent: 16),
-        SwitchListTile(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
-          secondary: const Icon(Icons.local_offer_outlined, color: _orange),
-          title: const Text('Promo & penawaran'),
-          subtitle: const Text(
-            'Dapatkan info promo, diskon dan penawaran menarik.',
-          ),
-          value: _promos,
-          activeTrackColor: _green,
-          onChanged: (value) => setState(() => _promos = value),
-        ),
-      ],
-    ),
-  );
+        ],
+      ),
+    );
+  }
 }
 
 class _SettingsRow {
-  const new(this.icon, this.label, {this.detail, this.route});
+  const new(this.icon, this.label, {this.detail, this.route, this.onTap});
 
   final IconData icon;
   final String label;
   final String? detail;
   final String? route;
+  final VoidCallback? onTap;
 }
 
 class _SettingsCard extends StatelessWidget {
   const new({required this.rows});
 
   final List<_SettingsRow> rows;
+
+  void _openRow(BuildContext context, _SettingsRow row) {
+    if (row.onTap case final tap?) {
+      tap();
+    } else if (row.route case final route?) {
+      Navigator.pushNamed(context, route).ignore();
+    } else {
+      DemoNotice.unavailable(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,10 +293,10 @@ class _SettingsCard extends StatelessWidget {
                 vertical: 6,
               ),
               leading: Icon(rows[index].icon, color: _green),
-              title: Text(rows[index].label),
+              title: I18nText(rows[index].label),
               subtitle: compact
                   ? switch (rows[index].detail) {
-                      final String detail => Text(detail),
+                      final String detail => I18nText(detail),
                       null => null,
                     }
                   : null,
@@ -220,17 +304,11 @@ class _SettingsCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (!compact)
-                    if (rows[index].detail case final detail?) Text(detail),
+                    if (rows[index].detail case final detail?) I18nText(detail),
                   const Icon(Icons.chevron_right),
                 ],
               ),
-              onTap: () => switch (rows[index].route) {
-                final String route => Navigator.pushNamed(
-                  context,
-                  route,
-                ).ignore(),
-                null => DemoNotice.unavailable(context),
-              },
+              onTap: () => _openRow(context, rows[index]),
             ),
           ],
         ],

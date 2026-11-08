@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
@@ -50,7 +51,7 @@ class _NearbyStoresPageState extends State<NearbyStoresPage> {
             const SizedBox(height: 22),
             const _StoresSectionHeader(),
             const SizedBox(height: 6),
-            const Text(
+            const I18nText(
               'Contoh tampilan · belum memakai lokasi atau data toko nyata.',
               style: TextStyle(color: Colors.black54),
             ),
@@ -62,7 +63,9 @@ class _NearbyStoresPageState extends State<NearbyStoresPage> {
             if (stores.isEmpty)
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 36),
-                child: Center(child: Text('Tidak ada toko contoh yang cocok.')),
+                child: Center(
+                  child: I18nText('Tidak ada toko contoh yang cocok.'),
+                ),
               ),
           ],
         ),
@@ -78,7 +81,7 @@ class _StoresHeader extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     children: [
       IconButton.filledTonal(
-        tooltip: 'Kembali',
+        tooltip: translateDisplayText(context, 'Kembali'),
         onPressed: () => Navigator.pop(context),
         style: IconButton.styleFrom(
           backgroundColor: Colors.white,
@@ -91,12 +94,12 @@ class _StoresHeader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            I18nText(
               'Toko di Sekitarmu',
               style: Theme.of(context).textTheme.headlineSmall
                   ?.copyWith(color: _ink),
             ),
-            const Text('Mandala by Pass, Medan · contoh lokasi'),
+            const I18nText('Mandala by Pass, Medan · contoh lokasi'),
           ],
         ),
       ),
@@ -113,10 +116,13 @@ class _StoresSearch extends StatelessWidget {
   Widget build(BuildContext context) => TextField(
     onChanged: onChanged,
     decoration: InputDecoration(
-      hintText: 'Cari nama toko atau kategori...',
+      hintText: translateDisplayText(
+        context,
+        'Cari nama toko atau kategori...',
+      ),
       prefixIcon: const Icon(Icons.search),
       suffixIcon: IconButton(
-        tooltip: 'Filter toko belum tersedia',
+        tooltip: translateDisplayText(context, 'Filter toko belum tersedia'),
         onPressed: () => DemoNotice.unavailable(context),
         icon: const Icon(Icons.tune),
       ),
@@ -139,7 +145,7 @@ class _StoresFilters extends StatelessWidget {
           'Rating',
         ]) ...[
           ChoiceChip(
-            label: Text(label),
+            label: I18nText(label),
             selected: label == 'Terdekat',
             showCheckmark: false,
             selectedColor: PanganKitaColors.brandPrimaryStrong,
@@ -168,19 +174,19 @@ class _StoresSectionHeader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            I18nText(
               'Pilihan toko',
               style: Theme.of(context).textTheme.titleLarge
                   ?.copyWith(color: _ink),
             ),
-            const Text('4 toko contoh untuk pratinjau'),
+            const I18nText('4 toko contoh untuk pratinjau'),
           ],
         ),
       ),
       TextButton(
         onPressed: () =>
             Navigator.pushNamed(context, AppRoutes.nearbyMap).ignore(),
-        child: const Text('Lihat Peta'),
+        child: const I18nText('Lihat Peta'),
       ),
     ],
   );
@@ -231,7 +237,7 @@ class _StoreCard extends StatelessWidget {
                       horizontal: 9,
                       vertical: 5,
                     ),
-                    child: Text(
+                    child: I18nText(
                       '${food.saving} · contoh',
                       style: const TextStyle(color: Colors.white),
                     ),
@@ -254,7 +260,7 @@ class _StoreCard extends StatelessWidget {
                           : null,
                       child: food.id == 'buns'
                           ? null
-                          : Text(
+                          : I18nText(
                               food.merchant.substring(0, 1),
                               style: Theme.of(context).textTheme.titleMedium
                                   ?.copyWith(
@@ -267,11 +273,11 @@ class _StoreCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          I18nText(
                             food.merchant,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          Text(
+                          I18nText(
                             food.id == 'buns' ? 'Roti & Pastry' : food.category,
                           ),
                         ],
@@ -350,7 +356,7 @@ class _StoreStat extends StatelessWidget {
               color: PanganKitaColors.brandAccent,
             ),
           Flexible(
-            child: Text(
+            child: I18nText(
               value,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -359,7 +365,7 @@ class _StoreStat extends StatelessWidget {
           ),
         ],
       ),
-      Text(
+      I18nText(
         label,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,

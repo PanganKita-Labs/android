@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const _providerGap = 9.0;
@@ -76,7 +77,7 @@ class _SocialDivider extends StatelessWidget {
           color: Theme.of(context).scaffoldBackgroundColor,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
+            child: I18nText(
               register ? 'Atau daftar dengan' : 'Lanjutkan dengan',
               textAlign: TextAlign.center,
               style: const TextStyle(

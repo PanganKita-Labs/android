@@ -1,0 +1,1925 @@
+{
+  "@@locale": "id",
+  "navHome": "Beranda",
+  "navOrders": "Pesanan",
+  "navChat": "Chat",
+  "navNotifications": "Notifikasi",
+  "settingsTitle": "Pengaturan",
+  "backToProfile": "Kembali ke Profil Saya",
+  "notificationsTitle": "Notifikasi",
+  "notificationsDemo": "Pengaturan notifikasi hanya contoh dan tidak disimpan.",
+  "accountTitle": "Akun",
+  "changePassword": "Ubah Password",
+  "languageLabel": "Bahasa",
+  "aboutPanganKita": "Tentang PanganKita",
+  "terms": "Syarat & Ketentuan",
+  "privacy": "Kebijakan Privasi",
+  "helpCenter": "Pusat Bantuan",
+  "settingsFooter": "PanganKita • Pengaturan contoh",
+  "ordersUpdate": "Update pesanan",
+  "ordersUpdateDescription": "Dapatkan notifikasi status pesanan kamu.",
+  "merchantMessages": "Pesan dari toko",
+  "merchantMessagesDescription": "Dapatkan notifikasi pesan dari toko pilihanmu.",
+  "promotions": "Promo & penawaran",
+  "promotionsDescription": "Dapatkan info promo, diskon dan penawaran menarik.",
+  "languageIndonesian": "Bahasa Indonesia",
+  "languageEnglish": "English",
+  "languageChinese": "Mandarin Sederhana",
+  "uiExampleOrderUnavailable": "Contoh pesanan tidak tersedia.",
+  "@uiExampleOrderUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleMerchantChatUnavailable": "Contoh chat toko tidak tersedia.",
+  "@uiExampleMerchantChatUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExamplePickupUnavailable": "Contoh pengambilan tidak tersedia.",
+  "@uiExamplePickupUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleReviewUnavailable": "Contoh ulasan tidak tersedia.",
+  "@uiExampleReviewUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMandalaByPassMedanSampleLocation": "Mandala by Pass, Medan · contoh lokasi",
+  "@uiMandalaByPassMedanSampleLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueSampleFoodItemsFound": "{arg0} makanan contoh ditemukan",
+  "@uiValueSampleFoodItemsFound": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiFilter": "Filter",
+  "@uiFilter": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDistanceUnavailable": "Jarak belum tersedia",
+  "@uiDistanceUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickUpAtValueDemo": "Ambil {arg0} (contoh)",
+  "@uiPickUpAtValueDemo": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiCanTFindYourFood": "Belum ketemu makananmu",
+  "@uiCanTFindYourFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTryAnotherKeywordFromTheAvailableSampleFoods": "Coba kata kunci lain dari contoh makanan yang tersedia.",
+  "@uiTryAnotherKeywordFromTheAvailableSampleFoods": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEditSearch": "Ubah Pencarian",
+  "@uiEditSearch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiResetFilters": "Reset Filter",
+  "@uiResetFilters": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYouMayAlsoLike": "Mungkin Kamu Suka",
+  "@uiYouMayAlsoLike": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchFilters": "Filter Pencarian",
+  "@uiSearchFilters": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiReset": "Reset",
+  "@uiReset": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCategory": "Kategori",
+  "@uiCategory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPriceRangeRp": "Rentang harga (Rp)",
+  "@uiPriceRangeRp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDistance": "Jarak",
+  "@uiDistance": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDistanceFilteringIsUnavailableInTheDemoData": "Filter jarak belum tersedia pada data contoh.",
+  "@uiDistanceFilteringIsUnavailableInTheDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSortBy": "Urutkan",
+  "@uiSortBy": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenStoresOnly": "Hanya toko buka",
+  "@uiOpenStoresOnly": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreOpeningStatusIsUnavailableInTheDemoData": "Status buka belum tersedia pada data contoh.",
+  "@uiStoreOpeningStatusIsUnavailableInTheDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiShowResults": "Tampilkan Hasil",
+  "@uiShowResults": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleSorting": "Urutan contoh",
+  "@uiExampleSorting": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLowestPrice": "Harga terendah",
+  "@uiLowestPrice": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFLASHSALE": "FLASH SALE",
+  "@uiFLASHSALE": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourFavoriteCroissantsUpTo60Off": "Croissant Favoritmu,\nDiskon Hingga 60%",
+  "@uiYourFavoriteCroissantsUpTo60Off": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderNow": "Pesan Sekarang!",
+  "@uiOrderNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoAllOffersLocationsRatingsAndStockAreSampleData": "Demo offline · Semua penawaran, lokasi, rating, dan stok adalah contoh.",
+  "@uiOfflineDemoAllOffersLocationsRatingsAndStockAreSampleData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSortedByNearestPickupDistance": "Diurutkan dari jarak pickup terdekat",
+  "@uiSortedByNearestPickupDistance": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewAll": "Lihat Semua",
+  "@uiViewAll": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoFoodsMatchYourSearch": "Tidak ada makanan yang cocok dengan pencarianmu.",
+  "@uiNoFoodsMatchYourSearch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWantToBrowseByStore": "Mau lihat berdasarkan toko?",
+  "@uiWantToBrowseByStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExploreNearbyMerchants": "Jelajahi semua merchant di dekatmu",
+  "@uiExploreNearbyMerchants": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseLocation": "Pilih Lokasi",
+  "@uiChooseLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseCurrentLocation": "Gunakan lokasi saat ini",
+  "@uiUseCurrentLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLocationAccessIsUnavailable": "Akses lokasi belum tersedia",
+  "@uiLocationAccessIsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSelectedLocation": "Lokasi pilihan",
+  "@uiSelectedLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRecentSearches": "Pencarian terakhir",
+  "@uiRecentSearches": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleAreaNotFound": "Area contoh tidak ditemukan.",
+  "@uiSampleAreaNotFound": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisAreaIsForDisplayOnlyDistanceBasedResultsAreNotAvailable": "Area ini hanya contoh tampilan; belum menentukan hasil berdasarkan jarak.",
+  "@uiThisAreaIsForDisplayOnlyDistanceBasedResultsAreNotAvailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseThisLocation": "Gunakan Lokasi Ini",
+  "@uiUseThisLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIllustrativeMapNotALiveLocation": "Peta ilustrasi - bukan lokasi langsung",
+  "@uiIllustrativeMapNotALiveLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupValueValue": "Pickup contoh: {arg0} · {arg1}",
+  "@uiDemoPickupValueValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiSampleProduct": "Produk contoh",
+  "@uiSampleProduct": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseAddOns": "Pilih Tambahan",
+  "@uiChooseAddOns": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMakeItEvenTastierDemo": "Bikin rasanya makin nikmat! (contoh)",
+  "@uiMakeItEvenTastierDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCustomerReviews": "Ulasan Pelanggan",
+  "@uiCustomerReviews": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoCustomer": "Pelanggan Demo",
+  "@uiDemoCustomer": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleReview": "Ulasan contoh",
+  "@uiSampleReview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisIsASampleCustomerReviewThereAreNoRealReviewsForThisDemoProduct": "Ini contoh tampilan ulasan pelanggan. Belum ada ulasan nyata untuk produk demo ini.",
+  "@uiThisIsASampleCustomerReviewThereAreNoRealReviewsForThisDemoProduct": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddToCartDemo": "Tambah ke Keranjang (Demo)",
+  "@uiAddToCartDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoFavoritesLastOnlyWhileThisPageIsOpenProductsLocationsAd": "Demo offline · Favorit hanya berlaku selama halaman terbuka. Produk, lokasi, tambahan, dan ulasan adalah contoh. Jumlah 1-10 item tidak mengubah stok atau membuat pesanan.",
+  "@uiOfflineDemoFavoritesLastOnlyWhileThisPageIsOpenProductsLocationsAd": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTermsConditions": "Syarat & Ketentuan",
+  "@uiTermsConditions": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiInformationAboutUsingThePanganKitaDemo": "Informasi penggunaan versi contoh PanganKita",
+  "@uiInformationAboutUsingThePanganKitaDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPrivacyPolicy": "Kebijakan Privasi",
+  "@uiPrivacyPolicy": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPrivacyPolicyUnavailable": "Kebijakan Privasi belum tersedia",
+  "@uiPrivacyPolicyUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTheOfficialDocumentIsNotYetAvailableInThisDemo": "Dokumen resmi belum tersedia dalam contoh aplikasi ini.",
+  "@uiTheOfficialDocumentIsNotYetAvailableInThisDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToSettings": "Kembali ke Pengaturan",
+  "@uiBackToSettings": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEditProfile": "Edit Profil",
+  "@uiEditProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangePhoto": "Ubah Foto",
+  "@uiChangePhoto": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSecurity": "Keamanan",
+  "@uiSecurity": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangePassword": "Ubah Password",
+  "@uiChangePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveChanges": "Simpan Perubahan",
+  "@uiSaveChanges": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFullName": "Nama lengkap",
+  "@uiFullName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEmail": "Email",
+  "@uiEmail": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPhoneNumber": "Nomor telepon",
+  "@uiPhoneNumber": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAPhoneNumberHelpsMerchantsContactYou": "Nomor telepon membantu toko menghubungimu.",
+  "@uiAPhoneNumberHelpsMerchantsContactYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyProfile": "Profil Saya",
+  "@uiMyProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForHelpingSaveFood": "Terima kasih sudah ikut menyelamatkan makanan.",
+  "@uiThankYouForHelpingSaveFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyFavorites": "Favorit Saya",
+  "@uiMyFavorites": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveWhatYouLoveAndFindItAnytime": "Simpan yang kamu suka, temukan lagi kapan saja.",
+  "@uiSaveWhatYouLoveAndFindItAnytime": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoFavoritesPricesAndAvailabilityAreNotConnected": "Favorit contoh. Harga dan ketersediaan belum terhubung.",
+  "@uiDemoFavoritesPricesAndAvailabilityAreNotConnected": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleFavoriteStore": "Toko favorit contoh",
+  "@uiSampleFavoriteStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoCompletedOrdersYet": "Contoh tampilan · belum ada pesanan selesai.",
+  "@uiDemoViewNoCompletedOrdersYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoMatchingSampleOrders": "Tidak ada pesanan contoh yang cocok.",
+  "@uiNoMatchingSampleOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSamplePaymentTotal": "Total pembayaran contoh",
+  "@uiSamplePaymentTotal": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemo": "Contoh",
+  "@uiDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTimeUnavailable": "Waktu diambil: Belum tersedia",
+  "@uiPickupTimeUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewDetails": "Lihat Detail",
+  "@uiViewDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWriteReview": "Beri Ulasan",
+  "@uiWriteReview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrders": "Pesanan",
+  "@uiOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourFavoriteFoodReadyToEnjoy": "Makanan favoritmu, siap dinikmati.",
+  "@uiYourFavoriteFoodReadyToEnjoy": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleActiveOrders": "Contoh pesanan aktif",
+  "@uiSampleActiveOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewThereAreNoRealOrders": "Contoh tampilan · belum ada pesanan nyata.",
+  "@uiDemoViewThereAreNoRealOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupCode": "Kode pengambilan",
+  "@uiPickupCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUnavailable": "Belum tersedia",
+  "@uiUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMessageStore": "Chat Toko",
+  "@uiMessageStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderDetails": "Detail Pesanan",
+  "@uiOrderDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderHelp": "Bantuan Pesanan",
+  "@uiOrderHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowCanWeHelp": "Ada yang bisa kami bantu?",
+  "@uiHowCanWeHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContactCustomerSupport": "Hubungi Customer Service",
+  "@uiContactCustomerSupport": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderIDUnavailable": "ID pesanan belum tersedia",
+  "@uiOrderIDUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickup": "Pengambilan",
+  "@uiPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderPickedUp": "Pesanan sudah diambil!",
+  "@uiOrderPickedUp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleCompletedPickupViewNoRealPickupHasBeenConfirmed": "Contoh tampilan pengambilan selesai.\nBelum ada pengambilan nyata yang dikonfirmasi.",
+  "@uiSampleCompletedPickupViewNoRealPickupHasBeenConfirmed": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForChoosingSurplusFood": "Terima kasih telah memilih makanan surplus.",
+  "@uiThankYouForChoosingSurplusFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToHome": "Kembali ke Beranda",
+  "@uiBackToHome": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoCanceledOrdersYet": "Contoh tampilan · belum ada pesanan dibatalkan.",
+  "@uiDemoViewNoCanceledOrdersYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCanceledOrdersWillAppearHere": "Pesanan yang dibatalkan akan muncul di sini.",
+  "@uiCanceledOrdersWillAppearHere": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoPaymentYet": "Belum ada pembayaran",
+  "@uiNoPaymentYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCancellationReasonUnavailable": "Alasan pembatalan: Belum tersedia",
+  "@uiCancellationReasonUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBrowseOtherFood": "Cari Menu Lain",
+  "@uiBrowseOtherFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoOrderOrCodeHasBeenCreated": "Belum ada pesanan atau kode yang dibuat.",
+  "@uiNoOrderOrCodeHasBeenCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupInformation": "Informasi pengambilan",
+  "@uiPickupInformation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentDetails": "Rincian pembayaran",
+  "@uiPaymentDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleOrderDetails": "Contoh detail pesanan",
+  "@uiSampleOrderDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderStatusUnavailable": "Status pesanan belum tersedia.",
+  "@uiOrderStatusUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowWasYourFood": "Bagaimana makananmu?",
+  "@uiHowWasYourFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTellUsAboutYourExperience": "Ceritakan pengalamanmu",
+  "@uiTellUsAboutYourExperience": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDisplayMyName": "Tampilkan nama saya",
+  "@uiDisplayMyName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisOptionIsADemoAndIsNotSaved": "Pilihan ini hanya contoh dan tidak disimpan.",
+  "@uiThisOptionIsADemoAndIsNotSaved": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSubmitReview": "Kirim Ulasan",
+  "@uiSubmitReview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddPhotoOptional": "Tambah foto (opsional)",
+  "@uiAddPhotoOptional": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddPhoto": "Tambah foto",
+  "@uiAddPhoto": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPanganKitaHelp": "Bantuan PanganKita",
+  "@uiPanganKitaHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCustomerSupportDemo": "Customer Service • contoh",
+  "@uiCustomerSupportDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiReadyForPickupDemo": "Siap diambil • contoh",
+  "@uiReadyForPickupDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleConversation": "Percakapan contoh",
+  "@uiSampleConversation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChat": "Chat",
+  "@uiChat": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStayConnectedWithYourFavoriteStores": "Terhubung dengan toko favoritmu.",
+  "@uiStayConnectedWithYourFavoriteStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoRealConversationsYet": "Contoh tampilan · belum ada percakapan nyata.",
+  "@uiDemoViewNoRealConversationsYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoMatchingExamples": "Tidak ada contoh yang cocok.",
+  "@uiNoMatchingExamples": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUnread": "Belum dibaca",
+  "@uiUnread": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAll": "Semua",
+  "@uiAll": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoSampleMessagesForThisStore": "Belum ada contoh pesan untuk toko ini.",
+  "@uiNoSampleMessagesForThisStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleConversationMessagesAreNotSentOrSaved": "Percakapan contoh. Pesan tidak dikirim atau disimpan.",
+  "@uiSampleConversationMessagesAreNotSentOrSaved": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoresNearYou": "Toko di Sekitarmu",
+  "@uiStoresNearYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIllustrativeMapSampleStoreLocations": "Peta ilustrasi • posisi toko contoh",
+  "@uiIllustrativeMapSampleStoreLocations": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewList": "Lihat daftar",
+  "@uiViewList": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDirections": "Petunjuk Arah",
+  "@uiDirections": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewStore": "Lihat Toko",
+  "@uiViewStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoLiveLocationOrStoreDataIsUsed": "Contoh tampilan · belum memakai lokasi atau data toko nyata.",
+  "@uiDemoViewNoLiveLocationOrStoreDataIsUsed": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoMatchingSampleStores": "Tidak ada toko contoh yang cocok.",
+  "@uiNoMatchingSampleStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFeaturedStores": "Pilihan toko",
+  "@uiFeaturedStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "ui4SampleStoresToPreview": "4 toko contoh untuk pratinjau",
+  "@ui4SampleStoresToPreview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewMap": "Lihat Peta",
+  "@uiViewMap": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyLocationDemo": "Lokasi saya (contoh)",
+  "@uiMyLocationDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIllustrativeRoute": "Rute ilustrasi",
+  "@uiIllustrativeRoute": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueDistanceAndTimeUnavailable": "{arg0} • jarak dan waktu belum tersedia",
+  "@uiValueDistanceAndTimeUnavailable": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDemoPickupDeadlineValue": "Batas pickup contoh: {arg0}",
+  "@uiDemoPickupDeadlineValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiOpenInMaps": "Buka di Aplikasi Peta",
+  "@uiOpenInMaps": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleStoreNameCopied": "Nama toko contoh disalin.",
+  "@uiSampleStoreNameCopied": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreDetails": "Detail Toko",
+  "@uiStoreDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewMap2": "Lihat peta ›",
+  "@uiViewMap2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPackOf5": "Isi 5 pcs",
+  "@uiPackOf5": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGarlicButterAndCheeseToastDemo": "Roti panggang dengan garlic butter dan keju · contoh",
+  "@uiGarlicButterAndCheeseToastDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreReviews": "Ulasan toko",
+  "@uiStoreReviews": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleRatingsNotVerified": "Rating contoh, belum diverifikasi.",
+  "@uiSampleRatingsNotVerified": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoStoreReviewsInTheOfflineDemo": "Belum ada ulasan toko dalam demo offline.",
+  "@uiNoStoreReviewsInTheOfflineDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAboutStore": "Tentang toko",
+  "@uiAboutStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCategoryValue": "Kategori: {arg0}",
+  "@uiCategoryValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDemoPickupLocationValue": "Lokasi pickup contoh: {arg0}",
+  "@uiDemoPickupLocationValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiThisStoreInformationComesFromOfflineDemoData": "Informasi toko ini berasal dari data contoh demo offline.",
+  "@uiThisStoreInformationComesFromOfflineDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueItemsValue": "{arg0} item · {arg1}",
+  "@uiValueItemsValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiViewCart": "Lihat Keranjang",
+  "@uiViewCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPayment": "Pembayaran",
+  "@uiPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentUnavailable": "Pembayaran belum tersedia",
+  "@uiPaymentUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisIsADemoScreenNoQRCodeBillTransactionOrOrderIsCreated": "Layar ini hanya contoh. Tidak ada kode QR, tagihan, transaksi, atau pesanan yang dibuat.",
+  "@uiThisIsADemoScreenNoQRCodeBillTransactionOrOrderIsCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiClose": "Tutup",
+  "@uiClose": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCartIsEmptyNoPaymentStatusAvailable": "Keranjang kosong. Belum ada status pembayaran.",
+  "@uiCartIsEmptyNoPaymentStatusAvailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThereIsNoBillToPay": "Belum ada tagihan yang perlu diselesaikan.",
+  "@uiThereIsNoBillToPay": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentDeadline": "Batas waktu pembayaran",
+  "@uiPaymentDeadline": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTotalPayment": "Total pembayaran",
+  "@uiTotalPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentMethod": "Metode pembayaran",
+  "@uiPaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveQR": "Simpan QR",
+  "@uiSaveQR": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPreviewStatus": "Status pratinjau",
+  "@uiPreviewStatus": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderID": "ID Pesanan",
+  "@uiOrderID": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRUnavailable": "QR belum tersedia",
+  "@uiQRUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewExampleSuccessfulPayment": "Lihat contoh pembayaran berhasil",
+  "@uiViewExampleSuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToCheckout": "Kembali ke Checkout",
+  "@uiBackToCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewExampleUnsuccessfulPayment": "Lihat contoh pembayaran belum berhasil",
+  "@uiViewExampleUnsuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckout": "Checkout",
+  "@uiCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoStoresSchedulesProfilesPricesAndQRISAreExamplesNoPaymen": "Demo offline. Toko, jadwal, profil, harga, dan QRIS hanya contoh. Tidak ada pembayaran atau pesanan dibuat.",
+  "@uiOfflineDemoStoresSchedulesProfilesPricesAndQRISAreExamplesNoPaymen": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourCartIsEmptyAddProductsBeforeCheckout": "Keranjang kosong. Tambahkan produk sebelum checkout.",
+  "@uiYourCartIsEmptyAddProductsBeforeCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickUpYourOrderAtTheStore": "Pesanan diambil langsung di toko",
+  "@uiPickUpYourOrderAtTheStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoDeliveryFeeSaveMore": "Tidak ada biaya antar, lebih hemat!",
+  "@uiNoDeliveryFeeSaveMore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupUntilValue": "Pickup hingga {arg0}",
+  "@uiPickupUntilValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiLocationDetails": "Detail lokasi",
+  "@uiLocationDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderRecipient": "Pengambil pesanan",
+  "@uiOrderRecipient": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChange": "Ubah",
+  "@uiChange": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentSummary": "Ringkasan pembayaran",
+  "@uiPaymentSummary": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTermsDemo": "Ketentuan pengambilan (demo)",
+  "@uiPickupTermsDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisPageIsASimulationStoresLocationsAndSchedulesAreExamplesNoPayme": "Halaman ini hanya simulasi. Toko, lokasi, dan jadwal adalah contoh. Tidak ada pembayaran, pesanan, atau reservasi dibuat. Ketentuan layanan sebenarnya belum tersedia.",
+  "@uiThisPageIsASimulationStoresLocationsAndSchedulesAreExamplesNoPayme": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIAgreeToThe": "Saya setuju dengan ",
+  "@uiIAgreeToThe": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTerms": "ketentuan pengambilan.",
+  "@uiPickupTerms": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPayNow": "Bayar Sekarang",
+  "@uiPayNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCart": "Keranjang",
+  "@uiCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiClearAll": "Hapus Semua",
+  "@uiClearAll": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoPricesAddOnsLocationsAndSchedulesAreExamplesTheCartClea": "Demo offline. Harga, tambahan, lokasi, dan jadwal adalah contoh. Keranjang hilang saat aplikasi ditutup. Tidak ada stok yang dipesan atau pembayaran dibuat.",
+  "@uiOfflineDemoPricesAddOnsLocationsAndSchedulesAreExamplesTheCartClea": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourCartIsEmpty": "Keranjangmu masih kosong",
+  "@uiYourCartIsEmpty": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSelectFoodFromHomeToSeeItHere": "Pilih makanan dari Beranda untuk melihat ringkasan di sini.",
+  "@uiSelectFoodFromHomeToSeeItHere": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContinueShopping": "Kembali Belanja",
+  "@uiContinueShopping": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleStoreLocation": "Lokasi toko contoh",
+  "@uiSampleStoreLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddMoreFood": "Tambah menu lain",
+  "@uiAddMoreFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupAtStore": "Ambil di toko",
+  "@uiPickupAtStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupDeadlineValue": "Batas pickup: {arg0}",
+  "@uiPickupDeadlineValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiNotesForStore": "Catatan untuk toko",
+  "@uiNotesForStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderSummary": "Ringkasan pesanan",
+  "@uiOrderSummary": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMakeSureYouCanArriveOnTimeTheActualScheduleIsUnavailableInTheDemo": "Pastikan kamu bisa datang sesuai jadwal. Jadwal aktual belum tersedia dalam demo.",
+  "@uiMakeSureYouCanArriveOnTimeTheActualScheduleIsUnavailableInTheDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContinueToCheckout": "Lanjut Checkout",
+  "@uiContinueToCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCartIsEmptyNoDemoPaymentAvailable": "Keranjang kosong. Tidak ada contoh pembayaran.",
+  "@uiCartIsEmptyNoDemoPaymentAvailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleUnsuccessfulPayment": "Contoh pembayaran belum berhasil",
+  "@uiExampleUnsuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoPaymentHasBeenProcessedOrConfirmedThisIsJustASampleScreen": "Belum ada pembayaran yang diproses atau dikonfirmasi. Ini hanya contoh tampilan.",
+  "@uiNoPaymentHasBeenProcessedOrConfirmedThisIsJustASampleScreen": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStatus": "Status",
+  "@uiStatus": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWhatYouCanDo": "Yang bisa kamu lakukan",
+  "@uiWhatYouCanDo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTryPayingAgain": "Coba Bayar Lagi",
+  "@uiTryPayingAgain": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangePaymentMethod": "Ganti Metode Pembayaran",
+  "@uiChangePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNeedHelp": "Butuh bantuan?",
+  "@uiNeedHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderDetails2": "Rincian pesanan",
+  "@uiOrderDetails2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleOrderDetails2": "Rincian pesanan contoh",
+  "@uiSampleOrderDetails2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleSuccessfulPayment": "Contoh pembayaran berhasil",
+  "@uiExampleSuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPreviewOfThePostPaymentScreenNoTransactionOrOrderHasBeenCreated": "Pratinjau tampilan setelah pembayaran.\nBelum ada transaksi atau pesanan yang dibuat.",
+  "@uiPreviewOfThePostPaymentScreenNoTransactionOrOrderHasBeenCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleMerchant": "Merchant contoh",
+  "@uiSampleMerchant": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisScheduleIsNotAnOrderConfirmation": "Jadwal ini bukan konfirmasi pesanan.",
+  "@uiThisScheduleIsNotAnOrderConfirmation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewSampleOrders": "Lihat contoh pesanan",
+  "@uiViewSampleOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChoosePaymentMethod": "Pilih metode pembayaran",
+  "@uiChoosePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOnlyQRISIsShownAsAnExampleNoPaymentOrQRCodeIsGenerated": "Saat ini hanya QRIS sebagai contoh tampilan. Tidak ada pembayaran atau kode QR yang dibuat.",
+  "@uiOnlyQRISIsShownAsAnExampleNoPaymentOrQRCodeIsGenerated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSamplePaymentMethod": "Metode contoh yang ditampilkan",
+  "@uiSamplePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseQRISDemo": "Gunakan QRIS (contoh)",
+  "@uiUseQRISDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPasswordUpdated": "Password Berhasil Diperbarui!",
+  "@uiPasswordUpdated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPleaseSignInAgainUsingYourNewPassword": "Silakan masuk kembali menggunakan\npassword baru.",
+  "@uiPleaseSignInAgainUsingYourNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToLogin": "Kembali ke Login",
+  "@uiBackToLogin": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLocalSimulationNoPasswordsOrAccountsAreSaved": "Simulasi lokal. Tidak ada password atau akun yang disimpan.",
+  "@uiLocalSimulationNoPasswordsOrAccountsAreSaved": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQualityFoodFriendlierPrices": "Makanan Berkualitas,\nHarga Lebih Bersahabat.",
+  "@uiQualityFoodFriendlierPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDiscoverQualitySurplusFoodFromTrustedNearbyBusinessesBeforePickupT": "Temukan makanan surplus berkualitas dari bisnis terpercaya di sekitarmu sebelum waktu pengambilannya berakhir.",
+  "@uiDiscoverQualitySurplusFoodFromTrustedNearbyBusinessesBeforePickupT": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSignUp": "Daftar",
+  "@uiSignUp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAlreadyHaveAnAccount": "Sudah punya akun?",
+  "@uiAlreadyHaveAnAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLogIn": "Login",
+  "@uiLogIn": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRememberedYourPassword": "Sudah ingat password?",
+  "@uiRememberedYourPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoModeNoEmailOrCodeIsSent": "Mode demo: tidak ada email atau kode yang dikirim.",
+  "@uiDemoModeNoEmailOrCodeIsSent": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSendOTPCode": "Kirim Kode OTP",
+  "@uiSendOTPCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiForgotPassword": "Lupa Password?",
+  "@uiForgotPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDonTWorryWeLlHelpRecoverYourAccount": "Tenang, kami bantu pulihkan akunmu.",
+  "@uiDonTWorryWeLlHelpRecoverYourAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiVerify": "Verifikasi",
+  "@uiVerify": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoModeUseCode5102NoEmailOrSMSIsSent": "Mode demo: gunakan kode 5102.\nTidak ada email atau SMS yang dikirim.",
+  "@uiDemoModeUseCode5102NoEmailOrSMSIsSent": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDidnTReceiveTheCode": "Belum menerima kode?",
+  "@uiDidnTReceiveTheCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiResend": "Kirim Ulang",
+  "@uiResend": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiVerifyOTPCode": "Verifikasi Kode OTP",
+  "@uiVerifyOTPCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSignUpAndEnjoyDeliciousFoodAtLowerPrices": "Daftar dan nikmati makanan lezat\ndengan harga lebih hemat.",
+  "@uiSignUpAndEnjoyDeliciousFoodAtLowerPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoRealNotificationsYet": "Contoh tampilan · belum ada notifikasi nyata.",
+  "@uiDemoViewNoRealNotificationsYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNotifications": "Notifikasi",
+  "@uiNotifications": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMarkAsRead": "Tandai dibaca",
+  "@uiMarkAsRead": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourLatestUpdates": "Kabar terbaru untukmu.",
+  "@uiYourLatestUpdates": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisFeatureIsUnavailableInTheOfflineDemo": "Fitur ini belum tersedia dalam demo offline.",
+  "@uiThisFeatureIsUnavailableInTheOfflineDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenDemoProfile": "Buka profil contoh",
+  "@uiOpenDemoProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseLocation2": "Pilih lokasi",
+  "@uiChooseLocation2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBack": "Kembali",
+  "@uiBack": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchForFood": "Cari makanan...",
+  "@uiSearchForFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiClearSearch": "Hapus pencarian",
+  "@uiClearSearch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchFilters2": "Filter pencarian",
+  "@uiSearchFilters2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMinimum": "Minimum",
+  "@uiMinimum": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMaximum": "Maksimum",
+  "@uiMaximum": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleBadgeMerchantNotVerified": "Badge contoh; merchant belum diverifikasi",
+  "@uiSampleBadgeMerchantNotVerified": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRISPromotion": "Promo QRIS",
+  "@uiQRISPromotion": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFlashSale": "Flash Sale",
+  "@uiFlashSale": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupValueValue2": "Pickup contoh {arg0}, {arg1}",
+  "@uiDemoPickupValueValue2": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiNearYourLocation": "Dekat dari Lokasimu",
+  "@uiNearYourLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFindDeliciousFoodNearYou": "Temukan makanan lezat di sekitarmu...",
+  "@uiFindDeliciousFoodNearYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFilterFood": "Filter makanan",
+  "@uiFilterFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchSampleAreas": "Cari area contoh",
+  "@uiSearchSampleAreas": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCopyProductInformation": "Salin informasi produk",
+  "@uiCopyProductInformation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleProductPhotoFromValue": "Foto produk contoh dari {arg0}",
+  "@uiSampleProductPhotoFromValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDecreaseDemoQuantity": "Kurangi jumlah contoh",
+  "@uiDecreaseDemoQuantity": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoQuantityValue": "Jumlah contoh {arg0}",
+  "@uiDemoQuantityValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiIncreaseDemoQuantity": "Tambah jumlah contoh",
+  "@uiIncreaseDemoQuantity": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAccount": "Akun",
+  "@uiAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiProductsAndOrders": "Produk dan pesanan",
+  "@uiProductsAndOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentAndPickup": "Pembayaran dan pengambilan",
+  "@uiPaymentAndPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToMyProfile": "Kembali ke Profil Saya",
+  "@uiBackToMyProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangingPhotosIsUnavailable": "Ubah foto belum tersedia",
+  "@uiChangingPhotosIsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleEmail": "Email contoh",
+  "@uiSampleEmail": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddPhoneNumber": "Tambahkan nomor telepon",
+  "@uiAddPhoneNumber": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenSettings": "Buka Pengaturan",
+  "@uiOpenSettings": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFood": "Makanan",
+  "@uiFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStores": "Toko",
+  "@uiStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoSampleFavoriteStores": "Tidak ada toko favorit contoh.",
+  "@uiNoSampleFavoriteStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoSampleFavoriteFoods": "Tidak ada makanan favorit contoh.",
+  "@uiNoSampleFavoriteFoods": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRemoveValueFromDemoFavorites": "Hapus {arg0} dari favorit contoh",
+  "@uiRemoveValueFromDemoFavorites": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiSearchOrders": "Cari pesanan",
+  "@uiSearchOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchSampleProductOrStoreName": "Cari nama produk atau toko contoh",
+  "@uiSearchSampleProductOrStoreName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCloseOrderHelp": "Tutup Bantuan Pesanan",
+  "@uiCloseOrderHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowDoIPickUpMyOrder": "Bagaimana cara mengambil pesanan?",
+  "@uiHowDoIPickUpMyOrder": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderNotReady": "Pesanan belum siap",
+  "@uiOrderNotReady": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreClosedOrHardToFind": "Toko tutup atau sulit ditemukan",
+  "@uiStoreClosedOrHardToFind": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIncorrectOrder": "Pesanan tidak sesuai",
+  "@uiIncorrectOrder": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentIssue": "Kendala pembayaran",
+  "@uiPaymentIssue": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTime": "Waktu pengambilan",
+  "@uiPickupTime": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoTotal": "Total contoh",
+  "@uiDemoTotal": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenOrderHelp": "Buka Bantuan Pesanan",
+  "@uiOpenOrderHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreLocation": "Lokasi toko",
+  "@uiStoreLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupDeadline": "Batas pickup contoh",
+  "@uiDemoPickupDeadline": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoSubtotal": "Subtotal contoh",
+  "@uiDemoSubtotal": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowWasTheFoodAndPickupExperience": "Bagaimana rasa makanan dan pengalaman pengambilanmu?",
+  "@uiHowWasTheFoodAndPickupExperience": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGiveValueStars": "Beri rating {arg0} bintang",
+  "@uiGiveValueStars": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiTastyFood": "Rasa enak",
+  "@uiTastyFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGoodPortion": "Porsi pas",
+  "@uiGoodPortion": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNeatPackaging": "Kemasan rapi",
+  "@uiNeatPackaging": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFriendlyStore": "Toko ramah",
+  "@uiFriendlyStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHelpOptionsUnavailable": "Opsi bantuan belum tersedia",
+  "@uiHelpOptionsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHelloHowCanWeHelpWithYourSampleOrder": "Halo! Ada yang bisa kami bantu terkait pesanan contoh?",
+  "@uiHelloHowCanWeHelpWithYourSampleOrder": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIMAtTheStoreButMyOrderIsnTReady": "Saya sudah di toko, tetapi pesanan belum tersedia.",
+  "@uiIMAtTheStoreButMyOrderIsnTReady": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfCourseCouldYouDescribeWhatSHappeningAtTheStore": "Baik, Kak. Bisa ceritakan kondisi di lokasi?",
+  "@uiOfCourseCouldYouDescribeWhatSHappeningAtTheStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAttachmentsUnavailable": "Lampiran belum tersedia",
+  "@uiAttachmentsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWriteAMessage": "Tulis pesan...",
+  "@uiWriteAMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEmojiUnavailable": "Emoji belum tersedia",
+  "@uiEmojiUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSendSampleMessage": "Kirim pesan contoh",
+  "@uiSendSampleMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourOrderIsReadyForPickup": "Pesanan Kakak sudah siap diambil, ya",
+  "@uiYourOrderIsReadyForPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWeRePreparingYourOrderNow": "Baik, kak. Pesanan sedang kami siapkan.",
+  "@uiWeRePreparingYourOrderNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForShoppingWithUs": "Terima kasih sudah berbelanja, kak!",
+  "@uiThankYouForShoppingWithUs": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOkayThankYou": "Siap, kak. Terima kasih!",
+  "@uiOkayThankYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchStoresOrMessages": "Cari toko atau pesan...",
+  "@uiSearchStoresOrMessages": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWriteASampleMessage": "Tulis pesan contoh...",
+  "@uiWriteASampleMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddSampleMessage": "Tambahkan pesan contoh",
+  "@uiAddSampleMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToStoreList": "Kembali ke daftar toko",
+  "@uiBackToStoreList": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMapFiltersUnavailable": "Filter peta belum tersedia",
+  "@uiMapFiltersUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDeviceLocationUnavailable": "Lokasi perangkat belum tersedia",
+  "@uiDeviceLocationUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchStoreNameOrCategory": "Cari nama toko atau kategori...",
+  "@uiSearchStoreNameOrCategory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreFiltersUnavailable": "Filter toko belum tersedia",
+  "@uiStoreFiltersUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueSampleReviews": "{arg0} ulasan contoh",
+  "@uiValueSampleReviews": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDistanceUnavailable2": "jarak belum ada",
+  "@uiDistanceUnavailable2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleProducts": "produk contoh",
+  "@uiSampleProducts": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWalking": "Jalan kaki",
+  "@uiWalking": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMotorcycle": "Motor",
+  "@uiMotorcycle": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCar": "Mobil",
+  "@uiCar": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToStoreMap": "Kembali ke peta toko",
+  "@uiBackToStoreMap": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCopyStoreName": "Salin nama toko",
+  "@uiCopyStoreName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddSampleProductToCart": "Tambah produk contoh ke keranjang",
+  "@uiAddSampleProductToCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAboutThePaymentPreview": "Tentang pratinjau pembayaran",
+  "@uiAboutThePaymentPreview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRISLogoSamplePaymentMethod": "Logo QRIS, metode pembayaran contoh",
+  "@uiQRISLogoSamplePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSubtotalValueItems": "Subtotal ({arg0} item)",
+  "@uiSubtotalValueItems": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiServiceFee": "Biaya layanan",
+  "@uiServiceFee": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIAgreeToTheDemoPickupTerms": "Saya setuju dengan ketentuan pengambilan demo",
+  "@uiIAgreeToTheDemoPickupTerms": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleSeparatePackagingLessSweetEtc": "Contoh: kemasan dipisah, jangan terlalu manis, dll.",
+  "@uiExampleSeparatePackagingLessSweetEtc": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiServiceFeeDemo": "Biaya layanan (demo)",
+  "@uiServiceFeeDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckInternetConnection": "Periksa koneksi internet",
+  "@uiCheckInternetConnection": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMakeSureYourConnectionIsStableBeforeRetrying": "Pastikan koneksi stabil sebelum mencoba lagi.",
+  "@uiMakeSureYourConnectionIsStableBeforeRetrying": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckTransactionHistory": "Cek riwayat transaksi",
+  "@uiCheckTransactionHistory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckYourPaymentAppBeforeTryingAgain": "Periksa aplikasi pembayaranmu sebelum mencoba lagi.",
+  "@uiCheckYourPaymentAppBeforeTryingAgain": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDecreaseValue": "Kurangi {arg0}",
+  "@uiDecreaseValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiQuantityOfValueValue": "Jumlah {arg0}: {arg1}",
+  "@uiQuantityOfValueValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiIncreaseValue": "Tambah {arg0}",
+  "@uiIncreaseValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiRemoveValue": "Hapus {arg0}",
+  "@uiRemoveValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiPaymentStatus": "Status pembayaran",
+  "@uiPaymentStatus": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentTime": "Waktu pembayaran",
+  "@uiPaymentTime": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderID2": "ID pesanan",
+  "@uiOrderID2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRISLogo": "Logo QRIS",
+  "@uiQRISLogo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContinueToWelcome": "Lanjut ke sambutan",
+  "@uiContinueToWelcome": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPanganKitaLogo": "Logo PanganKita",
+  "@uiPanganKitaLogo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDigitValue": "Digit {arg0}",
+  "@uiDigitValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiContinueWithValue": "Lanjutkan dengan {arg0}",
+  "@uiContinueWithValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiOrderReadyForPickup": "Pesanan siap diambil!",
+  "@uiOrderReadyForPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSotoKesawanIsPreparingYourFavoriteFood": "Soto Kesawan sedang menyiapkan makanan favoritmu.",
+  "@uiSotoKesawanIsPreparingYourFavoriteFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourFavoritesAreOnSale": "Favoritmu lagi diskon!",
+  "@uiYourFavoritesAreOnSale": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveUpTo60OnSelectedBreadAndSnacksToday": "Hemat hingga 60% untuk roti dan camilan pilihan hari ini.",
+  "@uiSaveUpTo60OnSelectedBreadAndSnacksToday": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderCompleted": "Pesanan selesai",
+  "@uiOrderCompleted": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSomethingTastyNearYou": "Ada yang enak di dekatmu",
+  "@uiSomethingTastyNearYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFindYourFavoriteFoodAtBetterPrices": "Temukan makanan favorit dengan harga yang lebih hemat.",
+  "@uiFindYourFavoriteFoodAtBetterPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRiceDishes": "Aneka Nasi",
+  "@uiRiceDishes": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBreadPastries": "Roti & Pastry",
+  "@uiBreadPastries": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCakesDesserts": "Kue & Dessert",
+  "@uiCakesDesserts": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveValue": "Hemat {arg0}%",
+  "@uiSaveValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiSampleStock": "Stok contoh",
+  "@uiSampleStock": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueBoxesLeft": "Sisa {arg0} kotak",
+  "@uiValueBoxesLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValuePortionsLeft": "Tersisa {arg0} porsi",
+  "@uiValuePortionsLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValueBoxesLeft2": "Tersisa {arg0} kotak",
+  "@uiValueBoxesLeft2": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValuePiecesLeft": "Tersisa {arg0} potong",
+  "@uiValuePiecesLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValueMinutesLeft": "{arg0} menit lagi",
+  "@uiValueMinutesLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiActive": "Aktif",
+  "@uiActive": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCompleted": "Selesai",
+  "@uiCompleted": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCanceled": "Dibatalkan",
+  "@uiCanceled": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenNow": "Buka Sekarang",
+  "@uiOpenNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBiggestDiscount": "Diskon Terbesar",
+  "@uiBiggestDiscount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNearest": "Terdekat",
+  "@uiNearest": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRating": "Rating",
+  "@uiRating": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAllStores": "Semua toko",
+  "@uiAllStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDiscount": "Diskon",
+  "@uiDiscount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPromotions": "Promo",
+  "@uiPromotions": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiToday": "Hari ini",
+  "@uiToday": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYesterday": "Kemarin",
+  "@uiYesterday": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGoodMorning": "Selamat Pagi, ",
+  "@uiGoodMorning": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSave": "Hemat ",
+  "@uiSave": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiVincentExampleComDemo": "vincent@example.com • contoh",
+  "@uiVincentExampleComDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPackOf52": "(Isi 5 pcs)",
+  "@uiPackOf52": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWelcomeBack": "Selamat datang kembali!",
+  "@uiWelcomeBack": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCreateAccount": "Buat Akun Baru",
+  "@uiCreateAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCreateNewPassword": "Buat Password Baru",
+  "@uiCreateNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFindYourFavoriteFoodsAtBetterPrices": "Temukan makanan favorit dengan\nharga lebih hemat.",
+  "@uiFindYourFavoriteFoodsAtBetterPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseAPasswordThatSEasyToRememberButHardToGuess": "Pastikan password mudah diingat\nnamun sulit ditebak.",
+  "@uiChooseAPasswordThatSEasyToRememberButHardToGuess": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPassword": "Password",
+  "@uiPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCreatePassword": "Buat password",
+  "@uiCreatePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNewPassword": "Password baru",
+  "@uiNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSignIn": "Masuk",
+  "@uiSignIn": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSavePassword": "Simpan Password",
+  "@uiSavePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDonTHaveAnAccount": "Belum punya akun?",
+  "@uiDonTHaveAnAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPasswordsDoNotMatch": "Konfirmasi password tidak cocok.",
+  "@uiPasswordsDoNotMatch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoModeNoAuthenticationOrServerAccount": "Mode demo. Tidak ada autentikasi atau akun server.",
+  "@uiDemoModeNoAuthenticationOrServerAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiConfirmNewPassword": "Konfirmasi password baru",
+  "@uiConfirmNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiConfirmPassword": "Konfirmasi password",
+  "@uiConfirmPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisFieldIsRequired": "Kolom wajib diisi.",
+  "@uiThisFieldIsRequired": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEnterAValidEmailAddress": "Masukkan format email yang valid.",
+  "@uiEnterAValidEmailAddress": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseAtLeast8CharactersIncludingLettersAndNumbers": "Gunakan minimal 8 karakter, termasuk huruf dan angka.",
+  "@uiUseAtLeast8CharactersIncludingLettersAndNumbers": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIncorrectDemoCodeUse5102": "Kode demo tidak cocok. Gunakan 5102.",
+  "@uiIncorrectDemoCodeUse5102": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTheDemoCodeRemains5102NoSMSOrEmailIsSent": "Kode demo masih 5102. Tidak ada SMS atau email yang dikirim.",
+  "@uiTheDemoCodeRemains5102NoSMSOrEmailIsSent": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiShowPassword": "Tampilkan password",
+  "@uiShowPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHidePassword": "Sembunyikan password",
+  "@uiHidePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEnterYourFullName": "Masukkan nama lengkap.",
+  "@uiEnterYourFullName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEnterAValidEmailAddress2": "Masukkan email yang valid.",
+  "@uiEnterAValidEmailAddress2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoChangesCannotBeSavedToAnAccount": "Perubahan contoh belum dapat disimpan ke akun.",
+  "@uiDemoChangesCannotBeSavedToAnAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleProductAddedToLocalCart": "Produk contoh ditambahkan ke keranjang lokal.",
+  "@uiSampleProductAddedToLocalCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoCartQuantityLimitReached": "Batas jumlah contoh dalam keranjang sudah tercapai.",
+  "@uiDemoCartQuantityLimitReached": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoProductInformationCopied": "Informasi produk demo disalin.",
+  "@uiDemoProductInformationCopied": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoLimit10ItemsPerConfigurationChangeTheQuantityInYourCart": "Batas pratinjau 10 item per pilihan. Ubah jumlah di keranjang.",
+  "@uiDemoLimit10ItemsPerConfigurationChangeTheQuantityInYourCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchFoodOrStores": "Cari makanan atau toko",
+  "@uiSearchFoodOrStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRemoveTemporaryFavorite": "Hapus favorit sementara",
+  "@uiRemoveTemporaryFavorite": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTemporarilyFavorite": "Favoritkan sementara",
+  "@uiTemporarilyFavorite": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoInventoryIsReservedOrPaymentCreated": "Tidak ada stok yang dipesan atau pembayaran dibuat.",
+  "@uiNoInventoryIsReservedOrPaymentCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderUpdates": "Update pesanan",
+  "@uiOrderUpdates": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForHelpingReduceFoodWasteWithSotoKesawan": "Terima kasih sudah menyelamatkan makanan bersama Soto Kesawan.",
+  "@uiThankYouForHelpingReduceFoodWasteWithSotoKesawan": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMawarBakeryCakeHasPreparedYourOrderPleaseCollectItBefore2030": "Mawar Bakery & Cake sudah menyiapkan pesananmu. Ambil sebelum 20.30, ya.",
+  "@uiMawarBakeryCakeHasPreparedYourOrderPleaseCollectItBefore2030": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWelcomeToPanganKita": "Selamat datang di PanganKita",
+  "@uiWelcomeToPanganKita": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupDeadlineValueValue": "Batas pickup contoh: {arg0} · {arg1}",
+  "@uiDemoPickupDeadlineValueValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDemoData": "Data contoh",
+  "@uiDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSettings": "Pengaturan",
+  "@uiSettings": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAboutPanganKita": "Tentang PanganKita",
+  "@uiAboutPanganKita": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMessagesFromStores": "Pesan dari toko",
+  "@uiMessagesFromStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPromotionsOffers": "Promo & penawaran",
+  "@uiPromotionsOffers": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderHistory": "Riwayat Pesanan",
+  "@uiOrderHistory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyLocation": "Lokasi Saya",
+  "@uiMyLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHelpCenter": "Pusat Bantuan",
+  "@uiHelpCenter": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLogOut": "Keluar",
+  "@uiLogOut": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTryAnotherSearchTerm": "Coba kata kunci lain.",
+  "@uiTryAnotherSearchTerm": {
+    "description": "Localizes a previously hard-coded UI message."
+  }
+}

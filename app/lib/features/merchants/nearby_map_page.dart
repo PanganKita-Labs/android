@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
@@ -87,7 +88,7 @@ class _MapHeader extends StatelessWidget {
     child: Row(
       children: [
         IconButton(
-          tooltip: 'Kembali ke daftar toko',
+          tooltip: translateDisplayText(context, 'Kembali ke daftar toko'),
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back),
         ),
@@ -96,7 +97,7 @@ class _MapHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              I18nText(
                 'Toko di Sekitarmu',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
@@ -108,7 +109,7 @@ class _MapHeader extends StatelessWidget {
                     color: PanganKitaColors.brandPrimaryStrong,
                   ),
                   Expanded(
-                    child: Text(
+                    child: I18nText(
                       'Mandala by Pass, Medan',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -121,7 +122,7 @@ class _MapHeader extends StatelessWidget {
           ),
         ),
         IconButton.filledTonal(
-          tooltip: 'Filter peta belum tersedia',
+          tooltip: translateDisplayText(context, 'Filter peta belum tersedia'),
           style: IconButton.styleFrom(
             backgroundColor: Colors.white,
             foregroundColor: PanganKitaColors.brandPrimaryStrong,
@@ -175,7 +176,10 @@ class _MerchantMap extends StatelessWidget {
         right: _mapInset,
         bottom: _mapBottomInset,
         child: IconButton.filledTonal(
-          tooltip: 'Lokasi perangkat belum tersedia',
+          tooltip: translateDisplayText(
+            context,
+            'Lokasi perangkat belum tersedia',
+          ),
           style: IconButton.styleFrom(
             backgroundColor: Colors.white,
             foregroundColor: PanganKitaColors.brandPrimaryStrong,
@@ -191,7 +195,7 @@ class _MerchantMap extends StatelessWidget {
           decoration: const BoxDecoration(color: Colors.white),
           child: Padding(
             padding: const EdgeInsets.all(4),
-            child: Text(
+            child: I18nText(
               'Peta ilustrasi • posisi toko contoh',
               style: Theme.of(context).textTheme.bodySmall,
             ),
@@ -238,7 +242,7 @@ class _MapFilterChips extends StatelessWidget {
                         size: _chipIconSize,
                       ),
                       const SizedBox(width: 8),
-                      Text(label),
+                      I18nText(label),
                     ],
                   ),
                 ),
@@ -285,7 +289,7 @@ class _MerchantPin extends StatelessWidget {
         const SizedBox(height: 3),
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 110),
-          child: Text(
+          child: I18nText(
             food.merchant,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -335,7 +339,7 @@ class _RoadLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Transform.rotate(
     angle: angle,
-    child: Text(
+    child: I18nText(
       label,
       textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.bodySmall?.copyWith(color: _mapInk),
@@ -382,7 +386,7 @@ class _MapStoreSheet extends StatelessWidget {
                 child: OutlinedButton.icon(
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.list, size: 18),
-                  label: const Text('Lihat daftar'),
+                  label: const I18nText('Lihat daftar'),
                 ),
               ),
             ],
@@ -395,7 +399,7 @@ class _MapStoreSheet extends StatelessWidget {
               AppRoutes.directions(food.id),
             ).ignore(),
             icon: const Icon(Icons.directions_outlined),
-            label: const Text('Petunjuk Arah'),
+            label: const I18nText('Petunjuk Arah'),
           ),
           const SizedBox(height: 8),
           FilledButton(
@@ -411,7 +415,7 @@ class _MapStoreSheet extends StatelessWidget {
               children: [
                 Icon(Icons.chevron_right),
                 SizedBox(width: 8),
-                Text('Lihat Toko'),
+                I18nText('Lihat Toko'),
               ],
             ),
           ),
@@ -446,7 +450,7 @@ class _MapStoreSummary extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            I18nText(
               food.merchant,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -461,7 +465,7 @@ class _MapStoreSummary extends StatelessWidget {
                   color: PanganKitaColors.brandAccent,
                 ),
                 Expanded(
-                  child: Text(
+                  child: I18nText(
                     '${food.rating.split(' ').first} · contoh rating',
                   ),
                 ),
@@ -472,11 +476,11 @@ class _MapStoreSummary extends StatelessWidget {
               children: [
                 Icon(Icons.location_on_outlined, size: 17),
                 SizedBox(width: 3),
-                Expanded(child: Text('Jarak belum tersedia')),
+                Expanded(child: I18nText('Jarak belum tersedia')),
               ],
             ),
             const SizedBox(height: 5),
-            Text(
+            I18nText(
               food.id == 'buns' ? '2 produk contoh' : '1 produk contoh',
               style: const TextStyle(
                 color: PanganKitaColors.brandPrimaryStrong,

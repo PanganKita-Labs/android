@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
@@ -9,6 +10,7 @@ const _photoSize = 72.0;
 const _photoRadius = 12.0;
 const _cardRadius = 16.0;
 const _maxReviewLength = 500;
+const _reviewTextMaxLines = 3;
 const _starCount = 5;
 const _starSize = 38.0;
 const _tagGap = 8.0;
@@ -44,7 +46,7 @@ class _ReviewPageState extends State<ReviewPage> {
     backgroundColor: PanganKitaColors.surfaceWarm,
     appBar: AppBar(
       leading: const BackButton(),
-      title: const Text('Beri Ulasan'),
+      title: const I18nText('Beri Ulasan'),
     ),
     body: SafeArea(
       top: false,
@@ -53,7 +55,7 @@ class _ReviewPageState extends State<ReviewPage> {
         children: [
           _ReviewProduct(food: widget.food, quantity: widget.quantity),
           const SizedBox(height: 20),
-          Text(
+          I18nText(
             'Bagaimana makananmu?',
             style: Theme.of(context).textTheme.headlineMedium
                 ?.copyWith(color: _ink),
@@ -73,16 +75,19 @@ class _ReviewPageState extends State<ReviewPage> {
             }),
           ),
           const SizedBox(height: 18),
-          Text(
+          I18nText(
             'Ceritakan pengalamanmu',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
-          const TextField(
-            maxLines: 3,
+          TextField(
+            maxLines: _reviewTextMaxLines,
             maxLength: _maxReviewLength,
             decoration: InputDecoration(
-              hintText: 'Bagaimana rasa makanan dan pengalaman pengambilanmu?',
+              hintText: translateDisplayText(
+                context,
+                'Bagaimana rasa makanan dan pengalaman pengambilanmu?',
+              ),
             ),
           ),
           const SizedBox(height: 6),
@@ -90,8 +95,8 @@ class _ReviewPageState extends State<ReviewPage> {
           CheckboxListTile(
             value: _showName,
             onChanged: (value) => setState(() => _showName = value ?? false),
-            title: const Text('Tampilkan nama saya'),
-            subtitle: const Text(
+            title: const I18nText('Tampilkan nama saya'),
+            subtitle: const I18nText(
               'Pilihan ini hanya contoh dan tidak disimpan.',
             ),
             controlAffinity: ListTileControlAffinity.leading,
@@ -104,7 +109,7 @@ class _ReviewPageState extends State<ReviewPage> {
             ),
             onPressed: () => DemoNotice.unavailable(context),
             icon: const Icon(Icons.send_outlined),
-            label: const Text('Kirim Ulasan'),
+            label: const I18nText('Kirim Ulasan'),
           ),
         ],
       ),
@@ -119,7 +124,7 @@ class _PhotoPicker extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
+      I18nText(
         'Tambah foto (opsional)',
         style: Theme.of(context).textTheme.titleMedium,
       ),
@@ -127,7 +132,7 @@ class _PhotoPicker extends StatelessWidget {
       OutlinedButton.icon(
         onPressed: () => DemoNotice.unavailable(context),
         icon: const Icon(Icons.add_a_photo_outlined),
-        label: const Text('Tambah foto'),
+        label: const I18nText('Tambah foto'),
       ),
     ],
   );
@@ -147,7 +152,10 @@ class _RatingPicker extends StatelessWidget {
           for (var star = 1; star <= _starCount; star++)
             Expanded(
               child: IconButton(
-                tooltip: 'Beri rating $star bintang',
+                tooltip: translateDisplayText(
+                  context,
+                  'Beri rating $star bintang',
+                ),
                 onPressed: () => onSelected(star),
                 icon: Icon(
                   star <= rating ? Icons.star : Icons.star_border,
@@ -160,7 +168,7 @@ class _RatingPicker extends StatelessWidget {
       ),
       if (rating > 0)
         Chip(
-          label: Text('$rating dari $_starCount bintang · contoh'),
+          label: I18nText('$rating dari $_starCount bintang · contoh'),
           backgroundColor: const Color(0xFFFFF0DF),
         ),
     ],
@@ -193,7 +201,7 @@ class _TagPicker extends StatelessWidget {
                 key: ValueKey('review-tag-$label'),
                 onPressed: () => onToggled(label),
                 icon: Icon(icon, size: _tagIconSize),
-                label: Text(label),
+                label: I18nText(label),
                 style: OutlinedButton.styleFrom(
                   minimumSize: const Size.fromHeight(_tagMinHeight),
                   alignment: Alignment.centerLeft,
@@ -246,11 +254,11 @@ class _ReviewProduct extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    I18nText(
                       food.merchant,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    Text(food.pickupAddress),
+                    I18nText(food.pickupAddress),
                   ],
                 ),
               ),
@@ -273,11 +281,11 @@ class _ReviewProduct extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    I18nText(
                       food.title,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    Text('$quantity × ${food.price}'),
+                    I18nText('$quantity × ${food.price}'),
                   ],
                 ),
               ),

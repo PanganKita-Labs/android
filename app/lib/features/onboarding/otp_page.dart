@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const _otpLength = 4;
@@ -136,7 +137,10 @@ class _OtpPageState extends State<OtpPage> {
                     ),
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(vertical: 18),
-                      labelText: 'Digit ${index + 1}',
+                      labelText: translateDisplayText(
+                        context,
+                        'Digit ${index + 1}',
+                      ),
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                     ),
                     onChanged: (value) => _changeDigit(index, value),
@@ -146,14 +150,14 @@ class _OtpPageState extends State<OtpPage> {
             ],
           ),
           if (_error case final String error)
-            Text(
+            I18nText(
               error,
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           const SizedBox(height: 26),
-          FilledButton(onPressed: _verify, child: const Text('Verifikasi')),
+          FilledButton(onPressed: _verify, child: const I18nText('Verifikasi')),
           const SizedBox(height: 12),
-          const Text(
+          const I18nText(
             'Mode demo: gunakan kode 5102.\nTidak ada email atau SMS '
             'yang dikirim.',
             textAlign: TextAlign.center,
@@ -163,8 +167,11 @@ class _OtpPageState extends State<OtpPage> {
             alignment: WrapAlignment.center,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              const Text('Belum menerima kode?'),
-              TextButton(onPressed: _resend, child: const Text('Kirim Ulang')),
+              const I18nText('Belum menerima kode?'),
+              TextButton(
+                onPressed: _resend,
+                child: const I18nText('Kirim Ulang'),
+              ),
             ],
           ),
         ],
@@ -182,7 +189,7 @@ class _OtpHeader extends StatelessWidget {
     children: [
       Align(alignment: Alignment.centerLeft, child: BackButton()),
       SizedBox(height: 23),
-      Text(
+      I18nText(
         'Verifikasi Kode OTP',
         textAlign: TextAlign.center,
         style: TextStyle(
@@ -191,7 +198,7 @@ class _OtpHeader extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
       ),
-      Text(
+      I18nText(
         'Daftar dan nikmati makanan lezat\ndengan harga lebih hemat.',
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 19.5),

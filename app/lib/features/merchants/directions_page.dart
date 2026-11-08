@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
@@ -58,12 +59,15 @@ class _DirectionsPageState extends State<DirectionsPage> {
               child: Row(
                 children: [
                   IconButton(
-                    tooltip: 'Kembali ke peta toko',
+                    tooltip: translateDisplayText(
+                      context,
+                      'Kembali ke peta toko',
+                    ),
                     onPressed: _backToMap,
                     icon: const Icon(Icons.arrow_back),
                   ),
                   const SizedBox(width: 8),
-                  Text(
+                  I18nText(
                     'Petunjuk Arah',
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
@@ -91,7 +95,7 @@ class _DirectionsPageState extends State<DirectionsPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(_modes[i].icon),
-                            Text(
+                            I18nText(
                               _modes[i].label,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -131,7 +135,7 @@ class _Destination extends StatelessWidget {
               children: [
                 Icon(Icons.my_location, color: _green),
                 SizedBox(width: 12),
-                Expanded(child: Text('Lokasi saya (contoh)')),
+                Expanded(child: I18nText('Lokasi saya (contoh)')),
               ],
             ),
             const Divider(),
@@ -140,7 +144,7 @@ class _Destination extends StatelessWidget {
                 const Icon(Icons.location_on, color: _green),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(
+                  child: I18nText(
                     food.merchant,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -177,7 +181,7 @@ class _RouteMap extends StatelessWidget {
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(8),
-              child: Text(
+              child: I18nText(
                 'Rute ilustrasi',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -252,24 +256,27 @@ class _DirectionsSheet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(food.merchant, style: Theme.of(context).textTheme.titleLarge),
-          Text(food.pickupAddress),
+          I18nText(
+            food.merchant,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          I18nText(food.pickupAddress),
           const SizedBox(height: 10),
-          Text('$mode • jarak dan waktu belum tersedia'),
+          I18nText('$mode • jarak dan waktu belum tersedia'),
           const SizedBox(height: 8),
-          Text('Batas pickup contoh: ${food.pickupTime}'),
+          I18nText('Batas pickup contoh: ${food.pickupTime}'),
           const SizedBox(height: 12),
           FilledButton.icon(
             onPressed: () => DemoNotice.unavailable(context),
             icon: const Icon(Icons.open_in_new),
-            label: const Text('Buka di Aplikasi Peta'),
+            label: const I18nText('Buka di Aplikasi Peta'),
           ),
           const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: () =>
                 Navigator.pushNamed(context, AppRoutes.store(food.id)).ignore(),
             icon: const Icon(Icons.storefront_outlined),
-            label: const Text('Lihat Toko'),
+            label: const I18nText('Lihat Toko'),
           ),
         ],
       ),

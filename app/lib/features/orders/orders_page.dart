@@ -4,6 +4,7 @@ import 'package:pangankita/app/navigation/app_bottom_navigation.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/orders/canceled_orders_section.dart';
 import 'package:pangankita/features/orders/completed_orders_section.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
@@ -48,14 +49,14 @@ class _OrdersPageState extends State<OrdersPage> {
           Row(
             children: [
               Expanded(
-                child: Text(
+                child: I18nText(
                   'Pesanan',
                   style: Theme.of(context).textTheme.displayLarge
                       ?.copyWith(color: _ink),
                 ),
               ),
               IconButton(
-                tooltip: 'Cari pesanan',
+                tooltip: translateDisplayText(context, 'Cari pesanan'),
                 onPressed: () => setState(() {
                   _searching = !_searching;
                   if (!_searching) _query = '';
@@ -68,7 +69,7 @@ class _OrdersPageState extends State<OrdersPage> {
               ),
             ],
           ),
-          const Text('Makanan favoritmu, siap dinikmati.'),
+          const I18nText('Makanan favoritmu, siap dinikmati.'),
           if (_searching) ...[
             const SizedBox(height: 12),
             _OrderSearchField(
@@ -82,13 +83,13 @@ class _OrdersPageState extends State<OrdersPage> {
           ),
           const SizedBox(height: 22),
           if (_selectedTab == 0) ...[
-            Text(
+            I18nText(
               'Contoh pesanan aktif',
               style: Theme.of(context).textTheme.titleLarge
                   ?.copyWith(color: _ink),
             ),
             const SizedBox(height: 6),
-            const Text(
+            const I18nText(
               'Contoh tampilan · belum ada pesanan nyata.',
               style: TextStyle(color: Colors.black54),
             ),
@@ -97,7 +98,7 @@ class _OrdersPageState extends State<OrdersPage> {
               (food) => food.matches(_query, 'Semua'),
             )) ...[_OrderExampleCard(food: food), const SizedBox(height: 16)],
             if (!_sampleFoods.any((food) => food.matches(_query, 'Semua')))
-              const Text('Tidak ada pesanan contoh yang cocok.'),
+              const I18nText('Tidak ada pesanan contoh yang cocok.'),
           ] else if (_selectedTab == 1)
             CompletedOrdersSection(query: _query)
           else
@@ -117,9 +118,12 @@ class _OrderSearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) => TextField(
     autofocus: true,
-    decoration: const InputDecoration(
-      hintText: 'Cari nama produk atau toko contoh',
-      prefixIcon: Padding(
+    decoration: InputDecoration(
+      hintText: translateDisplayText(
+        context,
+        'Cari nama produk atau toko contoh',
+      ),
+      prefixIcon: const Padding(
         padding: EdgeInsets.all(14),
         child: Image(
           image: AssetImage('assets/prototype/icon-search.png'),
@@ -145,7 +149,7 @@ class _OrderTabs extends StatelessWidget {
     children: [
       for (final (index, label) in ['Aktif', 'Selesai', 'Dibatalkan'].indexed)
         ChoiceChip(
-          label: Text(label),
+          label: I18nText(label),
           selected: selected == index,
           showCheckmark: false,
           selectedColor: PanganKitaColors.brandPrimaryStrong,
@@ -186,11 +190,11 @@ class _OrderExampleCard extends StatelessWidget {
                     : null,
                 child: food.merchant == 'Mawar Bakery & Cake'
                     ? null
-                    : Text(food.merchant.substring(0, 1)),
+                    : I18nText(food.merchant.substring(0, 1)),
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(
+                child: I18nText(
                   food.merchant,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -206,7 +210,9 @@ class _OrderExampleCard extends StatelessWidget {
             children: [
               const Icon(Icons.schedule_outlined, color: _orange, size: 18),
               const SizedBox(width: 6),
-              Expanded(child: Text('Waktu pickup contoh: ${food.pickupTime}')),
+              Expanded(
+                child: I18nText('Waktu pickup contoh: ${food.pickupTime}'),
+              ),
             ],
           ),
           const DecoratedBox(
@@ -219,8 +225,8 @@ class _OrderExampleCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Kode pengambilan'),
-                  Text(
+                  I18nText('Kode pengambilan'),
+                  I18nText(
                     'Belum tersedia',
                     style: TextStyle(
                       fontFamily: PanganKitaTheme.emphasisFontFamily,
@@ -234,8 +240,8 @@ class _OrderExampleCard extends StatelessWidget {
           ),
           Row(
             children: [
-              const Expanded(child: Text('Total pembayaran contoh')),
-              Text(
+              const Expanded(child: I18nText('Total pembayaran contoh')),
+              I18nText(
                 formatRupiah(food.priceRupiah),
                 style: Theme.of(context).textTheme.titleMedium
                     ?.copyWith(color: PanganKitaColors.brandPrimary),
@@ -270,8 +276,8 @@ class _OrderItemSummary extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(food.title, style: Theme.of(context).textTheme.titleSmall),
-            Text('1 × ${food.price}'),
+            I18nText(food.title, style: Theme.of(context).textTheme.titleSmall),
+            I18nText('1 × ${food.price}'),
           ],
         ),
       ),
@@ -294,7 +300,7 @@ class _OrderCardActions extends StatelessWidget {
             AppRoutes.merchantChat,
             arguments: (food: food, message: null),
           ),
-          child: const Text('Chat Toko'),
+          child: const I18nText('Chat Toko'),
         ),
       ),
       const SizedBox(width: 10),
@@ -305,7 +311,7 @@ class _OrderCardActions extends StatelessWidget {
             AppRoutes.orderDetail,
             arguments: food,
           ).ignore(),
-          child: const Text(
+          child: const I18nText(
             'Detail Pesanan',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 16, height: 1.15),
@@ -327,7 +333,7 @@ class _ExampleBadge extends StatelessWidget {
     ),
     child: Padding(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: Text(
+      child: I18nText(
         'Contoh',
         style: TextStyle(color: PanganKitaColors.brandPrimary),
       ),

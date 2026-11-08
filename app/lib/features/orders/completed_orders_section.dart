@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
@@ -23,7 +24,7 @@ class CompletedOrdersSection extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      const Text(
+      const I18nText(
         'Contoh tampilan · belum ada pesanan selesai.',
         style: TextStyle(color: Colors.black54),
       ),
@@ -43,7 +44,7 @@ class CompletedOrdersSection extends StatelessWidget {
         ),
       if (!DemoFood.examples[0].matches(query, 'Semua') &&
           !DemoFood.examples[1].matches(query, 'Semua'))
-        const Text('Tidak ada pesanan contoh yang cocok.'),
+        const I18nText('Tidak ada pesanan contoh yang cocok.'),
     ],
   );
 }
@@ -59,7 +60,7 @@ class _DatedCompletedExample extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      Text(
+      I18nText(
         date,
         style: Theme.of(context).textTheme.titleLarge?.copyWith(color: _ink),
       ),
@@ -77,8 +78,8 @@ class _DatedCompletedExample extends StatelessWidget {
               const Divider(height: 1),
               Row(
                 children: [
-                  const Expanded(child: Text('Total pembayaran contoh')),
-                  Text(
+                  const Expanded(child: I18nText('Total pembayaran contoh')),
+                  I18nText(
                     formatRupiah(quantity * food.priceRupiah),
                     style: Theme.of(context).textTheme.titleLarge
                         ?.copyWith(color: PanganKitaColors.brandPrimary),
@@ -108,7 +109,7 @@ class _MerchantHeader extends StatelessWidget {
       ),
       const SizedBox(width: 8),
       Expanded(
-        child: Text(
+        child: I18nText(
           food.merchant,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -122,7 +123,7 @@ class _MerchantHeader extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          child: Text(
+          child: I18nText(
             'Contoh',
             style: TextStyle(color: PanganKitaColors.brandPrimary),
           ),
@@ -154,9 +155,9 @@ class _CompletedItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(food.title, style: Theme.of(context).textTheme.titleSmall),
-            Text('$quantity × ${food.price}'),
-            const Text(
+            I18nText(food.title, style: Theme.of(context).textTheme.titleSmall),
+            I18nText('$quantity × ${food.price}'),
+            const I18nText(
               'Waktu diambil: Belum tersedia',
               style: TextStyle(color: PanganKitaColors.brandPrimary),
             ),
@@ -183,7 +184,7 @@ class _CompletedActions extends StatelessWidget {
             AppRoutes.pickup,
             arguments: (food: food, quantity: quantity),
           ).ignore(),
-          child: const Text('Lihat Detail'),
+          child: const I18nText('Lihat Detail'),
         ),
       ),
       const SizedBox(width: 10),
@@ -194,7 +195,7 @@ class _CompletedActions extends StatelessWidget {
             AppRoutes.review,
             arguments: (food: food, quantity: quantity),
           ).ignore(),
-          child: const Text('Beri Ulasan'),
+          child: const I18nText('Beri Ulasan'),
         ),
       ),
     ],

@@ -1,0 +1,1925 @@
+{
+  "@@locale": "en",
+  "navHome": "Home",
+  "navOrders": "Orders",
+  "navChat": "Chat",
+  "navNotifications": "Notifications",
+  "settingsTitle": "Settings",
+  "backToProfile": "Back to my profile",
+  "notificationsTitle": "Notifications",
+  "notificationsDemo": "Notification settings are for demonstration only and are not saved.",
+  "accountTitle": "Account",
+  "changePassword": "Change password",
+  "languageLabel": "Language",
+  "aboutPanganKita": "About PanganKita",
+  "terms": "Terms & Conditions",
+  "privacy": "Privacy Policy",
+  "helpCenter": "Help Center",
+  "settingsFooter": "PanganKita • Demo settings",
+  "ordersUpdate": "Order updates",
+  "ordersUpdateDescription": "Receive updates about your order status.",
+  "merchantMessages": "Messages from stores",
+  "merchantMessagesDescription": "Receive messages from your selected stores.",
+  "promotions": "Promotions & offers",
+  "promotionsDescription": "Get updates about promotions, discounts and special offers.",
+  "languageIndonesian": "Bahasa Indonesia",
+  "languageEnglish": "English",
+  "languageChinese": "Simplified Chinese",
+  "uiExampleOrderUnavailable": "Example order unavailable.",
+  "@uiExampleOrderUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleMerchantChatUnavailable": "Example merchant chat unavailable.",
+  "@uiExampleMerchantChatUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExamplePickupUnavailable": "Example pickup unavailable.",
+  "@uiExamplePickupUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleReviewUnavailable": "Example review unavailable.",
+  "@uiExampleReviewUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMandalaByPassMedanSampleLocation": "Mandala by Pass, Medan · sample location",
+  "@uiMandalaByPassMedanSampleLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueSampleFoodItemsFound": "{arg0} sample food items found",
+  "@uiValueSampleFoodItemsFound": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiFilter": "Filter",
+  "@uiFilter": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDistanceUnavailable": "Distance unavailable",
+  "@uiDistanceUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickUpAtValueDemo": "Pick up at {arg0} (demo)",
+  "@uiPickUpAtValueDemo": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiCanTFindYourFood": "Can't find your food?",
+  "@uiCanTFindYourFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTryAnotherKeywordFromTheAvailableSampleFoods": "Try another keyword from the available sample foods.",
+  "@uiTryAnotherKeywordFromTheAvailableSampleFoods": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEditSearch": "Edit Search",
+  "@uiEditSearch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiResetFilters": "Reset Filters",
+  "@uiResetFilters": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYouMayAlsoLike": "You May Also Like",
+  "@uiYouMayAlsoLike": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchFilters": "Search Filters",
+  "@uiSearchFilters": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiReset": "Reset",
+  "@uiReset": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCategory": "Category",
+  "@uiCategory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPriceRangeRp": "Price range (Rp)",
+  "@uiPriceRangeRp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDistance": "Distance",
+  "@uiDistance": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDistanceFilteringIsUnavailableInTheDemoData": "Distance filtering is unavailable in the demo data.",
+  "@uiDistanceFilteringIsUnavailableInTheDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSortBy": "Sort by",
+  "@uiSortBy": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenStoresOnly": "Open stores only",
+  "@uiOpenStoresOnly": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreOpeningStatusIsUnavailableInTheDemoData": "Store opening status is unavailable in the demo data.",
+  "@uiStoreOpeningStatusIsUnavailableInTheDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiShowResults": "Show Results",
+  "@uiShowResults": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleSorting": "Example sorting",
+  "@uiExampleSorting": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLowestPrice": "Lowest price",
+  "@uiLowestPrice": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFLASHSALE": "FLASH SALE",
+  "@uiFLASHSALE": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourFavoriteCroissantsUpTo60Off": "Your Favorite Croissants,\nUp to 60% Off",
+  "@uiYourFavoriteCroissantsUpTo60Off": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderNow": "Order Now!",
+  "@uiOrderNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoAllOffersLocationsRatingsAndStockAreSampleData": "Offline demo · All offers, locations, ratings, and stock are sample data.",
+  "@uiOfflineDemoAllOffersLocationsRatingsAndStockAreSampleData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSortedByNearestPickupDistance": "Sorted by nearest pickup distance",
+  "@uiSortedByNearestPickupDistance": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewAll": "View All",
+  "@uiViewAll": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoFoodsMatchYourSearch": "No foods match your search.",
+  "@uiNoFoodsMatchYourSearch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWantToBrowseByStore": "Want to browse by store?",
+  "@uiWantToBrowseByStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExploreNearbyMerchants": "Explore nearby merchants",
+  "@uiExploreNearbyMerchants": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseLocation": "Choose Location",
+  "@uiChooseLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseCurrentLocation": "Use current location",
+  "@uiUseCurrentLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLocationAccessIsUnavailable": "Location access is unavailable",
+  "@uiLocationAccessIsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSelectedLocation": "Selected location",
+  "@uiSelectedLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRecentSearches": "Recent searches",
+  "@uiRecentSearches": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleAreaNotFound": "Sample area not found.",
+  "@uiSampleAreaNotFound": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisAreaIsForDisplayOnlyDistanceBasedResultsAreNotAvailable": "This area is for display only; distance-based results are not available.",
+  "@uiThisAreaIsForDisplayOnlyDistanceBasedResultsAreNotAvailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseThisLocation": "Use This Location",
+  "@uiUseThisLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIllustrativeMapNotALiveLocation": "Illustrative map — not a live location",
+  "@uiIllustrativeMapNotALiveLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupValueValue": "Demo pickup: {arg0} · {arg1}",
+  "@uiDemoPickupValueValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiSampleProduct": "Sample product",
+  "@uiSampleProduct": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseAddOns": "Choose Add-ons",
+  "@uiChooseAddOns": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMakeItEvenTastierDemo": "Make it even tastier! (demo)",
+  "@uiMakeItEvenTastierDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCustomerReviews": "Customer Reviews",
+  "@uiCustomerReviews": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoCustomer": "Demo Customer",
+  "@uiDemoCustomer": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleReview": "Sample review",
+  "@uiSampleReview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisIsASampleCustomerReviewThereAreNoRealReviewsForThisDemoProduct": "This is a sample customer review. There are no real reviews for this demo product.",
+  "@uiThisIsASampleCustomerReviewThereAreNoRealReviewsForThisDemoProduct": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddToCartDemo": "Add to Cart (Demo)",
+  "@uiAddToCartDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoFavoritesLastOnlyWhileThisPageIsOpenProductsLocationsAd": "Offline demo · Favorites last only while this page is open. Products, locations, add-ons, and reviews are examples. Selecting 1–10 items does not change inventory or place an order.",
+  "@uiOfflineDemoFavoritesLastOnlyWhileThisPageIsOpenProductsLocationsAd": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTermsConditions": "Terms & Conditions",
+  "@uiTermsConditions": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiInformationAboutUsingThePanganKitaDemo": "Information about using the PanganKita demo",
+  "@uiInformationAboutUsingThePanganKitaDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPrivacyPolicy": "Privacy Policy",
+  "@uiPrivacyPolicy": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPrivacyPolicyUnavailable": "Privacy Policy unavailable",
+  "@uiPrivacyPolicyUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTheOfficialDocumentIsNotYetAvailableInThisDemo": "The official document is not yet available in this demo.",
+  "@uiTheOfficialDocumentIsNotYetAvailableInThisDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToSettings": "Back to Settings",
+  "@uiBackToSettings": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEditProfile": "Edit Profile",
+  "@uiEditProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangePhoto": "Change Photo",
+  "@uiChangePhoto": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSecurity": "Security",
+  "@uiSecurity": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangePassword": "Change Password",
+  "@uiChangePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveChanges": "Save Changes",
+  "@uiSaveChanges": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFullName": "Full name",
+  "@uiFullName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEmail": "Email",
+  "@uiEmail": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPhoneNumber": "Phone number",
+  "@uiPhoneNumber": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAPhoneNumberHelpsMerchantsContactYou": "A phone number helps merchants contact you.",
+  "@uiAPhoneNumberHelpsMerchantsContactYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyProfile": "My Profile",
+  "@uiMyProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForHelpingSaveFood": "Thank you for helping save food.",
+  "@uiThankYouForHelpingSaveFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyFavorites": "My Favorites",
+  "@uiMyFavorites": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveWhatYouLoveAndFindItAnytime": "Save what you love and find it anytime.",
+  "@uiSaveWhatYouLoveAndFindItAnytime": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoFavoritesPricesAndAvailabilityAreNotConnected": "Demo favorites. Prices and availability are not connected.",
+  "@uiDemoFavoritesPricesAndAvailabilityAreNotConnected": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleFavoriteStore": "Sample favorite store",
+  "@uiSampleFavoriteStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoCompletedOrdersYet": "Demo view · No completed orders yet.",
+  "@uiDemoViewNoCompletedOrdersYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoMatchingSampleOrders": "No matching sample orders.",
+  "@uiNoMatchingSampleOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSamplePaymentTotal": "Sample payment total",
+  "@uiSamplePaymentTotal": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemo": "Demo",
+  "@uiDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTimeUnavailable": "Pickup time: Unavailable",
+  "@uiPickupTimeUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewDetails": "View Details",
+  "@uiViewDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWriteReview": "Write Review",
+  "@uiWriteReview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrders": "Orders",
+  "@uiOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourFavoriteFoodReadyToEnjoy": "Your favorite food, ready to enjoy.",
+  "@uiYourFavoriteFoodReadyToEnjoy": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleActiveOrders": "Sample active orders",
+  "@uiSampleActiveOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewThereAreNoRealOrders": "Demo view · There are no real orders.",
+  "@uiDemoViewThereAreNoRealOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupCode": "Pickup code",
+  "@uiPickupCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUnavailable": "Unavailable",
+  "@uiUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMessageStore": "Message Store",
+  "@uiMessageStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderDetails": "Order Details",
+  "@uiOrderDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderHelp": "Order Help",
+  "@uiOrderHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowCanWeHelp": "How can we help?",
+  "@uiHowCanWeHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContactCustomerSupport": "Contact Customer Support",
+  "@uiContactCustomerSupport": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderIDUnavailable": "Order ID unavailable",
+  "@uiOrderIDUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickup": "Pickup",
+  "@uiPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderPickedUp": "Order picked up!",
+  "@uiOrderPickedUp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleCompletedPickupViewNoRealPickupHasBeenConfirmed": "Sample completed pickup view.\nNo real pickup has been confirmed.",
+  "@uiSampleCompletedPickupViewNoRealPickupHasBeenConfirmed": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForChoosingSurplusFood": "Thank you for choosing surplus food.",
+  "@uiThankYouForChoosingSurplusFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToHome": "Back to Home",
+  "@uiBackToHome": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoCanceledOrdersYet": "Demo view · No canceled orders yet.",
+  "@uiDemoViewNoCanceledOrdersYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCanceledOrdersWillAppearHere": "Canceled orders will appear here.",
+  "@uiCanceledOrdersWillAppearHere": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoPaymentYet": "No payment yet",
+  "@uiNoPaymentYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCancellationReasonUnavailable": "Cancellation reason: Unavailable",
+  "@uiCancellationReasonUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBrowseOtherFood": "Browse Other Food",
+  "@uiBrowseOtherFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoOrderOrCodeHasBeenCreated": "No order or code has been created.",
+  "@uiNoOrderOrCodeHasBeenCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupInformation": "Pickup Information",
+  "@uiPickupInformation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentDetails": "Payment Details",
+  "@uiPaymentDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleOrderDetails": "Sample order details",
+  "@uiSampleOrderDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderStatusUnavailable": "Order status unavailable.",
+  "@uiOrderStatusUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowWasYourFood": "How was your food?",
+  "@uiHowWasYourFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTellUsAboutYourExperience": "Tell us about your experience",
+  "@uiTellUsAboutYourExperience": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDisplayMyName": "Display my name",
+  "@uiDisplayMyName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisOptionIsADemoAndIsNotSaved": "This option is a demo and is not saved.",
+  "@uiThisOptionIsADemoAndIsNotSaved": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSubmitReview": "Submit Review",
+  "@uiSubmitReview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddPhotoOptional": "Add photo (optional)",
+  "@uiAddPhotoOptional": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddPhoto": "Add Photo",
+  "@uiAddPhoto": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPanganKitaHelp": "PanganKita Help",
+  "@uiPanganKitaHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCustomerSupportDemo": "Customer Support • demo",
+  "@uiCustomerSupportDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiReadyForPickupDemo": "Ready for pickup • demo",
+  "@uiReadyForPickupDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleConversation": "Sample conversation",
+  "@uiSampleConversation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChat": "Chat",
+  "@uiChat": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStayConnectedWithYourFavoriteStores": "Stay connected with your favorite stores.",
+  "@uiStayConnectedWithYourFavoriteStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoRealConversationsYet": "Demo view · No real conversations yet.",
+  "@uiDemoViewNoRealConversationsYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoMatchingExamples": "No matching examples.",
+  "@uiNoMatchingExamples": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUnread": "Unread",
+  "@uiUnread": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAll": "All",
+  "@uiAll": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoSampleMessagesForThisStore": "No sample messages for this store.",
+  "@uiNoSampleMessagesForThisStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleConversationMessagesAreNotSentOrSaved": "Sample conversation. Messages are not sent or saved.",
+  "@uiSampleConversationMessagesAreNotSentOrSaved": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoresNearYou": "Stores Near You",
+  "@uiStoresNearYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIllustrativeMapSampleStoreLocations": "Illustrative map • sample store locations",
+  "@uiIllustrativeMapSampleStoreLocations": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewList": "View List",
+  "@uiViewList": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDirections": "Directions",
+  "@uiDirections": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewStore": "View Store",
+  "@uiViewStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoLiveLocationOrStoreDataIsUsed": "Demo view · No live location or store data is used.",
+  "@uiDemoViewNoLiveLocationOrStoreDataIsUsed": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoMatchingSampleStores": "No matching sample stores.",
+  "@uiNoMatchingSampleStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFeaturedStores": "Featured Stores",
+  "@uiFeaturedStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "ui4SampleStoresToPreview": "4 sample stores to preview",
+  "@ui4SampleStoresToPreview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewMap": "View Map",
+  "@uiViewMap": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyLocationDemo": "My location (demo)",
+  "@uiMyLocationDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIllustrativeRoute": "Illustrative route",
+  "@uiIllustrativeRoute": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueDistanceAndTimeUnavailable": "{arg0} • distance and time unavailable",
+  "@uiValueDistanceAndTimeUnavailable": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDemoPickupDeadlineValue": "Demo pickup deadline: {arg0}",
+  "@uiDemoPickupDeadlineValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiOpenInMaps": "Open in Maps",
+  "@uiOpenInMaps": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleStoreNameCopied": "Sample store name copied.",
+  "@uiSampleStoreNameCopied": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreDetails": "Store Details",
+  "@uiStoreDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewMap2": "View map ›",
+  "@uiViewMap2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPackOf5": "Pack of 5",
+  "@uiPackOf5": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGarlicButterAndCheeseToastDemo": "Garlic butter and cheese toast · demo",
+  "@uiGarlicButterAndCheeseToastDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreReviews": "Store Reviews",
+  "@uiStoreReviews": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleRatingsNotVerified": "Sample ratings, not verified.",
+  "@uiSampleRatingsNotVerified": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoStoreReviewsInTheOfflineDemo": "No store reviews in the offline demo.",
+  "@uiNoStoreReviewsInTheOfflineDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAboutStore": "About Store",
+  "@uiAboutStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCategoryValue": "Category: {arg0}",
+  "@uiCategoryValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDemoPickupLocationValue": "Demo pickup location: {arg0}",
+  "@uiDemoPickupLocationValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiThisStoreInformationComesFromOfflineDemoData": "This store information comes from offline demo data.",
+  "@uiThisStoreInformationComesFromOfflineDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueItemsValue": "{arg0} items · {arg1}",
+  "@uiValueItemsValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiViewCart": "View Cart",
+  "@uiViewCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPayment": "Payment",
+  "@uiPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentUnavailable": "Payment unavailable",
+  "@uiPaymentUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisIsADemoScreenNoQRCodeBillTransactionOrOrderIsCreated": "This is a demo screen. No QR code, bill, transaction, or order is created.",
+  "@uiThisIsADemoScreenNoQRCodeBillTransactionOrOrderIsCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiClose": "Close",
+  "@uiClose": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCartIsEmptyNoPaymentStatusAvailable": "Cart is empty. No payment status available.",
+  "@uiCartIsEmptyNoPaymentStatusAvailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThereIsNoBillToPay": "There is no bill to pay.",
+  "@uiThereIsNoBillToPay": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentDeadline": "Payment deadline",
+  "@uiPaymentDeadline": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTotalPayment": "Total payment",
+  "@uiTotalPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentMethod": "Payment Method",
+  "@uiPaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveQR": "Save QR",
+  "@uiSaveQR": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPreviewStatus": "Preview Status",
+  "@uiPreviewStatus": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderID": "Order ID",
+  "@uiOrderID": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRUnavailable": "QR unavailable",
+  "@uiQRUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewExampleSuccessfulPayment": "View example successful payment",
+  "@uiViewExampleSuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToCheckout": "Back to Checkout",
+  "@uiBackToCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewExampleUnsuccessfulPayment": "View example unsuccessful payment",
+  "@uiViewExampleUnsuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckout": "Checkout",
+  "@uiCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoStoresSchedulesProfilesPricesAndQRISAreExamplesNoPaymen": "Offline demo. Stores, schedules, profiles, prices, and QRIS are examples. No payment or order is created.",
+  "@uiOfflineDemoStoresSchedulesProfilesPricesAndQRISAreExamplesNoPaymen": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourCartIsEmptyAddProductsBeforeCheckout": "Your cart is empty. Add products before checkout.",
+  "@uiYourCartIsEmptyAddProductsBeforeCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickUpYourOrderAtTheStore": "Pick up your order at the store",
+  "@uiPickUpYourOrderAtTheStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoDeliveryFeeSaveMore": "No delivery fee, save more!",
+  "@uiNoDeliveryFeeSaveMore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupUntilValue": "Pickup until {arg0}",
+  "@uiPickupUntilValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiLocationDetails": "Location Details",
+  "@uiLocationDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderRecipient": "Order recipient",
+  "@uiOrderRecipient": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChange": "Change",
+  "@uiChange": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentSummary": "Payment Summary",
+  "@uiPaymentSummary": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTermsDemo": "Pickup Terms (Demo)",
+  "@uiPickupTermsDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisPageIsASimulationStoresLocationsAndSchedulesAreExamplesNoPayme": "This page is a simulation. Stores, locations, and schedules are examples. No payment, order, or reservation is created. Actual service terms are not yet available.",
+  "@uiThisPageIsASimulationStoresLocationsAndSchedulesAreExamplesNoPayme": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIAgreeToThe": "I agree to the ",
+  "@uiIAgreeToThe": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTerms": "pickup terms.",
+  "@uiPickupTerms": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPayNow": "Pay Now",
+  "@uiPayNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCart": "Cart",
+  "@uiCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiClearAll": "Clear All",
+  "@uiClearAll": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoPricesAddOnsLocationsAndSchedulesAreExamplesTheCartClea": "Offline demo. Prices, add-ons, locations, and schedules are examples. The cart clears when the app closes. No inventory is reserved and no payment is created.",
+  "@uiOfflineDemoPricesAddOnsLocationsAndSchedulesAreExamplesTheCartClea": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourCartIsEmpty": "Your cart is empty",
+  "@uiYourCartIsEmpty": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSelectFoodFromHomeToSeeItHere": "Select food from Home to see it here.",
+  "@uiSelectFoodFromHomeToSeeItHere": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContinueShopping": "Continue Shopping",
+  "@uiContinueShopping": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleStoreLocation": "Sample store location",
+  "@uiSampleStoreLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddMoreFood": "Add More Food",
+  "@uiAddMoreFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupAtStore": "Pickup at Store",
+  "@uiPickupAtStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupDeadlineValue": "Pickup deadline: {arg0}",
+  "@uiPickupDeadlineValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiNotesForStore": "Notes for Store",
+  "@uiNotesForStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderSummary": "Order Summary",
+  "@uiOrderSummary": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMakeSureYouCanArriveOnTimeTheActualScheduleIsUnavailableInTheDemo": "Make sure you can arrive on time. The actual schedule is unavailable in the demo.",
+  "@uiMakeSureYouCanArriveOnTimeTheActualScheduleIsUnavailableInTheDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContinueToCheckout": "Continue to Checkout",
+  "@uiContinueToCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCartIsEmptyNoDemoPaymentAvailable": "Cart is empty. No demo payment available.",
+  "@uiCartIsEmptyNoDemoPaymentAvailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleUnsuccessfulPayment": "Example unsuccessful payment",
+  "@uiExampleUnsuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoPaymentHasBeenProcessedOrConfirmedThisIsJustASampleScreen": "No payment has been processed or confirmed. This is just a sample screen.",
+  "@uiNoPaymentHasBeenProcessedOrConfirmedThisIsJustASampleScreen": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStatus": "Status",
+  "@uiStatus": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWhatYouCanDo": "What You Can Do",
+  "@uiWhatYouCanDo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTryPayingAgain": "Try Paying Again",
+  "@uiTryPayingAgain": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangePaymentMethod": "Change Payment Method",
+  "@uiChangePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNeedHelp": "Need help?",
+  "@uiNeedHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderDetails2": "Order Details",
+  "@uiOrderDetails2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleOrderDetails2": "Sample Order Details",
+  "@uiSampleOrderDetails2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleSuccessfulPayment": "Example successful payment",
+  "@uiExampleSuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPreviewOfThePostPaymentScreenNoTransactionOrOrderHasBeenCreated": "Preview of the post-payment screen.\nNo transaction or order has been created.",
+  "@uiPreviewOfThePostPaymentScreenNoTransactionOrOrderHasBeenCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleMerchant": "Sample merchant",
+  "@uiSampleMerchant": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisScheduleIsNotAnOrderConfirmation": "This schedule is not an order confirmation.",
+  "@uiThisScheduleIsNotAnOrderConfirmation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewSampleOrders": "View sample orders",
+  "@uiViewSampleOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChoosePaymentMethod": "Choose Payment Method",
+  "@uiChoosePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOnlyQRISIsShownAsAnExampleNoPaymentOrQRCodeIsGenerated": "Only QRIS is shown as an example. No payment or QR code is generated.",
+  "@uiOnlyQRISIsShownAsAnExampleNoPaymentOrQRCodeIsGenerated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSamplePaymentMethod": "Sample payment method",
+  "@uiSamplePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseQRISDemo": "Use QRIS (Demo)",
+  "@uiUseQRISDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPasswordUpdated": "Password Updated!",
+  "@uiPasswordUpdated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPleaseSignInAgainUsingYourNewPassword": "Please sign in again using your\nnew password.",
+  "@uiPleaseSignInAgainUsingYourNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToLogin": "Back to Login",
+  "@uiBackToLogin": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLocalSimulationNoPasswordsOrAccountsAreSaved": "Local simulation. No passwords or accounts are saved.",
+  "@uiLocalSimulationNoPasswordsOrAccountsAreSaved": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQualityFoodFriendlierPrices": "Quality Food,\nFriendlier Prices.",
+  "@uiQualityFoodFriendlierPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDiscoverQualitySurplusFoodFromTrustedNearbyBusinessesBeforePickupT": "Discover quality surplus food from trusted nearby businesses before pickup time ends.",
+  "@uiDiscoverQualitySurplusFoodFromTrustedNearbyBusinessesBeforePickupT": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSignUp": "Sign Up",
+  "@uiSignUp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAlreadyHaveAnAccount": "Already have an account?",
+  "@uiAlreadyHaveAnAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLogIn": "Log In",
+  "@uiLogIn": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRememberedYourPassword": "Remembered your password?",
+  "@uiRememberedYourPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoModeNoEmailOrCodeIsSent": "Demo mode: no email or code is sent.",
+  "@uiDemoModeNoEmailOrCodeIsSent": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSendOTPCode": "Send OTP Code",
+  "@uiSendOTPCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiForgotPassword": "Forgot Password?",
+  "@uiForgotPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDonTWorryWeLlHelpRecoverYourAccount": "Don't worry, we'll help recover your account.",
+  "@uiDonTWorryWeLlHelpRecoverYourAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiVerify": "Verify",
+  "@uiVerify": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoModeUseCode5102NoEmailOrSMSIsSent": "Demo mode: use code 5102.\nNo email or SMS is sent.",
+  "@uiDemoModeUseCode5102NoEmailOrSMSIsSent": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDidnTReceiveTheCode": "Didn't receive the code?",
+  "@uiDidnTReceiveTheCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiResend": "Resend",
+  "@uiResend": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiVerifyOTPCode": "Verify OTP Code",
+  "@uiVerifyOTPCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSignUpAndEnjoyDeliciousFoodAtLowerPrices": "Sign up and enjoy delicious food\nat lower prices.",
+  "@uiSignUpAndEnjoyDeliciousFoodAtLowerPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoRealNotificationsYet": "Demo view · No real notifications yet.",
+  "@uiDemoViewNoRealNotificationsYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNotifications": "Notifications",
+  "@uiNotifications": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMarkAsRead": "Mark as Read",
+  "@uiMarkAsRead": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourLatestUpdates": "Your latest updates.",
+  "@uiYourLatestUpdates": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisFeatureIsUnavailableInTheOfflineDemo": "This feature is unavailable in the offline demo.",
+  "@uiThisFeatureIsUnavailableInTheOfflineDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenDemoProfile": "Open demo profile",
+  "@uiOpenDemoProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseLocation2": "Choose location",
+  "@uiChooseLocation2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBack": "Back",
+  "@uiBack": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchForFood": "Search for food...",
+  "@uiSearchForFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiClearSearch": "Clear search",
+  "@uiClearSearch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchFilters2": "Search filters",
+  "@uiSearchFilters2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMinimum": "Minimum",
+  "@uiMinimum": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMaximum": "Maximum",
+  "@uiMaximum": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleBadgeMerchantNotVerified": "Sample badge; merchant not verified",
+  "@uiSampleBadgeMerchantNotVerified": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRISPromotion": "QRIS Promotion",
+  "@uiQRISPromotion": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFlashSale": "Flash Sale",
+  "@uiFlashSale": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupValueValue2": "Demo pickup {arg0}, {arg1}",
+  "@uiDemoPickupValueValue2": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiNearYourLocation": "Near Your Location",
+  "@uiNearYourLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFindDeliciousFoodNearYou": "Find delicious food near you...",
+  "@uiFindDeliciousFoodNearYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFilterFood": "Filter food",
+  "@uiFilterFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchSampleAreas": "Search sample areas",
+  "@uiSearchSampleAreas": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCopyProductInformation": "Copy product information",
+  "@uiCopyProductInformation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleProductPhotoFromValue": "Sample product photo from {arg0}",
+  "@uiSampleProductPhotoFromValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDecreaseDemoQuantity": "Decrease demo quantity",
+  "@uiDecreaseDemoQuantity": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoQuantityValue": "Demo quantity {arg0}",
+  "@uiDemoQuantityValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiIncreaseDemoQuantity": "Increase demo quantity",
+  "@uiIncreaseDemoQuantity": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAccount": "Account",
+  "@uiAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiProductsAndOrders": "Products and Orders",
+  "@uiProductsAndOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentAndPickup": "Payment and Pickup",
+  "@uiPaymentAndPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToMyProfile": "Back to My Profile",
+  "@uiBackToMyProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangingPhotosIsUnavailable": "Changing photos is unavailable",
+  "@uiChangingPhotosIsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleEmail": "Sample email",
+  "@uiSampleEmail": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddPhoneNumber": "Add phone number",
+  "@uiAddPhoneNumber": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenSettings": "Open Settings",
+  "@uiOpenSettings": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFood": "Food",
+  "@uiFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStores": "Stores",
+  "@uiStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoSampleFavoriteStores": "No sample favorite stores.",
+  "@uiNoSampleFavoriteStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoSampleFavoriteFoods": "No sample favorite foods.",
+  "@uiNoSampleFavoriteFoods": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRemoveValueFromDemoFavorites": "Remove {arg0} from demo favorites",
+  "@uiRemoveValueFromDemoFavorites": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiSearchOrders": "Search orders",
+  "@uiSearchOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchSampleProductOrStoreName": "Search sample product or store name",
+  "@uiSearchSampleProductOrStoreName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCloseOrderHelp": "Close Order Help",
+  "@uiCloseOrderHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowDoIPickUpMyOrder": "How do I pick up my order?",
+  "@uiHowDoIPickUpMyOrder": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderNotReady": "Order not ready",
+  "@uiOrderNotReady": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreClosedOrHardToFind": "Store closed or hard to find",
+  "@uiStoreClosedOrHardToFind": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIncorrectOrder": "Incorrect order",
+  "@uiIncorrectOrder": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentIssue": "Payment issue",
+  "@uiPaymentIssue": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTime": "Pickup time",
+  "@uiPickupTime": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoTotal": "Demo total",
+  "@uiDemoTotal": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenOrderHelp": "Open Order Help",
+  "@uiOpenOrderHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreLocation": "Store location",
+  "@uiStoreLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupDeadline": "Demo pickup deadline",
+  "@uiDemoPickupDeadline": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoSubtotal": "Demo subtotal",
+  "@uiDemoSubtotal": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowWasTheFoodAndPickupExperience": "How was the food and pickup experience?",
+  "@uiHowWasTheFoodAndPickupExperience": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGiveValueStars": "Give {arg0} stars",
+  "@uiGiveValueStars": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiTastyFood": "Tasty food",
+  "@uiTastyFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGoodPortion": "Good portion",
+  "@uiGoodPortion": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNeatPackaging": "Neat packaging",
+  "@uiNeatPackaging": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFriendlyStore": "Friendly store",
+  "@uiFriendlyStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHelpOptionsUnavailable": "Help options unavailable",
+  "@uiHelpOptionsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHelloHowCanWeHelpWithYourSampleOrder": "Hello! How can we help with your sample order?",
+  "@uiHelloHowCanWeHelpWithYourSampleOrder": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIMAtTheStoreButMyOrderIsnTReady": "I'm at the store, but my order isn't ready.",
+  "@uiIMAtTheStoreButMyOrderIsnTReady": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfCourseCouldYouDescribeWhatSHappeningAtTheStore": "Of course. Could you describe what's happening at the store?",
+  "@uiOfCourseCouldYouDescribeWhatSHappeningAtTheStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAttachmentsUnavailable": "Attachments unavailable",
+  "@uiAttachmentsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWriteAMessage": "Write a message...",
+  "@uiWriteAMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEmojiUnavailable": "Emoji unavailable",
+  "@uiEmojiUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSendSampleMessage": "Send sample message",
+  "@uiSendSampleMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourOrderIsReadyForPickup": "Your order is ready for pickup!",
+  "@uiYourOrderIsReadyForPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWeRePreparingYourOrderNow": "We're preparing your order now.",
+  "@uiWeRePreparingYourOrderNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForShoppingWithUs": "Thank you for shopping with us!",
+  "@uiThankYouForShoppingWithUs": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOkayThankYou": "Okay, thank you!",
+  "@uiOkayThankYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchStoresOrMessages": "Search stores or messages...",
+  "@uiSearchStoresOrMessages": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWriteASampleMessage": "Write a sample message...",
+  "@uiWriteASampleMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddSampleMessage": "Add sample message",
+  "@uiAddSampleMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToStoreList": "Back to store list",
+  "@uiBackToStoreList": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMapFiltersUnavailable": "Map filters unavailable",
+  "@uiMapFiltersUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDeviceLocationUnavailable": "Device location unavailable",
+  "@uiDeviceLocationUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchStoreNameOrCategory": "Search store name or category...",
+  "@uiSearchStoreNameOrCategory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreFiltersUnavailable": "Store filters unavailable",
+  "@uiStoreFiltersUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueSampleReviews": "{arg0} sample reviews",
+  "@uiValueSampleReviews": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDistanceUnavailable2": "distance unavailable",
+  "@uiDistanceUnavailable2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleProducts": "sample products",
+  "@uiSampleProducts": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWalking": "Walking",
+  "@uiWalking": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMotorcycle": "Motorcycle",
+  "@uiMotorcycle": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCar": "Car",
+  "@uiCar": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToStoreMap": "Back to store map",
+  "@uiBackToStoreMap": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCopyStoreName": "Copy store name",
+  "@uiCopyStoreName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddSampleProductToCart": "Add sample product to cart",
+  "@uiAddSampleProductToCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAboutThePaymentPreview": "About the payment preview",
+  "@uiAboutThePaymentPreview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRISLogoSamplePaymentMethod": "QRIS logo, sample payment method",
+  "@uiQRISLogoSamplePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSubtotalValueItems": "Subtotal ({arg0} items)",
+  "@uiSubtotalValueItems": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiServiceFee": "Service fee",
+  "@uiServiceFee": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIAgreeToTheDemoPickupTerms": "I agree to the demo pickup terms",
+  "@uiIAgreeToTheDemoPickupTerms": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleSeparatePackagingLessSweetEtc": "Example: separate packaging, less sweet, etc.",
+  "@uiExampleSeparatePackagingLessSweetEtc": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiServiceFeeDemo": "Service fee (demo)",
+  "@uiServiceFeeDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckInternetConnection": "Check internet connection",
+  "@uiCheckInternetConnection": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMakeSureYourConnectionIsStableBeforeRetrying": "Make sure your connection is stable before retrying.",
+  "@uiMakeSureYourConnectionIsStableBeforeRetrying": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckTransactionHistory": "Check transaction history",
+  "@uiCheckTransactionHistory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckYourPaymentAppBeforeTryingAgain": "Check your payment app before trying again.",
+  "@uiCheckYourPaymentAppBeforeTryingAgain": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDecreaseValue": "Decrease {arg0}",
+  "@uiDecreaseValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiQuantityOfValueValue": "Quantity of {arg0}: {arg1}",
+  "@uiQuantityOfValueValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiIncreaseValue": "Increase {arg0}",
+  "@uiIncreaseValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiRemoveValue": "Remove {arg0}",
+  "@uiRemoveValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiPaymentStatus": "Payment status",
+  "@uiPaymentStatus": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentTime": "Payment time",
+  "@uiPaymentTime": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderID2": "Order ID",
+  "@uiOrderID2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRISLogo": "QRIS logo",
+  "@uiQRISLogo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContinueToWelcome": "Continue to welcome",
+  "@uiContinueToWelcome": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPanganKitaLogo": "PanganKita logo",
+  "@uiPanganKitaLogo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDigitValue": "Digit {arg0}",
+  "@uiDigitValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiContinueWithValue": "Continue with {arg0}",
+  "@uiContinueWithValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiOrderReadyForPickup": "Order ready for pickup!",
+  "@uiOrderReadyForPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSotoKesawanIsPreparingYourFavoriteFood": "Soto Kesawan is preparing your favorite food.",
+  "@uiSotoKesawanIsPreparingYourFavoriteFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourFavoritesAreOnSale": "Your favorites are on sale!",
+  "@uiYourFavoritesAreOnSale": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveUpTo60OnSelectedBreadAndSnacksToday": "Save up to 60% on selected bread and snacks today.",
+  "@uiSaveUpTo60OnSelectedBreadAndSnacksToday": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderCompleted": "Order completed",
+  "@uiOrderCompleted": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSomethingTastyNearYou": "Something tasty near you",
+  "@uiSomethingTastyNearYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFindYourFavoriteFoodAtBetterPrices": "Find your favorite food at better prices.",
+  "@uiFindYourFavoriteFoodAtBetterPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRiceDishes": "Rice Dishes",
+  "@uiRiceDishes": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBreadPastries": "Bread & Pastries",
+  "@uiBreadPastries": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCakesDesserts": "Cakes & Desserts",
+  "@uiCakesDesserts": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveValue": "Save {arg0}%",
+  "@uiSaveValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiSampleStock": "Sample stock",
+  "@uiSampleStock": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueBoxesLeft": "{arg0} boxes left",
+  "@uiValueBoxesLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValuePortionsLeft": "{arg0} portions left",
+  "@uiValuePortionsLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValueBoxesLeft2": "{arg0} boxes left",
+  "@uiValueBoxesLeft2": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValuePiecesLeft": "{arg0} pieces left",
+  "@uiValuePiecesLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValueMinutesLeft": "{arg0} minutes left",
+  "@uiValueMinutesLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiActive": "Active",
+  "@uiActive": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCompleted": "Completed",
+  "@uiCompleted": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCanceled": "Canceled",
+  "@uiCanceled": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenNow": "Open Now",
+  "@uiOpenNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBiggestDiscount": "Biggest Discount",
+  "@uiBiggestDiscount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNearest": "Nearest",
+  "@uiNearest": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRating": "Rating",
+  "@uiRating": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAllStores": "All stores",
+  "@uiAllStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDiscount": "Discount",
+  "@uiDiscount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPromotions": "Promotions",
+  "@uiPromotions": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiToday": "Today",
+  "@uiToday": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYesterday": "Yesterday",
+  "@uiYesterday": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGoodMorning": "Good Morning, ",
+  "@uiGoodMorning": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSave": "Save ",
+  "@uiSave": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiVincentExampleComDemo": "vincent@example.com • demo",
+  "@uiVincentExampleComDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPackOf52": "(Pack of 5)",
+  "@uiPackOf52": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWelcomeBack": "Welcome back!",
+  "@uiWelcomeBack": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCreateAccount": "Create Account",
+  "@uiCreateAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCreateNewPassword": "Create New Password",
+  "@uiCreateNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFindYourFavoriteFoodsAtBetterPrices": "Find your favorite foods\nat better prices.",
+  "@uiFindYourFavoriteFoodsAtBetterPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseAPasswordThatSEasyToRememberButHardToGuess": "Choose a password that's easy to remember\nbut hard to guess.",
+  "@uiChooseAPasswordThatSEasyToRememberButHardToGuess": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPassword": "Password",
+  "@uiPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCreatePassword": "Create password",
+  "@uiCreatePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNewPassword": "New password",
+  "@uiNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSignIn": "Sign In",
+  "@uiSignIn": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSavePassword": "Save Password",
+  "@uiSavePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDonTHaveAnAccount": "Don't have an account?",
+  "@uiDonTHaveAnAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPasswordsDoNotMatch": "Passwords do not match.",
+  "@uiPasswordsDoNotMatch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoModeNoAuthenticationOrServerAccount": "Demo mode. No authentication or server account.",
+  "@uiDemoModeNoAuthenticationOrServerAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiConfirmNewPassword": "Confirm new password",
+  "@uiConfirmNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiConfirmPassword": "Confirm password",
+  "@uiConfirmPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisFieldIsRequired": "This field is required.",
+  "@uiThisFieldIsRequired": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEnterAValidEmailAddress": "Enter a valid email address.",
+  "@uiEnterAValidEmailAddress": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseAtLeast8CharactersIncludingLettersAndNumbers": "Use at least 8 characters, including letters and numbers.",
+  "@uiUseAtLeast8CharactersIncludingLettersAndNumbers": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIncorrectDemoCodeUse5102": "Incorrect demo code. Use 5102.",
+  "@uiIncorrectDemoCodeUse5102": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTheDemoCodeRemains5102NoSMSOrEmailIsSent": "The demo code remains 5102. No SMS or email is sent.",
+  "@uiTheDemoCodeRemains5102NoSMSOrEmailIsSent": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiShowPassword": "Show password",
+  "@uiShowPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHidePassword": "Hide password",
+  "@uiHidePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEnterYourFullName": "Enter your full name.",
+  "@uiEnterYourFullName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEnterAValidEmailAddress2": "Enter a valid email address.",
+  "@uiEnterAValidEmailAddress2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoChangesCannotBeSavedToAnAccount": "Demo changes cannot be saved to an account.",
+  "@uiDemoChangesCannotBeSavedToAnAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleProductAddedToLocalCart": "Sample product added to local cart.",
+  "@uiSampleProductAddedToLocalCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoCartQuantityLimitReached": "Demo cart quantity limit reached.",
+  "@uiDemoCartQuantityLimitReached": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoProductInformationCopied": "Demo product information copied.",
+  "@uiDemoProductInformationCopied": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoLimit10ItemsPerConfigurationChangeTheQuantityInYourCart": "Demo limit: 10 items per configuration. Change the quantity in your cart.",
+  "@uiDemoLimit10ItemsPerConfigurationChangeTheQuantityInYourCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchFoodOrStores": "Search food or stores",
+  "@uiSearchFoodOrStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRemoveTemporaryFavorite": "Remove temporary favorite",
+  "@uiRemoveTemporaryFavorite": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTemporarilyFavorite": "Temporarily favorite",
+  "@uiTemporarilyFavorite": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoInventoryIsReservedOrPaymentCreated": "No inventory is reserved or payment created.",
+  "@uiNoInventoryIsReservedOrPaymentCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderUpdates": "Order updates",
+  "@uiOrderUpdates": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForHelpingReduceFoodWasteWithSotoKesawan": "Thank you for helping reduce food waste with Soto Kesawan.",
+  "@uiThankYouForHelpingReduceFoodWasteWithSotoKesawan": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMawarBakeryCakeHasPreparedYourOrderPleaseCollectItBefore2030": "Mawar Bakery & Cake has prepared your order. Please collect it before 20:30.",
+  "@uiMawarBakeryCakeHasPreparedYourOrderPleaseCollectItBefore2030": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWelcomeToPanganKita": "Welcome to PanganKita",
+  "@uiWelcomeToPanganKita": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupDeadlineValueValue": "Demo pickup deadline: {arg0} · {arg1}",
+  "@uiDemoPickupDeadlineValueValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDemoData": "Demo data",
+  "@uiDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSettings": "Settings",
+  "@uiSettings": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAboutPanganKita": "About PanganKita",
+  "@uiAboutPanganKita": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMessagesFromStores": "Messages from stores",
+  "@uiMessagesFromStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPromotionsOffers": "Promotions & offers",
+  "@uiPromotionsOffers": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderHistory": "Order History",
+  "@uiOrderHistory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyLocation": "My Location",
+  "@uiMyLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHelpCenter": "Help Center",
+  "@uiHelpCenter": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLogOut": "Log Out",
+  "@uiLogOut": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTryAnotherSearchTerm": "Try another search term.",
+  "@uiTryAnotherSearchTerm": {
+    "description": "Localizes a previously hard-coded UI message."
+  }
+}

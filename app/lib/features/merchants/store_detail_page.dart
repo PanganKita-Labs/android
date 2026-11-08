@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/shopping/demo_cart.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
@@ -46,7 +47,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
     final added = widget.cart.add(food);
     final notice = ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
+        content: I18nText(
           added
               ? 'Produk contoh ditambahkan ke keranjang lokal.'
               : 'Batas jumlah contoh dalam keranjang sudah tercapai.',
@@ -58,9 +59,9 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
 
   void _copyMerchant() {
     unawaited(Clipboard.setData(ClipboardData(text: widget.food.merchant)));
-    final notice = ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Nama toko contoh disalin.')));
+    final notice = ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: I18nText('Nama toko contoh disalin.')),
+    );
     unawaited(notice.closed);
   }
 
@@ -69,7 +70,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
     backgroundColor: PanganKitaColors.surfaceWarm,
     appBar: AppBar(
       backgroundColor: Colors.white,
-      title: const Text('Detail Toko'),
+      title: const I18nText('Detail Toko'),
       actions: [
         IconButton(
           tooltip: _favorite
@@ -79,7 +80,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
           icon: Icon(_favorite ? Icons.favorite : Icons.favorite_border),
         ),
         IconButton(
-          tooltip: 'Salin nama toko',
+          tooltip: translateDisplayText(context, 'Salin nama toko'),
           onPressed: _copyMerchant,
           icon: const Icon(Icons.copy_outlined),
         ),
@@ -169,15 +170,20 @@ class _MerchantSummary extends StatelessWidget {
         backgroundImage: food.id == 'buns'
             ? const AssetImage('assets/prototype/mawar-mark.webp')
             : null,
-        child: food.id == 'buns' ? null : Text(food.merchant.substring(0, 1)),
+        child: food.id == 'buns'
+            ? null
+            : I18nText(food.merchant.substring(0, 1)),
       ),
       const SizedBox(width: 10),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(food.merchant, style: Theme.of(context).textTheme.titleMedium),
-            Text(
+            I18nText(
+              food.merchant,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            I18nText(
               '${_storeCategory(food)} · contoh',
               style: Theme.of(context).textTheme.bodySmall,
             ),
@@ -190,7 +196,7 @@ class _MerchantSummary extends StatelessWidget {
                 ),
                 const SizedBox(width: 3),
                 Flexible(
-                  child: Text(
+                  child: I18nText(
                     '${food.rating} · contoh',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -199,7 +205,7 @@ class _MerchantSummary extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
+            I18nText(
               'Jarak belum tersedia',
               style: Theme.of(context).textTheme.bodySmall,
             ),
@@ -213,7 +219,7 @@ class _MerchantSummary extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 9, vertical: 5),
-          child: Text('Contoh'),
+          child: I18nText('Contoh'),
         ),
       ),
     ],
@@ -244,10 +250,10 @@ class _PickupSummary extends StatelessWidget {
               color: PanganKitaColors.brandPrimary,
             ),
             const SizedBox(width: 7),
-            Expanded(child: Text('${food.pickupAddress} · contoh')),
+            Expanded(child: I18nText('${food.pickupAddress} · contoh')),
             TextButton(
               onPressed: () => DemoNotice.unavailable(context),
-              child: const Text('Lihat peta ›'),
+              child: const I18nText('Lihat peta ›'),
             ),
           ],
         ),
@@ -260,7 +266,7 @@ class _PickupSummary extends StatelessWidget {
             ),
             const SizedBox(width: 7),
             Expanded(
-              child: Text(
+              child: I18nText(
                 food.id == 'buns'
                     ? 'Ambil 19.30–20.30 · contoh'
                     : 'Batas pickup contoh: ${food.pickupTime}',
@@ -290,7 +296,7 @@ class _StoreTabs extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () => onSelected(index),
-                  child: Text(
+                  child: I18nText(
                     label,
                     style: TextStyle(
                       color: selected == index
@@ -342,7 +348,10 @@ class _StoreProduct extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(child: _ProductText(food: food)),
           IconButton.filled(
-            tooltip: 'Tambah produk contoh ke keranjang',
+            tooltip: translateDisplayText(
+              context,
+              'Tambah produk contoh ke keranjang',
+            ),
             onPressed: onAdd,
             icon: const Icon(Icons.add),
           ),
@@ -361,16 +370,16 @@ class _ProductText extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
+      I18nText(
         food.id == 'buns'
             ? food.title.replaceFirst(' (Isi 5 pcs)', '')
             : food.title,
         style: Theme.of(context).textTheme.titleSmall,
       ),
       if (food.id == 'buns')
-        const Text('Isi 5 pcs', style: TextStyle(color: Colors.black54))
+        const I18nText('Isi 5 pcs', style: TextStyle(color: Colors.black54))
       else if (food.id == 'garlic-bread')
-        const Text(
+        const I18nText(
           'Roti panggang dengan garlic butter dan keju · contoh',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -379,13 +388,13 @@ class _ProductText extends StatelessWidget {
       Wrap(
         spacing: _priceGap,
         children: [
-          Text(
+          I18nText(
             food.price,
             style: Theme.of(context).textTheme.titleSmall
                 ?.copyWith(color: PanganKitaColors.brandPrimaryStrong),
           ),
           if (food.id == 'buns')
-            Text(
+            I18nText(
               food.original,
               style: const TextStyle(
                 color: Colors.black45,
@@ -402,7 +411,7 @@ class _ProductText extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-            child: Text('${food.stock} · contoh'),
+            child: I18nText('${food.stock} · contoh'),
           ),
         ),
     ],
@@ -422,19 +431,22 @@ class _StoreReviews extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Ulasan toko', style: Theme.of(context).textTheme.titleMedium),
+          I18nText(
+            'Ulasan toko',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: 12),
           Row(
             children: [
               const Icon(Icons.star, color: PanganKitaColors.brandAccent),
               const SizedBox(width: 8),
-              Text(food.rating),
+              I18nText(food.rating),
             ],
           ),
           const SizedBox(height: 16),
-          const Text('Rating contoh, belum diverifikasi.'),
+          const I18nText('Rating contoh, belum diverifikasi.'),
           const SizedBox(height: 8),
-          const Text('Belum ada ulasan toko dalam demo offline.'),
+          const I18nText('Belum ada ulasan toko dalam demo offline.'),
         ],
       ),
     ),
@@ -454,17 +466,23 @@ class _StoreAbout extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Tentang toko', style: Theme.of(context).textTheme.titleMedium),
+          I18nText(
+            'Tentang toko',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: 12),
-          Text(food.merchant, style: Theme.of(context).textTheme.titleSmall),
+          I18nText(
+            food.merchant,
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
           const SizedBox(height: 8),
-          Text('Kategori: ${_storeCategory(food)}'),
+          I18nText('Kategori: ${_storeCategory(food)}'),
           const SizedBox(height: 8),
-          Text('Lokasi pickup contoh: ${food.pickupAddress}'),
+          I18nText('Lokasi pickup contoh: ${food.pickupAddress}'),
           const SizedBox(height: 8),
-          Text('Batas pickup contoh: ${food.pickupTime}'),
+          I18nText('Batas pickup contoh: ${food.pickupTime}'),
           const SizedBox(height: 16),
-          const Text(
+          const I18nText(
             'Informasi toko ini berasal dari data contoh demo offline.',
           ),
         ],
@@ -495,14 +513,14 @@ class _CartFooter extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: Text(
+                    child: I18nText(
                       '${cart.itemCount} item · ${formatRupiah(cart.subtotal)}',
                       maxLines: 2,
                     ),
                   ),
                   const Icon(Icons.shopping_bag_outlined),
                   const SizedBox(width: 7),
-                  const Flexible(child: Text('Lihat Keranjang')),
+                  const Flexible(child: I18nText('Lihat Keranjang')),
                 ],
               ),
             ),

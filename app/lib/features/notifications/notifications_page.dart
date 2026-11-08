@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/navigation/app_bottom_navigation.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 
 const Color _ink = PanganKitaColors.inkCool;
 const Color _orderSurface = PanganKitaColors.informationSurface;
@@ -111,7 +112,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
               onSelected: (value) => setState(() => _filter = value),
             ),
             const SizedBox(height: 14),
-            const Text(
+            const I18nText(
               'Contoh tampilan · belum ada notifikasi nyata.',
               style: TextStyle(color: Colors.black54),
             ),
@@ -166,7 +167,7 @@ class _NotificationGroup extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const SizedBox(height: 20),
-        Text(
+        I18nText(
           today ? 'Hari ini' : 'Kemarin',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(color: _ink),
         ),
@@ -196,7 +197,7 @@ class _NotificationsHeader extends StatelessWidget {
       Row(
         children: [
           Expanded(
-            child: Text(
+            child: I18nText(
               'Notifikasi',
               style: Theme.of(context).textTheme.displayLarge
                   ?.copyWith(color: _ink),
@@ -205,11 +206,11 @@ class _NotificationsHeader extends StatelessWidget {
           TextButton.icon(
             onPressed: onMarkRead,
             icon: const Icon(Icons.done_all),
-            label: const Text('Tandai dibaca'),
+            label: const I18nText('Tandai dibaca'),
           ),
         ],
       ),
-      const Text('Kabar terbaru untukmu.'),
+      const I18nText('Kabar terbaru untukmu.'),
     ],
   );
 }
@@ -226,7 +227,7 @@ class _NotificationFilters extends StatelessWidget {
     children: [
       for (final label in ['Semua', 'Pesanan', 'Promo'])
         ChoiceChip(
-          label: Text(label),
+          label: I18nText(label),
           selected: selected == label,
           showCheckmark: false,
           selectedColor: PanganKitaColors.brandPrimaryStrong,
@@ -290,14 +291,14 @@ class _NotificationCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  I18nText(
                     notice.title,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 4),
-                  Text(notice.description),
+                  I18nText(notice.description),
                   const SizedBox(height: 12),
-                  Text(
+                  I18nText(
                     notice.time,
                     style: const TextStyle(color: Colors.black54),
                   ),

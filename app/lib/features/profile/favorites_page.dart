@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
 const Color _ink = PanganKitaColors.inkDeep;
@@ -46,7 +47,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
             Align(
               alignment: Alignment.centerLeft,
               child: IconButton.filledTonal(
-                tooltip: 'Kembali ke Profil Saya',
+                tooltip: translateDisplayText(
+                  context,
+                  'Kembali ke Profil Saya',
+                ),
                 style: IconButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: const RoundedRectangleBorder(
@@ -60,13 +64,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
               ),
             ),
             const SizedBox(height: 18),
-            Text(
+            I18nText(
               'Favorit Saya',
               style: Theme.of(context).textTheme.headlineLarge
                   ?.copyWith(color: _ink),
             ),
             const SizedBox(height: 4),
-            Text(
+            I18nText(
               'Simpan yang kamu suka, temukan lagi kapan saja.',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
@@ -123,7 +127,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   Icon(Icons.info_outline, color: _green),
                   SizedBox(width: 10),
                   Expanded(
-                    child: Text(
+                    child: I18nText(
                       'Favorit contoh. Harga dan ketersediaan belum terhubung.',
                     ),
                   ),
@@ -160,7 +164,7 @@ class _TabButton extends StatelessWidget {
       side: BorderSide(color: selected ? _green : const Color(0xFFE1E4E7)),
     ),
     icon: Icon(icon, size: _tabIconSize),
-    label: Text(label),
+    label: I18nText(label),
   );
 }
 
@@ -203,7 +207,7 @@ class _FoodCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: Text(
+                        child: I18nText(
                           food.title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -212,7 +216,10 @@ class _FoodCard extends StatelessWidget {
                         ),
                       ),
                       IconButton.filledTonal(
-                        tooltip: 'Hapus ${food.title} dari favorit contoh',
+                        tooltip: translateDisplayText(
+                          context,
+                          'Hapus ${food.title} dari favorit contoh',
+                        ),
                         onPressed: onRemove,
                         style: IconButton.styleFrom(
                           backgroundColor: Colors.white,
@@ -234,11 +241,11 @@ class _FoodCard extends StatelessWidget {
                             : null,
                         child: food.merchant.startsWith('Mawar')
                             ? null
-                            : const Text('R'),
+                            : const I18nText('R'),
                       ),
                       const SizedBox(width: 5),
                       Expanded(
-                        child: Text(
+                        child: I18nText(
                           food.merchant,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -251,14 +258,14 @@ class _FoodCard extends StatelessWidget {
                     children: [
                       const Icon(Icons.star, size: 14, color: _orange),
                       const SizedBox(width: 3),
-                      Text(
+                      I18nText(
                         '${food.rating.split(' ').first} · contoh',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Text(
+                  I18nText(
                     food.price,
                     style: Theme.of(context).textTheme.titleLarge
                         ?.copyWith(color: _green),
@@ -296,11 +303,11 @@ class _StoreCard extends StatelessWidget {
           ),
         ),
       ),
-      title: Text(
+      title: I18nText(
         'Mawar Bakery & Cake',
         style: Theme.of(context).textTheme.titleSmall,
       ),
-      subtitle: const Text('Toko favorit contoh'),
+      subtitle: const I18nText('Toko favorit contoh'),
       trailing: IconButton(
         tooltip: 'Hapus Mawar Bakery & Cake dari favorit contoh',
         onPressed: onRemove,
@@ -323,7 +330,7 @@ class _EmptyFavorites extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 56),
     child: Center(
-      child: Text(
+      child: I18nText(
         label,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodyLarge,

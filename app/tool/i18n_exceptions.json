@@ -1,0 +1,134 @@
+{
+  "description": "Explicit exceptions for identical translations and pre-existing static display text. Do not add broad exemptions; fix newly added UI strings instead.",
+  "unchanged_from_id": {
+    "en": [
+      "navChat",
+      "languageIndonesian",
+      "languageEnglish",
+      "uiFilter",
+      "uiReset",
+      "uiFLASHSALE",
+      "uiEmail",
+      "uiChat",
+      "uiCheckout",
+      "uiStatus",
+      "uiMinimum",
+      "uiFlashSale",
+      "uiDigitValue",
+      "uiRating",
+      "uiPassword"
+    ],
+    "zh": [],
+    "zh_Hans": []
+  },
+  "source_exceptions": [
+    {
+      "path": "features/discovery/product_detail_page.dart",
+      "kind": "localized display",
+      "value": "Mandala by Pass, Medan",
+      "reason": "Demonstration location name; not translated"
+    },
+    {
+      "path": "features/discovery/product_detail_page.dart",
+      "kind": "localized display",
+      "value": "1/1",
+      "reason": "Image pagination count; language-neutral"
+    },
+    {
+      "path": "features/discovery/product_detail_page.dart",
+      "kind": "localized display",
+      "value": "4.8",
+      "reason": "Numeric demonstration rating; language-neutral"
+    },
+    {
+      "path": "features/profile/terms_page.dart",
+      "kind": "localized display",
+      "value": "Dokumen Syarat & Ketentuan resmi belum tersedia. Halaman ini menjelaskan kemampuan aplikasi contoh saat ini dan belum menjadi perjanjian penggunaan.",
+      "reason": "KNOWN TRANSLATION DEBT: demo terms paragraph needs ARB translation before release"
+    },
+    {
+      "path": "features/profile/terms_page.dart",
+      "kind": "localized display",
+      "value": "Ketentuan resmi perlu diterbitkan dan ditinjau oleh tim sebelum layanan nyata digunakan.",
+      "reason": "KNOWN TRANSLATION DEBT: final demo terms paragraph needs ARB translation before release"
+    },
+    {
+      "path": "features/profile/profile_page.dart",
+      "kind": "localized display",
+      "value": "Vincent",
+      "reason": "Demo account name; do not translate proper names"
+    },
+    {
+      "path": "features/profile/favorites_page.dart",
+      "kind": "localized display",
+      "value": "R",
+      "reason": "Demo merchant initial, not prose"
+    },
+    {
+      "path": "features/profile/favorites_page.dart",
+      "kind": "localized display",
+      "value": "Mawar Bakery & Cake",
+      "reason": "Merchant display name; do not translate proper names"
+    },
+    {
+      "path": "features/orders/canceled_orders_section.dart",
+      "kind": "localized display",
+      "value": "26 Oktober 2026 · contoh",
+      "reason": "KNOWN TRANSLATION DEBT: demo date string requires locale-aware formatting"
+    },
+    {
+      "path": "features/messaging/support_page.dart",
+      "kind": "localized display",
+      "value": "MWR-028 • Mawar Bakery & Cake",
+      "reason": "Demo order identifier and merchant name; preserve identity"
+    },
+    {
+      "path": "features/merchants/nearby_map_page.dart",
+      "kind": "localized display",
+      "value": "Mandala by Pass, Medan",
+      "reason": "Demonstration location name; not translated"
+    },
+    {
+      "path": "features/shopping/checkout_page.dart",
+      "kind": "localized display",
+      "value": "Vincent",
+      "reason": "Demo buyer name; do not translate proper names"
+    },
+    {
+      "path": "features/shopping/checkout_page.dart",
+      "kind": "localized display",
+      "value": "QRIS",
+      "reason": "Payment-method acronym; preserve regulated display name"
+    },
+    {
+      "path": "features/shopping/payment_method_sheet.dart",
+      "kind": "localized display",
+      "value": "QRIS",
+      "reason": "Payment-method acronym; preserve regulated display name"
+    },
+    {
+      "path": "features/profile/favorites_page.dart",
+      "kind": "tooltip",
+      "value": "Hapus Mawar Bakery & Cake dari favorit contoh",
+      "reason": "KNOWN TRANSLATION DEBT: demo favorites tooltip remains Indonesian"
+    },
+    {
+      "path": "features/onboarding/recovery_page.dart",
+      "kind": "hintText",
+      "value": "nama@contoh.com",
+      "reason": "Example email address, not natural-language UI copy"
+    },
+    {
+      "path": "features/discovery/home_header.dart",
+      "kind": "Tooltip.message",
+      "value": "Pilih lokasi",
+      "reason": "KNOWN TRANSLATION DEBT: header location tooltip remains Indonesian"
+    },
+    {
+      "path": "features/discovery/home_header.dart",
+      "kind": "TextSpan.text",
+      "value": "Vincent",
+      "reason": "Demo profile name, not translatable"
+    }
+  ]
+}

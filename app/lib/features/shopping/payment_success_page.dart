@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/shopping/demo_cart.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
 const Color _green = PanganKitaColors.brandPrimaryStrong;
@@ -39,13 +40,15 @@ class PaymentSuccessPage extends StatelessWidget {
       backgroundColor: PanganKitaColors.surfaceWarm,
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Pembayaran'),
+        title: const I18nText('Pembayaran'),
       ),
       body: SafeArea(
         top: false,
         child: cart.lines.isEmpty
             ? const Center(
-                child: Text('Keranjang kosong. Tidak ada contoh pembayaran.'),
+                child: I18nText(
+                  'Keranjang kosong. Tidak ada contoh pembayaran.',
+                ),
               )
             : ListView(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
@@ -56,7 +59,7 @@ class PaymentSuccessPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   _PickupNotice(time: _pickupTimeLabel(cart)),
                   const SizedBox(height: 12),
-                  Text(
+                  I18nText(
                     'Rincian pesanan contoh',
                     style: Theme.of(context).textTheme.titleLarge
                         ?.copyWith(color: _ink),
@@ -90,14 +93,14 @@ class _SuccessHeader extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 8),
-      Text(
+      I18nText(
         'Contoh pembayaran berhasil',
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headlineMedium
             ?.copyWith(color: _ink),
       ),
       const SizedBox(height: 4),
-      const Text(
+      const I18nText(
         'Pratinjau tampilan setelah pembayaran.\n'
         'Belum ada transaksi atau pesanan yang dibuat.',
         textAlign: TextAlign.center,
@@ -138,11 +141,11 @@ class _PaymentSummary extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    I18nText(
                       _merchantNames(cart).join(', '),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    const Text('Merchant contoh'),
+                    const I18nText('Merchant contoh'),
                   ],
                 ),
               ),
@@ -194,12 +197,12 @@ class _PickupNotice extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                I18nText(
                   'Batas pickup contoh: $time',
                   style: Theme.of(context).textTheme.titleMedium
                       ?.copyWith(color: _orange),
                 ),
-                const Text('Jadwal ini bukan konfirmasi pesanan.'),
+                const I18nText('Jadwal ini bukan konfirmasi pesanan.'),
               ],
             ),
           ),
@@ -234,16 +237,16 @@ class _ProductCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                I18nText(
                   line.food.title,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
-                Text(line.food.merchant),
-                Text('${line.quantity} x ${formatRupiah(line.unitPrice)}'),
+                I18nText(line.food.merchant),
+                I18nText('${line.quantity} x ${formatRupiah(line.unitPrice)}'),
               ],
             ),
           ),
-          Text(
+          I18nText(
             formatRupiah(line.total),
             style: Theme.of(context).textTheme.titleMedium
                 ?.copyWith(color: _green),
@@ -264,9 +267,9 @@ class _SummaryRow extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Expanded(child: Text(label)),
+      Expanded(child: I18nText(label)),
       const SizedBox(width: 8),
-      Flexible(child: Text(value, textAlign: TextAlign.end)),
+      Flexible(child: I18nText(value, textAlign: TextAlign.end)),
     ],
   );
 }
@@ -288,7 +291,7 @@ class _SuccessActions extends StatelessWidget {
             FilledButton(
               onPressed: () =>
                   Navigator.pushNamed(context, AppRoutes.orders).ignore(),
-              child: const Text('Lihat contoh pesanan'),
+              child: const I18nText('Lihat contoh pesanan'),
             ),
             const SizedBox(height: 8),
             OutlinedButton(
@@ -297,7 +300,7 @@ class _SuccessActions extends StatelessWidget {
                 AppRoutes.home,
                 (route) => false,
               ).ignore(),
-              child: const Text('Kembali ke Beranda'),
+              child: const I18nText('Kembali ke Beranda'),
             ),
           ],
         ),

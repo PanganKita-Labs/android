@@ -1,0 +1,45 @@
+name: i18n consistency
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/i18n.yml'
+      - 'app/tool/check_i18n.py'
+      - 'app/tool/test_check_i18n.py'
+      - 'app/tool/i18n_exceptions.json'
+      - 'app/l10n.yaml'
+      - 'app/lib/**/*.dart'
+      - 'app/lib/i18n/arb/*.arb'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/i18n.yml'
+      - 'app/tool/check_i18n.py'
+      - 'app/tool/test_check_i18n.py'
+      - 'app/tool/i18n_exceptions.json'
+      - 'app/l10n.yaml'
+      - 'app/lib/**/*.dart'
+      - 'app/lib/i18n/arb/*.arb'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: i18n-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  i18n:
+    name: Indonesian source / EN / Chinese parity
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Verify catalogs and source coverage
+        run: python3 app/tool/check_i18n.py
+      - name: Test the i18n checker
+        working-directory: app
+        run: python3 -m unittest discover -s tool -p 'test_check_i18n.py' -v

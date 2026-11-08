@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 import 'package:pangankita/shared/reference_icon.dart';
 
@@ -98,7 +99,7 @@ class _FoodSummary extends StatelessWidget {
           children: [
             _MerchantLine(food: food),
             const SizedBox(height: 4),
-            Text(
+            I18nText(
               _cardTitle(food),
               style: const TextStyle(
                 fontFamily: PanganKitaTheme.emphasisFontFamily,
@@ -137,7 +138,7 @@ class _MerchantLine extends StatelessWidget {
         spacing: 2,
         children: [
           Flexible(
-            child: Text(
+            child: I18nText(
               food.merchant,
               style: const TextStyle(fontSize: 8.5, color: Colors.black54),
             ),
@@ -182,7 +183,7 @@ class _FoodPrice extends StatelessWidget {
     spacing: _priceGap,
     crossAxisAlignment: WrapCrossAlignment.center,
     children: [
-      Text(
+      I18nText(
         food.price,
         style: const TextStyle(
           fontFamily: PanganKitaTheme.emphasisFontFamily,
@@ -193,7 +194,7 @@ class _FoodPrice extends StatelessWidget {
           letterSpacing: -.35,
         ),
       ),
-      Text(
+      I18nText(
         food.original,
         style: const TextStyle(
           fontSize: 9,
@@ -237,7 +238,7 @@ class _FoodBadge extends StatelessWidget {
               TextSpan(
                 children: icon == 'badge' && label.startsWith('Hemat ')
                     ? [
-                        const TextSpan(text: 'Hemat '),
+                        TextSpan(text: translateDisplayText(context, 'Hemat ')),
                         TextSpan(
                           text: label.substring('Hemat '.length),
                           style: const TextStyle(
@@ -289,7 +290,7 @@ class _FoodFooter extends StatelessWidget {
         style: const TextStyle(fontSize: 9.5, height: 1.3, color: Colors.grey),
         semanticsLabel: 'Pickup contoh ${food.pickupTime}, ${food.distance}',
       ),
-      Text(
+      I18nText(
         food.stock,
         style: const TextStyle(
           fontSize: 9.5,
@@ -313,7 +314,7 @@ class _FoodRating extends StatelessWidget {
     children: [
       const ReferenceIcon('star', size: 9, color: PanganKitaColors.brandAccent),
       Flexible(
-        child: Text(
+        child: I18nText(
           rating,
           style: const TextStyle(fontSize: 5.5, color: Color(0xFF686868)),
         ),

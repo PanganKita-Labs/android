@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/shopping/demo_cart.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
 const _pageGap = 12.0;
@@ -31,22 +32,25 @@ class PaymentStatusPage extends StatelessWidget {
     builder: (context, child) => Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Pembayaran'),
+        title: const I18nText('Pembayaran'),
         actions: [
           IconButton(
-            tooltip: 'Tentang pratinjau pembayaran',
+            tooltip: translateDisplayText(
+              context,
+              'Tentang pratinjau pembayaran',
+            ),
             onPressed: () => showDialog<void>(
               context: context,
               builder: (context) => AlertDialog(
-                title: const Text('Pembayaran belum tersedia'),
-                content: const Text(
+                title: const I18nText('Pembayaran belum tersedia'),
+                content: const I18nText(
                   'Layar ini hanya contoh. Tidak ada kode QR, tagihan, '
                   'transaksi, atau pesanan yang dibuat.',
                 ),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Tutup'),
+                    child: const I18nText('Tutup'),
                   ),
                 ],
               ),
@@ -61,7 +65,7 @@ class PaymentStatusPage extends StatelessWidget {
             ? Center(
                 child: Padding(
                   padding: const EdgeInsets.all(24),
-                  child: Text(
+                  child: I18nText(
                     'Keranjang kosong. Belum ada status pembayaran.',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium,
@@ -104,12 +108,14 @@ class _PaymentNotice extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    I18nText(
                       'Pembayaran belum tersedia',
                       style: Theme.of(context).textTheme.titleMedium
                           ?.copyWith(color: _orange),
                     ),
-                    const Text('Belum ada tagihan yang perlu diselesaikan.'),
+                    const I18nText(
+                      'Belum ada tagihan yang perlu diselesaikan.',
+                    ),
                   ],
                 ),
               ),
@@ -126,8 +132,8 @@ class _PaymentNotice extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Column(
                   children: [
-                    Text('Batas waktu pembayaran'),
-                    Text(
+                    I18nText('Batas waktu pembayaran'),
+                    I18nText(
                       'Belum tersedia',
                       style: TextStyle(
                         fontFamily: PanganKitaTheme.emphasisFontFamily,
@@ -168,8 +174,8 @@ class _PaymentPreviewCard extends StatelessWidget {
             spacing: _pageGap,
             runSpacing: _wrapRunGap,
             children: [
-              const Text('Total pembayaran'),
-              Text(
+              const I18nText('Total pembayaran'),
+              I18nText(
                 formatRupiah(cart.subtotal),
                 style: Theme.of(context).textTheme.titleLarge
                     ?.copyWith(color: PanganKitaColors.brandPrimary),
@@ -182,21 +188,24 @@ class _PaymentPreviewCard extends StatelessWidget {
             spacing: _pageGap,
             runSpacing: _wrapRunGap,
             children: [
-              const Text('Metode pembayaran'),
+              const I18nText('Metode pembayaran'),
               Image.asset(
                 'assets/prototype/qris-logo-black.png',
                 width: _qrisLogoWidth,
                 height: _qrisLogoHeight,
-                semanticLabel: 'Logo QRIS, metode pembayaran contoh',
+                semanticLabel: translateDisplayText(
+                  context,
+                  'Logo QRIS, metode pembayaran contoh',
+                ),
               ),
             ],
           ),
           OutlinedButton.icon(
             onPressed: null,
             icon: const Icon(Icons.download_outlined),
-            label: const Text('Simpan QR'),
+            label: const I18nText('Simpan QR'),
           ),
-          Text(
+          I18nText(
             'Status pratinjau',
             style: Theme.of(context).textTheme.titleSmall,
           ),
@@ -217,7 +226,7 @@ class _PaymentPreviewCard extends StatelessWidget {
             alignment: WrapAlignment.spaceBetween,
             spacing: _pageGap,
             runSpacing: _wrapRunGap,
-            children: [Text('ID Pesanan'), Text('Belum tersedia')],
+            children: [I18nText('ID Pesanan'), I18nText('Belum tersedia')],
           ),
         ],
       ),
@@ -242,11 +251,11 @@ class _PaymentMerchant extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            I18nText(
               cart.lines.map((line) => line.food.merchant).toSet().join(', '),
               style: const TextStyle(fontWeight: FontWeight.w500),
             ),
-            const Text(
+            const I18nText(
               'ID pesanan belum tersedia',
               style: TextStyle(color: Colors.black54),
             ),
@@ -273,7 +282,10 @@ class _UnavailableQr extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.qr_code_2_outlined, size: 56, color: Colors.black38),
-          Text('QR belum tersedia', style: TextStyle(color: Colors.black54)),
+          I18nText(
+            'QR belum tersedia',
+            style: TextStyle(color: Colors.black54),
+          ),
         ],
       ),
     ),
@@ -293,9 +305,9 @@ class _PreviewStep extends StatelessWidget {
       CircleAvatar(
         radius: _stepRadius,
         backgroundColor: PanganKitaColors.brandPrimary,
-        child: Text(number, style: const TextStyle(color: Colors.white)),
+        child: I18nText(number, style: const TextStyle(color: Colors.white)),
       ),
-      Expanded(child: Text(text)),
+      Expanded(child: I18nText(text)),
     ],
   );
 }
@@ -319,13 +331,13 @@ class _PaymentActions extends StatelessWidget {
                 context,
                 AppRoutes.paymentSuccessPreview,
               ),
-              child: const Text('Lihat contoh pembayaran berhasil'),
+              child: const I18nText('Lihat contoh pembayaran berhasil'),
             ),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Kembali ke Checkout'),
+                child: const I18nText('Kembali ke Checkout'),
               ),
             ),
             TextButton(
@@ -334,14 +346,14 @@ class _PaymentActions extends StatelessWidget {
                 AppRoutes.home,
                 (route) => false,
               ),
-              child: const Text('Kembali ke Beranda'),
+              child: const I18nText('Kembali ke Beranda'),
             ),
             TextButton(
               onPressed: () => Navigator.pushNamed<void>(
                 context,
                 AppRoutes.paymentFailedPreview,
               ),
-              child: const Text('Lihat contoh pembayaran belum berhasil'),
+              child: const I18nText('Lihat contoh pembayaran belum berhasil'),
             ),
           ],
         ),

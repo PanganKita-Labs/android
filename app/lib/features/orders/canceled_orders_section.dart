@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
@@ -26,12 +27,12 @@ class CanceledOrdersSection extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      const Text(
+      const I18nText(
         'Contoh tampilan · belum ada pesanan dibatalkan.',
         style: TextStyle(color: Colors.black54),
       ),
       const SizedBox(height: 18),
-      Text(
+      I18nText(
         '26 Oktober 2026 · contoh',
         style: Theme.of(context).textTheme.titleLarge?.copyWith(color: _ink),
       ),
@@ -39,7 +40,7 @@ class CanceledOrdersSection extends StatelessWidget {
       if (DemoFood.examples[1].matches(query, 'Semua'))
         const _CanceledExampleCard()
       else
-        const Text('Tidak ada pesanan contoh yang cocok.'),
+        const I18nText('Tidak ada pesanan contoh yang cocok.'),
       const SizedBox(height: 24),
       const DecoratedBox(
         decoration: BoxDecoration(
@@ -57,7 +58,7 @@ class CanceledOrdersSection extends StatelessWidget {
               ),
               SizedBox(width: 12),
               Expanded(
-                child: Text('Pesanan yang dibatalkan akan muncul di sini.'),
+                child: I18nText('Pesanan yang dibatalkan akan muncul di sini.'),
               ),
             ],
           ),
@@ -85,7 +86,7 @@ class _CanceledExampleCard extends StatelessWidget {
           _CanceledProduct(food: food),
           const Divider(height: 1),
           _CanceledTotal(priceRupiah: food.priceRupiah),
-          const Text(
+          const I18nText(
             'Belum ada pembayaran',
             style: TextStyle(
               color: Colors.black54,
@@ -113,7 +114,7 @@ class _CanceledMerchantHeader extends StatelessWidget {
       ),
       const SizedBox(width: 8),
       Expanded(
-        child: Text(
+        child: I18nText(
           food.merchant,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -127,7 +128,7 @@ class _CanceledMerchantHeader extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          child: Text('Contoh', style: TextStyle(color: _red)),
+          child: I18nText('Contoh', style: TextStyle(color: _red)),
         ),
       ),
     ],
@@ -142,8 +143,8 @@ class _CanceledTotal extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: [
-      const Expanded(child: Text('Total pembayaran contoh')),
-      Text(
+      const Expanded(child: I18nText('Total pembayaran contoh')),
+      I18nText(
         formatRupiah(priceRupiah),
         style: Theme.of(context).textTheme.titleLarge
             ?.copyWith(color: PanganKitaColors.brandPrimary),
@@ -173,8 +174,8 @@ class _CanceledProduct extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(food.title, style: Theme.of(context).textTheme.titleSmall),
-            Text('1 × ${food.price}'),
+            I18nText(food.title, style: Theme.of(context).textTheme.titleSmall),
+            I18nText('1 × ${food.price}'),
             const SizedBox(height: 6),
             const DecoratedBox(
               decoration: BoxDecoration(
@@ -183,7 +184,7 @@ class _CanceledProduct extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                child: Text(
+                child: I18nText(
                   'Alasan pembatalan: Belum tersedia',
                   style: TextStyle(color: _red),
                 ),
@@ -205,7 +206,7 @@ class _CanceledActions extends StatelessWidget {
       Expanded(
         child: OutlinedButton(
           onPressed: () => DemoNotice.unavailable(context),
-          child: const Text('Lihat Detail'),
+          child: const I18nText('Lihat Detail'),
         ),
       ),
       const SizedBox(width: 10),
@@ -213,7 +214,7 @@ class _CanceledActions extends StatelessWidget {
         child: FilledButton(
           onPressed: () =>
               Navigator.pushReplacementNamed(context, AppRoutes.home).ignore(),
-          child: const Text('Cari Menu Lain', textAlign: TextAlign.center),
+          child: const I18nText('Cari Menu Lain', textAlign: TextAlign.center),
         ),
       ),
     ],

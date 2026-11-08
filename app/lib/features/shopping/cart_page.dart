@@ -3,6 +3,7 @@ import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/shopping/cart_line_card.dart';
 import 'package:pangankita/features/shopping/demo_cart.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
@@ -10,6 +11,7 @@ const _panelGap = 16.0;
 const _labelGap = 4.0;
 const _cartGap = 12.0;
 const _notesLimit = 200;
+const _notesMaxLines = 3;
 
 /// Session-only cart preview matching the supplied shopping reference.
 class CartPage extends StatelessWidget {
@@ -25,11 +27,11 @@ class CartPage extends StatelessWidget {
     builder: (context, child) => Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Keranjang'),
+        title: const I18nText('Keranjang'),
         actions: [
           TextButton(
             onPressed: cart.lines.isEmpty ? null : cart.clear,
-            child: const Text('Hapus Semua'),
+            child: const I18nText('Hapus Semua'),
           ),
         ],
       ),
@@ -54,7 +56,7 @@ class CartPage extends StatelessWidget {
                   _CartSummary(cart: cart),
                   const Padding(
                     padding: EdgeInsets.all(12),
-                    child: Text(
+                    child: I18nText(
                       'Demo offline. Harga, tambahan, lokasi, dan jadwal '
                       'adalah contoh. '
                       'Keranjang hilang saat aplikasi ditutup. '
@@ -86,18 +88,18 @@ class _EmptyCart extends StatelessWidget {
             size: 56,
             color: PanganKitaColors.brandPrimary,
           ),
-          Text(
+          I18nText(
             'Keranjangmu masih kosong',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          const Text(
+          const I18nText(
             'Pilih makanan dari Beranda untuk melihat ringkasan di sini.',
             textAlign: TextAlign.center,
           ),
           OutlinedButton(
             onPressed: () => Navigator.maybePop(context),
-            child: const Text('Kembali Belanja'),
+            child: const I18nText('Kembali Belanja'),
           ),
         ],
       ),
@@ -131,11 +133,11 @@ class _MerchantCart extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: _labelGap,
                     children: [
-                      Text(
+                      I18nText(
                         merchant,
                         style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
-                      const Text(
+                      const I18nText(
                         'Lokasi toko contoh',
                         style: TextStyle(fontSize: 12, color: Colors.black54),
                       ),
@@ -151,7 +153,7 @@ class _MerchantCart extends StatelessWidget {
           TextButton.icon(
             onPressed: () => Navigator.maybePop(context),
             icon: const Icon(Icons.add),
-            label: const Text('Tambah menu lain'),
+            label: const I18nText('Tambah menu lain'),
           ),
         ],
       ),
@@ -199,11 +201,11 @@ class _PickupCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: _labelGap,
                   children: [
-                    Text(
+                    I18nText(
                       'Ambil di toko',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    Text(
+                    I18nText(
                       'Batas pickup: $pickupTimes',
                       style: const TextStyle(
                         fontSize: 14,
@@ -225,20 +227,20 @@ class _PickupCard extends StatelessWidget {
 class _CartNotes extends StatelessWidget {
   const new();
   @override
-  Widget build(BuildContext context) => const Card(
+  Widget build(BuildContext context) => Card(
     margin: EdgeInsets.zero,
     child: Padding(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: _cartGap,
         children: [
-          Row(
+          const Row(
             spacing: 8,
             children: [
               Icon(Icons.receipt_long_outlined, size: 20),
               Expanded(
-                child: Text(
+                child: I18nText(
                   'Catatan untuk toko',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                 ),
@@ -247,22 +249,28 @@ class _CartNotes extends StatelessWidget {
           ),
           TextField(
             minLines: 2,
-            maxLines: 3,
+            maxLines: _notesMaxLines,
             maxLength: _notesLimit,
-            style: TextStyle(fontSize: 14, height: 1.35),
+            style: const TextStyle(fontSize: 14, height: 1.35),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(12),
-              enabledBorder: OutlineInputBorder(
+              contentPadding: const EdgeInsets.all(12),
+              enabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12)),
                 borderSide: BorderSide(color: PanganKitaColors.borderNeutral),
               ),
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12)),
                 borderSide: BorderSide(color: PanganKitaColors.brandPrimary),
               ),
-              hintText: 'Contoh: kemasan dipisah, jangan terlalu manis, dll.',
+              hintText: translateDisplayText(
+                context,
+                'Contoh: kemasan dipisah, jangan terlalu manis, dll.',
+              ),
               counterText: '',
-              hintStyle: TextStyle(fontSize: 14, color: Color(0xFF7B8698)),
+              hintStyle: const TextStyle(
+                fontSize: 14,
+                color: Color(0xFF7B8698),
+              ),
             ),
           ),
         ],
@@ -283,7 +291,7 @@ class _CartSummary extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: _cartGap,
         children: [
-          Text(
+          I18nText(
             'Ringkasan pesanan',
             style: Theme.of(context).textTheme.titleMedium,
           ),
@@ -305,7 +313,7 @@ class _CartSummary extends StatelessWidget {
             ),
             child: Padding(
               padding: EdgeInsets.all(12),
-              child: Text(
+              child: I18nText(
                 'Pastikan kamu bisa datang sesuai jadwal. '
                 'Jadwal aktual belum tersedia dalam demo.',
                 style: TextStyle(fontSize: 12),
@@ -333,11 +341,11 @@ class _SummaryRow extends StatelessWidget {
     spacing: _cartGap,
     runSpacing: _labelGap,
     children: [
-      Text(
+      I18nText(
         label,
         style: emphasized ? Theme.of(context).textTheme.titleSmall : null,
       ),
-      Text(
+      I18nText(
         value,
         style: emphasized
             ? Theme.of(context).textTheme.titleMedium
@@ -369,11 +377,11 @@ class _CartFooter extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: _labelGap,
                 children: [
-                  const Text(
+                  const I18nText(
                     'Total pembayaran',
                     style: TextStyle(fontSize: 12),
                   ),
-                  Text(
+                  I18nText(
                     formatRupiah(cart.subtotal),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
@@ -395,7 +403,7 @@ class _CartFooter extends StatelessWidget {
                 ),
                 onPressed: () =>
                     Navigator.pushNamed<void>(context, AppRoutes.checkout),
-                child: const Text(
+                child: const I18nText(
                   'Lanjut Checkout',
                   textAlign: TextAlign.center,
                 ),

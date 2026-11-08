@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/onboarding/auth_validation.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const Color _ink = PanganKitaColors.inkDeep;
@@ -46,12 +47,12 @@ class _RecoveryPageState extends State<RecoveryPage> {
           const SizedBox(height: 52),
           _RecoveryForm(form: _form, email: _email, onContinue: _continue),
           const SizedBox(height: 42),
-          const Center(child: Text('Sudah ingat password?')),
+          const Center(child: I18nText('Sudah ingat password?')),
           Center(
             child: TextButton(
               onPressed: () =>
                   Navigator.pushReplacementNamed(context, AppRoutes.login),
-              child: const Text('Kembali ke Login'),
+              child: const I18nText('Kembali ke Login'),
             ),
           ),
         ],
@@ -77,7 +78,7 @@ class _RecoveryForm extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
+        I18nText(
           'Email',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(color: _ink),
         ),
@@ -95,7 +96,7 @@ class _RecoveryForm extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        Text(
+        I18nText(
           'Mode demo: tidak ada email atau kode yang dikirim.',
           style: Theme.of(context).textTheme.bodySmall,
         ),
@@ -103,7 +104,7 @@ class _RecoveryForm extends StatelessWidget {
         FilledButton(
           onPressed: onContinue,
           style: FilledButton.styleFrom(shape: const StadiumBorder()),
-          child: const Text('Kirim Kode OTP'),
+          child: const I18nText('Kirim Kode OTP'),
         ),
       ],
     ),
@@ -120,7 +121,7 @@ class _RecoveryHeader extends StatelessWidget {
       Align(
         alignment: Alignment.centerLeft,
         child: IconButton.filledTonal(
-          tooltip: 'Kembali',
+          tooltip: translateDisplayText(context, 'Kembali'),
           onPressed: () => Navigator.pop(context),
           style: IconButton.styleFrom(
             backgroundColor: Colors.white,
@@ -146,13 +147,13 @@ class _RecoveryHeader extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 28),
-      Text(
+      I18nText(
         'Lupa Password?',
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.displayMedium?.copyWith(color: _ink),
       ),
       const SizedBox(height: 6),
-      Text(
+      I18nText(
         'Tenang, kami bantu pulihkan akunmu.',
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodyLarge,

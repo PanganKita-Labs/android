@@ -2,8 +2,27 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pangankita/app/pangan_kita_app.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+Future<void> main() async {
+  final _ = WidgetsFlutterBinding.ensureInitialized();
+
+  var initialLocale = const Locale('id');
+  try {
+    final stored = await SharedPreferencesAsync().getString(
+      'pangankita.ui.locale',
+    );
+    initialLocale = switch (stored) {
+      'en' => const Locale('en'),
+      'zh_Hans' => const Locale.fromSubtags(
+        languageCode: 'zh',
+        scriptCode: 'Hans',
+      ),
+      _ => const Locale('id'),
+    };
+  } on Exception catch (error) {
+    debugPrint('Unable to load language preference: $error');
+  }
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('assets/fonts/Geist-OFL.txt');
     yield LicenseEntryWithLineBreaks(['Geist'], license);
@@ -12,5 +31,5 @@ void main() {
     );
     yield LicenseEntryWithLineBreaks(['Satoshi'], satoshiLicense);
   });
-  runApp(const PanganKitaApp());
+  runApp(PanganKitaApp(initialLocale: initialLocale));
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/reference_icon.dart';
 
@@ -37,33 +38,45 @@ class AppBottomNavigation extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => NavigationBar(
-    height: MediaQuery.textScalerOf(context).scale(_navigationHeight),
-    selectedIndex: selectedIndex,
-    labelTextStyle: WidgetStateProperty.resolveWith(
-      (states) => TextStyle(
-        fontFamily: PanganKitaTheme.emphasisFontFamily,
-        fontSize: _navigationFontSize,
-        height: _navigationLineHeight,
-        color: states.contains(WidgetState.selected)
-            ? PanganKitaColors.highlightGreen
-            : PanganKitaColors.navigationInactive,
-        fontWeight: FontWeight.w600,
-      ),
-    ),
-    onDestinationSelected: (index) => _selectDestination(context, index),
-    destinations: const [
-      NavigationDestination(
-        icon: ReferenceIcon('home'),
-        selectedIcon: ReferenceIcon(
-          'home-filled',
-          color: PanganKitaColors.highlightGreen,
+  Widget build(BuildContext context) {
+    final i18n = context.i18n;
+    return NavigationBar(
+      height: MediaQuery.textScalerOf(context).scale(_navigationHeight),
+      selectedIndex: selectedIndex,
+      labelTextStyle: WidgetStateProperty.resolveWith(
+        (states) => TextStyle(
+          fontFamily: PanganKitaTheme.emphasisFontFamily,
+          fontSize: _navigationFontSize,
+          height: _navigationLineHeight,
+          color: states.contains(WidgetState.selected)
+              ? PanganKitaColors.highlightGreen
+              : PanganKitaColors.navigationInactive,
+          fontWeight: FontWeight.w600,
         ),
-        label: 'Beranda',
       ),
-      NavigationDestination(icon: ReferenceIcon('bag'), label: 'Pesanan'),
-      NavigationDestination(icon: ReferenceIcon('chat'), label: 'Chat'),
-      NavigationDestination(icon: ReferenceIcon('bell'), label: 'Notifikasi'),
-    ],
-  );
+      onDestinationSelected: (index) => _selectDestination(context, index),
+      destinations: [
+        NavigationDestination(
+          icon: const ReferenceIcon('home'),
+          selectedIcon: const ReferenceIcon(
+            'home-filled',
+            color: PanganKitaColors.highlightGreen,
+          ),
+          label: i18n?.navHome ?? 'Beranda',
+        ),
+        NavigationDestination(
+          icon: const ReferenceIcon('bag'),
+          label: i18n?.navOrders ?? 'Pesanan',
+        ),
+        NavigationDestination(
+          icon: const ReferenceIcon('chat'),
+          label: i18n?.navChat ?? 'Chat',
+        ),
+        NavigationDestination(
+          icon: const ReferenceIcon('bell'),
+          label: i18n?.navNotifications ?? 'Notifikasi',
+        ),
+      ],
+    );
+  }
 }
