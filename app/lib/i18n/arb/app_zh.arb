@@ -1,0 +1,1925 @@
+{
+  "@@locale": "zh",
+  "navHome": "首页",
+  "navOrders": "订单",
+  "navChat": "聊天",
+  "navNotifications": "通知",
+  "settingsTitle": "设置",
+  "backToProfile": "返回个人资料",
+  "notificationsTitle": "通知",
+  "notificationsDemo": "通知设置仅用于演示，不会保存。",
+  "accountTitle": "账户",
+  "changePassword": "修改密码",
+  "languageLabel": "语言",
+  "aboutPanganKita": "关于 PanganKita",
+  "terms": "条款与条件",
+  "privacy": "隐私政策",
+  "helpCenter": "帮助中心",
+  "settingsFooter": "PanganKita • 演示设置",
+  "ordersUpdate": "订单更新",
+  "ordersUpdateDescription": "接收订单状态通知。",
+  "merchantMessages": "商家消息",
+  "merchantMessagesDescription": "接收所选商家的消息通知。",
+  "promotions": "促销与优惠",
+  "promotionsDescription": "获取促销、折扣及特别优惠信息。",
+  "languageIndonesian": "印度尼西亚语",
+  "languageEnglish": "英语",
+  "languageChinese": "简体中文",
+  "uiExampleOrderUnavailable": "示例订单不可用。",
+  "@uiExampleOrderUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleMerchantChatUnavailable": "示例商家聊天不可用。",
+  "@uiExampleMerchantChatUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExamplePickupUnavailable": "示例取货信息不可用。",
+  "@uiExamplePickupUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleReviewUnavailable": "示例评价不可用。",
+  "@uiExampleReviewUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMandalaByPassMedanSampleLocation": "Mandala by Pass，棉兰 · 示例位置",
+  "@uiMandalaByPassMedanSampleLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueSampleFoodItemsFound": "找到 {arg0} 个示例食品",
+  "@uiValueSampleFoodItemsFound": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiFilter": "筛选",
+  "@uiFilter": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDistanceUnavailable": "距离信息暂不可用",
+  "@uiDistanceUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickUpAtValueDemo": "{arg0} 取货（演示）",
+  "@uiPickUpAtValueDemo": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiCanTFindYourFood": "还没找到想要的美食？",
+  "@uiCanTFindYourFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTryAnotherKeywordFromTheAvailableSampleFoods": "试试其他关键词搜索示例食品。",
+  "@uiTryAnotherKeywordFromTheAvailableSampleFoods": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEditSearch": "修改搜索",
+  "@uiEditSearch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiResetFilters": "重置筛选",
+  "@uiResetFilters": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYouMayAlsoLike": "猜你喜欢",
+  "@uiYouMayAlsoLike": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchFilters": "搜索筛选",
+  "@uiSearchFilters": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiReset": "重置",
+  "@uiReset": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCategory": "类别",
+  "@uiCategory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPriceRangeRp": "价格区间（印尼盾）",
+  "@uiPriceRangeRp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDistance": "距离",
+  "@uiDistance": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDistanceFilteringIsUnavailableInTheDemoData": "示例数据暂不支持距离筛选。",
+  "@uiDistanceFilteringIsUnavailableInTheDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSortBy": "排序方式",
+  "@uiSortBy": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenStoresOnly": "仅显示营业中的商家",
+  "@uiOpenStoresOnly": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreOpeningStatusIsUnavailableInTheDemoData": "示例数据暂无营业状态。",
+  "@uiStoreOpeningStatusIsUnavailableInTheDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiShowResults": "查看结果",
+  "@uiShowResults": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleSorting": "示例排序",
+  "@uiExampleSorting": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLowestPrice": "价格从低到高",
+  "@uiLowestPrice": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFLASHSALE": "限时抢购",
+  "@uiFLASHSALE": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourFavoriteCroissantsUpTo60Off": "你喜爱的可颂，\n最高立减 60%",
+  "@uiYourFavoriteCroissantsUpTo60Off": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderNow": "立即下单！",
+  "@uiOrderNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoAllOffersLocationsRatingsAndStockAreSampleData": "离线演示 · 所有优惠、位置、评分和库存均为示例数据。",
+  "@uiOfflineDemoAllOffersLocationsRatingsAndStockAreSampleData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSortedByNearestPickupDistance": "按最近取货距离排序",
+  "@uiSortedByNearestPickupDistance": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewAll": "查看全部",
+  "@uiViewAll": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoFoodsMatchYourSearch": "没有符合搜索条件的食品。",
+  "@uiNoFoodsMatchYourSearch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWantToBrowseByStore": "想按商家浏览吗？",
+  "@uiWantToBrowseByStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExploreNearbyMerchants": "探索附近的商家",
+  "@uiExploreNearbyMerchants": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseLocation": "选择位置",
+  "@uiChooseLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseCurrentLocation": "使用当前位置",
+  "@uiUseCurrentLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLocationAccessIsUnavailable": "位置权限暂不可用",
+  "@uiLocationAccessIsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSelectedLocation": "所选位置",
+  "@uiSelectedLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRecentSearches": "最近搜索",
+  "@uiRecentSearches": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleAreaNotFound": "未找到示例区域。",
+  "@uiSampleAreaNotFound": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisAreaIsForDisplayOnlyDistanceBasedResultsAreNotAvailable": "此区域仅供展示；目前无法根据距离筛选结果。",
+  "@uiThisAreaIsForDisplayOnlyDistanceBasedResultsAreNotAvailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseThisLocation": "使用此位置",
+  "@uiUseThisLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIllustrativeMapNotALiveLocation": "示意地图，非实时位置",
+  "@uiIllustrativeMapNotALiveLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupValueValue": "示例取货：{arg0} · {arg1}",
+  "@uiDemoPickupValueValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiSampleProduct": "示例商品",
+  "@uiSampleProduct": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseAddOns": "选择加料",
+  "@uiChooseAddOns": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMakeItEvenTastierDemo": "让美味加倍！（演示）",
+  "@uiMakeItEvenTastierDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCustomerReviews": "顾客评价",
+  "@uiCustomerReviews": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoCustomer": "演示顾客",
+  "@uiDemoCustomer": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleReview": "示例评价",
+  "@uiSampleReview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisIsASampleCustomerReviewThereAreNoRealReviewsForThisDemoProduct": "这是顾客评价示例。该演示商品暂无真实评价。",
+  "@uiThisIsASampleCustomerReviewThereAreNoRealReviewsForThisDemoProduct": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddToCartDemo": "加入购物车（演示）",
+  "@uiAddToCartDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoFavoritesLastOnlyWhileThisPageIsOpenProductsLocationsAd": "离线演示 · 收藏仅在此页面打开期间有效。商品、位置、加料和评价均为示例。选择 1–10 件商品不会改变库存或创建订单。",
+  "@uiOfflineDemoFavoritesLastOnlyWhileThisPageIsOpenProductsLocationsAd": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTermsConditions": "条款与条件",
+  "@uiTermsConditions": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiInformationAboutUsingThePanganKitaDemo": "PanganKita 演示版使用说明",
+  "@uiInformationAboutUsingThePanganKitaDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPrivacyPolicy": "隐私政策",
+  "@uiPrivacyPolicy": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPrivacyPolicyUnavailable": "隐私政策暂不可用",
+  "@uiPrivacyPolicyUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTheOfficialDocumentIsNotYetAvailableInThisDemo": "此演示应用尚未提供正式文件。",
+  "@uiTheOfficialDocumentIsNotYetAvailableInThisDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToSettings": "返回设置",
+  "@uiBackToSettings": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEditProfile": "编辑个人资料",
+  "@uiEditProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangePhoto": "更换照片",
+  "@uiChangePhoto": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSecurity": "安全",
+  "@uiSecurity": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangePassword": "修改密码",
+  "@uiChangePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveChanges": "保存更改",
+  "@uiSaveChanges": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFullName": "全名",
+  "@uiFullName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEmail": "电子邮箱",
+  "@uiEmail": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPhoneNumber": "电话号码",
+  "@uiPhoneNumber": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAPhoneNumberHelpsMerchantsContactYou": "电话号码便于商家与你联系。",
+  "@uiAPhoneNumberHelpsMerchantsContactYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyProfile": "我的资料",
+  "@uiMyProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForHelpingSaveFood": "感谢你一起减少食物浪费。",
+  "@uiThankYouForHelpingSaveFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyFavorites": "我的收藏",
+  "@uiMyFavorites": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveWhatYouLoveAndFindItAnytime": "收藏喜欢的商品，随时轻松找到。",
+  "@uiSaveWhatYouLoveAndFindItAnytime": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoFavoritesPricesAndAvailabilityAreNotConnected": "示例收藏。价格和库存尚未接入实时数据。",
+  "@uiDemoFavoritesPricesAndAvailabilityAreNotConnected": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleFavoriteStore": "示例收藏商家",
+  "@uiSampleFavoriteStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoCompletedOrdersYet": "演示页面 · 暂无已完成订单。",
+  "@uiDemoViewNoCompletedOrdersYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoMatchingSampleOrders": "没有符合条件的示例订单。",
+  "@uiNoMatchingSampleOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSamplePaymentTotal": "示例付款总额",
+  "@uiSamplePaymentTotal": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemo": "演示",
+  "@uiDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTimeUnavailable": "取货时间：暂不可用",
+  "@uiPickupTimeUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewDetails": "查看详情",
+  "@uiViewDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWriteReview": "撰写评价",
+  "@uiWriteReview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrders": "订单",
+  "@uiOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourFavoriteFoodReadyToEnjoy": "你喜爱的美食，即将享用。",
+  "@uiYourFavoriteFoodReadyToEnjoy": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleActiveOrders": "示例进行中订单",
+  "@uiSampleActiveOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewThereAreNoRealOrders": "演示页面 · 暂无真实订单。",
+  "@uiDemoViewThereAreNoRealOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupCode": "取货码",
+  "@uiPickupCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUnavailable": "暂不可用",
+  "@uiUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMessageStore": "联系商家",
+  "@uiMessageStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderDetails": "订单详情",
+  "@uiOrderDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderHelp": "订单帮助",
+  "@uiOrderHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowCanWeHelp": "有什么可以帮你？",
+  "@uiHowCanWeHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContactCustomerSupport": "联系客服",
+  "@uiContactCustomerSupport": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderIDUnavailable": "订单编号暂不可用",
+  "@uiOrderIDUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickup": "取货",
+  "@uiPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderPickedUp": "订单已取货！",
+  "@uiOrderPickedUp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleCompletedPickupViewNoRealPickupHasBeenConfirmed": "示例取货完成页面。\n尚未确认任何真实取货。",
+  "@uiSampleCompletedPickupViewNoRealPickupHasBeenConfirmed": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForChoosingSurplusFood": "感谢你选择剩余食品。",
+  "@uiThankYouForChoosingSurplusFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToHome": "返回首页",
+  "@uiBackToHome": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoCanceledOrdersYet": "演示页面 · 暂无已取消订单。",
+  "@uiDemoViewNoCanceledOrdersYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCanceledOrdersWillAppearHere": "已取消的订单会显示在这里。",
+  "@uiCanceledOrdersWillAppearHere": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoPaymentYet": "暂无付款",
+  "@uiNoPaymentYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCancellationReasonUnavailable": "取消原因：暂不可用",
+  "@uiCancellationReasonUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBrowseOtherFood": "浏览其他美食",
+  "@uiBrowseOtherFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoOrderOrCodeHasBeenCreated": "尚未创建订单或取货码。",
+  "@uiNoOrderOrCodeHasBeenCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupInformation": "取货信息",
+  "@uiPickupInformation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentDetails": "付款详情",
+  "@uiPaymentDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleOrderDetails": "示例订单详情",
+  "@uiSampleOrderDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderStatusUnavailable": "订单状态暂不可用。",
+  "@uiOrderStatusUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowWasYourFood": "餐食怎么样？",
+  "@uiHowWasYourFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTellUsAboutYourExperience": "分享你的体验",
+  "@uiTellUsAboutYourExperience": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDisplayMyName": "显示我的名字",
+  "@uiDisplayMyName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisOptionIsADemoAndIsNotSaved": "此选项仅供演示，不会保存。",
+  "@uiThisOptionIsADemoAndIsNotSaved": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSubmitReview": "提交评价",
+  "@uiSubmitReview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddPhotoOptional": "添加照片（可选）",
+  "@uiAddPhotoOptional": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddPhoto": "添加照片",
+  "@uiAddPhoto": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPanganKitaHelp": "PanganKita 帮助中心",
+  "@uiPanganKitaHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCustomerSupportDemo": "客户支持 · 演示",
+  "@uiCustomerSupportDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiReadyForPickupDemo": "可取货 · 演示",
+  "@uiReadyForPickupDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleConversation": "示例对话",
+  "@uiSampleConversation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChat": "聊天",
+  "@uiChat": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStayConnectedWithYourFavoriteStores": "与你喜爱的商家保持联系。",
+  "@uiStayConnectedWithYourFavoriteStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoRealConversationsYet": "演示页面 · 暂无真实对话。",
+  "@uiDemoViewNoRealConversationsYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoMatchingExamples": "没有符合条件的示例。",
+  "@uiNoMatchingExamples": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUnread": "未读",
+  "@uiUnread": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAll": "全部",
+  "@uiAll": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoSampleMessagesForThisStore": "此商家暂无示例消息。",
+  "@uiNoSampleMessagesForThisStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleConversationMessagesAreNotSentOrSaved": "示例对话。消息不会发送或保存。",
+  "@uiSampleConversationMessagesAreNotSentOrSaved": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoresNearYou": "附近商家",
+  "@uiStoresNearYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIllustrativeMapSampleStoreLocations": "示意地图 · 商家位置均为示例",
+  "@uiIllustrativeMapSampleStoreLocations": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewList": "查看列表",
+  "@uiViewList": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDirections": "路线指引",
+  "@uiDirections": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewStore": "查看商家",
+  "@uiViewStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoLiveLocationOrStoreDataIsUsed": "演示页面 · 尚未使用真实位置或商家数据。",
+  "@uiDemoViewNoLiveLocationOrStoreDataIsUsed": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoMatchingSampleStores": "没有符合条件的示例商家。",
+  "@uiNoMatchingSampleStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFeaturedStores": "精选商家",
+  "@uiFeaturedStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "ui4SampleStoresToPreview": "4 家示例商家供预览",
+  "@ui4SampleStoresToPreview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewMap": "查看地图",
+  "@uiViewMap": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyLocationDemo": "我的位置（演示）",
+  "@uiMyLocationDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIllustrativeRoute": "示意路线",
+  "@uiIllustrativeRoute": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueDistanceAndTimeUnavailable": "{arg0} · 距离和时间暂不可用",
+  "@uiValueDistanceAndTimeUnavailable": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDemoPickupDeadlineValue": "示例取货截止时间：{arg0}",
+  "@uiDemoPickupDeadlineValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiOpenInMaps": "在地图应用中打开",
+  "@uiOpenInMaps": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleStoreNameCopied": "已复制示例商家名称。",
+  "@uiSampleStoreNameCopied": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreDetails": "商家详情",
+  "@uiStoreDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewMap2": "查看地图 ›",
+  "@uiViewMap2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPackOf5": "每包 5 件",
+  "@uiPackOf5": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGarlicButterAndCheeseToastDemo": "蒜香黄油芝士吐司 · 演示",
+  "@uiGarlicButterAndCheeseToastDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreReviews": "商家评价",
+  "@uiStoreReviews": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleRatingsNotVerified": "示例评分，未经验证。",
+  "@uiSampleRatingsNotVerified": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoStoreReviewsInTheOfflineDemo": "离线演示暂无商家评价。",
+  "@uiNoStoreReviewsInTheOfflineDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAboutStore": "关于商家",
+  "@uiAboutStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCategoryValue": "类别：{arg0}",
+  "@uiCategoryValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDemoPickupLocationValue": "示例取货地点：{arg0}",
+  "@uiDemoPickupLocationValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiThisStoreInformationComesFromOfflineDemoData": "此商家信息来自离线演示数据。",
+  "@uiThisStoreInformationComesFromOfflineDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueItemsValue": "{arg0} 件 · {arg1}",
+  "@uiValueItemsValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiViewCart": "查看购物车",
+  "@uiViewCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPayment": "付款",
+  "@uiPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentUnavailable": "付款暂不可用",
+  "@uiPaymentUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisIsADemoScreenNoQRCodeBillTransactionOrOrderIsCreated": "此页面仅供演示，不会创建二维码、账单、交易或订单。",
+  "@uiThisIsADemoScreenNoQRCodeBillTransactionOrOrderIsCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiClose": "关闭",
+  "@uiClose": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCartIsEmptyNoPaymentStatusAvailable": "购物车为空，暂无付款状态。",
+  "@uiCartIsEmptyNoPaymentStatusAvailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThereIsNoBillToPay": "暂无待付款账单。",
+  "@uiThereIsNoBillToPay": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentDeadline": "付款截止时间",
+  "@uiPaymentDeadline": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTotalPayment": "付款总额",
+  "@uiTotalPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentMethod": "付款方式",
+  "@uiPaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveQR": "保存二维码",
+  "@uiSaveQR": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPreviewStatus": "预览状态",
+  "@uiPreviewStatus": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderID": "订单编号",
+  "@uiOrderID": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRUnavailable": "二维码暂不可用",
+  "@uiQRUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewExampleSuccessfulPayment": "查看付款成功示例",
+  "@uiViewExampleSuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToCheckout": "返回结账",
+  "@uiBackToCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewExampleUnsuccessfulPayment": "查看付款失败示例",
+  "@uiViewExampleUnsuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckout": "结账",
+  "@uiCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoStoresSchedulesProfilesPricesAndQRISAreExamplesNoPaymen": "离线演示。商家、时间表、个人资料、价格及 QRIS 均为示例，不会创建付款或订单。",
+  "@uiOfflineDemoStoresSchedulesProfilesPricesAndQRISAreExamplesNoPaymen": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourCartIsEmptyAddProductsBeforeCheckout": "购物车为空，请先添加商品再结账。",
+  "@uiYourCartIsEmptyAddProductsBeforeCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickUpYourOrderAtTheStore": "请到店取货",
+  "@uiPickUpYourOrderAtTheStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoDeliveryFeeSaveMore": "无需配送费，更省钱！",
+  "@uiNoDeliveryFeeSaveMore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupUntilValue": "取货截止至 {arg0}",
+  "@uiPickupUntilValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiLocationDetails": "位置详情",
+  "@uiLocationDetails": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderRecipient": "取货人",
+  "@uiOrderRecipient": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChange": "更改",
+  "@uiChange": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentSummary": "付款摘要",
+  "@uiPaymentSummary": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTermsDemo": "取货条款（演示）",
+  "@uiPickupTermsDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisPageIsASimulationStoresLocationsAndSchedulesAreExamplesNoPayme": "此页面仅供模拟。商家、位置和时间表均为示例，不会创建付款、订单或预订。正式服务条款暂未提供。",
+  "@uiThisPageIsASimulationStoresLocationsAndSchedulesAreExamplesNoPayme": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIAgreeToThe": "我同意",
+  "@uiIAgreeToThe": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTerms": "取货条款。",
+  "@uiPickupTerms": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPayNow": "立即付款",
+  "@uiPayNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCart": "购物车",
+  "@uiCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiClearAll": "清空",
+  "@uiClearAll": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfflineDemoPricesAddOnsLocationsAndSchedulesAreExamplesTheCartClea": "离线演示。价格、加料、位置和时间表均为示例。关闭应用后购物车会清空，不会预留库存或创建付款。",
+  "@uiOfflineDemoPricesAddOnsLocationsAndSchedulesAreExamplesTheCartClea": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourCartIsEmpty": "购物车还是空的",
+  "@uiYourCartIsEmpty": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSelectFoodFromHomeToSeeItHere": "从首页选择食品，即可在这里查看。",
+  "@uiSelectFoodFromHomeToSeeItHere": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContinueShopping": "继续购物",
+  "@uiContinueShopping": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleStoreLocation": "示例商家位置",
+  "@uiSampleStoreLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddMoreFood": "添加其他美食",
+  "@uiAddMoreFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupAtStore": "到店自取",
+  "@uiPickupAtStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupDeadlineValue": "取货截止时间：{arg0}",
+  "@uiPickupDeadlineValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiNotesForStore": "给商家的备注",
+  "@uiNotesForStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderSummary": "订单摘要",
+  "@uiOrderSummary": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMakeSureYouCanArriveOnTimeTheActualScheduleIsUnavailableInTheDemo": "请确保按时到店。演示版暂不提供实际时间表。",
+  "@uiMakeSureYouCanArriveOnTimeTheActualScheduleIsUnavailableInTheDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContinueToCheckout": "继续结账",
+  "@uiContinueToCheckout": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCartIsEmptyNoDemoPaymentAvailable": "购物车为空，暂无付款示例。",
+  "@uiCartIsEmptyNoDemoPaymentAvailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleUnsuccessfulPayment": "付款失败示例",
+  "@uiExampleUnsuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoPaymentHasBeenProcessedOrConfirmedThisIsJustASampleScreen": "尚未处理或确认任何付款，此页面仅供展示。",
+  "@uiNoPaymentHasBeenProcessedOrConfirmedThisIsJustASampleScreen": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStatus": "状态",
+  "@uiStatus": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWhatYouCanDo": "你可以这样做",
+  "@uiWhatYouCanDo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTryPayingAgain": "重试付款",
+  "@uiTryPayingAgain": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangePaymentMethod": "更换付款方式",
+  "@uiChangePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNeedHelp": "需要帮助吗？",
+  "@uiNeedHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderDetails2": "订单明细",
+  "@uiOrderDetails2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleOrderDetails2": "示例订单明细",
+  "@uiSampleOrderDetails2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleSuccessfulPayment": "付款成功示例",
+  "@uiExampleSuccessfulPayment": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPreviewOfThePostPaymentScreenNoTransactionOrOrderHasBeenCreated": "付款后页面预览。\n尚未创建交易或订单。",
+  "@uiPreviewOfThePostPaymentScreenNoTransactionOrOrderHasBeenCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleMerchant": "示例商家",
+  "@uiSampleMerchant": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisScheduleIsNotAnOrderConfirmation": "此时间安排不代表订单确认。",
+  "@uiThisScheduleIsNotAnOrderConfirmation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiViewSampleOrders": "查看示例订单",
+  "@uiViewSampleOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChoosePaymentMethod": "选择付款方式",
+  "@uiChoosePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOnlyQRISIsShownAsAnExampleNoPaymentOrQRCodeIsGenerated": "目前仅展示 QRIS 示例，不会创建付款或二维码。",
+  "@uiOnlyQRISIsShownAsAnExampleNoPaymentOrQRCodeIsGenerated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSamplePaymentMethod": "示例付款方式",
+  "@uiSamplePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseQRISDemo": "使用 QRIS（演示）",
+  "@uiUseQRISDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPasswordUpdated": "密码已更新！",
+  "@uiPasswordUpdated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPleaseSignInAgainUsingYourNewPassword": "请使用新密码\n重新登录。",
+  "@uiPleaseSignInAgainUsingYourNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToLogin": "返回登录",
+  "@uiBackToLogin": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLocalSimulationNoPasswordsOrAccountsAreSaved": "本地模拟。不会保存密码或账号。",
+  "@uiLocalSimulationNoPasswordsOrAccountsAreSaved": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQualityFoodFriendlierPrices": "优质美食，\n价格更实惠。",
+  "@uiQualityFoodFriendlierPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDiscoverQualitySurplusFoodFromTrustedNearbyBusinessesBeforePickupT": "在取货截止前，发现附近可靠商家的优质剩余食品。",
+  "@uiDiscoverQualitySurplusFoodFromTrustedNearbyBusinessesBeforePickupT": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSignUp": "注册",
+  "@uiSignUp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAlreadyHaveAnAccount": "已有账号？",
+  "@uiAlreadyHaveAnAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLogIn": "登录",
+  "@uiLogIn": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRememberedYourPassword": "想起密码了吗？",
+  "@uiRememberedYourPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoModeNoEmailOrCodeIsSent": "演示模式：不会发送邮件或验证码。",
+  "@uiDemoModeNoEmailOrCodeIsSent": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSendOTPCode": "发送验证码",
+  "@uiSendOTPCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiForgotPassword": "忘记密码？",
+  "@uiForgotPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDonTWorryWeLlHelpRecoverYourAccount": "别担心，我们会帮你找回账号。",
+  "@uiDonTWorryWeLlHelpRecoverYourAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiVerify": "验证",
+  "@uiVerify": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoModeUseCode5102NoEmailOrSMSIsSent": "演示模式：使用验证码 5102。\n不会发送邮件或短信。",
+  "@uiDemoModeUseCode5102NoEmailOrSMSIsSent": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDidnTReceiveTheCode": "没有收到验证码？",
+  "@uiDidnTReceiveTheCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiResend": "重新发送",
+  "@uiResend": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiVerifyOTPCode": "验证一次性验证码",
+  "@uiVerifyOTPCode": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSignUpAndEnjoyDeliciousFoodAtLowerPrices": "注册即可享受\n价格更实惠的美食。",
+  "@uiSignUpAndEnjoyDeliciousFoodAtLowerPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoViewNoRealNotificationsYet": "演示页面 · 暂无真实通知。",
+  "@uiDemoViewNoRealNotificationsYet": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNotifications": "通知",
+  "@uiNotifications": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMarkAsRead": "标记为已读",
+  "@uiMarkAsRead": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourLatestUpdates": "你的最新动态。",
+  "@uiYourLatestUpdates": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisFeatureIsUnavailableInTheOfflineDemo": "此功能在离线演示中暂不可用。",
+  "@uiThisFeatureIsUnavailableInTheOfflineDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenDemoProfile": "打开演示资料",
+  "@uiOpenDemoProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseLocation2": "选择位置",
+  "@uiChooseLocation2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBack": "返回",
+  "@uiBack": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchForFood": "搜索美食…",
+  "@uiSearchForFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiClearSearch": "清除搜索",
+  "@uiClearSearch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchFilters2": "搜索筛选",
+  "@uiSearchFilters2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMinimum": "最低",
+  "@uiMinimum": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMaximum": "最高",
+  "@uiMaximum": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleBadgeMerchantNotVerified": "示例徽章；商家尚未验证",
+  "@uiSampleBadgeMerchantNotVerified": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRISPromotion": "QRIS 优惠",
+  "@uiQRISPromotion": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFlashSale": "限时抢购",
+  "@uiFlashSale": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupValueValue2": "示例取货 {arg0}，{arg1}",
+  "@uiDemoPickupValueValue2": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiNearYourLocation": "你附近",
+  "@uiNearYourLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFindDeliciousFoodNearYou": "发现附近的美食…",
+  "@uiFindDeliciousFoodNearYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFilterFood": "筛选美食",
+  "@uiFilterFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchSampleAreas": "搜索示例区域",
+  "@uiSearchSampleAreas": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCopyProductInformation": "复制商品信息",
+  "@uiCopyProductInformation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleProductPhotoFromValue": "来自 {arg0} 的示例商品照片",
+  "@uiSampleProductPhotoFromValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDecreaseDemoQuantity": "减少示例数量",
+  "@uiDecreaseDemoQuantity": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoQuantityValue": "示例数量 {arg0}",
+  "@uiDemoQuantityValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiIncreaseDemoQuantity": "增加示例数量",
+  "@uiIncreaseDemoQuantity": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAccount": "账号",
+  "@uiAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiProductsAndOrders": "商品与订单",
+  "@uiProductsAndOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentAndPickup": "付款与取货",
+  "@uiPaymentAndPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToMyProfile": "返回我的资料",
+  "@uiBackToMyProfile": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChangingPhotosIsUnavailable": "暂不支持更换照片",
+  "@uiChangingPhotosIsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleEmail": "示例电子邮箱",
+  "@uiSampleEmail": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddPhoneNumber": "添加电话号码",
+  "@uiAddPhoneNumber": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenSettings": "打开设置",
+  "@uiOpenSettings": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFood": "美食",
+  "@uiFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStores": "商家",
+  "@uiStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoSampleFavoriteStores": "暂无收藏的示例商家。",
+  "@uiNoSampleFavoriteStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoSampleFavoriteFoods": "暂无收藏的示例美食。",
+  "@uiNoSampleFavoriteFoods": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRemoveValueFromDemoFavorites": "从示例收藏中移除 {arg0}",
+  "@uiRemoveValueFromDemoFavorites": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiSearchOrders": "搜索订单",
+  "@uiSearchOrders": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchSampleProductOrStoreName": "搜索示例商品或商家名称",
+  "@uiSearchSampleProductOrStoreName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCloseOrderHelp": "关闭订单帮助",
+  "@uiCloseOrderHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowDoIPickUpMyOrder": "如何取货？",
+  "@uiHowDoIPickUpMyOrder": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderNotReady": "订单尚未准备好",
+  "@uiOrderNotReady": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreClosedOrHardToFind": "商家已关闭或难以找到",
+  "@uiStoreClosedOrHardToFind": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIncorrectOrder": "订单内容有误",
+  "@uiIncorrectOrder": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentIssue": "付款问题",
+  "@uiPaymentIssue": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPickupTime": "取货时间",
+  "@uiPickupTime": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoTotal": "示例总额",
+  "@uiDemoTotal": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenOrderHelp": "打开订单帮助",
+  "@uiOpenOrderHelp": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreLocation": "商家位置",
+  "@uiStoreLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupDeadline": "示例取货截止时间",
+  "@uiDemoPickupDeadline": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoSubtotal": "示例小计",
+  "@uiDemoSubtotal": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHowWasTheFoodAndPickupExperience": "餐食口味和取货体验如何？",
+  "@uiHowWasTheFoodAndPickupExperience": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGiveValueStars": "评 {arg0} 星",
+  "@uiGiveValueStars": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiTastyFood": "味道不错",
+  "@uiTastyFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGoodPortion": "分量合适",
+  "@uiGoodPortion": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNeatPackaging": "包装整洁",
+  "@uiNeatPackaging": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFriendlyStore": "商家友好",
+  "@uiFriendlyStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHelpOptionsUnavailable": "帮助选项暂不可用",
+  "@uiHelpOptionsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHelloHowCanWeHelpWithYourSampleOrder": "你好！需要我们协助处理示例订单吗？",
+  "@uiHelloHowCanWeHelpWithYourSampleOrder": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIMAtTheStoreButMyOrderIsnTReady": "我已经到店，但订单尚未准备好。",
+  "@uiIMAtTheStoreButMyOrderIsnTReady": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOfCourseCouldYouDescribeWhatSHappeningAtTheStore": "好的，请描述一下店内的情况。",
+  "@uiOfCourseCouldYouDescribeWhatSHappeningAtTheStore": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAttachmentsUnavailable": "附件暂不可用",
+  "@uiAttachmentsUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWriteAMessage": "输入消息…",
+  "@uiWriteAMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEmojiUnavailable": "表情符号暂不可用",
+  "@uiEmojiUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSendSampleMessage": "发送示例消息",
+  "@uiSendSampleMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourOrderIsReadyForPickup": "你的订单可以取货了！",
+  "@uiYourOrderIsReadyForPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWeRePreparingYourOrderNow": "我们正在准备你的订单。",
+  "@uiWeRePreparingYourOrderNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForShoppingWithUs": "感谢惠顾！",
+  "@uiThankYouForShoppingWithUs": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOkayThankYou": "好的，谢谢！",
+  "@uiOkayThankYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchStoresOrMessages": "搜索商家或消息…",
+  "@uiSearchStoresOrMessages": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWriteASampleMessage": "输入示例消息…",
+  "@uiWriteASampleMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddSampleMessage": "添加示例消息",
+  "@uiAddSampleMessage": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToStoreList": "返回商家列表",
+  "@uiBackToStoreList": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMapFiltersUnavailable": "地图筛选暂不可用",
+  "@uiMapFiltersUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDeviceLocationUnavailable": "设备位置暂不可用",
+  "@uiDeviceLocationUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchStoreNameOrCategory": "搜索商家名称或类别…",
+  "@uiSearchStoreNameOrCategory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiStoreFiltersUnavailable": "商家筛选暂不可用",
+  "@uiStoreFiltersUnavailable": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueSampleReviews": "{arg0} 条示例评价",
+  "@uiValueSampleReviews": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDistanceUnavailable2": "距离暂不可用",
+  "@uiDistanceUnavailable2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleProducts": "示例商品",
+  "@uiSampleProducts": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWalking": "步行",
+  "@uiWalking": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMotorcycle": "摩托车",
+  "@uiMotorcycle": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCar": "汽车",
+  "@uiCar": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBackToStoreMap": "返回商家地图",
+  "@uiBackToStoreMap": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCopyStoreName": "复制商家名称",
+  "@uiCopyStoreName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAddSampleProductToCart": "将示例商品加入购物车",
+  "@uiAddSampleProductToCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAboutThePaymentPreview": "关于付款预览",
+  "@uiAboutThePaymentPreview": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRISLogoSamplePaymentMethod": "QRIS 标志，示例付款方式",
+  "@uiQRISLogoSamplePaymentMethod": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSubtotalValueItems": "小计（{arg0} 件）",
+  "@uiSubtotalValueItems": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiServiceFee": "服务费",
+  "@uiServiceFee": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIAgreeToTheDemoPickupTerms": "我同意演示取货条款",
+  "@uiIAgreeToTheDemoPickupTerms": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiExampleSeparatePackagingLessSweetEtc": "例如：分开包装、少糖等。",
+  "@uiExampleSeparatePackagingLessSweetEtc": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiServiceFeeDemo": "服务费（演示）",
+  "@uiServiceFeeDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckInternetConnection": "检查网络连接",
+  "@uiCheckInternetConnection": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMakeSureYourConnectionIsStableBeforeRetrying": "重试前请确保网络连接稳定。",
+  "@uiMakeSureYourConnectionIsStableBeforeRetrying": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckTransactionHistory": "查看交易记录",
+  "@uiCheckTransactionHistory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCheckYourPaymentAppBeforeTryingAgain": "再次尝试前请查看付款应用。",
+  "@uiCheckYourPaymentAppBeforeTryingAgain": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDecreaseValue": "减少 {arg0}",
+  "@uiDecreaseValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiQuantityOfValueValue": "{arg0} 数量：{arg1}",
+  "@uiQuantityOfValueValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiIncreaseValue": "增加 {arg0}",
+  "@uiIncreaseValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiRemoveValue": "移除 {arg0}",
+  "@uiRemoveValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiPaymentStatus": "付款状态",
+  "@uiPaymentStatus": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPaymentTime": "付款时间",
+  "@uiPaymentTime": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderID2": "订单编号",
+  "@uiOrderID2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiQRISLogo": "QRIS 标志",
+  "@uiQRISLogo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiContinueToWelcome": "继续进入欢迎页面",
+  "@uiContinueToWelcome": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPanganKitaLogo": "PanganKita 标志",
+  "@uiPanganKitaLogo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDigitValue": "第 {arg0} 位",
+  "@uiDigitValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiContinueWithValue": "使用 {arg0} 继续",
+  "@uiContinueWithValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiOrderReadyForPickup": "订单可以取货了！",
+  "@uiOrderReadyForPickup": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSotoKesawanIsPreparingYourFavoriteFood": "Soto Kesawan 正在准备你喜爱的餐食。",
+  "@uiSotoKesawanIsPreparingYourFavoriteFood": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYourFavoritesAreOnSale": "你的收藏正在打折！",
+  "@uiYourFavoritesAreOnSale": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveUpTo60OnSelectedBreadAndSnacksToday": "今日精选面包和小吃最高立减 60%。",
+  "@uiSaveUpTo60OnSelectedBreadAndSnacksToday": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderCompleted": "订单已完成",
+  "@uiOrderCompleted": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSomethingTastyNearYou": "附近有美味",
+  "@uiSomethingTastyNearYou": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFindYourFavoriteFoodAtBetterPrices": "以更优惠的价格找到心仪美食。",
+  "@uiFindYourFavoriteFoodAtBetterPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRiceDishes": "米饭类",
+  "@uiRiceDishes": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBreadPastries": "面包与糕点",
+  "@uiBreadPastries": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCakesDesserts": "蛋糕与甜点",
+  "@uiCakesDesserts": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSaveValue": "节省 {arg0}%",
+  "@uiSaveValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiSampleStock": "示例库存",
+  "@uiSampleStock": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiValueBoxesLeft": "剩余 {arg0} 盒",
+  "@uiValueBoxesLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValuePortionsLeft": "剩余 {arg0} 份",
+  "@uiValuePortionsLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValueBoxesLeft2": "剩余 {arg0} 盒",
+  "@uiValueBoxesLeft2": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValuePiecesLeft": "剩余 {arg0} 份",
+  "@uiValuePiecesLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiValueMinutesLeft": "剩余 {arg0} 分钟",
+  "@uiValueMinutesLeft": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      }
+    }
+  },
+  "uiActive": "进行中",
+  "@uiActive": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCompleted": "已完成",
+  "@uiCompleted": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCanceled": "已取消",
+  "@uiCanceled": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOpenNow": "正在营业",
+  "@uiOpenNow": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiBiggestDiscount": "最大折扣",
+  "@uiBiggestDiscount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNearest": "最近",
+  "@uiNearest": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRating": "评分",
+  "@uiRating": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAllStores": "所有商家",
+  "@uiAllStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDiscount": "折扣",
+  "@uiDiscount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPromotions": "优惠",
+  "@uiPromotions": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiToday": "今天",
+  "@uiToday": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiYesterday": "昨天",
+  "@uiYesterday": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiGoodMorning": "早上好，",
+  "@uiGoodMorning": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSave": "省下",
+  "@uiSave": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiVincentExampleComDemo": "vincent@example.com · 演示",
+  "@uiVincentExampleComDemo": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPackOf52": "（5 件装）",
+  "@uiPackOf52": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWelcomeBack": "欢迎回来！",
+  "@uiWelcomeBack": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCreateAccount": "创建账号",
+  "@uiCreateAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCreateNewPassword": "设置新密码",
+  "@uiCreateNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiFindYourFavoriteFoodsAtBetterPrices": "以更优惠的价格\n发现心仪美食。",
+  "@uiFindYourFavoriteFoodsAtBetterPrices": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiChooseAPasswordThatSEasyToRememberButHardToGuess": "请选择容易记住\n但不易被猜到的密码。",
+  "@uiChooseAPasswordThatSEasyToRememberButHardToGuess": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPassword": "密码",
+  "@uiPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiCreatePassword": "设置密码",
+  "@uiCreatePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNewPassword": "新密码",
+  "@uiNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSignIn": "登录",
+  "@uiSignIn": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSavePassword": "保存密码",
+  "@uiSavePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDonTHaveAnAccount": "还没有账号？",
+  "@uiDonTHaveAnAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPasswordsDoNotMatch": "两次输入的密码不一致。",
+  "@uiPasswordsDoNotMatch": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoModeNoAuthenticationOrServerAccount": "演示模式。没有真实身份验证或服务器账号。",
+  "@uiDemoModeNoAuthenticationOrServerAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiConfirmNewPassword": "确认新密码",
+  "@uiConfirmNewPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiConfirmPassword": "确认密码",
+  "@uiConfirmPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThisFieldIsRequired": "此项为必填项。",
+  "@uiThisFieldIsRequired": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEnterAValidEmailAddress": "请输入有效的电子邮箱地址。",
+  "@uiEnterAValidEmailAddress": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiUseAtLeast8CharactersIncludingLettersAndNumbers": "至少输入 8 个字符，包含字母和数字。",
+  "@uiUseAtLeast8CharactersIncludingLettersAndNumbers": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiIncorrectDemoCodeUse5102": "示例验证码错误，请输入 5102。",
+  "@uiIncorrectDemoCodeUse5102": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTheDemoCodeRemains5102NoSMSOrEmailIsSent": "示例验证码仍为 5102，不会发送短信或邮件。",
+  "@uiTheDemoCodeRemains5102NoSMSOrEmailIsSent": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiShowPassword": "显示密码",
+  "@uiShowPassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHidePassword": "隐藏密码",
+  "@uiHidePassword": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEnterYourFullName": "请输入全名。",
+  "@uiEnterYourFullName": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiEnterAValidEmailAddress2": "请输入有效的电子邮箱地址。",
+  "@uiEnterAValidEmailAddress2": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoChangesCannotBeSavedToAnAccount": "演示更改无法保存到真实账号。",
+  "@uiDemoChangesCannotBeSavedToAnAccount": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSampleProductAddedToLocalCart": "示例商品已加入本地购物车。",
+  "@uiSampleProductAddedToLocalCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoCartQuantityLimitReached": "已达到示例购物车数量上限。",
+  "@uiDemoCartQuantityLimitReached": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoProductInformationCopied": "已复制演示商品信息。",
+  "@uiDemoProductInformationCopied": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoLimit10ItemsPerConfigurationChangeTheQuantityInYourCart": "演示限制：每种配置最多 10 件。请在购物车中调整数量。",
+  "@uiDemoLimit10ItemsPerConfigurationChangeTheQuantityInYourCart": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSearchFoodOrStores": "搜索美食或商家",
+  "@uiSearchFoodOrStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiRemoveTemporaryFavorite": "取消临时收藏",
+  "@uiRemoveTemporaryFavorite": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTemporarilyFavorite": "临时收藏",
+  "@uiTemporarilyFavorite": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiNoInventoryIsReservedOrPaymentCreated": "不会预留库存或创建付款。",
+  "@uiNoInventoryIsReservedOrPaymentCreated": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderUpdates": "订单更新",
+  "@uiOrderUpdates": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiThankYouForHelpingReduceFoodWasteWithSotoKesawan": "感谢你与 Soto Kesawan 一起减少食物浪费。",
+  "@uiThankYouForHelpingReduceFoodWasteWithSotoKesawan": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMawarBakeryCakeHasPreparedYourOrderPleaseCollectItBefore2030": "Mawar Bakery & Cake 已备好你的订单，请在 20:30 前取货。",
+  "@uiMawarBakeryCakeHasPreparedYourOrderPleaseCollectItBefore2030": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiWelcomeToPanganKita": "欢迎来到 PanganKita",
+  "@uiWelcomeToPanganKita": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiDemoPickupDeadlineValueValue": "示例取货截止时间：{arg0} · {arg1}",
+  "@uiDemoPickupDeadlineValueValue": {
+    "description": "Localizes a previously hard-coded UI message.",
+    "placeholders": {
+      "arg0": {
+        "type": "String"
+      },
+      "arg1": {
+        "type": "String"
+      }
+    }
+  },
+  "uiDemoData": "演示数据",
+  "@uiDemoData": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiSettings": "设置",
+  "@uiSettings": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiAboutPanganKita": "关于 PanganKita",
+  "@uiAboutPanganKita": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMessagesFromStores": "商家消息",
+  "@uiMessagesFromStores": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiPromotionsOffers": "促销与优惠",
+  "@uiPromotionsOffers": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiOrderHistory": "订单记录",
+  "@uiOrderHistory": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiMyLocation": "我的位置",
+  "@uiMyLocation": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiHelpCenter": "帮助中心",
+  "@uiHelpCenter": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiLogOut": "退出登录",
+  "@uiLogOut": {
+    "description": "Localizes a previously hard-coded UI message."
+  },
+  "uiTryAnotherSearchTerm": "试试其他搜索词。",
+  "@uiTryAnotherSearchTerm": {
+    "description": "Localizes a previously hard-coded UI message."
+  }
+}
