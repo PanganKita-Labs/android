@@ -4,7 +4,7 @@ import 'package:pangankita/features/orders/order_help_sheet.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-const _ink = Color(0xFF10283C);
+const Color _ink = PanganKitaColors.inkDeep;
 const Color _green = PanganKitaColors.brandPrimaryStrong;
 const _paleGreen = Color(0xFFE9F6EF);
 const _merchantRadius = 24.0;

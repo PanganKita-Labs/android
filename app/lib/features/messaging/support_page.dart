@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
-const _ink = Color(0xFF10283C);
+const Color _ink = PanganKitaColors.inkDeep;
 const Color _green = PanganKitaColors.brandPrimaryStrong;
 const _orderImageSize = 80.0;
 const _bubbleWidthFraction = .78;

@@ -4,7 +4,7 @@ import 'package:pangankita/app/navigation/app_bottom_navigation.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-const _ink = Color(0xFF14313A);
+const Color _ink = PanganKitaColors.inkCool;
 const _searchRadius = 24.0;
 const _chipSpacing = 10.0;
 const _avatarRadius = 27.0;

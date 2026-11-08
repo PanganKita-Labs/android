@@ -10,7 +10,7 @@ const _markerPositions = [
   Alignment(.55, -.4),
   Alignment(-.55, .6),
 ];
-const _mapInk = Color(0xFF14313A);
+const Color _mapInk = PanganKitaColors.inkCool;
 const _streetStep = 44.0;
 const _blockInset = 5.0;
 const _mainRoadWidth = 18.0;
@@ -455,7 +455,11 @@ class _MapStoreSummary extends StatelessWidget {
             const SizedBox(height: 5),
             Row(
               children: [
-                const Icon(Icons.star, size: 17, color: Color(0xFFF5921B)),
+                const Icon(
+                  Icons.star,
+                  size: 17,
+                  color: PanganKitaColors.brandAccent,
+                ),
                 Expanded(
                   child: Text(
                     '${food.rating.split(' ').first} · contoh rating',

@@ -3,8 +3,8 @@ import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/navigation/app_bottom_navigation.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 
-const _ink = Color(0xFF14313A);
-const _orderSurface = Color(0xFFE7F0EB);
+const Color _ink = PanganKitaColors.inkCool;
+const Color _orderSurface = PanganKitaColors.informationSurface;
 const _orderIconSurface = Color(0xFFD0E6D9);
 const _promoIconSurface = Color(0xFFF9E7D1);
 const _cardRadius = 20.0;

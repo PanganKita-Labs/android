@@ -5,8 +5,8 @@ import 'package:pangankita/features/shopping/demo_cart.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
 const Color _green = PanganKitaColors.brandPrimaryStrong;
-const _ink = Color(0xFF10283C);
-const _orange = Color(0xFFE98412);
+const Color _ink = PanganKitaColors.inkDeep;
+const Color _orange = PanganKitaColors.referenceOrange;
 const _cardRadius = 16.0;
 const _photoRadius = 10.0;
 const _photoSize = 66.0;

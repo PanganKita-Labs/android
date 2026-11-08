@@ -46,8 +46,8 @@ class AppBottomNavigation extends StatelessWidget {
         fontSize: _navigationFontSize,
         height: _navigationLineHeight,
         color: states.contains(WidgetState.selected)
-            ? const Color(0xFF52A963)
-            : const Color(0xFF8D8F90),
+            ? PanganKitaColors.highlightGreen
+            : PanganKitaColors.navigationInactive,
         fontWeight: FontWeight.w600,
       ),
     ),
@@ -55,7 +55,10 @@ class AppBottomNavigation extends StatelessWidget {
     destinations: const [
       NavigationDestination(
         icon: ReferenceIcon('home'),
-        selectedIcon: ReferenceIcon('home-filled', color: Color(0xFF52A963)),
+        selectedIcon: ReferenceIcon(
+          'home-filled',
+          color: PanganKitaColors.highlightGreen,
+        ),
         label: 'Beranda',
       ),
       NavigationDestination(icon: ReferenceIcon('bag'), label: 'Pesanan'),

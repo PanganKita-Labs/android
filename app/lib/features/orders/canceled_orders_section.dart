@@ -5,10 +5,10 @@ import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-const _ink = Color(0xFF14313A);
+const Color _ink = PanganKitaColors.inkCool;
 const _red = Color(0xFFD94B42);
 const _redPale = Color(0xFFFCEAE6);
-const _greenPale = Color(0xFFE6F0EB);
+const Color _greenPale = PanganKitaColors.positiveSurfaceMuted;
 const _gap = 12.0;
 const _photoSize = 76.0;
 const _photoRadius = 12.0;

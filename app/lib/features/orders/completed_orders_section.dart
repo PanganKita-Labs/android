@@ -4,12 +4,12 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-const _ink = Color(0xFF14313A);
+const Color _ink = PanganKitaColors.inkCool;
 const _gap = 12.0;
 const _photoSize = 76.0;
 const _photoRadius = 12.0;
 const _merchantRadius = 18.0;
-const _badgeColor = Color(0xFFE6F0EB);
+const Color _badgeColor = PanganKitaColors.positiveSurfaceMuted;
 
 /// Display-only examples for the completed orders tab.
 class CompletedOrdersSection extends StatelessWidget {

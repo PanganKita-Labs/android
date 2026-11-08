@@ -207,7 +207,7 @@ class _PickupCard extends StatelessWidget {
                       'Batas pickup: $pickupTimes',
                       style: const TextStyle(
                         fontSize: 14,
-                        color: Color(0xFFAD5200),
+                        color: PanganKitaColors.attentionText,
                       ),
                     ),
                   ],

@@ -144,3 +144,17 @@ regions, map it to Flutter widgets, implement in a focused feature, compare
 actual renders to the reference, test small viewports, and run configured code
 quality gates. Do not mark a page complete based only on successful compile.
 Do not add reference files to Git.
+
+## Shared runtime color tokens
+
+`app/lib/app/pangan_kita_theme.dart` is the Flutter source of truth for
+approved brand/semantic colors and the repeated reference-screen colors.
+Use `PanganKitaColors` for these roles instead of duplicating identical
+hexadecimal literals across screens. The official brand accent
+(`brandAccent`) and reference-specific orange (`referenceOrange`) intentionally
+remain distinct; the same applies to `textPrimary`, `inkCool`, and `inkDeep`.
+Do not flatten visually distinct colors just because they seem similar.
+
+Local illustration/map paints and one-off decorative colors may remain local.
+Changes to the approved brand palette require visual review; extracting tokens
+is not authorization to redesign screens.

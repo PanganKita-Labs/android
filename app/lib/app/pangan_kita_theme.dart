@@ -212,6 +212,37 @@ abstract final class PanganKitaColors {
   /// Controlled urgency accent.
   static const brandAccent = Color(0xFFF5921B);
 
+  // Reference-screen and repeated UI roles. Values preserve current pixels.
+  /// Cool ink used in the approved reference screens.
+  static const inkCool = Color(0xFF14313A);
+
+  /// Deep ink used in detailed and account screens.
+  static const inkDeep = Color(0xFF10283C);
+
+  /// Reference-screen orange, distinct from the official brand accent.
+  static const referenceOrange = Color(0xFFE98412);
+
+  /// Green highlight used in hero and navigation details.
+  static const highlightGreen = Color(0xFF52A963);
+
+  /// Inactive bottom-navigation icon tint.
+  static const navigationInactive = Color(0xFF8D8F90);
+
+  /// Muted positive/order-context surface.
+  static const positiveSurfaceMuted = Color(0xFFE6F0EB);
+
+  /// Soft positive/confirmation surface.
+  static const positiveSurface = Color(0xFFE7F5ED);
+
+  /// Soft information and order-context surface.
+  static const informationSurface = Color(0xFFE7F0EB);
+
+  /// Dark attention text for informational pickup contexts.
+  static const attentionText = Color(0xFFAD5200);
+
+  /// Cool secondary text used by the reference UI.
+  static const textSecondaryCool = Color(0xFF52636B);
+
   /// Warm page background.
   static const surfaceWarm = Color(0xFFFAF6F0);
 
