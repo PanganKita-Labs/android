@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/features/onboarding/welcome_page.dart';
+import 'package:pangankita/i18n/i18n.dart';
 
 const _logoWidthFraction = .78;
 
@@ -63,7 +64,7 @@ class _SplashPageState extends State<SplashPage> {
               widthFactor: _logoWidthFraction,
               child: Image.asset(
                 'assets/prototype/splash.webp',
-                semanticLabel: 'Logo PanganKita',
+                semanticLabel: translateDisplayText(context, 'Logo PanganKita'),
               ),
             ),
           ),

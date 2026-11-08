@@ -6,6 +6,7 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/shopping/checkout_order_details.dart';
 import 'package:pangankita/features/shopping/demo_cart.dart';
 import 'package:pangankita/features/shopping/payment_method_sheet.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
@@ -43,7 +44,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     builder: (context, child) => Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Checkout'),
+        title: const I18nText('Checkout'),
       ),
       body: SafeArea(
         top: false,
@@ -72,7 +73,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     value: _understood,
                     onChanged: _setUnderstood,
                   ),
-                  const Text(
+                  const I18nText(
                     'Demo offline. Toko, jadwal, profil, harga, dan QRIS '
                     'hanya contoh. Tidak ada pembayaran atau pesanan dibuat.',
                     textAlign: TextAlign.center,
@@ -94,7 +95,7 @@ class _CheckoutEmpty extends StatelessWidget {
   Widget build(BuildContext context) => Center(
     child: Padding(
       padding: const EdgeInsets.all(24),
-      child: Text(
+      child: I18nText(
         'Keranjang kosong. Tambahkan produk sebelum checkout.',
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.titleMedium,
@@ -130,12 +131,12 @@ class _PickupNotice extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: _checkoutLabelGap,
               children: [
-                Text(
+                I18nText(
                   'Pesanan diambil langsung di toko',
                   style: Theme.of(context).textTheme.titleSmall
                       ?.copyWith(fontSize: _checkoutNoticeTitleSize),
                 ),
-                const Text(
+                const I18nText(
                   'Tidak ada biaya antar, lebih hemat!',
                   style: TextStyle(fontSize: 12, color: Colors.black54),
                 ),
@@ -177,7 +178,7 @@ class _CheckoutMerchant extends StatelessWidget {
                     spacing: _checkoutLabelGap,
                     children: [
                       Flexible(
-                        child: Text(
+                        child: I18nText(
                           merchant,
                           style: const TextStyle(
                             fontSize: 15,
@@ -205,7 +206,7 @@ class _CheckoutMerchant extends StatelessWidget {
                         color: PanganKitaColors.brandAccent,
                       ),
                       Expanded(
-                        child: Text(
+                        child: I18nText(
                           'Pickup hingga $pickupTimes',
                           style: const TextStyle(
                             fontSize: 12,
@@ -239,7 +240,7 @@ class _MerchantLocation extends StatelessWidget {
         color: PanganKitaColors.brandPrimary,
       ),
       Expanded(
-        child: Text(
+        child: I18nText(
           address,
           style: const TextStyle(fontSize: 12, color: Colors.black54),
         ),
@@ -259,7 +260,7 @@ class _MerchantLocation extends StatelessWidget {
         ),
         iconAlignment: IconAlignment.end,
         icon: const Icon(Icons.chevron_right, size: 18),
-        label: const Text('Detail lokasi'),
+        label: const I18nText('Detail lokasi'),
       ),
     ],
   );
@@ -277,12 +278,15 @@ class _PickupPerson extends StatelessWidget {
         backgroundColor: PanganKitaColors.surfaceWarm,
         child: Icon(Icons.person_outline, color: PanganKitaColors.brandPrimary),
       ),
-      title: Text(
+      title: I18nText(
         'Vincent',
         style: Theme.of(context).textTheme.titleSmall
             ?.copyWith(fontSize: _checkoutPersonTitleSize),
       ),
-      subtitle: const Text('Pengambil pesanan', style: TextStyle(fontSize: 13)),
+      subtitle: const I18nText(
+        'Pengambil pesanan',
+        style: TextStyle(fontSize: 13),
+      ),
       trailing: const Icon(Icons.chevron_right),
       onTap: () => DemoNotice.show(
         context,
@@ -303,7 +307,7 @@ class _PaymentMethod extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: _checkoutLabelGap,
         children: [
-          Text(
+          I18nText(
             'Metode pembayaran',
             style: Theme.of(context).textTheme.titleMedium,
           ),
@@ -315,15 +319,18 @@ class _PaymentMethod extends StatelessWidget {
                 width: _qrisLogoWidth,
                 height: _qrisLogoHeight,
                 fit: BoxFit.contain,
-                semanticLabel: 'Logo QRIS, metode pembayaran contoh',
+                semanticLabel: translateDisplayText(
+                  context,
+                  'Logo QRIS, metode pembayaran contoh',
+                ),
               ),
-              const Expanded(child: Text('QRIS')),
+              const Expanded(child: I18nText('QRIS')),
               TextButton.icon(
                 style: TextButton.styleFrom(padding: EdgeInsets.zero),
                 iconAlignment: IconAlignment.end,
                 icon: const Icon(Icons.chevron_right, size: 20),
                 onPressed: () => showPaymentMethodSheet(context),
-                label: const Text('Ubah'),
+                label: const I18nText('Ubah'),
               ),
             ],
           ),
@@ -345,7 +352,7 @@ class _PaymentSummary extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: _checkoutGap,
         children: [
-          Text(
+          I18nText(
             'Ringkasan pembayaran',
             style: Theme.of(context).textTheme.titleMedium,
           ),
@@ -381,11 +388,11 @@ class _PaymentRow extends StatelessWidget {
     spacing: _checkoutGap,
     runSpacing: _checkoutLabelGap,
     children: [
-      Text(
+      I18nText(
         label,
         style: emphasized ? Theme.of(context).textTheme.titleSmall : null,
       ),
-      Text(
+      I18nText(
         amount,
         style: emphasized
             ? Theme.of(context).textTheme.titleMedium
@@ -408,8 +415,8 @@ class _PickupAgreement extends StatelessWidget {
       showDialog<void>(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Ketentuan pengambilan (demo)'),
-          content: const Text(
+          title: const I18nText('Ketentuan pengambilan (demo)'),
+          content: const I18nText(
             'Halaman ini hanya simulasi. Toko, lokasi, dan jadwal '
             'adalah contoh. Tidak ada pembayaran, pesanan, '
             'atau reservasi dibuat. '
@@ -418,7 +425,7 @@ class _PickupAgreement extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Tutup'),
+              child: const I18nText('Tutup'),
             ),
           ],
         ),
@@ -432,7 +439,10 @@ class _PickupAgreement extends StatelessWidget {
       Checkbox(
         value: value,
         onChanged: onChanged,
-        semanticLabel: 'Saya setuju dengan ketentuan pengambilan demo',
+        semanticLabel: translateDisplayText(
+          context,
+          'Saya setuju dengan ketentuan pengambilan demo',
+        ),
         activeColor: PanganKitaColors.brandPrimaryStrong,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(4)),
@@ -442,7 +452,10 @@ class _PickupAgreement extends StatelessWidget {
         child: Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            const Text('Saya setuju dengan ', style: TextStyle(fontSize: 14)),
+            const I18nText(
+              'Saya setuju dengan ',
+              style: TextStyle(fontSize: 14),
+            ),
             TextButton(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
@@ -453,7 +466,7 @@ class _PickupAgreement extends StatelessWidget {
                 ),
               ),
               onPressed: () => _showTerms(context),
-              child: const Text('ketentuan pengambilan.'),
+              child: const I18nText('ketentuan pengambilan.'),
             ),
           ],
         ),
@@ -482,11 +495,11 @@ class _CheckoutFooter extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: _checkoutLabelGap,
                 children: [
-                  const Text(
+                  const I18nText(
                     'Total pembayaran',
                     style: TextStyle(fontSize: 12),
                   ),
-                  Text(
+                  I18nText(
                     formatRupiah(cart.subtotal),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
@@ -512,7 +525,7 @@ class _CheckoutFooter extends StatelessWidget {
                         AppRoutes.paymentStatus,
                       )
                     : null,
-                child: const Text(
+                child: const I18nText(
                   'Bayar Sekarang',
                   textAlign: TextAlign.center,
                 ),

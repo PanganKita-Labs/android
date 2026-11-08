@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const _pastryWidth = 145.0;
@@ -107,7 +108,7 @@ class _HeroCopy extends StatelessWidget {
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            child: Text(
+            child: I18nText(
               'FLASH SALE',
               style: TextStyle(
                 fontFamily: PanganKitaTheme.bodyFontFamily,
@@ -119,7 +120,7 @@ class _HeroCopy extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 2),
-        const Text(
+        const I18nText(
           'Croissant Favoritmu,\nDiskon Hingga 60%',
           style: TextStyle(
             color: Colors.white,
@@ -147,7 +148,7 @@ class _HeroCopy extends StatelessWidget {
             'Promo croissant belum tersedia dalam demo offline. '
             'Tidak ada pesanan yang dibuat.',
           ),
-          child: const Text('Pesan Sekarang!'),
+          child: const I18nText('Pesan Sekarang!'),
         ),
       ],
     ),

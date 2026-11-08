@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/reference_icon.dart';
 
 /// Reference greeting and selected example area; no geolocation is collected.
@@ -21,9 +22,9 @@ class HomeHeader extends StatelessWidget {
       InkWell(
         onTap: () => Navigator.pushNamed(context, AppRoutes.profile).ignore(),
         customBorder: const CircleBorder(),
-        child: const Tooltip(
-          message: 'Buka profil contoh',
-          child: CircleAvatar(
+        child: Tooltip(
+          message: translateDisplayText(context, 'Buka profil contoh'),
+          child: const CircleAvatar(
             radius: 22,
             backgroundImage: AssetImage('assets/prototype/avatar.webp'),
           ),
@@ -33,17 +34,17 @@ class HomeHeader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text.rich(
+            Text.rich(
               TextSpan(
-                text: 'Selamat Pagi, ',
-                children: [
+                text: translateDisplayText(context, 'Selamat Pagi, '),
+                children: const [
                   TextSpan(
                     text: 'Vincent',
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: PanganKitaTheme.emphasisFontFamily,
                 fontSize: 13,
                 height: 1.26,
@@ -63,7 +64,7 @@ class HomeHeader extends StatelessWidget {
                     children: [
                       const ReferenceIcon('pin', size: 13),
                       Expanded(
-                        child: Text(
+                        child: I18nText(
                           location,
                           style: const TextStyle(fontSize: 11, height: 1.3),
                         ),
@@ -77,7 +78,7 @@ class HomeHeader extends StatelessWidget {
         ),
       ),
       IconButton.filledTonal(
-        tooltip: 'Keranjang',
+        tooltip: translateDisplayText(context, 'Keranjang'),
         style: IconButton.styleFrom(
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
@@ -88,7 +89,7 @@ class HomeHeader extends StatelessWidget {
         icon: const ReferenceIcon('cart', size: 23),
       ),
       IconButton.filledTonal(
-        tooltip: 'Notifikasi',
+        tooltip: translateDisplayText(context, 'Notifikasi'),
         style: IconButton.styleFrom(
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(

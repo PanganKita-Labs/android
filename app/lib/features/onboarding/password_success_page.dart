@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 
 const _successTopFraction = .19;
 
@@ -23,7 +24,7 @@ class PasswordSuccessPage extends StatelessWidget {
             color: PanganKitaColors.brandPrimary,
           ),
           const SizedBox(height: 21),
-          const Text(
+          const I18nText(
             'Password Berhasil Diperbarui!',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -32,7 +33,7 @@ class PasswordSuccessPage extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-          const Text(
+          const I18nText(
             'Silakan masuk kembali menggunakan\npassword baru.',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 19.5),
@@ -44,10 +45,10 @@ class PasswordSuccessPage extends StatelessWidget {
               AppRoutes.login,
               (route) => false,
             ),
-            child: const Text('Kembali ke Login'),
+            child: const I18nText('Kembali ke Login'),
           ),
           const SizedBox(height: 16),
-          const Text(
+          const I18nText(
             'Simulasi lokal. Tidak ada password atau akun yang disimpan.',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 12, color: Colors.blueGrey),

@@ -7,6 +7,7 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/food_card.dart';
 import 'package:pangankita/features/discovery/hero_banner.dart';
 import 'package:pangankita/features/discovery/home_header.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 import 'package:pangankita/shared/reference_icon.dart';
@@ -83,7 +84,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             for (final category in DemoFood.categories)
               ListTile(
-                title: Text(
+                title: I18nText(
                   category,
                   style: const TextStyle(
                     fontFamily: PanganKitaTheme.bodyFontFamily,
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 10),
             const HeroBanner(),
             const SizedBox(height: 20),
-            const Text(
+            const I18nText(
               'Kategori',
               style: TextStyle(
                 fontFamily: PanganKitaTheme.emphasisFontFamily,
@@ -158,7 +159,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 8),
             const _MerchantBanner(),
             const SizedBox(height: 12),
-            const Text(
+            const I18nText(
               'Demo offline · Semua penawaran, lokasi, rating, dan stok '
               'adalah contoh.',
               textAlign: TextAlign.center,
@@ -193,7 +194,7 @@ class _FeedSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  I18nText(
                     title,
                     style: const TextStyle(
                       fontFamily: PanganKitaTheme.emphasisFontFamily,
@@ -205,7 +206,7 @@ class _FeedSection extends StatelessWidget {
                     ),
                   ),
                   if (!flash)
-                    const Text(
+                    const I18nText(
                       'Diurutkan dari jarak pickup terdekat',
                       style: TextStyle(fontSize: 9, color: Colors.blueGrey),
                     ),
@@ -221,7 +222,7 @@ class _FeedSection extends StatelessWidget {
                 context,
                 'Semua contoh untuk bagian ini sudah ditampilkan.',
               ),
-              child: const Text(
+              child: const I18nText(
                 'Lihat Semua',
                 style: TextStyle(
                   fontFamily: PanganKitaTheme.emphasisFontFamily,
@@ -234,7 +235,7 @@ class _FeedSection extends StatelessWidget {
         ),
         const SizedBox(height: 2),
         if (foods.isEmpty)
-          const Text('Tidak ada makanan yang cocok dengan pencarianmu.'),
+          const I18nText('Tidak ada makanan yang cocok dengan pencarianmu.'),
         for (final food in foods) ...[
           FoodCard(food: food),
           const SizedBox(height: 8),
@@ -275,7 +276,7 @@ class _MerchantBanner extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              I18nText(
                 'Mau lihat berdasarkan toko?',
                 style: TextStyle(
                   fontFamily: PanganKitaTheme.emphasisFontFamily,
@@ -283,7 +284,7 @@ class _MerchantBanner extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Text(
+              I18nText(
                 'Jelajahi semua merchant di dekatmu',
                 style: TextStyle(
                   fontFamily: PanganKitaTheme.bodyFontFamily,
@@ -318,7 +319,10 @@ class _HomeSearch extends StatelessWidget {
     textInputAction: TextInputAction.search,
     style: const TextStyle(fontSize: 11),
     decoration: InputDecoration(
-      hintText: 'Temukan makanan lezat di sekitarmu...',
+      hintText: translateDisplayText(
+        context,
+        'Temukan makanan lezat di sekitarmu...',
+      ),
       semanticCounterText: 'Cari makanan atau toko',
       hintStyle: const TextStyle(fontSize: 11, color: Colors.grey),
       contentPadding: const EdgeInsets.symmetric(vertical: 6),
@@ -332,7 +336,7 @@ class _HomeSearch extends StatelessWidget {
       ),
       prefixIcon: const ReferenceIcon('search', size: 18),
       suffixIcon: IconButton(
-        tooltip: 'Filter makanan',
+        tooltip: translateDisplayText(context, 'Filter makanan'),
         onPressed: onFilter,
         icon: const ReferenceIcon('filter', size: 19),
       ),
@@ -357,7 +361,7 @@ class _HomeCategories extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               spacing: _categoryLabelGap,
               children: [
-                Text(category),
+                I18nText(category),
                 if (category == 'Semua') const _ReferenceCategoryCount(),
               ],
             ),
@@ -392,7 +396,7 @@ class _ReferenceCategoryCount extends StatelessWidget {
     decoration: BoxDecoration(color: Color(0x27FFFFFF), shape: BoxShape.circle),
     child: Padding(
       padding: EdgeInsets.all(5),
-      child: Text(
+      child: I18nText(
         _referenceCategoryCount,
         style: TextStyle(
           fontFamily: PanganKitaTheme.emphasisFontFamily,

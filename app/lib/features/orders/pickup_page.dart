@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
@@ -27,7 +28,7 @@ class PickupPage extends StatelessWidget {
     backgroundColor: PanganKitaColors.surfaceWarm,
     appBar: AppBar(
       leading: const BackButton(),
-      title: const Text('Pengambilan'),
+      title: const I18nText('Pengambilan'),
     ),
     body: SafeArea(
       top: false,
@@ -40,14 +41,14 @@ class PickupPage extends StatelessWidget {
             child: Icon(Icons.shopping_bag_outlined, size: 56, color: _green),
           ),
           const SizedBox(height: 12),
-          Text(
+          I18nText(
             'Pesanan sudah diambil!',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineLarge
                 ?.copyWith(color: _green),
           ),
           const SizedBox(height: 6),
-          const Text(
+          const I18nText(
             'Contoh tampilan pengambilan selesai.\n'
             'Belum ada pengambilan nyata yang dikonfirmasi.',
             textAlign: TextAlign.center,
@@ -67,7 +68,7 @@ class PickupPage extends StatelessWidget {
                   const Icon(Icons.eco_outlined, size: 32, color: _green),
                   const SizedBox(width: 16),
                   Expanded(
-                    child: Text(
+                    child: I18nText(
                       'Terima kasih telah memilih makanan surplus.',
                       style: Theme.of(context).textTheme.titleMedium
                           ?.copyWith(color: _green),
@@ -106,7 +107,7 @@ class _PickupActions extends StatelessWidget {
           arguments: (food: food, quantity: quantity),
         ).ignore(),
         icon: const Icon(Icons.star),
-        label: const Text('Beri Ulasan'),
+        label: const I18nText('Beri Ulasan'),
       ),
       const SizedBox(height: 12),
       OutlinedButton.icon(
@@ -117,7 +118,7 @@ class _PickupActions extends StatelessWidget {
           (route) => false,
         ).ignore(),
         icon: const Icon(Icons.home_outlined),
-        label: const Text('Kembali ke Beranda'),
+        label: const I18nText('Kembali ke Beranda'),
       ),
     ],
   );
@@ -149,11 +150,11 @@ class _PickupSummary extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    I18nText(
                       food.merchant,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    Text(food.pickupAddress),
+                    I18nText(food.pickupAddress),
                   ],
                 ),
               ),
@@ -176,11 +177,11 @@ class _PickupSummary extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    I18nText(
                       food.title,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    Text('$quantity × ${food.price}'),
+                    I18nText('$quantity × ${food.price}'),
                   ],
                 ),
               ),
@@ -219,9 +220,9 @@ class _SummaryRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: [
-      Expanded(child: Text(label)),
+      Expanded(child: I18nText(label)),
       const SizedBox(width: 8),
-      Text(
+      I18nText(
         value,
         style: emphasized
             ? Theme.of(context).textTheme.titleLarge?.copyWith(color: _green)

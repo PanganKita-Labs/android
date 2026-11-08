@@ -6,6 +6,7 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/onboarding/auth_field.dart';
 import 'package:pangankita/features/onboarding/auth_validation.dart';
 import 'package:pangankita/features/onboarding/social_sign_in.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const _minFormGutter = 20.0;
@@ -119,7 +120,7 @@ class _AuthHeading extends StatelessWidget {
         ? CrossAxisAlignment.center
         : CrossAxisAlignment.start,
     children: [
-      Text(
+      I18nText(
         mode.title,
         textAlign: mode == _AuthMode.password
             ? TextAlign.center
@@ -133,7 +134,7 @@ class _AuthHeading extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 4),
-      Text(
+      I18nText(
         mode.subtitle,
         textAlign: mode == _AuthMode.password
             ? TextAlign.center
@@ -153,13 +154,13 @@ class _AuthFooter extends StatelessWidget {
     alignment: WrapAlignment.center,
     crossAxisAlignment: WrapCrossAlignment.center,
     children: [
-      Text(register ? 'Sudah punya akun?' : 'Belum punya akun?'),
+      I18nText(register ? 'Sudah punya akun?' : 'Belum punya akun?'),
       TextButton(
         onPressed: () => Navigator.pushReplacementNamed(
           context,
           register ? AppRoutes.login : AppRoutes.register,
         ),
-        child: Text(register ? 'Masuk' : 'Daftar'),
+        child: I18nText(register ? 'Masuk' : 'Daftar'),
       ),
     ],
   );
@@ -250,7 +251,7 @@ class _AuthFormState extends State<_AuthForm> {
             alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () => Navigator.pushNamed(context, AppRoutes.recover),
-              child: const Text(
+              child: const I18nText(
                 'Lupa Password?',
                 style: TextStyle(fontSize: 13, color: Colors.blueGrey),
               ),
@@ -261,7 +262,7 @@ class _AuthFormState extends State<_AuthForm> {
           onPressed: () {
             unawaited(_submit());
           },
-          child: Text(widget.mode.submitLabel),
+          child: I18nText(widget.mode.submitLabel),
         ),
       ],
     ),

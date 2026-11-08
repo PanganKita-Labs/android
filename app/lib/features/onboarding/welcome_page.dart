@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 
 const _headingSize = 30.0;
 const _narrowWidth = 320.0;
@@ -66,7 +67,7 @@ class _WelcomeCopy extends StatelessWidget {
     padding: EdgeInsets.only(left: 29, top: 20, right: 29),
     child: Column(
       children: [
-        Text(
+        I18nText(
           'Makanan Berkualitas,\nHarga Lebih Bersahabat.',
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -78,7 +79,7 @@ class _WelcomeCopy extends StatelessWidget {
           ),
         ),
         SizedBox(height: 12),
-        Text(
+        I18nText(
           'Temukan makanan surplus berkualitas dari bisnis '
           'terpercaya di sekitarmu sebelum waktu pengambilannya '
           'berakhir.',
@@ -102,7 +103,7 @@ class _WelcomeActions extends StatelessWidget {
           width: double.infinity,
           child: FilledButton(
             onPressed: () => Navigator.pushNamed(context, AppRoutes.register),
-            child: const Text(
+            child: const I18nText(
               'Daftar',
               style: TextStyle(
                 fontFamily: PanganKitaTheme.emphasisFontFamily,
@@ -116,10 +117,10 @@ class _WelcomeActions extends StatelessWidget {
         alignment: WrapAlignment.center,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          const Text('Sudah punya akun?'),
+          const I18nText('Sudah punya akun?'),
           TextButton(
             onPressed: () => Navigator.pushNamed(context, AppRoutes.login),
-            child: const Text('Login'),
+            child: const I18nText('Login'),
           ),
         ],
       ),

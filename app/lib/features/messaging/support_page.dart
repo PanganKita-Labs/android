@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const Color _ink = PanganKitaColors.inkDeep;
@@ -65,7 +66,7 @@ class _SupportHeader extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: IconButton.filledTonal(
-            tooltip: 'Kembali ke Profil Saya',
+            tooltip: translateDisplayText(context, 'Kembali ke Profil Saya'),
             onPressed: () => Navigator.pop(context),
             style: IconButton.styleFrom(
               backgroundColor: Colors.white,
@@ -91,12 +92,12 @@ class _SupportHeader extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  I18nText(
                     'Bantuan PanganKita',
                     style: Theme.of(context).textTheme.headlineMedium
                         ?.copyWith(color: _ink),
                   ),
-                  Text(
+                  I18nText(
                     'Customer Service • contoh',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
@@ -104,7 +105,10 @@ class _SupportHeader extends StatelessWidget {
               ),
             ),
             IconButton(
-              tooltip: 'Opsi bantuan belum tersedia',
+              tooltip: translateDisplayText(
+                context,
+                'Opsi bantuan belum tersedia',
+              ),
               onPressed: () => DemoNotice.unavailable(context),
               icon: const Icon(Icons.more_vert),
             ),
@@ -141,7 +145,7 @@ class _ExampleOrderCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                I18nText(
                   'MWR-028 • Mawar Bakery & Cake',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -167,7 +171,7 @@ class _ExampleOrderCard extends StatelessWidget {
                         color: _green,
                       ),
                       SizedBox(width: 6),
-                      Flexible(child: Text('Siap diambil • contoh')),
+                      Flexible(child: I18nText('Siap diambil • contoh')),
                     ],
                   ),
                 ),
@@ -189,7 +193,7 @@ class _ExampleMessages extends StatelessWidget {
     children: const [
       Center(
         child: Chip(
-          label: Text('Percakapan contoh'),
+          label: I18nText('Percakapan contoh'),
           backgroundColor: Color(0xFFECEBE9),
           side: BorderSide.none,
           shape: StadiumBorder(),
@@ -253,9 +257,12 @@ class _MessageBubble extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(message, style: Theme.of(context).textTheme.bodyLarge),
+                  I18nText(
+                    message,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
                   const SizedBox(height: 6),
-                  Text(
+                  I18nText(
                     time,
                     textAlign: outgoing ? TextAlign.right : TextAlign.left,
                     style: Theme.of(context).textTheme.bodySmall,
@@ -285,7 +292,7 @@ class _Suggestions extends StatelessWidget {
       children: [
         for (final label in ['Pesanan belum siap', 'Kendala pembayaran'])
           ActionChip(
-            label: Text(label),
+            label: I18nText(label),
             backgroundColor: Colors.white,
             side: const BorderSide(color: PanganKitaColors.borderNeutral),
             shape: const StadiumBorder(),
@@ -310,7 +317,7 @@ class _Composer extends StatelessWidget {
     child: Row(
       children: [
         IconButton.outlined(
-          tooltip: 'Lampiran belum tersedia',
+          tooltip: translateDisplayText(context, 'Lampiran belum tersedia'),
           onPressed: onUnavailable,
           style: IconButton.styleFrom(
             minimumSize: const Size.square(48),
@@ -323,14 +330,14 @@ class _Composer extends StatelessWidget {
           child: TextField(
             controller: controller,
             decoration: InputDecoration(
-              hintText: 'Tulis pesan...',
+              hintText: translateDisplayText(context, 'Tulis pesan...'),
               isDense: true,
               contentPadding: const EdgeInsets.all(16),
               border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(28)),
               ),
               suffixIcon: IconButton(
-                tooltip: 'Emoji belum tersedia',
+                tooltip: translateDisplayText(context, 'Emoji belum tersedia'),
                 onPressed: onUnavailable,
                 icon: const Icon(Icons.sentiment_satisfied_alt_outlined),
               ),
@@ -339,7 +346,7 @@ class _Composer extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         IconButton.filled(
-          tooltip: 'Kirim pesan contoh',
+          tooltip: translateDisplayText(context, 'Kirim pesan contoh'),
           onPressed: onUnavailable,
           style: IconButton.styleFrom(
             minimumSize: const Size.square(58),

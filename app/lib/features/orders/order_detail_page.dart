@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/orders/order_help_sheet.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
@@ -25,10 +26,10 @@ class OrderDetailPage extends StatelessWidget {
     backgroundColor: PanganKitaColors.surfaceWarm,
     appBar: AppBar(
       leading: const BackButton(),
-      title: const Text('Detail Pesanan'),
+      title: const I18nText('Detail Pesanan'),
       actions: [
         IconButton(
-          tooltip: 'Buka Bantuan Pesanan',
+          tooltip: translateDisplayText(context, 'Buka Bantuan Pesanan'),
           onPressed: () => OrderHelpSheet.show(context, food: food),
           icon: const Icon(Icons.help_outline),
         ),
@@ -47,17 +48,17 @@ class OrderDetailPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                I18nText(
                   'Kode pengambilan',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text(
+                I18nText(
                   'Belum tersedia',
                   style: Theme.of(context).textTheme.headlineMedium
                       ?.copyWith(color: _ink),
                 ),
                 const SizedBox(height: 6),
-                const Text('Belum ada pesanan atau kode yang dibuat.'),
+                const I18nText('Belum ada pesanan atau kode yang dibuat.'),
               ],
             ),
           ),
@@ -71,7 +72,7 @@ class OrderDetailPage extends StatelessWidget {
           OutlinedButton.icon(
             onPressed: () => OrderHelpSheet.show(context, food: food),
             icon: const Icon(Icons.support_agent_outlined),
-            label: const Text('Bantuan Pesanan'),
+            label: const I18nText('Bantuan Pesanan'),
           ),
         ],
       ),
@@ -100,11 +101,11 @@ class _OrderFoodCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  I18nText(
                     food.merchant,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
-                  Text(food.pickupAddress),
+                  I18nText(food.pickupAddress),
                 ],
               ),
             ),
@@ -128,12 +129,12 @@ class _OrderFoodCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  I18nText(
                     food.title,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 4),
-                  Text('1 × ${food.price}'),
+                  I18nText('1 × ${food.price}'),
                 ],
               ),
             ),
@@ -154,7 +155,7 @@ class _PickupInfoCard extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
+        I18nText(
           'Informasi pengambilan',
           style: Theme.of(context).textTheme.titleMedium,
         ),
@@ -179,7 +180,7 @@ class _PaymentInfoCard extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
+        I18nText(
           'Rincian pembayaran',
           style: Theme.of(context).textTheme.titleMedium,
         ),
@@ -225,11 +226,11 @@ class _StatusNotice extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                I18nText(
                   'Contoh detail pesanan',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                const Text('Status pesanan belum tersedia.'),
+                const I18nText('Status pesanan belum tersedia.'),
               ],
             ),
           ),
@@ -276,11 +277,11 @@ class _ProgressPreview extends StatelessWidget {
                           shape: BoxShape.circle,
                           border: Border.all(color: _lineColor, width: 2),
                         ),
-                        child: Center(child: Text('${index + 1}')),
+                        child: Center(child: I18nText('${index + 1}')),
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
+                    I18nText(
                       label,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodySmall
@@ -324,10 +325,10 @@ class _InfoRow extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Expanded(child: Text(label)),
+      Expanded(child: I18nText(label)),
       const SizedBox(width: 12),
       Flexible(
-        child: Text(
+        child: I18nText(
           value,
           textAlign: TextAlign.end,
           style: emphasized

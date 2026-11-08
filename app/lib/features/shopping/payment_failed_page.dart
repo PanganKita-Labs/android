@@ -3,6 +3,7 @@ import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/shopping/demo_cart.dart';
 import 'package:pangankita/features/shopping/payment_method_sheet.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
 const Color _green = PanganKitaColors.brandPrimaryStrong;
@@ -37,11 +38,11 @@ class PaymentFailedPage extends StatelessWidget {
       backgroundColor: PanganKitaColors.surfaceWarm,
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Pembayaran'),
+        title: const I18nText('Pembayaran'),
       ),
       body: cart.lines.isEmpty
           ? const Center(
-              child: Text('Keranjang kosong. Tidak ada contoh pembayaran.'),
+              child: I18nText('Keranjang kosong. Tidak ada contoh pembayaran.'),
             )
           : ListView(
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
@@ -70,14 +71,14 @@ class _FailedHeader extends StatelessWidget {
         child: Icon(Icons.error_outline, size: 76, color: _orange),
       ),
       const SizedBox(height: 16),
-      Text(
+      I18nText(
         'Contoh pembayaran belum berhasil',
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headlineMedium
             ?.copyWith(color: _ink),
       ),
       const SizedBox(height: 6),
-      const Text(
+      const I18nText(
         'Belum ada pembayaran yang diproses atau dikonfirmasi. '
         'Ini hanya contoh tampilan.',
         textAlign: TextAlign.center,
@@ -117,7 +118,7 @@ class _ExampleOrderCard extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text(
+                child: I18nText(
                   _merchantNames(cart).join(', '),
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
@@ -142,13 +143,13 @@ class _ExampleOrderCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      I18nText(
                         line.food.title,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      Text(line.food.merchant),
+                      I18nText(line.food.merchant),
                       const SizedBox(height: 4),
-                      Text(
+                      I18nText(
                         '${line.quantity} x ${formatRupiah(line.unitPrice)}',
                       ),
                     ],
@@ -175,7 +176,7 @@ class _ExampleOrderCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Status'),
+                    I18nText('Status'),
                     SizedBox(height: 6),
                     DecoratedBox(
                       decoration: BoxDecoration(
@@ -189,7 +190,7 @@ class _ExampleOrderCard extends StatelessWidget {
                           horizontal: 10,
                           vertical: 5,
                         ),
-                        child: Text('Belum tersedia'),
+                        child: I18nText('Belum tersedia'),
                       ),
                     ),
                   ],
@@ -213,9 +214,9 @@ class _CardDetail extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(label),
+      I18nText(label),
       const SizedBox(height: 6),
-      Text(value, style: Theme.of(context).textTheme.titleMedium),
+      I18nText(value, style: Theme.of(context).textTheme.titleMedium),
     ],
   );
 }
@@ -236,7 +237,7 @@ class _NextStepsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          I18nText(
             'Yang bisa kamu lakukan',
             style: Theme.of(context).textTheme.titleLarge,
           ),
@@ -282,8 +283,8 @@ class _AdviceRow extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: Theme.of(context).textTheme.titleSmall),
-            Text(description),
+            I18nText(title, style: Theme.of(context).textTheme.titleSmall),
+            I18nText(description),
           ],
         ),
       ),
@@ -306,18 +307,18 @@ class _FailedActions extends StatelessWidget {
           FilledButton.icon(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.refresh),
-            label: const Text('Coba Bayar Lagi'),
+            label: const I18nText('Coba Bayar Lagi'),
           ),
           const SizedBox(height: 10),
           OutlinedButton.icon(
             onPressed: () => showPaymentMethodSheet(context),
             icon: const Icon(Icons.credit_card_outlined),
-            label: const Text('Ganti Metode Pembayaran'),
+            label: const I18nText('Ganti Metode Pembayaran'),
           ),
           TextButton(
             onPressed: () =>
                 Navigator.pushNamed<void>(context, AppRoutes.support),
-            child: const Text('Butuh bantuan?'),
+            child: const I18nText('Butuh bantuan?'),
           ),
         ],
       ),

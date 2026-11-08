@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 
 const Color _ink = PanganKitaColors.inkDeep;
 
@@ -11,24 +12,24 @@ class TermsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: PanganKitaColors.surfaceWarm,
-    appBar: AppBar(title: const Text('Syarat & Ketentuan')),
+    appBar: AppBar(title: const I18nText('Syarat & Ketentuan')),
     body: SafeArea(
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
         children: [
-          Text(
+          I18nText(
             'Syarat & Ketentuan',
             style: Theme.of(context).textTheme.headlineLarge
                 ?.copyWith(color: _ink),
           ),
           const SizedBox(height: 8),
-          const Text('Informasi penggunaan versi contoh PanganKita'),
+          const I18nText('Informasi penggunaan versi contoh PanganKita'),
           const SizedBox(height: 24),
           const Card(
             color: PanganKitaColors.informationSurface,
             child: Padding(
               padding: EdgeInsets.all(18),
-              child: Text(
+              child: I18nText(
                 'Dokumen Syarat & Ketentuan resmi belum tersedia. '
                 'Halaman ini menjelaskan kemampuan aplikasi contoh saat ini '
                 'dan belum menjadi perjanjian penggunaan.',
@@ -58,7 +59,7 @@ class TermsPage extends StatelessWidget {
                 'yang dicatat oleh contoh aplikasi ini.',
           ),
           const SizedBox(height: 8),
-          const Text(
+          const I18nText(
             'Ketentuan resmi perlu diterbitkan dan ditinjau oleh tim '
             'sebelum layanan nyata digunakan.',
             style: TextStyle(color: Colors.black54),
@@ -81,12 +82,12 @@ class _TermsSection extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        I18nText(
           title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(color: _ink),
         ),
         const SizedBox(height: 6),
-        Text(description),
+        I18nText(description),
       ],
     ),
   );

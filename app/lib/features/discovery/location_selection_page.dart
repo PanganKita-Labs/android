@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const List<({String name, String subtitle})> _sampleAreas = [
@@ -75,12 +76,12 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
                   Row(
                     children: [
                       IconButton(
-                        tooltip: 'Kembali',
+                        tooltip: translateDisplayText(context, 'Kembali'),
                         onPressed: () => Navigator.pop(context),
                         icon: const Icon(Icons.arrow_back, size: 28),
                       ),
                       const SizedBox(width: 10),
-                      Text(
+                      I18nText(
                         'Pilih Lokasi',
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
@@ -91,12 +92,18 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
                     controller: _search,
                     onChanged: (value) => setState(() => _query = value.trim()),
                     decoration: InputDecoration(
-                      hintText: 'Cari area contoh',
+                      hintText: translateDisplayText(
+                        context,
+                        'Cari area contoh',
+                      ),
                       prefixIcon: const Icon(Icons.search),
                       suffixIcon: _query.isEmpty
                           ? null
                           : IconButton(
-                              tooltip: 'Hapus pencarian',
+                              tooltip: translateDisplayText(
+                                context,
+                                'Hapus pencarian',
+                              ),
                               onPressed: () {
                                 _search.clear();
                                 setState(() => _query = '');
@@ -120,8 +127,8 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
                           color: PanganKitaColors.brandPrimaryStrong,
                         ),
                       ),
-                      title: const Text('Gunakan lokasi saat ini'),
-                      subtitle: const Text('Akses lokasi belum tersedia'),
+                      title: const I18nText('Gunakan lokasi saat ini'),
+                      subtitle: const I18nText('Akses lokasi belum tersedia'),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () => DemoNotice.unavailable(context),
                     ),
@@ -129,7 +136,7 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
                   const SizedBox(height: 14),
                   const _IllustrativeMap(),
                   const SizedBox(height: 18),
-                  Text(
+                  I18nText(
                     'Lokasi pilihan',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
@@ -143,7 +150,7 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
                       onTap: null,
                     ),
                   const SizedBox(height: 20),
-                  Text(
+                  I18nText(
                     'Pencarian terakhir',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
@@ -151,7 +158,7 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
                   if (matches.isEmpty)
                     const Padding(
                       padding: EdgeInsets.all(16),
-                      child: Text('Area contoh tidak ditemukan.'),
+                      child: I18nText('Area contoh tidak ditemukan.'),
                     )
                   else
                     for (final area in recent)
@@ -178,7 +185,7 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
                         ),
                         SizedBox(width: 12),
                         Expanded(
-                          child: Text(
+                          child: I18nText(
                             'Area ini hanya contoh tampilan; belum menentukan '
                             'hasil berdasarkan jarak.',
                           ),
@@ -200,7 +207,7 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
                     minimumSize: const Size.fromHeight(54),
                   ),
                   onPressed: () => Navigator.pop(context, _selected),
-                  child: const Text('Gunakan Lokasi Ini'),
+                  child: const I18nText('Gunakan Lokasi Ini'),
                 ),
               ),
             ),
@@ -232,8 +239,8 @@ class _AreaTile extends StatelessWidget {
         selected ? Icons.location_on : Icons.history,
         color: PanganKitaColors.brandPrimaryStrong,
       ),
-      title: Text(name),
-      subtitle: Text(subtitle),
+      title: I18nText(name),
+      subtitle: I18nText(subtitle),
       trailing: Icon(
         selected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
         color: selected ? PanganKitaColors.brandPrimaryStrong : Colors.blueGrey,
@@ -300,7 +307,7 @@ class _IllustrativeMap extends StatelessWidget {
                 padding: EdgeInsets.all(5),
                 child: SizedBox(
                   width: 155,
-                  child: Text(
+                  child: I18nText(
                     'Peta ilustrasi - bukan lokasi langsung',
                     textAlign: TextAlign.right,
                   ),
@@ -320,7 +327,7 @@ class _MapStreetLabel extends StatelessWidget {
   final String label;
 
   @override
-  Widget build(BuildContext context) => Text(
+  Widget build(BuildContext context) => I18nText(
     label,
     style: const TextStyle(color: Color(0xFF14313A), fontSize: 10),
   );

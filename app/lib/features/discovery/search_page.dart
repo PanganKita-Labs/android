@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
 const _pageInset = 18.0;
@@ -142,7 +143,9 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 Icon(Icons.location_on, color: PanganKitaColors.brandPrimary),
                 SizedBox(width: 8),
-                Expanded(child: Text('Mandala by Pass, Medan · contoh lokasi')),
+                Expanded(
+                  child: I18nText('Mandala by Pass, Medan · contoh lokasi'),
+                ),
               ],
             ),
             const SizedBox(height: 24),
@@ -162,11 +165,11 @@ class _SearchPageState extends State<SearchPage> {
                 },
               )
             else ...[
-              Text(
+              I18nText(
                 _query.isEmpty ? 'Makanan contoh' : 'Hasil untuk “$_query”',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
-              Text('${results.length} makanan contoh ditemukan'),
+              I18nText('${results.length} makanan contoh ditemukan'),
               const SizedBox(height: 14),
               for (final food in results) ...[
                 _SearchResultCard(
@@ -201,7 +204,7 @@ class _SearchBar extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     children: [
       IconButton.filledTonal(
-        tooltip: 'Kembali',
+        tooltip: translateDisplayText(context, 'Kembali'),
         onPressed: () => Navigator.pop(context),
         style: IconButton.styleFrom(
           backgroundColor: Colors.white,
@@ -217,10 +220,10 @@ class _SearchBar extends StatelessWidget {
           onChanged: onChanged,
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
-            hintText: 'Cari makanan...',
+            hintText: translateDisplayText(context, 'Cari makanan...'),
             prefixIcon: const Icon(Icons.search),
             suffixIcon: IconButton(
-              tooltip: 'Hapus pencarian',
+              tooltip: translateDisplayText(context, 'Hapus pencarian'),
               onPressed: () {
                 controller.clear();
                 onChanged('');
@@ -232,7 +235,7 @@ class _SearchBar extends StatelessWidget {
       ),
       const SizedBox(width: 8),
       IconButton.filledTonal(
-        tooltip: 'Filter pencarian',
+        tooltip: translateDisplayText(context, 'Filter pencarian'),
         onPressed: onFilter,
         style: IconButton.styleFrom(
           backgroundColor: Colors.white,
@@ -261,7 +264,7 @@ class _QuickFilters extends StatelessWidget {
     children: [
       for (final category in ['Semua', 'Roti & Pastry'])
         ChoiceChip(
-          label: Text(category),
+          label: I18nText(category),
           selected: selected == category,
           showCheckmark: false,
           selectedColor: PanganKitaColors.brandPrimaryStrong,
@@ -275,7 +278,7 @@ class _QuickFilters extends StatelessWidget {
           onSelected: (_) => onSelected(category),
         ),
       ActionChip(
-        label: const Text('Filter'),
+        label: const I18nText('Filter'),
         backgroundColor: Colors.white,
         side: const BorderSide(color: PanganKitaColors.borderNeutral),
         onPressed: onDiscount,
@@ -348,7 +351,7 @@ class _SearchResultPhoto extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-            child: Text(
+            child: I18nText(
               food.saving,
               style: Theme.of(context).textTheme.labelSmall
                   ?.copyWith(color: Colors.white),
@@ -379,7 +382,7 @@ class _SearchResultInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Text(
+            child: I18nText(
               food.title,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -415,7 +418,7 @@ class _SearchResultInfo extends StatelessWidget {
           ),
           const SizedBox(width: 3),
           Expanded(
-            child: Text(
+            child: I18nText(
               food.merchant,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -429,12 +432,12 @@ class _SearchResultInfo extends StatelessWidget {
         crossAxisAlignment: WrapCrossAlignment.center,
         spacing: _priceGap,
         children: [
-          Text(
+          I18nText(
             food.price,
             style: Theme.of(context).textTheme.titleMedium
                 ?.copyWith(color: PanganKitaColors.brandPrimaryStrong),
           ),
-          Text(
+          I18nText(
             food.original,
             style: Theme.of(context).textTheme.bodySmall
                 ?.copyWith(decoration: TextDecoration.lineThrough),
@@ -458,7 +461,7 @@ class _SearchPickupMeta extends StatelessWidget {
       const Row(
         children: [
           Icon(Icons.location_on_outlined, size: 14),
-          Expanded(child: Text('Jarak belum tersedia')),
+          Expanded(child: I18nText('Jarak belum tersedia')),
         ],
       ),
       Row(
@@ -468,7 +471,7 @@ class _SearchPickupMeta extends StatelessWidget {
             size: 14,
             color: PanganKitaColors.brandAccent,
           ),
-          Expanded(child: Text('Ambil $pickupTime (contoh)')),
+          Expanded(child: I18nText('Ambil $pickupTime (contoh)')),
         ],
       ),
     ],
@@ -503,12 +506,12 @@ class _EmptySearch extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 16),
-      Text(
+      I18nText(
         'Belum ketemu makananmu',
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headlineSmall,
       ),
-      const Text(
+      const I18nText(
         'Coba kata kunci lain dari contoh makanan yang tersedia.',
         textAlign: TextAlign.center,
       ),
@@ -518,20 +521,23 @@ class _EmptySearch extends StatelessWidget {
           Expanded(
             child: OutlinedButton(
               onPressed: onEditSearch,
-              child: const Text('Ubah Pencarian'),
+              child: const I18nText('Ubah Pencarian'),
             ),
           ),
           const SizedBox(width: 8),
           Expanded(
             child: TextButton(
               onPressed: onResetFilters,
-              child: const Text('Reset Filter'),
+              child: const I18nText('Reset Filter'),
             ),
           ),
         ],
       ),
       const SizedBox(height: 18),
-      Text('Mungkin Kamu Suka', style: Theme.of(context).textTheme.titleLarge),
+      I18nText(
+        'Mungkin Kamu Suka',
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
       for (final food in DemoFood.examples.take(_recommendationCount))
         ListTile(
           contentPadding: EdgeInsets.zero,
@@ -539,8 +545,12 @@ class _EmptySearch extends StatelessWidget {
             dimension: _recommendationImageSize,
             child: Image.asset(food.image, fit: BoxFit.cover),
           ),
-          title: Text(food.title, maxLines: 2, overflow: TextOverflow.ellipsis),
-          subtitle: Text(food.price),
+          title: I18nText(
+            food.title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          subtitle: I18nText(food.price),
           onTap: () => onSuggestion(food.title),
         ),
     ],
@@ -634,43 +644,43 @@ class _SearchFiltersState extends State<_SearchFilters> {
           Row(
             children: [
               Expanded(
-                child: Text(
+                child: I18nText(
                   'Filter Pencarian',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
-              TextButton(onPressed: _reset, child: const Text('Reset')),
+              TextButton(onPressed: _reset, child: const I18nText('Reset')),
             ],
           ),
           const Divider(),
-          Text('Kategori', style: Theme.of(context).textTheme.titleMedium),
+          I18nText('Kategori', style: Theme.of(context).textTheme.titleMedium),
           _SearchCategoryChoices(
             selected: _category,
             onSelected: (category) => setState(() => _category = category),
           ),
           const Divider(),
-          Text(
+          I18nText(
             'Rentang harga (Rp)',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           _SearchPriceFields(minimum: _minimum, maximum: _maximum),
           const Divider(),
-          Text('Jarak', style: Theme.of(context).textTheme.titleMedium),
-          const Text('Filter jarak belum tersedia pada data contoh.'),
+          I18nText('Jarak', style: Theme.of(context).textTheme.titleMedium),
+          const I18nText('Filter jarak belum tersedia pada data contoh.'),
           const Divider(),
-          Text('Urutkan', style: Theme.of(context).textTheme.titleMedium),
+          I18nText('Urutkan', style: Theme.of(context).textTheme.titleMedium),
           _SearchSortChoices(
             lowestPriceFirst: _lowestPriceFirst,
             onSelected: (value) => setState(() => _lowestPriceFirst = value),
           ),
           const Divider(),
-          Text(
+          I18nText(
             'Hanya toko buka',
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          const Text('Status buka belum tersedia pada data contoh.'),
+          const I18nText('Status buka belum tersedia pada data contoh.'),
           if (_error != null)
-            Text(
+            I18nText(
               _error ?? '',
               style: const TextStyle(color: PanganKitaColors.danger),
             ),
@@ -681,7 +691,7 @@ class _SearchFiltersState extends State<_SearchFilters> {
               foregroundColor: Colors.white,
             ),
             onPressed: _apply,
-            child: const Text('Tampilkan Hasil'),
+            child: const I18nText('Tampilkan Hasil'),
           ),
         ],
       ),
@@ -701,7 +711,7 @@ class _SearchCategoryChoices extends StatelessWidget {
     children: [
       for (final category in DemoFood.categories)
         ChoiceChip(
-          label: Text(category),
+          label: I18nText(category),
           selected: selected == category,
           showCheckmark: false,
           selectedColor: PanganKitaColors.brandPrimaryStrong,
@@ -731,7 +741,9 @@ class _SearchPriceFields extends StatelessWidget {
         child: TextField(
           controller: minimum,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(labelText: 'Minimum'),
+          decoration: InputDecoration(
+            labelText: translateDisplayText(context, 'Minimum'),
+          ),
         ),
       ),
       const SizedBox(width: 12),
@@ -739,7 +751,9 @@ class _SearchPriceFields extends StatelessWidget {
         child: TextField(
           controller: maximum,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(labelText: 'Maksimum'),
+          decoration: InputDecoration(
+            labelText: translateDisplayText(context, 'Maksimum'),
+          ),
         ),
       ),
     ],
@@ -764,7 +778,7 @@ class _SearchSortChoices extends StatelessWidget {
               : Icons.radio_button_checked,
           color: PanganKitaColors.brandPrimaryStrong,
         ),
-        title: const Text('Urutan contoh'),
+        title: const I18nText('Urutan contoh'),
         onTap: () => onSelected(false),
       ),
       ListTile(
@@ -776,7 +790,7 @@ class _SearchSortChoices extends StatelessWidget {
               : Icons.radio_button_unchecked,
           color: PanganKitaColors.brandPrimaryStrong,
         ),
-        title: const Text('Harga terendah'),
+        title: const I18nText('Harga terendah'),
         onTap: () => onSelected(true),
       ),
     ],

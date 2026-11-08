@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
@@ -40,20 +41,23 @@ class OrderHelpSheet extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Text(
+                    child: I18nText(
                       'Bantuan Pesanan',
                       style: Theme.of(context).textTheme.headlineLarge
                           ?.copyWith(color: _ink),
                     ),
                   ),
                   IconButton(
-                    tooltip: 'Tutup Bantuan Pesanan',
+                    tooltip: translateDisplayText(
+                      context,
+                      'Tutup Bantuan Pesanan',
+                    ),
                     onPressed: () => Navigator.pop(context),
                     icon: const Icon(Icons.close, color: _ink),
                   ),
                 ],
               ),
-              Text(
+              I18nText(
                 'Ada yang bisa kami bantu?',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
@@ -72,7 +76,7 @@ class OrderHelpSheet extends StatelessWidget {
             ),
             onPressed: () => DemoNotice.unavailable(context),
             icon: const Icon(Icons.support_agent_outlined),
-            label: const Text('Hubungi Customer Service'),
+            label: const I18nText('Hubungi Customer Service'),
           ),
         ),
       ],
@@ -104,11 +108,11 @@ class _ExampleOrder extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                I18nText(
                   food.merchant,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
-                const Text('ID pesanan belum tersedia'),
+                const I18nText('ID pesanan belum tersedia'),
               ],
             ),
           ),
@@ -181,12 +185,14 @@ class _HelpQuestion extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
-      title: Text(
+      title: I18nText(
         title,
         style: Theme.of(context).textTheme.titleSmall?.copyWith(color: _ink),
       ),
       childrenPadding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-      children: [Align(alignment: Alignment.centerLeft, child: Text(answer))],
+      children: [
+        Align(alignment: Alignment.centerLeft, child: I18nText(answer)),
+      ],
     ),
   );
 }

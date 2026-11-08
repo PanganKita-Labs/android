@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/navigation/app_bottom_navigation.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
 const Color _ink = PanganKitaColors.inkCool;
@@ -81,12 +82,12 @@ class _ChatPageState extends State<ChatPage> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(23, 24, 23, 32),
           children: [
-            Text(
+            I18nText(
               'Chat',
               style: Theme.of(context).textTheme.displayLarge
                   ?.copyWith(color: _ink),
             ),
-            const Text('Terhubung dengan toko favoritmu.'),
+            const I18nText('Terhubung dengan toko favoritmu.'),
             const SizedBox(height: 18),
             _ChatSearch(onChanged: (value) => setState(() => _query = value)),
             const SizedBox(height: 16),
@@ -95,7 +96,7 @@ class _ChatPageState extends State<ChatPage> {
               onSelected: (value) => setState(() => _unreadOnly = value),
             ),
             const SizedBox(height: 12),
-            const Text(
+            const I18nText(
               'Contoh tampilan · belum ada percakapan nyata.',
               style: TextStyle(color: Colors.black54),
             ),
@@ -128,7 +129,7 @@ class _ConversationList extends StatelessWidget {
       if (conversations.isEmpty)
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 36),
-          child: Center(child: Text('Tidak ada contoh yang cocok.')),
+          child: Center(child: I18nText('Tidak ada contoh yang cocok.')),
         ),
     ],
   );
@@ -142,10 +143,10 @@ class _ChatSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) => TextField(
     onChanged: onChanged,
-    decoration: const InputDecoration(
-      hintText: 'Cari toko atau pesan...',
-      prefixIcon: Icon(Icons.search, color: Colors.black45),
-      border: OutlineInputBorder(
+    decoration: InputDecoration(
+      hintText: translateDisplayText(context, 'Cari toko atau pesan...'),
+      prefixIcon: const Icon(Icons.search, color: Colors.black45),
+      border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(_searchRadius)),
       ),
     ),
@@ -168,19 +169,19 @@ class _ChatFilters extends StatelessWidget {
               ? Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Belum dibaca'),
+                    const I18nText('Belum dibaca'),
                     const SizedBox(width: 8),
                     CircleAvatar(
                       radius: _unreadBadgeRadius,
                       backgroundColor: Colors.red,
-                      child: Text(
+                      child: I18nText(
                         '$_unreadConversationCount',
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ],
                 )
-              : const Text('Semua'),
+              : const I18nText('Semua'),
           selected: unreadOnly == unread,
           showCheckmark: false,
           selectedColor: PanganKitaColors.brandPrimaryStrong,
@@ -224,7 +225,7 @@ class _ConversationRow extends StatelessWidget {
         title: Row(
           children: [
             Flexible(
-              child: Text(
+              child: I18nText(
                 food.merchant,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -243,18 +244,22 @@ class _ConversationRow extends StatelessWidget {
             ],
           ],
         ),
-        subtitle: Text(message, maxLines: 1, overflow: TextOverflow.ellipsis),
+        subtitle: I18nText(
+          message,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         trailing: SizedBox(
           width: _trailingWidth,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(time, style: Theme.of(context).textTheme.bodySmall),
+              I18nText(time, style: Theme.of(context).textTheme.bodySmall),
               if (unreadCount > 0)
                 CircleAvatar(
                   radius: _unreadBadgeRadius,
                   backgroundColor: PanganKitaColors.brandPrimaryStrong,
-                  child: Text(
+                  child: I18nText(
                     '$unreadCount',
                     style: const TextStyle(color: Colors.white),
                   ),

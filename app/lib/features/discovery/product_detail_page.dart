@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/shopping/demo_cart.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_addon.dart';
@@ -149,7 +150,7 @@ class _DetailToolbar extends StatelessWidget {
       const SizedBox(width: 12),
       IconButton(
         style: _toolbarStyle,
-        tooltip: 'Salin informasi produk',
+        tooltip: translateDisplayText(context, 'Salin informasi produk'),
         onPressed: onCopy,
         icon: const Icon(Icons.share_outlined),
       ),
@@ -182,7 +183,10 @@ class _MerchantSummary extends StatelessWidget {
           child: Image.asset(
             food.image,
             fit: BoxFit.cover,
-            semanticLabel: 'Foto produk contoh dari ${food.merchant}',
+            semanticLabel: translateDisplayText(
+              context,
+              'Foto produk contoh dari ${food.merchant}',
+            ),
           ),
         ),
       ),
@@ -191,7 +195,7 @@ class _MerchantSummary extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: PanganKitaSpacing.xs,
           children: [
-            Text(
+            I18nText(
               food.merchant,
               style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
             ),
@@ -200,7 +204,7 @@ class _MerchantSummary extends StatelessWidget {
               children: [
                 ReferenceIcon('pin', size: 12),
                 Expanded(
-                  child: Text(
+                  child: I18nText(
                     'Mandala by Pass, Medan',
                     style: TextStyle(fontSize: 10, color: Colors.black54),
                   ),
@@ -223,7 +227,7 @@ class _MerchantSummary extends StatelessWidget {
                   size: 13,
                   color: PanganKitaColors.brandAccent,
                 ),
-                Text(
+                I18nText(
                   food.rating.split(' ').first,
                   style: const TextStyle(
                     fontSize: 12,
@@ -232,7 +236,7 @@ class _MerchantSummary extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
+            I18nText(
               food.rating.substring(food.rating.indexOf(' ') + 1),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 9, color: Colors.black54),
@@ -254,12 +258,12 @@ class _ProductSummary extends StatelessWidget {
     spacing: _contentGap,
     children: [
       _ProductPhoto(food: food),
-      Text(
+      I18nText(
         food.title,
         style: Theme.of(context).textTheme.titleLarge
             ?.copyWith(fontSize: _titleSize, fontWeight: FontWeight.w700),
       ),
-      Text(
+      I18nText(
         '${food.title} dari ${food.merchant}. '
         'Pilihan contoh untuk diambil langsung di toko.',
         style: const TextStyle(fontSize: 12, height: 1.35),
@@ -269,14 +273,14 @@ class _ProductSummary extends StatelessWidget {
         runSpacing: PanganKitaSpacing.xs,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          Text(
+          I18nText(
             food.price,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontSize: _priceSize,
               color: PanganKitaColors.brandPrimary,
             ),
           ),
-          Text(
+          I18nText(
             food.original,
             style: const TextStyle(
               color: Colors.grey,
@@ -286,7 +290,7 @@ class _ProductSummary extends StatelessWidget {
           _SavingsPill(food: food),
         ],
       ),
-      Text(
+      I18nText(
         'Pickup contoh: ${food.pickupTime} · ${food.stock}',
         style: const TextStyle(fontSize: 12),
       ),
@@ -317,7 +321,7 @@ class _ProductPhoto extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                child: Text(
+                child: I18nText(
                   'Produk contoh',
                   style: TextStyle(fontSize: 10, color: Colors.black),
                 ),
@@ -334,7 +338,7 @@ class _ProductPhoto extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                child: Text('1/1', style: TextStyle(fontSize: 10)),
+                child: I18nText('1/1', style: TextStyle(fontSize: 10)),
               ),
             ),
           ),
@@ -366,7 +370,7 @@ class _SavingsPill extends StatelessWidget {
         ),
         Text.rich(
           TextSpan(
-            text: 'Hemat ',
+            text: translateDisplayText(context, 'Hemat '),
             children: [
               TextSpan(
                 text: food.saving.replaceFirst('Hemat ', ''),
@@ -399,8 +403,11 @@ class _ProductAddons extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      Text('Pilih Tambahan', style: Theme.of(context).textTheme.titleMedium),
-      const Text(
+      I18nText(
+        'Pilih Tambahan',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
+      const I18nText(
         'Bikin rasanya makin nikmat! (contoh)',
         style: TextStyle(fontSize: 12, color: Colors.black54),
       ),
@@ -420,8 +427,11 @@ class _ProductAddons extends StatelessWidget {
                 activeColor: PanganKitaColors.brandAccent,
                 dense: true,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                title: Text(option.label, style: const TextStyle(fontSize: 12)),
-                secondary: Text(
+                title: I18nText(
+                  option.label,
+                  style: const TextStyle(fontSize: 12),
+                ),
+                secondary: I18nText(
                   '+${formatRupiah(option.priceRupiah)}',
                   style: const TextStyle(fontSize: 12, color: Colors.black54),
                 ),
@@ -441,7 +451,10 @@ class _ProductReviews extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.stretch,
     spacing: _captionSize,
     children: [
-      Text('Ulasan Pelanggan', style: Theme.of(context).textTheme.titleMedium),
+      I18nText(
+        'Ulasan Pelanggan',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
       DecoratedBox(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -462,7 +475,7 @@ class _ProductReviews extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: _savingsGap,
                   children: [
-                    const Text(
+                    const I18nText(
                       'Pelanggan Demo',
                       style: TextStyle(
                         fontSize: 13,
@@ -480,7 +493,7 @@ class _ProductReviews extends StatelessWidget {
                             color: PanganKitaColors.brandAccent,
                           ),
                         ),
-                        const Text(
+                        const I18nText(
                           '4.8',
                           style: TextStyle(
                             fontSize: 11,
@@ -489,12 +502,12 @@ class _ProductReviews extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Text(
+                    const I18nText(
                       'Ulasan contoh',
                       style: TextStyle(fontSize: 9, color: Colors.black54),
                     ),
                     const SizedBox(height: _reviewGap),
-                    const Text(
+                    const I18nText(
                       'Ini contoh tampilan ulasan pelanggan. '
                       'Belum ada ulasan nyata untuk produk demo ini.',
                       style: TextStyle(fontSize: 12, height: 1.4),
@@ -529,7 +542,7 @@ class _QuantityPicker extends StatelessWidget {
         spacing: _controlGap,
         children: [
           IconButton.filledTonal(
-            tooltip: 'Kurangi jumlah contoh',
+            tooltip: translateDisplayText(context, 'Kurangi jumlah contoh'),
             style: _quantityStyle,
             onPressed: onDecrease,
             icon: const Icon(Icons.remove),
@@ -538,13 +551,13 @@ class _QuantityPicker extends StatelessWidget {
             liveRegion: true,
             label: 'Jumlah contoh $quantity',
             excludeSemantics: true,
-            child: Text(
+            child: I18nText(
               '$quantity',
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           IconButton.filledTonal(
-            tooltip: 'Tambah jumlah contoh',
+            tooltip: translateDisplayText(context, 'Tambah jumlah contoh'),
             style: _quantityStyle,
             onPressed: onIncrease,
             icon: const Icon(Icons.add),
@@ -578,9 +591,9 @@ class _CartAction extends StatelessWidget {
         ),
         onPressed: onAdd,
         icon: const Icon(Icons.shopping_cart_outlined),
-        label: const Text('Tambah ke Keranjang (Demo)'),
+        label: const I18nText('Tambah ke Keranjang (Demo)'),
       ),
-      const Text(
+      const I18nText(
         'Demo offline · Favorit hanya berlaku selama halaman terbuka. '
         'Produk, lokasi, tambahan, dan ulasan adalah contoh. '
         'Jumlah 1-10 item tidak mengubah stok atau membuat pesanan.',

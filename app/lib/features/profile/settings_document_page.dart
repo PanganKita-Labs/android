@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 
 /// Honest placeholder until an approved privacy document is available.
 class SettingsDocumentPage extends StatelessWidget {
@@ -9,7 +10,7 @@ class SettingsDocumentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: PanganKitaColors.surfaceWarm,
-    appBar: AppBar(title: const Text('Kebijakan Privasi')),
+    appBar: AppBar(title: const I18nText('Kebijakan Privasi')),
     body: SafeArea(
       child: Center(
         child: Padding(
@@ -23,20 +24,20 @@ class SettingsDocumentPage extends StatelessWidget {
                 color: PanganKitaColors.brandPrimaryStrong,
               ),
               const SizedBox(height: 16),
-              Text(
+              I18nText(
                 'Kebijakan Privasi belum tersedia',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 8),
-              const Text(
+              const I18nText(
                 'Dokumen resmi belum tersedia dalam contoh aplikasi ini.',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
               OutlinedButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Kembali ke Pengaturan'),
+                child: const I18nText('Kembali ke Pengaturan'),
               ),
             ],
           ),

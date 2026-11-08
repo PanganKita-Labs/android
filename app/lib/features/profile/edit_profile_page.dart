@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const Color _ink = PanganKitaColors.inkDeep;
@@ -50,7 +51,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
           Row(
             children: [
               IconButton.filledTonal(
-                tooltip: 'Kembali ke Profil Saya',
+                tooltip: translateDisplayText(
+                  context,
+                  'Kembali ke Profil Saya',
+                ),
                 style: IconButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: const RoundedRectangleBorder(
@@ -61,7 +65,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 icon: const Icon(Icons.arrow_back, color: _ink),
               ),
               const SizedBox(width: 8),
-              Text(
+              I18nText(
                 'Edit Profil',
                 style: Theme.of(context).textTheme.headlineLarge
                     ?.copyWith(color: _ink),
@@ -80,7 +84,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   right: 0,
                   bottom: 0,
                   child: IconButton.filled(
-                    tooltip: 'Ubah foto belum tersedia',
+                    tooltip: translateDisplayText(
+                      context,
+                      'Ubah foto belum tersedia',
+                    ),
                     onPressed: () => DemoNotice.unavailable(context),
                     icon: const Icon(Icons.camera_alt_outlined),
                   ),
@@ -91,7 +98,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           Center(
             child: TextButton(
               onPressed: () => DemoNotice.unavailable(context),
-              child: const Text(
+              child: const I18nText(
                 'Ubah Foto',
                 style: TextStyle(decoration: TextDecoration.underline),
               ),
@@ -111,7 +118,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             child: Form(key: _formKey, child: const _ProfileFields()),
           ),
           const SizedBox(height: 26),
-          Text('Keamanan', style: Theme.of(context).textTheme.titleLarge),
+          I18nText('Keamanan', style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 10),
           Card(
             color: Colors.white,
@@ -122,7 +129,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 vertical: 10,
               ),
               leading: const Icon(Icons.lock_outline, color: _ink),
-              title: Text(
+              title: I18nText(
                 'Ubah Password',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
@@ -138,7 +145,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               shape: const StadiumBorder(),
             ),
             onPressed: _save,
-            child: const Text('Simpan Perubahan'),
+            child: const I18nText('Simpan Perubahan'),
           ),
         ],
       ),
@@ -153,36 +160,42 @@ class _ProfileFields extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      const Text('Nama lengkap', style: _labelStyle),
+      const I18nText('Nama lengkap', style: _labelStyle),
       const SizedBox(height: 8),
       TextFormField(
         initialValue: 'Vincent',
         textCapitalization: TextCapitalization.words,
-        decoration: const InputDecoration(hintText: 'Nama lengkap'),
+        decoration: InputDecoration(
+          hintText: translateDisplayText(context, 'Nama lengkap'),
+        ),
         validator: (value) => value == null || value.trim().isEmpty
             ? 'Masukkan nama lengkap.'
             : null,
       ),
       const SizedBox(height: 24),
-      const Text('Email', style: _labelStyle),
+      const I18nText('Email', style: _labelStyle),
       const SizedBox(height: 8),
       TextFormField(
         initialValue: 'vincent@example.com',
         keyboardType: TextInputType.emailAddress,
-        decoration: const InputDecoration(hintText: 'Email contoh'),
+        decoration: InputDecoration(
+          hintText: translateDisplayText(context, 'Email contoh'),
+        ),
         validator: (value) => value == null || !_emailShape.hasMatch(value)
             ? 'Masukkan email yang valid.'
             : null,
       ),
       const SizedBox(height: 24),
-      const Text('Nomor telepon', style: _labelStyle),
+      const I18nText('Nomor telepon', style: _labelStyle),
       const SizedBox(height: 8),
       TextFormField(
         keyboardType: TextInputType.phone,
-        decoration: const InputDecoration(hintText: 'Tambahkan nomor telepon'),
+        decoration: InputDecoration(
+          hintText: translateDisplayText(context, 'Tambahkan nomor telepon'),
+        ),
       ),
       const SizedBox(height: 6),
-      Text(
+      I18nText(
         'Nomor telepon membantu toko menghubungimu.',
         style: Theme.of(context).textTheme.bodySmall,
       ),

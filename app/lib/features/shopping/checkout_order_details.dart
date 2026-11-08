@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/shopping/demo_cart.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
 const _orderTitleSize = 15.0;
@@ -26,7 +27,7 @@ class CheckoutOrderDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: _orderGap,
         children: [
-          Text(
+          I18nText(
             'Rincian pesanan',
             style: Theme.of(context).textTheme.titleMedium,
           ),
@@ -62,7 +63,7 @@ class _CheckoutLine extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: _lineGap,
           children: [
-            Text(
+            I18nText(
               line.food.id == 'buns'
                   ? line.food.title.replaceFirst(' (Isi 5 pcs)', '')
                   : line.food.title,
@@ -70,12 +71,12 @@ class _CheckoutLine extends StatelessWidget {
                   ?.copyWith(fontSize: _orderTitleSize),
             ),
             if (line.food.id == 'buns')
-              const Text(
+              const I18nText(
                 '(Isi 5 pcs)',
                 style: TextStyle(fontSize: 12, color: Colors.black54),
               ),
             if (line.addons.isNotEmpty)
-              Text(
+              I18nText(
                 line.addons.map((addon) => addon.label).join(', '),
                 style: const TextStyle(fontSize: 11, color: Colors.black54),
               ),
@@ -84,11 +85,11 @@ class _CheckoutLine extends StatelessWidget {
               spacing: _orderPriceGap,
               runSpacing: _lineGap,
               children: [
-                Text(
+                I18nText(
                   '${line.quantity} x ${formatRupiah(line.unitPrice)}',
                   style: const TextStyle(fontSize: 12, color: Colors.black54),
                 ),
-                Text(
+                I18nText(
                   formatRupiah(line.total),
                   style: Theme.of(context).textTheme.titleMedium
                       ?.copyWith(color: PanganKitaColors.brandPrimary),

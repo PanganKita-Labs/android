@@ -35,12 +35,17 @@ import 'package:pangankita/features/shopping/demo_cart.dart';
 import 'package:pangankita/features/shopping/payment_failed_page.dart';
 import 'package:pangankita/features/shopping/payment_status_page.dart';
 import 'package:pangankita/features/shopping/payment_success_page.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Application composition for the native Flutter reference conversion.
 class PanganKitaApp extends StatefulWidget {
   /// Creates the local prototype without server authentication or payments.
-  const new({super.key});
+  const new({this.initialLocale = const Locale('id'), super.key});
+
+  /// The restored language selection. Indonesian remains the default.
+  final Locale initialLocale;
 
   @override
   State<PanganKitaApp> createState() => _PanganKitaAppState();
@@ -49,6 +54,24 @@ class PanganKitaApp extends StatefulWidget {
 class _PanganKitaAppState extends State<PanganKitaApp> {
   final _cart = DemoCart();
   final _selectedArea = ValueNotifier<String>('Mandala by Pass, Medan');
+  Locale _locale = const Locale('id');
+
+  @override
+  void initState() {
+    super.initState();
+    _locale = widget.initialLocale;
+  }
+
+  Future<void> _setLocale(Locale locale) async {
+    if (_locale == locale) return;
+    setState(() => _locale = locale);
+    final value = locale.languageCode == 'zh' ? 'zh_Hans' : locale.languageCode;
+    try {
+      await SharedPreferencesAsync().setString('pangankita.ui.locale', value);
+    } on Exception catch (error) {
+      debugPrint('Unable to save language preference: $error');
+    }
+  }
 
   @override
   void dispose() {
@@ -60,6 +83,9 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'PanganKita',
+    locale: _locale,
+    supportedLocales: AppLocalizations.supportedLocales,
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
     debugShowCheckedModeBanner: false,
     initialRoute: AppRoutes.splash,
     theme: PanganKitaTheme.light,
@@ -85,7 +111,9 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
         onLocationChanged: (area) => _selectedArea.value = area,
       ),
       AppRoutes.editProfile: (context) => const EditProfilePage(),
-      AppRoutes.settings: (context) => const SettingsPage(),
+      AppRoutes.settings: (context) => SettingsPage(
+        onLocaleChanged: (locale) => _setLocale(locale).ignore(),
+      ),
       AppRoutes.terms: (context) => const TermsPage(),
       AppRoutes.privacy: (context) => const SettingsDocumentPage.privacy(),
       AppRoutes.favorites: (context) => const FavoritesPage(),
@@ -110,7 +138,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
         return food is DemoFood
             ? OrderDetailPage(food: food)
             : const Scaffold(
-                body: Center(child: Text('Contoh pesanan tidak tersedia.')),
+                body: Center(child: I18nText('Contoh pesanan tidak tersedia.')),
               );
       },
       AppRoutes.chat: (context) => const ChatPage(),
@@ -122,7 +150,9 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
                 previewMessage: example.message,
               )
             : const Scaffold(
-                body: Center(child: Text('Contoh chat toko tidak tersedia.')),
+                body: Center(
+                  child: I18nText('Contoh chat toko tidak tersedia.'),
+                ),
               );
       },
       AppRoutes.notifications: (context) => const NotificationsPage(),
@@ -138,7 +168,9 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
         return example is ({DemoFood food, int quantity})
             ? PickupPage(food: example.food, quantity: example.quantity)
             : const Scaffold(
-                body: Center(child: Text('Contoh pengambilan tidak tersedia.')),
+                body: Center(
+                  child: I18nText('Contoh pengambilan tidak tersedia.'),
+                ),
               );
       },
       AppRoutes.review: (context) {
@@ -146,7 +178,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
         return example is ({DemoFood food, int quantity})
             ? ReviewPage(food: example.food, quantity: example.quantity)
             : const Scaffold(
-                body: Center(child: Text('Contoh ulasan tidak tersedia.')),
+                body: Center(child: I18nText('Contoh ulasan tidak tersedia.')),
               );
       },
       for (final food in DemoFood.examples)

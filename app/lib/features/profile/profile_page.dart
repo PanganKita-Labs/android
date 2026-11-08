@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/demo_notice.dart';
 
 const Color _profileGreen = PanganKitaColors.brandPrimaryStrong;
@@ -48,20 +49,20 @@ class ProfilePage extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                tooltip: 'Kembali ke Beranda',
+                tooltip: translateDisplayText(context, 'Kembali ke Beranda'),
                 onPressed: () => Navigator.pop(context),
                 icon: const Icon(Icons.arrow_back, color: _profileInk),
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(
+                child: I18nText(
                   'Profil Saya',
                   style: Theme.of(context).textTheme.headlineMedium
                       ?.copyWith(color: _profileInk),
                 ),
               ),
               IconButton(
-                tooltip: 'Buka Pengaturan',
+                tooltip: translateDisplayText(context, 'Buka Pengaturan'),
                 onPressed: () =>
                     Navigator.pushNamed(context, AppRoutes.settings).ignore(),
                 icon: const Icon(Icons.settings_outlined, color: _profileInk),
@@ -76,13 +77,13 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          Text(
+          I18nText(
             'Vincent',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineMedium
                 ?.copyWith(color: _profileInk),
           ),
-          Text(
+          I18nText(
             'vincent@example.com • contoh',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium,
@@ -93,7 +94,7 @@ class ProfilePage extends StatelessWidget {
               onPressed: () =>
                   Navigator.pushNamed(context, AppRoutes.editProfile).ignore(),
               icon: const Icon(Icons.edit_outlined),
-              label: const Text('Edit Profil'),
+              label: const I18nText('Edit Profil'),
             ),
           ),
           const SizedBox(height: 18),
@@ -111,7 +112,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 const SizedBox(width: 14),
                 Expanded(
-                  child: Text(
+                  child: I18nText(
                     'Terima kasih sudah ikut menyelamatkan makanan.',
                     style: Theme.of(context).textTheme.titleMedium
                         ?.copyWith(color: _profileInk),
@@ -195,7 +196,7 @@ class _ProfileMenu extends StatelessWidget {
               items[index].icon,
               color: items[index].color ?? _profileGreen,
             ),
-            title: Text(
+            title: I18nText(
               items[index].label,
               style: TextStyle(color: items[index].color ?? _profileInk),
             ),

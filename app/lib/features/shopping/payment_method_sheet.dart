@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 
 const _logoWidth = 48.0;
 const _logoHeight = 24.0;
@@ -18,12 +19,12 @@ Future<void> showPaymentMethodSheet(BuildContext context) =>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
+              I18nText(
                 'Pilih metode pembayaran',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 8),
-              const Text(
+              const I18nText(
                 'Saat ini hanya QRIS sebagai contoh tampilan. '
                 'Tidak ada pembayaran atau kode QR yang dibuat.',
               ),
@@ -35,10 +36,10 @@ Future<void> showPaymentMethodSheet(BuildContext context) =>
                     'assets/prototype/qris-logo-black.png',
                     width: _logoWidth,
                     height: _logoHeight,
-                    semanticLabel: 'Logo QRIS',
+                    semanticLabel: translateDisplayText(context, 'Logo QRIS'),
                   ),
-                  title: const Text('QRIS'),
-                  subtitle: const Text('Metode contoh yang ditampilkan'),
+                  title: const I18nText('QRIS'),
+                  subtitle: const I18nText('Metode contoh yang ditampilkan'),
                   trailing: const Icon(
                     Icons.check_circle,
                     color: PanganKitaColors.brandPrimaryStrong,
@@ -48,7 +49,7 @@ Future<void> showPaymentMethodSheet(BuildContext context) =>
               const SizedBox(height: 16),
               FilledButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Gunakan QRIS (contoh)'),
+                child: const I18nText('Gunakan QRIS (contoh)'),
               ),
             ],
           ),

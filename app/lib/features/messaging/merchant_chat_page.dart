@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
 const _photoSize = 48.0;
@@ -58,7 +59,7 @@ class _MerchantChatPageState extends State<MerchantChatPage> {
                   _MessageBubble(message: message, local: false)
                 else
                   const Center(
-                    child: Text('Belum ada contoh pesan untuk toko ini.'),
+                    child: I18nText('Belum ada contoh pesan untuk toko ini.'),
                   ),
                 for (final message in _localMessages) ...[
                   const SizedBox(height: 12),
@@ -94,7 +95,7 @@ class _MerchantHeader extends StatelessWidget implements PreferredSizeWidget {
         ),
         const SizedBox(width: 10),
         Expanded(
-          child: Text(
+          child: I18nText(
             food.merchant,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -112,7 +113,7 @@ class _PreviewNotice extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const Padding(
     padding: EdgeInsets.fromLTRB(16, 8, 16, 4),
-    child: Text(
+    child: I18nText(
       'Percakapan contoh. Pesan tidak dikirim atau disimpan.',
       textAlign: TextAlign.center,
       style: TextStyle(color: Colors.black54),
@@ -145,8 +146,11 @@ class _ProductContext extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Produk contoh'),
-                Text(food.title, style: Theme.of(context).textTheme.titleSmall),
+                const I18nText('Produk contoh'),
+                I18nText(
+                  food.title,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
               ],
             ),
           ),
@@ -179,9 +183,9 @@ class _MessageBubble extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(message),
+              I18nText(message),
               const SizedBox(height: 6),
-              Text(
+              I18nText(
                 local ? 'Pesan lokal, tidak terkirim' : 'Pesan contoh toko',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -211,9 +215,12 @@ class _Composer extends StatelessWidget {
               controller: controller,
               textInputAction: TextInputAction.send,
               onSubmitted: (_) => onSend(),
-              decoration: const InputDecoration(
-                hintText: 'Tulis pesan contoh...',
-                border: OutlineInputBorder(
+              decoration: InputDecoration(
+                hintText: translateDisplayText(
+                  context,
+                  'Tulis pesan contoh...',
+                ),
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(24)),
                 ),
               ),
@@ -221,7 +228,7 @@ class _Composer extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           IconButton.filled(
-            tooltip: 'Tambahkan pesan contoh',
+            tooltip: translateDisplayText(context, 'Tambahkan pesan contoh'),
             onPressed: onSend,
             icon: const Icon(Icons.send),
           ),

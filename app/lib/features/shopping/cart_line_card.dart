@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/shopping/demo_cart.dart';
+import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 
 const _lineGap = 12.0;
@@ -42,16 +43,16 @@ class CartLineCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: _cartTextGap,
             children: [
-              Text(
+              I18nText(
                 line.food.title,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               if (line.addons.isNotEmpty)
-                Text(
+                I18nText(
                   line.addons.map((addon) => addon.label).join(', '),
                   style: const TextStyle(fontSize: 11, color: Colors.black54),
                 ),
-              Text(
+              I18nText(
                 formatRupiah(line.unitPrice),
                 style: Theme.of(context).textTheme.titleMedium
                     ?.copyWith(color: PanganKitaColors.brandPrimary),
@@ -62,13 +63,16 @@ class CartLineCard extends StatelessWidget {
                 children: [
                   IconButton.filledTonal(
                     style: _cartQuantityStyle,
-                    tooltip: 'Kurangi ${line.food.title}',
+                    tooltip: translateDisplayText(
+                      context,
+                      'Kurangi ${line.food.title}',
+                    ),
                     onPressed: line.quantity > 1
                         ? () => cart.setQuantity(line.id, line.quantity - 1)
                         : null,
                     icon: const Icon(Icons.remove),
                   ),
-                  Text(
+                  I18nText(
                     '${line.quantity}',
                     semanticsLabel:
                         'Jumlah ${line.food.title}: ${line.quantity}',
@@ -76,7 +80,10 @@ class CartLineCard extends StatelessWidget {
                   ),
                   IconButton.filledTonal(
                     style: _cartQuantityStyle,
-                    tooltip: 'Tambah ${line.food.title}',
+                    tooltip: translateDisplayText(
+                      context,
+                      'Tambah ${line.food.title}',
+                    ),
                     onPressed: line.quantity < DemoCart.quantityLimit
                         ? () => cart.setQuantity(line.id, line.quantity + 1)
                         : null,
@@ -88,7 +95,7 @@ class CartLineCard extends StatelessWidget {
           ),
         ),
         IconButton(
-          tooltip: 'Hapus ${line.food.title}',
+          tooltip: translateDisplayText(context, 'Hapus ${line.food.title}'),
           onPressed: () => cart.remove(line.id),
           icon: const Icon(Icons.delete_outline),
         ),
