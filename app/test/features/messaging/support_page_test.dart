@@ -6,7 +6,7 @@ import 'package:pangankita/features/messaging/support_page.dart';
 import 'package:pangankita/features/profile/profile_page.dart';
 import 'package:pangankita/features/profile/settings_page.dart';
 
-import 'font_test_utils.dart';
+import '../../helpers/font_test_utils.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
