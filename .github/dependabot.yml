@@ -6,6 +6,8 @@ version: 2
 
 multi-ecosystem-groups:
   pangankita-routine:
+    commit-message:
+      prefix: "chore(deps)"
     schedule:
       interval: monthly
       time: "04:00"
