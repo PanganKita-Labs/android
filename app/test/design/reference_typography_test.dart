@@ -6,7 +6,7 @@ import 'package:pangankita/features/discovery/home_page.dart';
 import 'package:pangankita/features/onboarding/auth_page.dart';
 import 'package:pangankita/features/onboarding/otp_page.dart';
 
-import 'font_test_utils.dart';
+import '../helpers/font_test_utils.dart';
 
 TextStyle _styleOf(WidgetTester tester, Finder finder) {
   final text = tester.widget<Text>(finder);
