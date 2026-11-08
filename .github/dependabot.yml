@@ -1,0 +1,37 @@
+
+version: 2
+
+# Monthly routine updates only.
+# Security updates are handled separately.
+
+multi-ecosystem-groups:
+  pangankita-routine:
+    schedule:
+      interval: monthly
+      time: "04:00"
+      timezone: Etc/UTC
+
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    patterns:
+      - "*"
+    multi-ecosystem-group: pangankita-routine
+    rebase-strategy: disabled
+    allow:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-patch
+          - version-update:semver-minor
+
+  - package-ecosystem: pub
+    directory: /app
+    patterns:
+      - "*"
+    multi-ecosystem-group: pangankita-routine
+    rebase-strategy: disabled
+    allow:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-patch
+          - version-update:semver-minor
