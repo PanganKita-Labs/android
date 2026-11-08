@@ -7,8 +7,8 @@ import 'package:pangankita/features/orders/completed_orders_section.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-const _ink = Color(0xFF14313A);
-const _orange = Color(0xFFE98412);
+const Color _ink = PanganKitaColors.inkCool;
+const Color _orange = PanganKitaColors.referenceOrange;
 const _chipGap = 8.0;
 const _chipRunGap = 10.0;
 const _cardGap = 8.0;
@@ -211,7 +211,7 @@ class _OrderExampleCard extends StatelessWidget {
           ),
           const DecoratedBox(
             decoration: BoxDecoration(
-              color: Color(0xFFE6F0EB),
+              color: PanganKitaColors.positiveSurfaceMuted,
               borderRadius: BorderRadius.all(Radius.circular(_codeRadius)),
             ),
             child: Padding(
@@ -322,7 +322,7 @@ class _ExampleBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const DecoratedBox(
     decoration: BoxDecoration(
-      color: Color(0xFFE6F0EB),
+      color: PanganKitaColors.positiveSurfaceMuted,
       borderRadius: BorderRadius.all(Radius.circular(20)),
     ),
     child: Padding(

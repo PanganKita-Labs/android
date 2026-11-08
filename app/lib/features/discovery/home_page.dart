@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                 height: 1.16,
                 letterSpacing: -.45,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF14313A),
+                color: PanganKitaColors.inkCool,
               ),
             ),
             const SizedBox(height: 2),
@@ -201,7 +201,7 @@ class _FeedSection extends StatelessWidget {
                       height: 1.2,
                       fontWeight: FontWeight.w700,
                       letterSpacing: -.45,
-                      color: Color(0xFF14313A),
+                      color: PanganKitaColors.inkCool,
                     ),
                   ),
                   if (!flash)
@@ -215,7 +215,7 @@ class _FeedSection extends StatelessWidget {
             TextButton(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
-                foregroundColor: const Color(0xFF52636B),
+                foregroundColor: PanganKitaColors.textSecondaryCool,
               ),
               onPressed: () => DemoNotice.show(
                 context,

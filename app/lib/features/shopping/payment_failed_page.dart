@@ -7,7 +7,7 @@ import 'package:pangankita/shared/format_rupiah.dart';
 
 const Color _green = PanganKitaColors.brandPrimaryStrong;
 const _orange = Color(0xFFE88913);
-const _ink = Color(0xFF10283C);
+const Color _ink = PanganKitaColors.inkDeep;
 const _cardRadius = 20.0;
 const _merchantRadius = 20.0;
 const _productRadius = 12.0;

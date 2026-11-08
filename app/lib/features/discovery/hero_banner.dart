@@ -73,7 +73,7 @@ class _HeroDots extends StatelessWidget {
       spacing: _indicatorGap,
       children: [
         for (final color in const [
-          Color(0xFF52A963),
+          PanganKitaColors.highlightGreen,
           PanganKitaColors.borderNeutral,
           PanganKitaColors.borderNeutral,
         ])
