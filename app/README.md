@@ -41,7 +41,7 @@ flutter run -d emulator-5554
 app/
 ├── lib/
 │   ├── main.dart
-│   ├── app/                   # Named routes, theme, app state ownership
+│   ├── app/                   # Routes, navigation, theme, session state
 │   ├── features/
 │   │   ├── onboarding/        # Welcome and local authentication demos
 │   │   ├── discovery/         # Home, search, product detail, area selection

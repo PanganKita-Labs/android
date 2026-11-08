@@ -108,3 +108,15 @@ abstract final class AppRoutes {
   /// Detail for one illustrative merchant; no live store data.
   static String store(String id) => '/stores/$id';
 }
+
+/// Destination tab for the existing named Orders route.
+enum OrdersTab {
+  /// Show active-order examples.
+  active,
+
+  /// Show completed-order examples.
+  completed,
+
+  /// Show canceled-order examples.
+  canceled,
+}

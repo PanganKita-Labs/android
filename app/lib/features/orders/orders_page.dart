@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pangankita/app/app_routes.dart';
+import 'package:pangankita/app/navigation/app_bottom_navigation.dart';
 import 'package:pangankita/app/pangan_kita_theme.dart';
-import 'package:pangankita/features/discovery/discovery_navigation.dart';
 import 'package:pangankita/features/orders/canceled_orders_section.dart';
 import 'package:pangankita/features/orders/completed_orders_section.dart';
 import 'package:pangankita/shared/format_rupiah.dart';
@@ -105,7 +105,7 @@ class _OrdersPageState extends State<OrdersPage> {
         ],
       ),
     ),
-    bottomNavigationBar: const DiscoveryNavigation(selectedIndex: 1),
+    bottomNavigationBar: const AppBottomNavigation(selectedIndex: 1),
   );
 }
 

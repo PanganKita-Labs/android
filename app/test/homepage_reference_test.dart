@@ -9,6 +9,24 @@ import 'font_test_utils.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(loadBrandFonts);
+
+  testWidgets('compact titles retain reference line breaks', (tester) async {
+    final examples = <(DemoFood, String)>[
+      (DemoFood.examples[0], 'Mawar Coconut\nBuns (Isi 5 pcs)'),
+      (DemoFood.examples[3], 'Ayam Paha Atas\nTanpa Tulang'),
+      (DemoFood.examples[4], 'Paket Ayam Pop +\nRendang Sapi'),
+    ];
+    for (final (food, title) in examples) {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: PanganKitaTheme.light,
+          home: Scaffold(body: FoodCard(food: food)),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text(title), findsOneWidget, reason: food.id);
+    }
+  });
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
     for (final scale in [1.0, 1.6]) {
       testWidgets('pickup cards fit $width at text scale $scale', (

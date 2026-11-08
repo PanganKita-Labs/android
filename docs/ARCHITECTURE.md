@@ -128,7 +128,7 @@ The active Flutter source implements a **local demonstration prototype**:
 
 ```text
 app/lib/main.dart
-app/lib/app/                       # composition, named routes and theme
+app/lib/app/                       # composition, named routes, navigation and theme
 app/lib/features/onboarding/       # local welcome/auth UI
 app/lib/features/discovery/        # home, search, product and area selection
 app/lib/features/merchants/        # store/map/directions previews

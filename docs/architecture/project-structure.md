@@ -13,7 +13,7 @@ These directories reflect the existing UI, not deployed backend capabilities:
 ```text
 app/lib/
 ├── main.dart
-├── app/                        # routes, composition and theme
+├── app/                        # routes, navigation, composition and theme
 ├── features/
 │   ├── onboarding/             # local authentication demonstrations
 │   ├── discovery/              # home, search, product and area selection
@@ -80,6 +80,14 @@ May own:
 - genuinely top-level state dependencies.
 
 Do not put feature business logic here.
+
+### `app/navigation/`
+
+`app/navigation/app_bottom_navigation.dart` owns the bottom destinations used
+by Home, Orders, Chat and Notifications. Feature screens depend on this app
+widget instead of importing another feature's navigation implementation.
+Notifications opens Orders via `AppRoutes.orders` with a typed `OrdersTab`
+argument; the app route factory selects the target tab and defaults to Active.
 
 ### Optional `app/routing/` (not created yet)
 
