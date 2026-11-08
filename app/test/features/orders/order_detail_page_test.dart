@@ -6,7 +6,7 @@ import 'package:pangankita/features/orders/order_detail_page.dart';
 import 'package:pangankita/features/orders/orders_page.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-import 'font_test_utils.dart';
+import '../../helpers/font_test_utils.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
