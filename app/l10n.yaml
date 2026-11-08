@@ -1,0 +1,8 @@
+arb-dir: lib/i18n/arb
+output-dir: lib/i18n/generated
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+preferred-supported-locales:
+  - id
+  - en
+  - zh_Hans
