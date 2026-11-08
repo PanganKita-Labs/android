@@ -6,7 +6,7 @@ import 'package:pangankita/features/merchants/directions_page.dart';
 import 'package:pangankita/features/merchants/nearby_map_page.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-import 'font_test_utils.dart';
+import '../../helpers/font_test_utils.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

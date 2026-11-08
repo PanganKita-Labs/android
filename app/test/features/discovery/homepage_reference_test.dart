@@ -4,7 +4,7 @@ import 'package:pangankita/app/pangan_kita_theme.dart';
 import 'package:pangankita/features/discovery/food_card.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-import 'font_test_utils.dart';
+import '../../helpers/font_test_utils.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

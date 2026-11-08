@@ -7,7 +7,7 @@ import 'package:pangankita/features/merchants/store_detail_page.dart';
 import 'package:pangankita/features/shopping/demo_cart.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 
-import 'font_test_utils.dart';
+import '../../helpers/font_test_utils.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
