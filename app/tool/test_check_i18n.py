@@ -14,6 +14,25 @@ from pathlib import Path
 import check_i18n
 
 
+
+def wrap_long_lookup_label(match: re.Match[str], base: dict[str, object]) -> str | None:
+    """Reformat a real long lookup entry into adjacent Dart string literals."""
+    label = "".join(
+        check_i18n.decode_dart_literal(fragment.group(0))
+        for fragment in re.finditer(check_i18n.LOOKUP_LITERAL, match.group(1))
+    )
+    getter = match.group(2)
+    if len(label) <= 80 or " " not in label:
+        return None
+    if base.get(getter) != label:
+        return None
+    split_at = label.rfind(" ", 0, len(label) // 2)
+    if split_at <= 0:
+        return None
+    left = json.dumps(label[: split_at + 1], ensure_ascii=False)
+    right = json.dumps(label[split_at + 1 :], ensure_ascii=False)
+    return f"{left}\n        {right} =>\n          strings.{getter},"
+
 class I18nCheckerTests(unittest.TestCase):
     """Prove the checker rejects common translation-contribution defects."""
 
@@ -59,30 +78,12 @@ class I18nCheckerTests(unittest.TestCase):
         path = self.root / "lib/i18n/generated/i18n_presentation_lookup.g.dart"
         text = path.read_text(encoding="utf-8")
         base = check_i18n.load_json(self.root / "lib/i18n/arb/app_id.arb")
-
-        # Parse the lookup rather than assuming the initial file is unformatted.
-        # Real dart format often wraps both literals and their getter expressions.
         replacements: list[tuple[int, int, str]] = []
         for match in check_i18n.LOOKUP_ENTRY.finditer(text):
-            label = "".join(
-                check_i18n.decode_dart_literal(fragment.group(0))
-                for fragment in re.finditer(check_i18n.LOOKUP_LITERAL, match.group(1))
-            )
-            getter = match.group(2)
-            if len(label) <= 80 or " " not in label or base.get(getter) != label:
+            wrapped = wrap_long_lookup_label(match, base)
+            if wrapped is None:
                 continue
-            split_at = label.rfind(" ", 0, len(label) // 2)
-            if split_at <= 0:
-                continue
-            left = json.dumps(label[: split_at + 1], ensure_ascii=False)
-            right = json.dumps(label[split_at + 1 :], ensure_ascii=False)
-            replacements.append(
-                (
-                    match.start(),
-                    match.end(),
-                    f"{left}\n        {right} =>\n          strings.{getter},",
-                )
-            )
+            replacements.append((match.start(), match.end(), wrapped))
             if len(replacements) == 7:
                 break
         self.assertTrue(replacements, "no long lookup labels available for wrapping test")
@@ -90,7 +91,6 @@ class I18nCheckerTests(unittest.TestCase):
             text = text[:start] + replacement + text[end:]
         path.write_text(text, encoding="utf-8")
         self.assertEqual([], self.check())
-
     def test_wrapped_lookup_still_detects_unknown_getter(self) -> None:
         """Line wrapping must not silently hide invalid ARB references."""
         path = self.root / "lib/i18n/generated/i18n_presentation_lookup.g.dart"

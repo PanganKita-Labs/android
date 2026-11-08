@@ -63,7 +63,9 @@ def tokens(message: str) -> Counter[str]:
     return Counter(PLACEHOLDER.findall(message) + ICU_VARIABLE.findall(message))
 
 
-def check_catalogs(root: Path, config: dict[str, object], errors: list[str]) -> dict[str, dict[str, object]]:
+
+def _load_catalogs(root: Path, errors: list[str]) -> dict[str, dict[str, object]]:
+    """Read each configured locale and verify its declared language code."""
     catalogs: dict[str, dict[str, object]] = {}
     for loc in LOCALES:
         path = root / "lib" / "i18n" / "arb" / f"app_{loc}.arb"
@@ -75,72 +77,143 @@ def check_catalogs(root: Path, config: dict[str, object], errors: list[str]) -> 
         catalogs[loc] = data
         if data.get("@@locale") != loc:
             errors.append(f"{path.relative_to(root)}: @@locale must be {loc!r}")
-    if len(catalogs) != len(LOCALES):
-        return catalogs
+    return catalogs
 
-    base = catalogs["id"]
-    base_keys = message_keys(base)
+
+def _unchanged_terms(config: dict[str, object], errors: list[str]) -> dict[str, object]:
+    """Read the intentional untranslated-term exceptions."""
     allowed = config.get("unchanged_from_id", {})
     if not isinstance(allowed, dict):
         errors.append("exception file: unchanged_from_id must be an object")
-        allowed = {}
+        return {}
+    return allowed
 
-    for loc, data in catalogs.items():
-        keys = message_keys(data)
-        for key in sorted(base_keys - keys):
-            errors.append(f"{loc}: missing Indonesian source key {key}")
-        for key in sorted(keys - base_keys):
-            errors.append(f"{loc}: unexpected key {key}, not in Indonesian catalog")
-        exceptions = set(allowed.get(loc, [])) if isinstance(allowed.get(loc, []), list) else set()
-        for key in sorted(exceptions - base_keys):
-            errors.append(f"{loc}: outdated unchanged-term exception {key}")
-        for key in sorted(base_keys & keys):
-            value = data[key]
-            id_value = base[key]
-            if not isinstance(value, str) or not value.strip():
-                errors.append(f"{loc}:{key}: translation must be a nonempty string")
-                continue
-            if not isinstance(id_value, str):
-                errors.append(f"id:{key}: source must be a string")
-                continue
-            if tokens(value) != tokens(id_value):
-                errors.append(
-                    f"{loc}:{key}: placeholder mismatch: expected {dict(tokens(id_value))}, "
-                    f"got {dict(tokens(value))}"
-                )
-            if loc != "id" and value == id_value and key not in exceptions:
-                errors.append(
-                    f"{loc}:{key}: identical to Indonesian; translate it or document an intentional exception"
-                )
-            if loc != "id" and key in exceptions and value != id_value:
-                errors.append(f"{loc}:{key}: stale unchanged-term exception (translation now differs)")
-            meta_key = "@" + key
-            if meta_key in base and meta_key not in data:
-                errors.append(f"{loc}:{key}: missing source metadata {meta_key}")
-            if meta_key in data:
-                meta = data[meta_key]
-                if not isinstance(meta, dict):
-                    errors.append(f"{loc}:{meta_key}: metadata must be an object")
-                else:
-                    defined = meta.get("placeholders", {})
-                    if not isinstance(defined, dict):
-                        errors.append(f"{loc}:{meta_key}: placeholders metadata must be an object")
-                    elif set(defined) != set(tokens(value)):
-                        errors.append(
-                            f"{loc}:{meta_key}: metadata placeholders {sorted(defined)} "
-                            f"do not match message placeholders {sorted(tokens(value))}"
-                        )
-            elif tokens(value):
-                errors.append(f"{loc}:{key}: add @{key} placeholder metadata for Flutter gen-l10n")
-        for field in sorted(data):
-            if field.startswith("@") and not field.startswith("@@") and field[1:] not in keys:
-                errors.append(f"{loc}: metadata {field} has no corresponding message")
 
-    # Both Chinese catalogs currently carry the same Simplified Chinese strings.
-    # Keeping them synchronized prevents fallback zh from becoming stale.
+def _check_catalog_keys(
+    loc: str, keys: set[str], base_keys: set[str], exceptions: set[str], errors: list[str]
+) -> None:
+    """Report missing, additional, and outdated exempted message keys."""
+    for key in sorted(base_keys - keys):
+        errors.append(f"{loc}: missing Indonesian source key {key}")
+    for key in sorted(keys - base_keys):
+        errors.append(f"{loc}: unexpected key {key}, not in Indonesian catalog")
+    for key in sorted(exceptions - base_keys):
+        errors.append(f"{loc}: outdated unchanged-term exception {key}")
+
+
+def _check_message_text(
+    loc: str, key: str, value: str, source: str, exceptions: set[str], errors: list[str]
+) -> None:
+    """Compare placeholders and intentional identical source text."""
+    if tokens(value) != tokens(source):
+        errors.append(
+            f"{loc}:{key}: placeholder mismatch: expected {dict(tokens(source))}, "
+            f"got {dict(tokens(value))}"
+        )
+    if loc == "id":
+        return
+    if value == source and key not in exceptions:
+        errors.append(
+            f"{loc}:{key}: identical to Indonesian; translate it or document an intentional exception"
+        )
+    if key in exceptions and value != source:
+        errors.append(f"{loc}:{key}: stale unchanged-term exception (translation now differs)")
+
+
+def _check_metadata_placeholders(
+    loc: str, meta_key: str, meta: object, value: str, errors: list[str]
+) -> None:
+    """Check the Flutter placeholder annotations for one message."""
+    if not isinstance(meta, dict):
+        errors.append(f"{loc}:{meta_key}: metadata must be an object")
+        return
+    defined = meta.get("placeholders", {})
+    if not isinstance(defined, dict):
+        errors.append(f"{loc}:{meta_key}: placeholders metadata must be an object")
+    elif set(defined) != set(tokens(value)):
+        errors.append(
+            f"{loc}:{meta_key}: metadata placeholders {sorted(defined)} "
+            f"do not match message placeholders {sorted(tokens(value))}"
+        )
+
+
+def _check_message_metadata(
+    loc: str, key: str, value: str, data: dict[str, object], base: dict[str, object], errors: list[str]
+) -> None:
+    """Require the source annotations and check matching localized placeholders."""
+    meta_key = "@" + key
+    if meta_key in base and meta_key not in data:
+        errors.append(f"{loc}:{key}: missing source metadata {meta_key}")
+    if meta_key in data:
+        _check_metadata_placeholders(loc, meta_key, data[meta_key], value, errors)
+    elif tokens(value):
+        errors.append(f"{loc}:{key}: add @{key} placeholder metadata for Flutter gen-l10n")
+
+
+def _check_catalog_message(
+    loc: str, key: str, data: dict[str, object], base: dict[str, object],
+    exceptions: set[str], errors: list[str]
+) -> None:
+    """Validate a translated message and its associated metadata."""
+    value = data[key]
+    source = base[key]
+    if not isinstance(value, str) or not value.strip():
+        errors.append(f"{loc}:{key}: translation must be a nonempty string")
+        return
+    if not isinstance(source, str):
+        errors.append(f"id:{key}: source must be a string")
+        return
+    _check_message_text(loc, key, value, source, exceptions, errors)
+    _check_message_metadata(loc, key, value, data, base, errors)
+
+
+def _check_orphaned_metadata(
+    loc: str, data: dict[str, object], keys: set[str], errors: list[str]
+) -> None:
+    """Reject metadata entries without a corresponding message key."""
+    for field in sorted(data):
+        if not field.startswith("@") or field.startswith("@@"):
+            continue
+        if field[1:] not in keys:
+            errors.append(f"{loc}: metadata {field} has no corresponding message")
+
+
+def _check_one_catalog(
+    loc: str, data: dict[str, object], base: dict[str, object],
+    base_keys: set[str], allowed: dict[str, object], errors: list[str]
+) -> None:
+    """Validate one catalog against the authoritative Indonesian source."""
+    keys = message_keys(data)
+    configured = allowed.get(loc, [])
+    exceptions = set(configured) if isinstance(configured, list) else set()
+    _check_catalog_keys(loc, keys, base_keys, exceptions, errors)
+    for key in sorted(base_keys & keys):
+        _check_catalog_message(loc, key, data, base, exceptions, errors)
+    _check_orphaned_metadata(loc, data, keys, errors)
+
+
+def _check_chinese_fallback(
+    catalogs: dict[str, dict[str, object]], base_keys: set[str], errors: list[str]
+) -> None:
+    """Keep zh fallback and zh_Hans content synchronized."""
     for key in sorted(base_keys):
         if catalogs["zh"].get(key) != catalogs["zh_Hans"].get(key):
             errors.append(f"zh_Hans:{key}: differs from zh fallback; update both Chinese files")
+
+
+def check_catalogs(
+    root: Path, config: dict[str, object], errors: list[str]
+) -> dict[str, dict[str, object]]:
+    """Validate all configured catalogs against Indonesian messages and metadata."""
+    catalogs = _load_catalogs(root, errors)
+    if len(catalogs) != len(LOCALES):
+        return catalogs
+    base = catalogs["id"]
+    base_keys = message_keys(base)
+    allowed = _unchanged_terms(config, errors)
+    for loc, data in catalogs.items():
+        _check_one_catalog(loc, data, base, base_keys, allowed, errors)
+    _check_chinese_fallback(catalogs, base_keys, errors)
     return catalogs
 
 
@@ -198,31 +271,142 @@ def get_exceptions(config: dict[str, object], errors: list[str]) -> dict[tuple[s
     return entries
 
 
-def check_source(root: Path, catalogs: dict[str, dict[str, object]], config: dict[str, object], errors: list[str]) -> tuple[int, int]:
+
+def _check_presentation_entry(
+    match: re.Match[str], mapping: dict[str, str], base: dict[str, object], errors: list[str]
+) -> None:
+    """Validate one generated lookup label and its Indonesian getter."""
+    literal = "".join(
+        decode_dart_literal(fragment.group(0))
+        for fragment in re.finditer(LOOKUP_LITERAL, match.group(1))
+    )
+    getter = match.group(2)
+    if literal in mapping:
+        errors.append(f"presentation lookup: duplicated literal {literal!r}")
+    mapping[literal] = getter
+    if getter not in base:
+        errors.append(f"presentation lookup: getter {getter} missing from Indonesian ARB")
+    elif base[getter] != literal:
+        errors.append(f"presentation lookup: {getter} no longer matches Indonesian message {literal!r}")
+
+
+def _read_presentation_mapping(
+    root: Path, catalogs: dict[str, dict[str, object]], errors: list[str]
+) -> dict[str, str] | None:
+    """Verify the generated lookup and return its display-label mapping."""
     lookup = root / "lib/i18n/generated/i18n_presentation_lookup.g.dart"
     try:
         lookup_text = lookup.read_text(encoding="utf-8")
     except OSError as exc:
         errors.append(f"{lookup}: {exc}")
-        return 0, 0
+        return None
     base = catalogs.get("id", {})
     mapping: dict[str, str] = {}
     for match in LOOKUP_ENTRY.finditer(lookup_text):
-        literal = "".join(
-            decode_dart_literal(fragment.group(0))
-            for fragment in re.finditer(LOOKUP_LITERAL, match.group(1))
-        )
-        getter = match.group(2)
-        if literal in mapping:
-            errors.append(f"presentation lookup: duplicated literal {literal!r}")
-        mapping[literal] = getter
-        if getter not in base:
-            errors.append(f"presentation lookup: getter {getter} missing from Indonesian ARB")
-        elif base[getter] != literal:
-            errors.append(f"presentation lookup: {getter} no longer matches Indonesian message {literal!r}")
+        _check_presentation_entry(match, mapping, base, errors)
     for getter in set(GETTER_REFERENCE.findall(lookup_text)):
         if getter not in base:
             errors.append(f"presentation lookup: referenced getter {getter} missing from Indonesian ARB")
+    return mapping
+
+
+def _translated_literals(text: str):
+    """Yield fixed strings passed to the presentation translation helpers."""
+    for match in I18N_CALL.finditer(text):
+        pos = match.end()
+        if match.group(0).startswith("translateDisplayText"):
+            context = re.match(r"\s*context\s*,", text[pos:])
+            if not context:
+                continue
+            pos += context.end()
+        literal = concatenated_literals(text, pos)
+        if literal is not None:
+            yield "localized display", literal, match.start(), True
+
+
+def _raw_text_literals(text: str):
+    """Yield directly hardcoded Text widget strings."""
+    for match in UNLOCALIZED_TEXT.finditer(text):
+        literal = concatenated_literals(text, match.end())
+        if literal is not None:
+            yield "raw Text", literal, match.start(), False
+
+
+def _attribute_literals(text: str):
+    """Yield hardcoded accessibility, helper, and field-label attributes."""
+    for match in ATTR_LITERAL.finditer(text):
+        literal = concatenated_literals(text, match.end())
+        if literal is not None:
+            yield match.group(1), literal, match.start(), False
+
+
+def _named_widget_literals(text: str, pattern: re.Pattern[str], field: str, kind: str):
+    """Yield constant values for a named constructor argument."""
+    for match in pattern.finditer(text):
+        offset = re.match(r"\s*" + field + r"\s*:", text[match.end():])
+        if not offset:
+            continue
+        literal = concatenated_literals(text, match.end() + offset.end())
+        if literal is not None:
+            yield kind, literal, match.start(), False
+
+
+def _source_literals(text: str):
+    """Yield statically checkable labels, preserving the original scan order."""
+    yield from _translated_literals(text)
+    yield from _raw_text_literals(text)
+    yield from _attribute_literals(text)
+    yield from _named_widget_literals(text, TOOLTIP, "message", "Tooltip.message")
+    yield from _named_widget_literals(text, TEXT_SPAN, "text", "TextSpan.text")
+
+
+def _verify_source_literal(
+    occurrence: tuple[str, str, int, bool], relative: str, text: str,
+    mapping: dict[str, str], exceptions: dict[tuple[str, str, str], str],
+    used_exceptions: set[tuple[str, str, str]], errors: list[str]
+) -> None:
+    """Report an uncovered string, recording only actually used exceptions."""
+    kind, literal, char_pos, translated = occurrence
+    if "$" in literal:  # Dynamic/interpolated display text needs human review.
+        return
+    if translated and literal in mapping:
+        return
+    key = (relative, kind, literal)
+    if key in exceptions:
+        used_exceptions.add(key)
+        return
+    line = text.count("\n", 0, char_pos) + 1
+    hint = (
+        "use a key registered in the generated presentation lookup"
+        if translated else "use a localized string instead of raw display text"
+    )
+    errors.append(f"lib/{relative}:{line}: {kind} {literal!r}; {hint}")
+
+
+def _scan_source_file(
+    path: Path, relative: str, mapping: dict[str, str],
+    exceptions: dict[tuple[str, str, str], str],
+    used_exceptions: set[tuple[str, str, str]], errors: list[str]
+) -> int:
+    """Check one Dart source file and count the statically inspected strings."""
+    text = path.read_text(encoding="utf-8")
+    examined = 0
+    for occurrence in _source_literals(text):
+        examined += 1
+        _verify_source_literal(
+            occurrence, relative, text, mapping, exceptions, used_exceptions, errors
+        )
+    return examined
+
+
+def check_source(
+    root: Path, catalogs: dict[str, dict[str, object]],
+    config: dict[str, object], errors: list[str]
+) -> tuple[int, int]:
+    """Validate source display literals against the generated presentation lookup."""
+    mapping = _read_presentation_mapping(root, catalogs, errors)
+    if mapping is None:
+        return 0, 0
     exceptions = get_exceptions(config, errors)
     used_exceptions: set[tuple[str, str, str]] = set()
     examined = 0
@@ -231,59 +415,9 @@ def check_source(root: Path, catalogs: dict[str, dict[str, object]], config: dic
         relative = path.relative_to(source_dir).as_posix()
         if relative.startswith("i18n/generated/"):
             continue
-        text = path.read_text(encoding="utf-8")
-
-        def verify(kind: str, literal: str, char_pos: int, *, translated: bool) -> None:
-            nonlocal examined
-            examined += 1
-            if "$" in literal:  # dynamic/interpolated text needs a manual review
-                return
-            if translated and literal in mapping:
-                return
-            key = (relative, kind, literal)
-            if key in exceptions:
-                used_exceptions.add(key)
-                return
-            line = text.count("\n", 0, char_pos) + 1
-            hint = (
-                "use a key registered in the generated presentation lookup"
-                if translated else "use a localized string instead of raw display text"
-            )
-            errors.append(f"lib/{relative}:{line}: {kind} {literal!r}; {hint}")
-
-        for m in I18N_CALL.finditer(text):
-            if m.group(0).startswith("translateDisplayText"):
-                # Common form: translateDisplayText(context, 'literal')
-                start = re.match(r"\s*context\s*,", text[m.end():])
-                if not start:
-                    continue
-                pos = m.end() + start.end()
-            else:
-                pos = m.end()
-            literal = concatenated_literals(text, pos)
-            if literal is not None:
-                verify("localized display", literal, m.start(), translated=True)
-        for m in UNLOCALIZED_TEXT.finditer(text):
-            literal = concatenated_literals(text, m.end())
-            if literal is not None:
-                verify("raw Text", literal, m.start(), translated=False)
-        for m in ATTR_LITERAL.finditer(text):
-            literal = concatenated_literals(text, m.end())
-            if literal is not None:
-                verify(m.group(1), literal, m.start(), translated=False)
-        for m in TOOLTIP.finditer(text):
-            offset = re.match(r"\s*message\s*:", text[m.end():])
-            if offset:
-                literal = concatenated_literals(text, m.end() + offset.end())
-                if literal is not None:
-                    verify("Tooltip.message", literal, m.start(), translated=False)
-        for m in TEXT_SPAN.finditer(text):
-            offset = re.match(r"\s*text\s*:", text[m.end():])
-            if offset:
-                literal = concatenated_literals(text, m.end() + offset.end())
-                if literal is not None:
-                    verify("TextSpan.text", literal, m.start(), translated=False)
-    # Stale exemptions are important: contributors must remove whitelist debt on cleanup.
+        examined += _scan_source_file(
+            path, relative, mapping, exceptions, used_exceptions, errors
+        )
     for key in sorted(set(exceptions) - used_exceptions):
         errors.append(f"stale source exception {key}: remove it when fixed")
     return examined, len(used_exceptions)
