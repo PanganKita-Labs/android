@@ -102,7 +102,6 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class _SettingsHeader extends StatelessWidget {
