@@ -39,12 +39,16 @@ import 'package:pangankita/i18n/i18n.dart';
 import 'package:pangankita/shared/models/demo_food.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Application composition for the native Flutter reference conversion.
+/// Root widget for routes, localization, and local demonstration state.
+///
+/// The cart and selected area last only for this widget's lifetime.
+/// UI language selection is the only device preference saved here.
 class PanganKitaApp extends StatefulWidget {
   /// Creates the local prototype without server authentication or payments.
+  /// [initialLocale] is the starting language, not a forced override.
   const new({this.initialLocale = const Locale('id'), super.key});
 
-  /// The restored language selection. Indonesian remains the default.
+  /// Startup locale; defaults to Indonesian in isolated widget tests.
   final Locale initialLocale;
 
   @override
@@ -52,7 +56,12 @@ class PanganKitaApp extends StatefulWidget {
 }
 
 class _PanganKitaAppState extends State<PanganKitaApp> {
+  /// Shared by product, cart, checkout, and payment preview routes.
+  /// Disposed with the root application widget.
   final _cart = DemoCart();
+
+  /// Example location shared across screens, without device GPS access.
+  /// This value is not persisted across application restarts.
   final _selectedArea = ValueNotifier<String>('Mandala by Pass, Medan');
   Locale _locale = const Locale('id');
 
@@ -62,6 +71,8 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     _locale = widget.initialLocale;
   }
 
+  /// Updates visible language immediately, then attempts persistence.
+  /// If storage fails, the current session keeps its selected locale.
   Future<void> _setLocale(Locale locale) async {
     if (_locale == locale) return;
     setState(() => _locale = locale);

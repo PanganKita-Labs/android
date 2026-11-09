@@ -10,7 +10,10 @@ const _navigationFontSize = 12.0;
 const _navigationLineHeight = 1.2;
 const _notificationsIndex = 3;
 
-/// App-wide bottom destinations shared by consumer tabs.
+/// App-wide navigation for Home, Orders, Chat, and Notifications.
+///
+/// Switching destinations replaces the current named route rather
+/// than pushing another screen onto the navigation stack.
 class AppBottomNavigation extends StatelessWidget {
   /// Selects Home (0), Orders (1), Chat (2), or Notifications (3).
   const new({required this.selectedIndex, super.key});

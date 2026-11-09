@@ -71,7 +71,12 @@ class DemoFood {
       ? 'assets/prototype/garlic-bread.webp'
       : 'assets/prototype/$id.webp';
 
-  /// Case-insensitive reference search; no remote requests.
+  /// Tests a local category filter and a case-insensitive text match.
+  ///
+  /// The category must exactly match [selectedCategory], unless it is
+  /// 'Semua'. [query] is trimmed and matched as a substring against
+  /// the example title, merchant, category, and search terms.
+  /// No remote search or live availability lookup occurs.
   bool matches(String query, String selectedCategory) =>
       (selectedCategory == 'Semua' || category == selectedCategory) &&
       '$title $merchant $category $searchTerms'.toLowerCase().contains(

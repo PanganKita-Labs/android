@@ -2,9 +2,11 @@ import 'package:flutter/widgets.dart';
 import 'package:pangankita/i18n/generated/app_localizations.dart';
 import 'package:pangankita/i18n/generated/i18n_presentation_lookup.g.dart';
 
-/// Translates a display string while preserving underlying domain data.
+/// Translates recognized presentation strings using the generated lookup.
 ///
-/// A missing localization delegate keeps the original text in isolated tests.
+/// Returns [value] unchanged if no localization delegate is available
+/// or if the value has no matching generated translation.
+/// Do not use this function for identifiers or user-provided data.
 String translateDisplayText(BuildContext context, String value) =>
     translateI18nPresentation(
       Localizations.of<AppLocalizations>(context, AppLocalizations),
@@ -13,7 +15,8 @@ String translateDisplayText(BuildContext context, String value) =>
 
 /// A const-capable localized equivalent of a plain Flutter [Text] widget.
 ///
-/// Do not use this to translate identifiers, URLs, route names, or user input.
+/// Missing delegates and unrecognized display text retain [data].
+/// Do not translate identifiers, URLs, route names, or user input.
 class I18nText extends StatelessWidget {
   /// Creates localized text, preserving the caller's rendering preferences.
   const new(
