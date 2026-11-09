@@ -1,0 +1,113 @@
+name: PR Labeler
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, reopened, edited, synchronize, ready_for_review]
+
+# Metadata-only workflow: never checkout or run code from a pull request.
+permissions:
+  pull-requests: write
+
+concurrency:
+  group: pr-labeler-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  label:
+    name: Apply type and area labels
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Label from trusted event metadata and changed paths
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          set -euo pipefail
+          # Only fixed label names are ever sent to the API.
+          managed=(
+            type:feat type:fix type:docs type:style type:refactor
+            type:perf type:test type:chore type:ci type:build type:research
+            area:app area:android area:backend area:ci area:docs
+            area:i18n area:tests area:discovery area:merchants
+            area:messaging area:notifications area:onboarding
+            area:orders area:profile area:shopping area:research
+          )
+          desired=()
+          wants() {
+            local label
+            for label in "${desired[@]}"; do
+              [[ "$label" == "$1" ]] && return 0
+            done
+            return 1
+          }
+          add() { wants "$1" || desired+=("$1"); }
+
+          title_pattern='^([A-Za-z]+)(\([^)]*\))?(!)?:[[:space:]]+'
+          if [[ "$PR_TITLE" =~ $title_pattern ]]; then
+            case "${BASH_REMATCH[1],,}" in
+              feat|fix|docs|style|refactor|perf|test|chore|ci|build|research)
+                add "type:${BASH_REMATCH[1],,}" ;;
+            esac
+          fi
+
+          files="$(gh api --paginate "repos/$GH_REPO/pulls/$PR_NUMBER/files?per_page=100" --jq '.[].filename')"
+          while IFS= read -r path; do
+            [[ -z "$path" ]] && continue
+            [[ "$path" == app/test/* || "$path" == app/integration_test/* ]] && add area:tests
+            case "$path" in
+              .github/workflows/*|.github/scripts/*|.github/dependabot.yml|app/tool/*) add area:ci ;;
+            esac
+            case "$path" in
+              docs/*|README.md|app/README.md|backend/README.md|.github/PULL_REQUEST_TEMPLATE.md) add area:docs ;;
+            esac
+            case "$path" in
+              app/android/*) add area:android ;;
+              backend/*) add area:backend ;;
+              research/*) add area:research ;;
+            esac
+            case "$path" in
+              app/lib/i18n/*|app/l10n.yaml|app/test/i18n/*|app/tool/check_i18n.py|app/tool/test_check_i18n.py|app/tool/i18n_exceptions.json) add area:i18n ;;
+            esac
+            case "$path" in
+              app/lib/app/*|app/lib/shared/*|app/lib/main.dart|app/pubspec.yaml) add area:app ;;
+              app/lib/features/discovery/*|app/test/features/discovery/*) add area:discovery ;;
+              app/lib/features/merchants/*|app/test/features/merchants/*) add area:merchants ;;
+              app/lib/features/messaging/*|app/test/features/messaging/*) add area:messaging ;;
+              app/lib/features/notifications/*|app/test/features/notifications/*) add area:notifications ;;
+              app/lib/features/onboarding/*|app/test/features/onboarding/*) add area:onboarding ;;
+              app/lib/features/orders/*|app/test/features/orders/*) add area:orders ;;
+              app/lib/features/profile/*|app/test/features/profile/*) add area:profile ;;
+              app/lib/features/shopping/*|app/test/features/shopping/*) add area:shopping ;;
+            esac
+          done <<< "$files"
+
+          current="$(gh api --paginate "repos/$GH_REPO/issues/$PR_NUMBER/labels?per_page=100" --jq '.[].name')"
+          for label in "${managed[@]}"; do
+            if grep -Fxq "$label" <<< "$current" && ! wants "$label"; then
+              gh api -X DELETE "repos/$GH_REPO/issues/$PR_NUMBER/labels/$label" >/dev/null
+            fi
+          done
+          for label in "${desired[@]}"; do
+            if grep -Fxq "$label" <<< "$current"; then
+              continue
+            fi
+            if ! gh api "repos/$GH_REPO/labels/$label" >/dev/null 2>&1; then
+              if [[ "$label" == type:* ]]; then
+                color='8250df'
+                description='Automatically classified from the PR title'
+              else
+                color='c5def5'
+                description='Automatically classified from changed paths'
+              fi
+              gh api -X POST "repos/$GH_REPO/labels" \
+                -f "name=$label" -f "color=$color" -f "description=$description" >/dev/null
+            fi
+            gh api -X POST "repos/$GH_REPO/issues/$PR_NUMBER/labels" \
+              -f "labels[]=$label" >/dev/null
+          done
+          printf 'Applied labels: %s\n' "${desired[*]}"
