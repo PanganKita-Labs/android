@@ -7,10 +7,18 @@ on:
   workflow_dispatch:
   pull_request:
     branches: [main]
-    # Validate this test/workflow on its introducing PR without running it on
-    # every ordinary application PR. Weekly runs continue after merge.
+    # Protect Android runtime compatibility on relevant PRs. Keep docs-only
+    # and unrelated tooling changes off the four-emulator matrix.
     paths:
       - '.github/workflows/android-smoke.yml'
+      - '.github/scripts/run_android_smoke.sh'
+      - '.github/scripts/fetch_satoshi.py'
+      - 'app/lib/**'
+      - 'app/android/**'
+      - 'app/assets/**'
+      - 'app/pubspec.yaml'
+      - 'app/pubspec.lock'
+      - 'app/l10n.yaml'
       - 'app/integration_test/**'
 
 concurrency:
