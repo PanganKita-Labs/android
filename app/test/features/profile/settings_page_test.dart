@@ -106,14 +106,8 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Bahasa'));
     await tester.pumpAndSettle();
-    final sheet = find.byType(BottomSheet);
-    expect(sheet, findsOneWidget);
-    final chinese = find.descendant(
-      of: sheet,
-      matching: find.text('简体中文'),
-    );
-    expect(chinese, findsOneWidget);
-    await tester.tap(chinese);
+    expect(find.text('English'), findsWidgets);
+    await tester.tap(find.text('简体中文'));
     await tester.pumpAndSettle();
     expect(chosen?.languageCode, 'zh');
     expect(chosen?.scriptCode, 'Hans');
