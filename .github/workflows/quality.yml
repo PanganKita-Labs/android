@@ -82,8 +82,8 @@ jobs:
           check-unnecessary-nullable
           lib
 
-      - name: Run complexity analysis
-        run: dart run dartrics analyze lib
-
       - name: Run tests with coverage
         run: flutter test --coverage
+
+      - name: Enforce zero Dartrics violations
+        run: dart run dartrics analyze --snapshot none --strict-dismiss --fatal-warnings lib
