@@ -579,6 +579,29 @@ class _SearchFilters extends StatefulWidget {
   State<_SearchFilters> createState() => _SearchFiltersState();
 }
 
+// Empty bounds are unbounded. Whitespace-only and malformed bounds are
+// invalid, matching the original search-filter behavior.
+({int? minimum, int? maximum})? _parseSearchPriceRange(
+  String minimumInput,
+  String maximumInput,
+) {
+  final minimum = int.tryParse(minimumInput.trim());
+  final maximum = int.tryParse(maximumInput.trim());
+  if (!_isValidPriceBound(minimumInput, minimum) ||
+      !_isValidPriceBound(maximumInput, maximum)) {
+    return null;
+  }
+  if (minimum != null && maximum != null && minimum > maximum) {
+    return null;
+  }
+  return (minimum: minimum, maximum: maximum);
+}
+
+bool _isValidPriceBound(String raw, int? parsed) {
+  if (raw.isNotEmpty && parsed == null) return false;
+  return parsed == null || parsed >= 0;
+}
+
 class _SearchFiltersState extends State<_SearchFilters> {
   String _category = 'Semua';
   bool _lowestPriceFirst = false;
@@ -603,20 +626,15 @@ class _SearchFiltersState extends State<_SearchFilters> {
   }
 
   void _apply() {
-    final min = int.tryParse(_minimum.text.trim());
-    final max = int.tryParse(_maximum.text.trim());
-    if ((_minimum.text.isNotEmpty && min == null) ||
-        (_maximum.text.isNotEmpty && max == null) ||
-        (min != null && min < 0) ||
-        (max != null && max < 0) ||
-        (min != null && max != null && min > max)) {
+    final range = _parseSearchPriceRange(_minimum.text, _maximum.text);
+    if (range == null) {
       setState(() => _error = 'Masukkan rentang harga yang valid.');
       return;
     }
     widget.onApply((
       category: _category,
-      minimum: min,
-      maximum: max,
+      minimum: range.minimum,
+      maximum: range.maximum,
       lowestPriceFirst: _lowestPriceFirst,
     ));
   }
