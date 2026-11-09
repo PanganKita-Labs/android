@@ -139,11 +139,7 @@ class _ExampleOrderStatus extends StatelessWidget {
     child: const Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(
-          Icons.shopping_bag_outlined,
-          size: 18,
-          color: _green,
-        ),
+        Icon(Icons.shopping_bag_outlined, size: 18, color: _green),
         SizedBox(width: 6),
         Flexible(child: I18nText('Siap diambil • contoh')),
       ],
