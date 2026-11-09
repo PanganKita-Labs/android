@@ -49,7 +49,9 @@ jobs:
         run: python3 ../.github/scripts/fetch_satoshi.py
 
       - name: Verify formatting
-        run: dart format --output=none --set-exit-if-changed .
+        run: |
+          dart format --output=write .
+          git diff --exit-code -- .
 
       - name: Run strict Flutter analyzer
         run: flutter analyze --fatal-infos --fatal-warnings
