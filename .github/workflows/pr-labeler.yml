@@ -98,40 +98,35 @@ jobs:
             fi
             if ! gh api "repos/$GH_REPO/labels/$label" >/dev/null 2>&1; then
               case "$label" in
-                type:feat) color='0e8a16' ;;
-                type:fix) color='d73a4a' ;;
-                type:docs) color='0075ca' ;;
-                type:refactor) color='8250df' ;;
-                type:test) color='008b8b' ;;
-                type:ci) color='1d76db' ;;
-                type:perf) color='b08800' ;;
-                type:build) color='c27c0e' ;;
-                type:chore) color='6b7280' ;;
-                type:style) color='ad6ad8' ;;
-                type:research) color='c45883' ;;
-                area:android) color='3ddc84' ;;
-                area:app) color='68798f' ;;
-                area:ci) color='1d76db' ;;
-                area:tests) color='008b8b' ;;
-                area:i18n) color='c17c26' ;;
-                area:docs) color='0075ca' ;;
-                area:onboarding) color='9b59b6' ;;
-                area:discovery) color='0e8a16' ;;
-                area:merchants) color='25a18e' ;;
-                area:shopping) color='db6d28' ;;
-                area:orders) color='b35b20' ;;
-                area:profile) color='8066b4' ;;
-                area:messaging) color='2a8dc1' ;;
-                area:notifications) color='c45883' ;;
-                area:backend) color='596b80' ;;
-                area:research) color='8a789d' ;;
+                type:feat) color='0e8a16'; description='New application feature or capability' ;;
+                type:fix) color='d73a4a'; description='Bug fix or behavior correction' ;;
+                type:docs) color='0075ca'; description='Documentation and source-code comments' ;;
+                type:refactor) color='8250df'; description='Internal restructuring without intended behavior changes' ;;
+                type:test) color='008b8b'; description='Automated tests and test infrastructure' ;;
+                type:ci) color='1d76db'; description='Continuous integration and automation changes' ;;
+                type:perf) color='b08800'; description='Performance or resource-efficiency improvement' ;;
+                type:build) color='c27c0e'; description='Build configuration and tooling' ;;
+                type:chore) color='6b7280'; description='Repository maintenance and housekeeping' ;;
+                type:style) color='ad6ad8'; description='Formatting or visual style changes' ;;
+                type:research) color='c45883'; description='Research and experimental validation' ;;
+                area:android) color='3ddc84'; description='Android platform configuration and integration' ;;
+                area:app) color='68798f'; description='Application composition, shared UI, and app-wide state' ;;
+                area:ci) color='1d76db'; description='GitHub Actions, automation, and developer tooling' ;;
+                area:tests) color='008b8b'; description='Unit, widget, and integration tests' ;;
+                area:i18n) color='c17c26'; description='Localization, translations, and language support' ;;
+                area:docs) color='0075ca'; description='Project documentation and contribution guidance' ;;
+                area:onboarding) color='9b59b6'; description='Welcome, authentication UI, and account recovery' ;;
+                area:discovery) color='0e8a16'; description='Food discovery, search, and product presentation' ;;
+                area:merchants) color='25a18e'; description='Merchant profiles, maps, and store information' ;;
+                area:shopping) color='db6d28'; description='Cart, checkout, and payment preview flows' ;;
+                area:orders) color='b35b20'; description='Order previews, pickup, and review flows' ;;
+                area:profile) color='8066b4'; description='User profile, settings, and favorites' ;;
+                area:messaging) color='2a8dc1'; description='Chat, conversations, and support UI' ;;
+                area:notifications) color='c45883'; description='Notifications and notification interactions' ;;
+                area:backend) color='596b80'; description='Backend and server-related files' ;;
+                area:research) color='8a789d'; description='Research documents and experimental materials' ;;
                 *) echo "Unknown managed label: $label" >&2; exit 1 ;;
               esac
-              if [[ "$label" == type:* ]]; then
-                description='Automatically classified from the PR title'
-              else
-                description='Automatically classified from changed paths'
-              fi
               gh api -X POST "repos/$GH_REPO/labels" \
                 -f "name=$label" -f "color=$color" -f "description=$description" >/dev/null
             fi
