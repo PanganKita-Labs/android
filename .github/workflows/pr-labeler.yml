@@ -97,11 +97,39 @@ jobs:
               continue
             fi
             if ! gh api "repos/$GH_REPO/labels/$label" >/dev/null 2>&1; then
+              case "$label" in
+                type:feat) color='0e8a16' ;;
+                type:fix) color='d73a4a' ;;
+                type:docs) color='0075ca' ;;
+                type:refactor) color='8250df' ;;
+                type:test) color='008b8b' ;;
+                type:ci) color='1d76db' ;;
+                type:perf) color='b08800' ;;
+                type:build) color='c27c0e' ;;
+                type:chore) color='6b7280' ;;
+                type:style) color='ad6ad8' ;;
+                type:research) color='c45883' ;;
+                area:android) color='3ddc84' ;;
+                area:app) color='68798f' ;;
+                area:ci) color='1d76db' ;;
+                area:tests) color='008b8b' ;;
+                area:i18n) color='c17c26' ;;
+                area:docs) color='0075ca' ;;
+                area:onboarding) color='9b59b6' ;;
+                area:discovery) color='0e8a16' ;;
+                area:merchants) color='25a18e' ;;
+                area:shopping) color='db6d28' ;;
+                area:orders) color='b35b20' ;;
+                area:profile) color='8066b4' ;;
+                area:messaging) color='2a8dc1' ;;
+                area:notifications) color='c45883' ;;
+                area:backend) color='596b80' ;;
+                area:research) color='8a789d' ;;
+                *) echo "Unknown managed label: $label" >&2; exit 1 ;;
+              esac
               if [[ "$label" == type:* ]]; then
-                color='8250df'
                 description='Automatically classified from the PR title'
               else
-                color='c5def5'
                 description='Automatically classified from changed paths'
               fi
               gh api -X POST "repos/$GH_REPO/labels" \
