@@ -63,7 +63,7 @@ jobs:
               .github/workflows/*|.github/scripts/*|.github/dependabot.yml|app/tool/*) add area:ci ;;
             esac
             case "$path" in
-              docs/*|README.md|app/README.md|backend/README.md|docs/README.md|.github/PULL_REQUEST_TEMPLATE.md) add area:docs ;;
+              docs/*|README.md|app/README.md|backend/README.md|.github/PULL_REQUEST_TEMPLATE.md) add area:docs ;;
             esac
             case "$path" in
               app/android/*) add area:android ;;
@@ -71,7 +71,7 @@ jobs:
               research/*) add area:research ;;
             esac
             case "$path" in
-              app/lib/i18n/*|app/lib/i18n/arb/*|app/l10n.yaml|app/test/i18n/*|app/tool/check_i18n.py|app/tool/test_check_i18n.py|app/tool/i18n_exceptions.json) add area:i18n ;;
+              app/lib/i18n/*|app/l10n.yaml|app/test/i18n/*|app/tool/check_i18n.py|app/tool/test_check_i18n.py|app/tool/i18n_exceptions.json) add area:i18n ;;
             esac
             case "$path" in
               app/lib/app/*|app/lib/shared/*|app/lib/main.dart|app/pubspec.yaml) add area:app ;;
