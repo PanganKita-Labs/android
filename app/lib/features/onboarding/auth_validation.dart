@@ -2,11 +2,12 @@ const _minimumPasswordLength = 8;
 
 /// Validation shared by the local sign-in, registration and recovery forms.
 abstract final class AuthValidation {
-  /// Requires a nonblank form value.
+  /// Returns an error for null or whitespace-only input; otherwise null.
   static String? requiredValue(String? value) =>
       value == null || value.trim().isEmpty ? 'Kolom wajib diisi.' : null;
 
-  /// Checks the format only; no email is sent.
+  /// Validates a local email shape without checking account ownership.
+  /// Returns null for accepted input; no email or verification is sent.
   static String? email(String? value) {
     final required = requiredValue(value);
     if (required != null) return required;
@@ -16,7 +17,8 @@ abstract final class AuthValidation {
         : 'Masukkan format email yang valid.';
   }
 
-  /// Mirrors the reference's registration password requirements.
+  /// Requires eight or more characters including a letter and a digit.
+  /// Returns null when valid; does not authenticate or store a password.
   static String? password(String? value) {
     if (value == null ||
         value.length < _minimumPasswordLength ||

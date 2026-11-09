@@ -1,4 +1,7 @@
-/// Routes for the local HTML reference conversion.
+/// Named navigation paths for the local Flutter demonstration.
+///
+/// Product and merchant paths are registered for known fixture IDs.
+/// They are not external deep links or server endpoints.
 abstract final class AppRoutes {
   /// Initial brand screen.
   static const splash = '/';
@@ -36,16 +39,19 @@ abstract final class AppRoutes {
   /// Read-only pickup checkout simulation.
   static const checkout = '/checkout';
 
-  /// Local order-screen preview; no order is created by checkout.
+  /// Local order preview. Pass an [OrdersTab] to select a tab;
+  /// missing or invalid route arguments default to active orders.
   static const orders = '/orders';
 
-  /// Detail of an illustrative order; no reservation exists.
+  /// Example order detail. Expects a DemoFood route argument;
+  /// other arguments display an unavailable-example fallback.
   static const orderDetail = '/orders/detail';
 
   /// Display-only chat list; no messages are exchanged.
   static const chat = '/chat';
 
-  /// Local merchant conversation preview; messages are not delivered.
+  /// Merchant chat preview; accepts a record with a DemoFood and
+  /// an optional message. Other arguments show a fallback screen.
   static const merchantChat = '/chat/merchant';
 
   /// Display-only notification examples; no push service is connected.
@@ -60,10 +66,12 @@ abstract final class AppRoutes {
   /// Illustrative unsuccessful-payment layout; no attempt is recorded.
   static const paymentFailedPreview = '/checkout/failed-preview';
 
-  /// Illustrative completed pickup; no pickup is recorded.
+  /// Pickup preview; expects a record with DemoFood and int quantity.
+  /// No pickup is recorded, and invalid arguments show a fallback.
   static const pickup = '/orders/pickup';
 
-  /// Local review form preview; no review is submitted.
+  /// Review preview; expects a record with DemoFood and int quantity.
+  /// No review is submitted, and invalid arguments show a fallback.
   static const review = '/orders/review';
 
   /// Local food examples.
@@ -75,7 +83,7 @@ abstract final class AppRoutes {
   /// Local edit-form preview; changes are not saved to an account.
   static const editProfile = '/profile/edit';
 
-  /// Local settings preview without persistence.
+  /// Local settings preview. Only the UI language preference persists.
   static const settings = '/profile/settings';
 
   /// Status of the unpublished terms document in this local prototype.
@@ -109,7 +117,9 @@ abstract final class AppRoutes {
   static String store(String id) => '/stores/$id';
 }
 
-/// Destination tab for the existing named Orders route.
+/// Typed argument for [AppRoutes.orders] to choose an orders tab.
+///
+/// An absent or unrecognized route argument opens the active tab.
 enum OrdersTab {
   /// Show active-order examples.
   active,

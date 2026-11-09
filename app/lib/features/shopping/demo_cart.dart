@@ -4,11 +4,12 @@ import 'package:pangankita/shared/models/demo_food.dart';
 
 /// App-session cart for UI demonstrations; no persistence or stock mutations.
 class DemoCart extends ChangeNotifier {
-  /// Explicit preview limit, not an assertion about merchant inventory.
+  /// Maximum quantity per configured cart line, not the cart-wide total.
+  /// This is a demo UI bound, not a merchant inventory limit.
   static const quantityLimit = 10;
   final _lines = <String, DemoCartLine>{};
 
-  /// Read-only current cart snapshot.
+  /// Unmodifiable snapshot of cart lines, not a writable cart view.
   List<DemoCartLine> get lines => List.unmodifiable(_lines.values);
 
   /// Number of configured items, including quantities.
@@ -18,7 +19,11 @@ class DemoCart extends ChangeNotifier {
   /// Whole-rupiah preview total; the demo service fee is zero.
   int get subtotal => _lines.values.fold(0, (sum, line) => sum + line.total);
 
-  /// Adds or combines a configuration; returns false at the preview limit.
+  /// Adds an item or combines it with an identically configured line.
+  ///
+  /// Add-on order is normalized before the line ID is calculated.
+  /// Returns false without changing state if that line would exceed
+  /// [quantityLimit]. Throws [RangeError] for an invalid [quantity].
   bool add(
     DemoFood food, {
     int quantity = 1,
@@ -44,7 +49,10 @@ class DemoCart extends ChangeNotifier {
     return true;
   }
 
-  /// Changes only a known line within the documented preview bounds.
+  /// Replaces the quantity of the existing line identified by [id].
+  ///
+  /// An unknown [id] is a no-op, but [quantity] is still validated.
+  /// Throws [RangeError] for quantities outside 1 to [quantityLimit].
   void setQuantity(String id, int quantity) {
     _checkQuantity(quantity);
     final line = _lines[id];
@@ -91,7 +99,8 @@ class DemoCartLine {
   /// The cart stores these as an unmodifiable list.
   final List<DemoAddon> addons;
 
-  /// Identity includes options to keep different configurations separate.
+  /// Combines the food ID and selected add-ons into a line identity.
+  /// [DemoCart.add] normalizes add-on order for canonical IDs.
   String get id => '${food.id}/${addons.map((addon) => addon.name).join(',')}';
 
   /// Whole-rupiah amount for one configured item.

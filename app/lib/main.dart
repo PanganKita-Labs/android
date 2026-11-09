@@ -4,6 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:pangankita/app/pangan_kita_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Restores the UI locale, registers font licenses, and starts the demo.
+///
+/// Indonesian is used for absent, unknown, or unreadable preferences.
+/// Cart contents and the selected example area are not restored.
 Future<void> main() async {
   final _ = WidgetsFlutterBinding.ensureInitialized();
 
