@@ -156,9 +156,7 @@ class _FailedOrderLine extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     children: [
       ClipRRect(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(_productRadius),
-        ),
+        borderRadius: const BorderRadius.all(Radius.circular(_productRadius)),
         child: SizedBox.square(
           dimension: _productSize,
           child: Image.asset(line.food.image, fit: BoxFit.cover),
@@ -175,9 +173,7 @@ class _FailedOrderLine extends StatelessWidget {
             ),
             I18nText(line.food.merchant),
             const SizedBox(height: 4),
-            I18nText(
-              '${line.quantity} x ${formatRupiah(line.unitPrice)}',
-            ),
+            I18nText('${line.quantity} x ${formatRupiah(line.unitPrice)}'),
           ],
         ),
       ),
@@ -195,10 +191,7 @@ class _FailedDetails extends StatelessWidget {
     children: [
       SizedBox(
         width: _methodWidth,
-        child: _CardDetail(
-          label: 'Metode pembayaran',
-          value: 'QRIS contoh',
-        ),
+        child: _CardDetail(label: 'Metode pembayaran', value: 'QRIS contoh'),
       ),
       SizedBox(
         width: _statusWidth,
@@ -210,15 +203,10 @@ class _FailedDetails extends StatelessWidget {
             DecoratedBox(
               decoration: BoxDecoration(
                 color: Color(0xFFFCE8E5),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(_badgeRadius),
-                ),
+                borderRadius: BorderRadius.all(Radius.circular(_badgeRadius)),
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: I18nText('Belum tersedia'),
               ),
             ),
