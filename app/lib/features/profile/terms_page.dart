@@ -60,6 +60,7 @@ class TermsPage extends StatelessWidget {
   );
 }
 
+/// Explains that official legal terms have not been published.
 class _OfficialTermsNotice extends StatelessWidget {
   const new();
 
@@ -77,6 +78,7 @@ class _OfficialTermsNotice extends StatelessWidget {
   );
 }
 
+/// Displays a labeled section of reference-only terms content.
 class _TermsSection extends StatelessWidget {
   const new({required this.title, required this.description});
 

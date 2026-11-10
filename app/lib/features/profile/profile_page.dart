@@ -28,6 +28,7 @@ class ProfilePage extends StatelessWidget {
   /// Reports a confirmed area to the app-session owner.
   final ValueChanged<String> onLocationChanged;
 
+/// Opens the example-area selector and reports its selected value.
   Future<void> _chooseLocation(BuildContext context) async {
     final selected = await Navigator.pushNamed(
       context,
@@ -72,6 +73,7 @@ class ProfilePage extends StatelessWidget {
   );
 }
 
+/// Shows profile navigation, title, and settings shortcut.
 class _ProfileHeader extends StatelessWidget {
   const new();
 
@@ -101,6 +103,7 @@ class _ProfileHeader extends StatelessWidget {
   );
 }
 
+/// Displays static demonstration identity and edit navigation.
 class _ProfileIdentity extends StatelessWidget {
   const new();
 
@@ -140,6 +143,7 @@ class _ProfileIdentity extends StatelessWidget {
   );
 }
 
+/// Shows illustrative food-rescue appreciation, not impact metrics.
 class _ProfileImpactNotice extends StatelessWidget {
   const new();
 
@@ -169,6 +173,7 @@ class _ProfileImpactNotice extends StatelessWidget {
   );
 }
 
+/// Connects profile menu actions to existing demo routes.
 class _ProfileNavigation extends StatelessWidget {
   const new({required this.onChooseLocation});
 
@@ -202,6 +207,7 @@ class _ProfileNavigation extends StatelessWidget {
   );
 }
 
+/// Describes one profile menu icon, label, and action.
 class _ProfileItem {
   const new(this.icon, this.label, this.onTap, {this.color});
 
@@ -211,6 +217,7 @@ class _ProfileItem {
   final Color? color;
 }
 
+/// Renders the ordered menu entries for the local profile.
 class _ProfileMenu extends StatelessWidget {
   const new({required this.items});
 
