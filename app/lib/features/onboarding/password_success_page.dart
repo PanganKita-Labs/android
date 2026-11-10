@@ -6,6 +6,8 @@ import 'package:pangankita/i18n/i18n.dart';
 const _successTopFraction = .19;
 
 /// Confirmation for the simulated password recovery flow.
+///
+/// No password is updated or stored; the action returns to demo login.
 class PasswordSuccessPage extends StatelessWidget {
   /// Creates the confirmation screen.
   const new({super.key});

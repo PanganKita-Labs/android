@@ -30,7 +30,9 @@ abstract final class AppRoutes {
   /// Demo recovery confirmation.
   static const success = '/success';
 
-  /// Details for one local example; not a public deep link.
+  /// Path for the known product fixture [id], not a public deep link.
+  ///
+  /// The caller must use an ID registered by the root application.
   static String product(String id) => '/products/$id';
 
   /// Session-only shopping preview.
@@ -110,10 +112,14 @@ abstract final class AppRoutes {
   /// Illustrative map of local merchant examples.
   static const nearbyMap = '/stores/map';
 
-  /// Illustrative directions to one example merchant.
+  /// Path to illustrative directions for a registered merchant [id].
+  ///
+  /// Returns a string; no map route or GPS coordinates are calculated.
   static String directions(String id) => '/stores/$id/directions';
 
-  /// Detail for one illustrative merchant; no live store data.
+  /// Path to the local merchant detail preview for a fixture [id].
+  ///
+  /// Returns a string and does not retrieve merchant data.
   static String store(String id) => '/stores/$id';
 }
 

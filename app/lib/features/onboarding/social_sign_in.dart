@@ -9,7 +9,9 @@ const _facebookIconHeight = 30.0;
 const _socialBorder = Color(0xFFDADBD9);
 const _dividerColor = Color(0xFFE4E8EB);
 
-/// Provider buttons using the actual artwork from the supplied reference.
+/// Shows provider-branded placeholders using reference artwork.
+///
+/// These buttons display a notice; they do not authenticate users.
 class SocialSignIn extends StatelessWidget {
   /// Creates the social sign-in group.
   const new({required this.register, super.key});
@@ -60,6 +62,7 @@ class SocialSignIn extends StatelessWidget {
   );
 }
 
+/// Separates the local credential form from illustrative provider buttons.
 class _SocialDivider extends StatelessWidget {
   const new({required this.register});
   final bool register;

@@ -59,6 +59,7 @@ class WelcomePage extends StatelessWidget {
   );
 }
 
+/// Displays introduction text alongside the static welcome illustration.
 class _WelcomeCopy extends StatelessWidget {
   const new();
 
@@ -91,6 +92,7 @@ class _WelcomeCopy extends StatelessWidget {
   );
 }
 
+/// Opens local registration and login demonstration routes.
 class _WelcomeActions extends StatelessWidget {
   const new();
 
