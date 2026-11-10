@@ -18,13 +18,19 @@ const _categoryFontSize = 9.0;
 const _nearbySectionGap = 12.0;
 const _referenceCategoryCount = '18';
 
+/// Default callback which validates an area without saving it.
+///
+/// Throws [ArgumentError] if [area] is empty; other values are ignored.
 void _ignoreAreaChange(String area) {
   if (area.isEmpty) throw ArgumentError.value(area, 'area');
 }
 
 /// Searchable local reference feed with category filtering.
 class HomePage extends StatefulWidget {
-  /// Creates the demo feed.
+  /// Creates a fixture feed starting at [initialLocation].
+  ///
+  /// [onLocationChanged] runs after the area picker returns a string while
+  /// this widget is mounted. Its default callback does not persist changes.
   const new({
     this.initialLocation = 'Mandala by Pass, Medan',
     this.onLocationChanged = _ignoreAreaChange,
@@ -63,8 +69,10 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  /// Opens the example-area selector and reports a selected area only while
-  /// mounted.
+  /// Opens the local picker and awaits the selected area.
+  ///
+  /// Only a [String] result received while mounted updates local state
+  /// and invokes [HomePage.onLocationChanged].
   Future<void> _chooseLocation() async {
     final selected = await Navigator.pushNamed(
       context,

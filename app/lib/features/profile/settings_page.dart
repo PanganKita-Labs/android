@@ -12,7 +12,10 @@ const _largeTextScale = 1.5;
 
 /// Account-settings preview with local, non-persistent switches.
 class SettingsPage extends StatelessWidget {
-  /// Creates the settings reference page without account integration.
+  /// Creates a settings preview with an optional [onLocaleChanged] callback.
+  ///
+  /// Without a supplied callback, choosing a language does not update
+  /// the root locale or persist a device preference.
   const new({this.onLocaleChanged = _ignoreLocaleChange, super.key});
 
   /// Called when the user selects a supported UI language.
@@ -23,8 +26,10 @@ class SettingsPage extends StatelessWidget {
     return;
   }
 
-  /// Shows available UI languages and forwards the chosen locale to the app
-  /// owner.
+  /// Offers Indonesian, English, and Simplified Chinese in a sheet.
+  ///
+  /// Invokes [onLocaleChanged] only when a locale is selected. Dismissing
+  /// the sheet without selection does not notify the app owner.
   Future<void> _chooseLanguage(BuildContext context) async {
     final selected = await showModalBottomSheet<Locale>(
       context: context,

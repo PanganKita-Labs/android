@@ -24,7 +24,9 @@ const _recommendationImageSize = 48.0;
 
 /// Search and filter preview over local listing examples.
 class SearchPage extends StatefulWidget {
-  /// Starts with the query submitted from Home.
+  /// Initializes a fixture search with [initialQuery].
+  ///
+  /// Leading and trailing whitespace is removed at screen initialization.
   const new({this.initialQuery = '', super.key});
 
   /// Initial local query; no remote search is performed.
@@ -34,9 +36,11 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
-/// Owns local search text, filter criteria, and temporary favorites.
+/// Owns local search text, filters, and temporary favorites.
 ///
-/// Results are computed from [DemoFood] fixtures, without a remote search.
+/// Creates and disposes its text controller and search focus node.
+/// Results are derived from [DemoFood] fixtures, without remote search;
+/// favorites and filters are discarded when this state is removed.
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _controller = TextEditingController();
   final _favorites = <String>{};
@@ -61,8 +65,7 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
-  /// Returns fixture results matching the active query, category, and price
-  /// range.
+  /// Returns fixture results matching the active query and price filters.
   ///
   /// The optional sort only reorders the in-memory list.
   List<DemoFood> get _results {
@@ -104,7 +107,10 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  /// Applies validated filter values and dismisses the filter sheet.
+  /// Applies the validated [filters] record to page-local search state.
+  ///
+  /// Nullable price bounds are inclusive; the sorting flag affects only
+  /// local ordering. The filter sheet is then dismissed without persistence.
   void _applyFilters(
     ({String category, int? minimum, int? maximum, bool lowestPriceFirst})
     filters,

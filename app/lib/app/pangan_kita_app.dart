@@ -74,8 +74,11 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     _locale = widget.initialLocale;
   }
 
-  /// Updates visible language immediately, then attempts persistence.
-  /// If storage fails, the current session keeps its selected locale.
+  /// Applies [locale] immediately, then attempts device persistence.
+  ///
+  /// Simplified Chinese is stored as `zh_Hans`; other choices use their
+  /// language code. A storage [Exception] is logged rather than propagated,
+  /// and the newly selected locale stays active for this session.
   Future<void> _setLocale(Locale locale) async {
     if (_locale == locale) return;
     setState(() => _locale = locale);
@@ -143,8 +146,10 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     AppRoutes.nearbyMap: (context) => const NearbyMapPage(),
   };
 
-  /// Validates order arguments and provides a fallback for unsupported
-  /// examples.
+  /// Resolves example order routes from their supplied arguments.
+  ///
+  /// The detail route accepts a [DemoFood] argument. Other argument types
+  /// display an unavailable-example message rather than an order detail.
   Map<String, WidgetBuilder> get _ordersRoutes => {
     AppRoutes.orders: (context) {
       final tab = ModalRoute.of(context)?.settings.arguments;

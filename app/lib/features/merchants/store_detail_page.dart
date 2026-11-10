@@ -27,7 +27,10 @@ String _storeCategory(DemoFood food) =>
 
 /// Store preview based on the shopping design, using sample merchant data.
 class StoreDetailPage extends StatefulWidget {
-  /// Receives one sample merchant and the app-session cart.
+  /// Displays the fixture merchant identified by [food].
+  ///
+  /// [cart] belongs to the app session, so this widget does not dispose it.
+  /// Adding a product changes local cart state, not merchant inventory.
   const new({required this.food, required this.cart, super.key});
 
   /// Product used to identify the sample merchant.
@@ -47,8 +50,10 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
   bool _favorite = false;
   int _tab = 0;
 
-  /// Adds one illustrative store item to the session cart, subject to its
-  /// limit.
+  /// Attempts to add [food] to the session cart and reports the outcome.
+  ///
+  /// A successful addition notifies the cart's listeners. When its
+  /// quantity limit is reached, feedback appears without modifying the cart.
   void _add(DemoFood food) {
     final added = widget.cart.add(food);
     final notice = ScaffoldMessenger.of(context).showSnackBar(
@@ -63,7 +68,9 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
     unawaited(notice.closed);
   }
 
-  /// Copies the example merchant information for sharing.
+  /// Requests copying the fixture merchant name to the clipboard.
+  ///
+  /// Copy completion is not awaited before a local notice appears.
   void _copyMerchant() {
     unawaited(Clipboard.setData(ClipboardData(text: widget.food.merchant)));
     final notice = ScaffoldMessenger.of(context).showSnackBar(
