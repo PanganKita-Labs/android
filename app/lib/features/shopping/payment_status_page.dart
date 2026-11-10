@@ -34,29 +34,7 @@ class PaymentStatusPage extends StatelessWidget {
         leading: const BackButton(),
         title: const I18nText('Pembayaran'),
         actions: [
-          IconButton(
-            tooltip: translateDisplayText(
-              context,
-              'Tentang pratinjau pembayaran',
-            ),
-            onPressed: () => showDialog<void>(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: const I18nText('Pembayaran belum tersedia'),
-                content: const I18nText(
-                  'Layar ini hanya contoh. Tidak ada kode QR, tagihan, '
-                  'transaksi, atau pesanan yang dibuat.',
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const I18nText('Tutup'),
-                  ),
-                ],
-              ),
-            ),
-            icon: const Icon(Icons.help_outline),
-          ),
+          const _PaymentHelpButton(),
         ],
       ),
       body: SafeArea(
@@ -83,6 +61,108 @@ class PaymentStatusPage extends StatelessWidget {
       ),
       bottomNavigationBar: cart.lines.isEmpty ? null : const _PaymentActions(),
     ),
+  );
+}
+
+class _PaymentHelpButton extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => IconButton(
+    tooltip: translateDisplayText(context, 'Tentang pratinjau pembayaran'),
+    onPressed: () => showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const I18nText('Pembayaran belum tersedia'),
+        content: const I18nText(
+          'Layar ini hanya contoh. Tidak ada kode QR, tagihan, '
+          'transaksi, atau pesanan yang dibuat.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const I18nText('Tutup'),
+          ),
+        ],
+      ),
+    ),
+    icon: const Icon(Icons.help_outline),
+  );
+}
+
+class _PaymentTimeNotice extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const DecoratedBox(
+    decoration: BoxDecoration(
+      color: _orangePale,
+      borderRadius: BorderRadius.all(Radius.circular(12)),
+    ),
+    child: SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Column(
+          children: [
+            I18nText('Batas waktu pembayaran'),
+            I18nText(
+              'Belum tersedia',
+              style: TextStyle(
+                fontFamily: PanganKitaTheme.emphasisFontFamily,
+                fontWeight: FontWeight.w700,
+                fontSize: 22,
+                color: _orange,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+class _PaymentTotalRow extends StatelessWidget {
+  const new({required this.cart});
+
+  final DemoCart cart;
+
+  @override
+  Widget build(BuildContext context) => Wrap(
+    alignment: WrapAlignment.spaceBetween,
+    spacing: _pageGap,
+    runSpacing: _wrapRunGap,
+    children: [
+      const I18nText('Total pembayaran'),
+      I18nText(
+        formatRupiah(cart.subtotal),
+        style: Theme.of(context).textTheme.titleLarge
+            ?.copyWith(color: PanganKitaColors.brandPrimary),
+      ),
+    ],
+  );
+}
+
+class _PaymentMethodRow extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Wrap(
+    alignment: WrapAlignment.center,
+    spacing: _pageGap,
+    runSpacing: _wrapRunGap,
+    children: [
+      const I18nText('Metode pembayaran'),
+      Image.asset(
+        'assets/prototype/qris-logo-black.png',
+        width: _qrisLogoWidth,
+        height: _qrisLogoHeight,
+        semanticLabel: translateDisplayText(
+          context,
+          'Logo QRIS, metode pembayaran contoh',
+        ),
+      ),
+    ],
   );
 }
 
@@ -121,32 +201,7 @@ class _PaymentNotice extends StatelessWidget {
               ),
             ],
           ),
-          const DecoratedBox(
-            decoration: BoxDecoration(
-              color: _orangePale,
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-            ),
-            child: SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Column(
-                  children: [
-                    I18nText('Batas waktu pembayaran'),
-                    I18nText(
-                      'Belum tersedia',
-                      style: TextStyle(
-                        fontFamily: PanganKitaTheme.emphasisFontFamily,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 22,
-                        color: _orange,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          const _PaymentTimeNotice(),
         ],
       ),
     ),
@@ -169,37 +224,9 @@ class _PaymentPreviewCard extends StatelessWidget {
         children: [
           _PaymentMerchant(cart: cart),
           const Divider(height: 1),
-          Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            spacing: _pageGap,
-            runSpacing: _wrapRunGap,
-            children: [
-              const I18nText('Total pembayaran'),
-              I18nText(
-                formatRupiah(cart.subtotal),
-                style: Theme.of(context).textTheme.titleLarge
-                    ?.copyWith(color: PanganKitaColors.brandPrimary),
-              ),
-            ],
-          ),
+          _PaymentTotalRow(cart: cart),
           const Center(child: _UnavailableQr()),
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: _pageGap,
-            runSpacing: _wrapRunGap,
-            children: [
-              const I18nText('Metode pembayaran'),
-              Image.asset(
-                'assets/prototype/qris-logo-black.png',
-                width: _qrisLogoWidth,
-                height: _qrisLogoHeight,
-                semanticLabel: translateDisplayText(
-                  context,
-                  'Logo QRIS, metode pembayaran contoh',
-                ),
-              ),
-            ],
-          ),
+          const _PaymentMethodRow(),
           OutlinedButton.icon(
             onPressed: null,
             icon: const Icon(Icons.download_outlined),
