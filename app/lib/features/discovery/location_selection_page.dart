@@ -30,7 +30,10 @@ const _mainRoadEnd = .57;
 
 /// Local preview of the location selection design; no GPS or map service runs.
 class LocationSelectionPage extends StatefulWidget {
-  /// Creates the area selector.
+  /// Creates an offline area picker initialized with [initialArea].
+  ///
+  /// The default area is `Mandala by Pass, Medan`. Confirmation returns the
+  /// selected string through [Navigator.pop]; canceling returns no area.
   const new({this.initialArea = 'Mandala by Pass, Medan', super.key});
 
   /// Example area currently selected in this app session.
@@ -42,7 +45,9 @@ class LocationSelectionPage extends StatefulWidget {
 
 /// Owns the current area query and selection until confirmation.
 ///
-/// Selection uses supplied area examples, not device GPS or reverse geocoding.
+/// Creates and disposes its local search controller. Confirmation returns
+/// the selected area to the caller; searching does not request GPS, remote
+/// places, or reverse geocoding.
 class _LocationSelectionPageState extends State<LocationSelectionPage> {
   final _search = TextEditingController();
   String _selected = _sampleAreas.first.name;

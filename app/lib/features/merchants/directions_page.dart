@@ -21,7 +21,10 @@ const _sheetHeightFraction = .42;
 
 /// Directions preview. It does not use GPS, routing, or live travel times.
 class DirectionsPage extends StatefulWidget {
-  /// Creates directions for an illustrative merchant.
+  /// Displays a fixed route illustration for the example [food].
+  ///
+  /// The merchant is the displayed destination; the route geometry and
+  /// travel-mode choices do not use device GPS or calculate an ETA.
   const new({required this.food, super.key});
 
   /// Local example shown as the destination.
@@ -37,7 +40,10 @@ class DirectionsPage extends StatefulWidget {
 class _DirectionsPageState extends State<DirectionsPage> {
   int _mode = 0;
 
-  /// Returns to the existing map route, avoiding an extra directions screen.
+  /// Returns to the map using the current navigator, if possible.
+  ///
+  /// Pops when a previous route exists; otherwise replaces this page with
+  /// the map preview. Neither path starts a navigation service.
   void _backToMap() {
     final navigator = Navigator.of(context);
     if (navigator.canPop()) {
