@@ -63,7 +63,8 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  /// Opens the example-area selector and reports a selected area only while mounted.
+  /// Opens the example-area selector and reports a selected area only while
+  /// mounted.
   Future<void> _chooseLocation() async {
     final selected = await Navigator.pushNamed(
       context,

@@ -143,7 +143,8 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     AppRoutes.nearbyMap: (context) => const NearbyMapPage(),
   };
 
-  /// Validates order arguments and provides a fallback for unsupported examples.
+  /// Validates order arguments and provides a fallback for unsupported
+  /// examples.
   Map<String, WidgetBuilder> get _ordersRoutes => {
     AppRoutes.orders: (context) {
       final tab = ModalRoute.of(context)?.settings.arguments;

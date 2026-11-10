@@ -47,7 +47,8 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
   bool _favorite = false;
   int _tab = 0;
 
-  /// Adds one illustrative store item to the session cart, subject to its limit.
+  /// Adds one illustrative store item to the session cart, subject to its
+  /// limit.
   void _add(DemoFood food) {
     final added = widget.cart.add(food);
     final notice = ScaffoldMessenger.of(context).showSnackBar(

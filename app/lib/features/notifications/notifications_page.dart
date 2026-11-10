@@ -148,7 +148,8 @@ class _NotificationGroup extends StatelessWidget {
   final Set<int> read;
   final ValueChanged<int> onOpened;
 
-  /// Marks a fixture notification as read before opening its example destination.
+  /// Marks a fixture notification as read before opening its example
+  /// destination.
   void _openNotice(BuildContext context, _Notice notice) {
     onOpened(notice.id);
     if (notice.order) {

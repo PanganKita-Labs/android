@@ -61,7 +61,8 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
-  /// Returns fixture results matching the active query, category, and price range.
+  /// Returns fixture results matching the active query, category, and price
+  /// range.
   ///
   /// The optional sort only reorders the in-memory list.
   List<DemoFood> get _results {

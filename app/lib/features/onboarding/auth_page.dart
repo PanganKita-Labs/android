@@ -200,7 +200,8 @@ class _AuthFormState extends State<_AuthForm> {
     super.dispose();
   }
 
-  /// Returns a validation message when the confirmation differs from its password.
+  /// Returns a validation message when the confirmation differs from its
+  /// password.
   String? _confirmation(String? value) =>
       value != _password.text || value == null || value.isEmpty
       ? 'Konfirmasi password tidak cocok.'
