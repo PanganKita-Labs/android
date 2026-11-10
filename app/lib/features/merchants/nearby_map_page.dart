@@ -193,11 +193,7 @@ class _MapStoreRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: [
-      const Icon(
-        Icons.star,
-        size: 17,
-        color: PanganKitaColors.brandAccent,
-      ),
+      const Icon(Icons.star, size: 17, color: PanganKitaColors.brandAccent),
       Expanded(
         child: I18nText('${food.rating.split(' ').first} · contoh rating'),
       ),
@@ -577,31 +573,31 @@ class _StreetPainter extends CustomPainter {
   }
 
   void _drawBlocks(Canvas canvas, Size size) {
-      final block = Paint()..color = const Color(0xFFECE8E1);
-      final parcel = Paint()..color = const Color(0xFFF4F0E9);
-      for (var x = -_streetStep; x < size.width; x += _streetStep) {
-        for (var y = -_streetStep; y < size.height; y += _streetStep) {
-          canvas
-            ..drawRect(
-              Rect.fromLTWH(
-                x + _blockInset,
-                y + _blockInset,
-                _streetStep - _blockInset,
-                _streetStep - _blockInset * 2,
-              ),
-              block,
-            )
-            ..drawRect(
-              Rect.fromLTWH(
-                x + _parcelInset,
-                y + _parcelInset,
-                _parcelWidth,
-                _parcelHeight,
-              ),
-              parcel,
-            );
-        }
+    final block = Paint()..color = const Color(0xFFECE8E1);
+    final parcel = Paint()..color = const Color(0xFFF4F0E9);
+    for (var x = -_streetStep; x < size.width; x += _streetStep) {
+      for (var y = -_streetStep; y < size.height; y += _streetStep) {
+        canvas
+          ..drawRect(
+            Rect.fromLTWH(
+              x + _blockInset,
+              y + _blockInset,
+              _streetStep - _blockInset,
+              _streetStep - _blockInset * 2,
+            ),
+            block,
+          )
+          ..drawRect(
+            Rect.fromLTWH(
+              x + _parcelInset,
+              y + _parcelInset,
+              _parcelWidth,
+              _parcelHeight,
+            ),
+            parcel,
+          );
       }
+    }
   }
 
   @override

@@ -256,10 +256,7 @@ class _StoreBanner extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(14)),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 9,
-              vertical: 5,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
             child: I18nText(
               '${food.saving} · contoh',
               style: const TextStyle(color: Colors.white),
@@ -290,9 +287,7 @@ class _StoreIdentity extends StatelessWidget {
             : I18nText(
                 food.merchant.substring(0, 1),
                 style: Theme.of(context).textTheme.titleMedium
-                    ?.copyWith(
-                      color: PanganKitaColors.brandPrimaryStrong,
-                    ),
+                    ?.copyWith(color: PanganKitaColors.brandPrimaryStrong),
               ),
       ),
       const SizedBox(width: 10),
@@ -304,9 +299,7 @@ class _StoreIdentity extends StatelessWidget {
               food.merchant,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            I18nText(
-              food.id == 'buns' ? 'Roti & Pastry' : food.category,
-            ),
+            I18nText(food.id == 'buns' ? 'Roti & Pastry' : food.category),
           ],
         ),
       ),
@@ -338,20 +331,11 @@ class _StoreStats extends StatelessWidget {
               isRating: true,
             ),
           ),
-          const SizedBox(
-            height: _statDividerHeight,
-            child: VerticalDivider(),
-          ),
+          const SizedBox(height: _statDividerHeight, child: VerticalDivider()),
           const Expanded(
-            child: _StoreStat(
-              value: '—',
-              label: 'jarak belum ada',
-            ),
+            child: _StoreStat(value: '—', label: 'jarak belum ada'),
           ),
-          const SizedBox(
-            height: _statDividerHeight,
-            child: VerticalDivider(),
-          ),
+          const SizedBox(height: _statDividerHeight, child: VerticalDivider()),
           Expanded(
             child: _StoreStat(
               value: food.id == 'buns' ? '2' : '1',
