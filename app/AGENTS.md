@@ -543,7 +543,11 @@ strict-inference
 strict-raw-types
 ```
 
-CI treats analyzer infos and warnings as fatal.
+CI treats analyzer infos and warnings as fatal. The accepted baseline also
+enforces `public_member_api_docs` for non-overriding public declarations and
+runs `dart doc --dry-run .` to detect API documentation warnings and errors.
+These checks establish structural coverage, not semantic truth; verify contract
+claims against implementation and tests.
 
 Do not weaken lint rules merely to make CI pass.
 
