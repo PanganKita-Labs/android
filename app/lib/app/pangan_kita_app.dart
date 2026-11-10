@@ -50,7 +50,8 @@ class PanganKitaApp extends StatefulWidget {
 
   /// Initial locale, defaulting to Indonesian.
   ///
-  /// This constructor value is not replaced by a stored preference here.
+  /// The app entry point may restore a saved preference and pass it here;
+  /// this widget does not independently read preference storage.
   final Locale initialLocale;
 
   @override
@@ -59,9 +60,9 @@ class PanganKitaApp extends StatefulWidget {
 
 /// Owns the session cart, example area, and active UI locale.
 ///
-/// Routes share one session cart. Language changes attempt a device-preference
-/// write, but this state initializes from [PanganKitaApp.initialLocale] rather
-/// than loading a previously stored preference.
+/// Routes share one session cart. The app entry point restores a saved
+/// language into [PanganKitaApp.initialLocale]; this widget applies that
+/// value and writes subsequent language changes to device preferences.
 class _PanganKitaAppState extends State<PanganKitaApp> {
   /// Shared by product, cart, checkout, and payment preview routes.
   /// Disposed with the root application widget.
