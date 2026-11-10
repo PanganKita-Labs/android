@@ -2,9 +2,9 @@ blank_issues_enabled: false
 
 contact_links:
   - name: Security vulnerability
-    url: https://github.com/PanganKita-Labs/PanganKita/security
-    about: Report suspected security vulnerabilities privately.
+    url: https://github.com/PanganKita-Labs/android/security
+    about: Read the security policy. Use private reporting when enabled; never post exploit details publicly.
 
   - name: Project documentation
-    url: https://github.com/PanganKita-Labs/PanganKita/tree/main/docs
+    url: https://github.com/PanganKita-Labs/android/tree/main/docs
     about: Review product, architecture, engineering, research, and contribution documentation.

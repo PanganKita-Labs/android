@@ -217,7 +217,8 @@ implementation details.
 
 ## Contributor documentation
 
-Keep contributor instructions consistent with:
+Keep contributor instructions consistent with the canonical human-facing
+`../CONTRIBUTING.md`, `../SECURITY.md`, and `../CODE_OF_CONDUCT.md`, plus:
 
 - root `AGENTS.md`;
 - scoped `AGENTS.md` files;

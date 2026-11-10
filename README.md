@@ -155,7 +155,7 @@ dart run dart_code_linter:metrics analyze --fatal-style --fatal-performance --fa
 dart run dart_code_linter:metrics check-unused-code --analyze-private-members lib
 dart run dart_code_linter:metrics check-unused-files lib
 dart run dart_code_linter:metrics check-unnecessary-nullable lib
-dart run dartrics analyze lib
+dart run dartrics analyze --snapshot none --strict-dismiss --fatal-warnings lib
 flutter test --coverage
 flutter build apk --debug
 ```
@@ -172,9 +172,12 @@ The repository also runs automated formatting, analysis, test, integrity, and An
 | [Architecture director](docs/ARCHITECTURE.md) | Engineering principles and dependency boundaries |
 | [Design contract](docs/DESIGN.md) | Brand, typography and screenshot-fidelity rules |
 | [Implementation notes](docs/IMPLEMENTATION.md) | Screen-level prototype behavior and limitations |
-| [Contribution rules](rules.md) | Branch, PR, safety and review requirements |
+| [Contributor guide](CONTRIBUTING.md) | Setup, validations, scope and contribution workflow |
+| [Security policy](SECURITY.md) | Responsible disclosure and private reporting prerequisites |
+| [Code of conduct](CODE_OF_CONDUCT.md) | Community expectations and reporting guidance |
+| [AI contribution guardrails](rules.md) | Agent-specific branch, review, and authorization requirements |
 | [Pull request template](.github/PULL_REQUEST_TEMPLATE.md) | Required verification and evidence in contributions |
 
-Before contributing, follow the root [agent instructions](AGENTS.md) and any applicable scoped `AGENTS.md`. Keep product claims evidence-based, preserve the existing brand identity, use isolated branches for focused changes, and document whether new behavior is **local UI**, **mock/demo**, or **actually connected**.
+Human contributors should start with the [contributor guide](CONTRIBUTING.md). AI-assisted work also follows [root agent instructions](AGENTS.md) and applicable scoped `AGENTS.md` files. Keep product claims evidence-based, preserve the existing brand identity, use isolated branches for focused changes, and document whether new behavior is **local UI**, **mock/demo**, or **actually connected**.
 
 **Project and asset licensing:** No repository-wide `LICENSE` file is currently declared. Do not assume that public visibility grants blanket reuse rights. Fonts, images and other third-party assets may have separate terms; check their provenance and permissions before redistributing them.
