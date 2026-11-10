@@ -57,40 +57,7 @@ class CartLineCard extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium
                     ?.copyWith(color: PanganKitaColors.brandPrimary),
               ),
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                spacing: _quantityGap,
-                children: [
-                  IconButton.filledTonal(
-                    style: _cartQuantityStyle,
-                    tooltip: translateDisplayText(
-                      context,
-                      'Kurangi ${line.food.title}',
-                    ),
-                    onPressed: line.quantity > 1
-                        ? () => cart.setQuantity(line.id, line.quantity - 1)
-                        : null,
-                    icon: const Icon(Icons.remove),
-                  ),
-                  I18nText(
-                    '${line.quantity}',
-                    semanticsLabel:
-                        'Jumlah ${line.food.title}: ${line.quantity}',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  IconButton.filledTonal(
-                    style: _cartQuantityStyle,
-                    tooltip: translateDisplayText(
-                      context,
-                      'Tambah ${line.food.title}',
-                    ),
-                    onPressed: line.quantity < DemoCart.quantityLimit
-                        ? () => cart.setQuantity(line.id, line.quantity + 1)
-                        : null,
-                    icon: const Icon(Icons.add),
-                  ),
-                ],
-              ),
+              _CartQuantityControls(line: line, cart: cart),
             ],
           ),
         ),
@@ -101,6 +68,42 @@ class CartLineCard extends StatelessWidget {
         ),
       ],
     ),
+  );
+}
+
+class _CartQuantityControls extends StatelessWidget {
+  const new({required this.line, required this.cart});
+
+  final DemoCartLine line;
+  final DemoCart cart;
+
+  @override
+  Widget build(BuildContext context) => Wrap(
+    crossAxisAlignment: WrapCrossAlignment.center,
+    spacing: _quantityGap,
+    children: [
+      IconButton.filledTonal(
+        style: _cartQuantityStyle,
+        tooltip: translateDisplayText(context, 'Kurangi ${line.food.title}'),
+        onPressed: line.quantity > 1
+            ? () => cart.setQuantity(line.id, line.quantity - 1)
+            : null,
+        icon: const Icon(Icons.remove),
+      ),
+      I18nText(
+        '${line.quantity}',
+        semanticsLabel: 'Jumlah ${line.food.title}: ${line.quantity}',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
+      IconButton.filledTonal(
+        style: _cartQuantityStyle,
+        tooltip: translateDisplayText(context, 'Tambah ${line.food.title}'),
+        onPressed: line.quantity < DemoCart.quantityLimit
+            ? () => cart.setQuantity(line.id, line.quantity + 1)
+            : null,
+        icon: const Icon(Icons.add),
+      ),
+    ],
   );
 }
 
