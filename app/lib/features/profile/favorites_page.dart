@@ -93,9 +93,7 @@ class _FavoritesHeading extends StatelessWidget {
           style: IconButton.styleFrom(
             backgroundColor: Colors.white,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(_cornerRadius),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(_cornerRadius)),
             ),
           ),
           onPressed: () => Navigator.pop(context),
@@ -105,8 +103,7 @@ class _FavoritesHeading extends StatelessWidget {
       const SizedBox(height: 18),
       I18nText(
         'Favorit Saya',
-        style: Theme.of(context).textTheme.headlineLarge
-            ?.copyWith(color: _ink),
+        style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: _ink),
       ),
       const SizedBox(height: 4),
       I18nText(
@@ -225,7 +222,9 @@ class _FoodCard extends StatelessWidget {
           children: [
             _FavoriteFoodPhoto(food: food),
             const SizedBox(width: 12),
-            Expanded(child: _FavoriteFoodDetails(food: food, onRemove: onRemove)),
+            Expanded(
+              child: _FavoriteFoodDetails(food: food, onRemove: onRemove),
+            ),
           ],
         ),
       ),
@@ -297,8 +296,7 @@ class _FavoriteFoodTitle extends StatelessWidget {
           food.title,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.titleSmall
-              ?.copyWith(color: _ink),
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(color: _ink),
         ),
       ),
       IconButton.filledTonal(
@@ -330,9 +328,7 @@ class _FavoriteMerchant extends StatelessWidget {
         backgroundImage: food.merchant.startsWith('Mawar')
             ? const AssetImage('assets/prototype/mawar-mark.webp')
             : null,
-        child: food.merchant.startsWith('Mawar')
-            ? null
-            : const I18nText('R'),
+        child: food.merchant.startsWith('Mawar') ? null : const I18nText('R'),
       ),
       const SizedBox(width: 5),
       Expanded(
