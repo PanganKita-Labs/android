@@ -57,6 +57,33 @@ void main() {
     expect(find.textContaining('bukan lokasi langsung'), findsOneWidget);
   });
 
+  testWidgets('clearing the area query restores example choices', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(390, 844);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: const LocationSelectionPage(),
+      ),
+    );
+    await tester.enterText(find.byType(TextField), 'Tembung');
+    await tester.pumpAndSettle();
+    expect(find.byTooltip('Hapus pencarian'), findsOneWidget);
+    await tester.tap(find.byTooltip('Hapus pencarian'));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text('Medan Kota'),
+      180,
+      scrollable: find.byType(Scrollable).first,
+    );
+    expect(find.text('Medan Kota'), findsOneWidget);
+    expect(find.text('Area contoh tidak ditemukan.'), findsNothing);
+  });
+
   testWidgets('selected area survives selector reopening and tab changes', (
     tester,
   ) async {

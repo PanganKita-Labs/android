@@ -37,6 +37,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Bantuan PanganKita'), findsOneWidget);
     expect(find.text('Customer Service • contoh'), findsOneWidget);
+    expect(find.text('Siap diambil • contoh'), findsOneWidget);
     expect(find.text('19.42 • contoh'), findsOneWidget);
     await tester.tap(find.text('Pesanan belum siap'));
     expect(find.byType(TextField), findsOneWidget);

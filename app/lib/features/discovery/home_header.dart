@@ -19,62 +19,11 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     spacing: PanganKitaSpacing.sm,
     children: [
-      InkWell(
-        onTap: () => Navigator.pushNamed(context, AppRoutes.profile).ignore(),
-        customBorder: const CircleBorder(),
-        child: Tooltip(
-          message: translateDisplayText(context, 'Buka profil contoh'),
-          child: const CircleAvatar(
-            radius: 22,
-            backgroundImage: AssetImage('assets/prototype/avatar.webp'),
-          ),
-        ),
-      ),
+      const _HomeAvatarLink(),
       Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text.rich(
-              TextSpan(
-                text: translateDisplayText(context, 'Selamat Pagi, '),
-                children: const [
-                  TextSpan(
-                    text: 'Vincent',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
-              style: const TextStyle(
-                fontFamily: PanganKitaTheme.emphasisFontFamily,
-                fontSize: 13,
-                height: 1.26,
-                letterSpacing: -.2,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 3),
-            Tooltip(
-              message: 'Pilih lokasi',
-              child: InkWell(
-                onTap: onLocationTap,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    spacing: PanganKitaSpacing.xs,
-                    children: [
-                      const ReferenceIcon('pin', size: 13),
-                      Expanded(
-                        child: I18nText(
-                          location,
-                          style: const TextStyle(fontSize: 11, height: 1.3),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+        child: _HomeLocationSummary(
+          location: location,
+          onLocationTap: onLocationTap,
         ),
       ),
       IconButton.filledTonal(
@@ -102,6 +51,77 @@ class HomeHeader extends StatelessWidget {
           smallSize: 8,
           backgroundColor: Color(0xFFAF0014),
           child: ReferenceIcon('bell', size: 23),
+        ),
+      ),
+    ],
+  );
+}
+
+class _HomeAvatarLink extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => InkWell(
+    onTap: () => Navigator.pushNamed(context, AppRoutes.profile).ignore(),
+    customBorder: const CircleBorder(),
+    child: Tooltip(
+      message: translateDisplayText(context, 'Buka profil contoh'),
+      child: const CircleAvatar(
+        radius: 22,
+        backgroundImage: AssetImage('assets/prototype/avatar.webp'),
+      ),
+    ),
+  );
+}
+
+class _HomeLocationSummary extends StatelessWidget {
+  const new({required this.location, required this.onLocationTap});
+
+  final String location;
+  final VoidCallback onLocationTap;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text.rich(
+        TextSpan(
+          text: translateDisplayText(context, 'Selamat Pagi, '),
+          children: const [
+            TextSpan(
+              text: 'Vincent',
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
+        style: const TextStyle(
+          fontFamily: PanganKitaTheme.emphasisFontFamily,
+          fontSize: 13,
+          height: 1.26,
+          letterSpacing: -.2,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      const SizedBox(height: 3),
+      Tooltip(
+        message: 'Pilih lokasi',
+        child: InkWell(
+          onTap: onLocationTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(
+              spacing: PanganKitaSpacing.xs,
+              children: [
+                const ReferenceIcon('pin', size: 13),
+                Expanded(
+                  child: I18nText(
+                    location,
+                    style: const TextStyle(fontSize: 11, height: 1.3),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     ],

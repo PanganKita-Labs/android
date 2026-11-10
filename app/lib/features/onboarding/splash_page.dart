@@ -38,9 +38,7 @@ class _SplashPageState extends State<SplashPage> {
             ? Duration.zero
             : const Duration(milliseconds: 350),
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const WelcomePage(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-            FadeTransition(opacity: animation, child: child),
+            FadeTransition(opacity: animation, child: const WelcomePage()),
       ),
     ).ignore();
   }

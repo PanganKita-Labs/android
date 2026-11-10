@@ -74,29 +74,7 @@ class SettingsPage extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
           children: [
-            Row(
-              children: [
-                IconButton.filledTonal(
-                  tooltip: i18n?.backToProfile ?? 'Kembali ke Profil Saya',
-                  style: IconButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(11)),
-                    ),
-                  ),
-                  onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.arrow_back, color: _ink),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: I18nText(
-                    i18n?.settingsTitle ?? 'Pengaturan',
-                    style: Theme.of(context).textTheme.headlineLarge
-                        ?.copyWith(color: _ink),
-                  ),
-                ),
-              ],
-            ),
+            const _SettingsHeader(),
             const SizedBox(height: 32),
             _SectionTitle(i18n?.notificationsTitle ?? 'Notifikasi'),
             const SizedBox(height: 6),
@@ -108,50 +86,11 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 10),
             const _NotificationCard(),
             const SizedBox(height: 30),
-            _SectionTitle(i18n?.accountTitle ?? 'Akun'),
-            const SizedBox(height: 10),
-            _SettingsCard(
-              rows: [
-                _SettingsRow(
-                  Icons.lock_outline,
-                  i18n?.changePassword ?? 'Ubah Password',
-                  route: AppRoutes.recover,
-                ),
-                _SettingsRow(
-                  Icons.language,
-                  i18n?.languageLabel ?? 'Bahasa',
-                  detail: switch (Localizations.localeOf(context)
-                      .languageCode) {
-                    'en' => 'English',
-                    'zh' => '简体中文',
-                    _ => 'Indonesia',
-                  },
-                  onTap: () => _chooseLanguage(context).ignore(),
-                ),
-              ],
+            _SettingsAccountSection(
+              onChooseLanguage: () => _chooseLanguage(context).ignore(),
             ),
             const SizedBox(height: 30),
-            _SectionTitle(i18n?.aboutPanganKita ?? 'Tentang PanganKita'),
-            const SizedBox(height: 10),
-            _SettingsCard(
-              rows: [
-                _SettingsRow(
-                  Icons.description_outlined,
-                  i18n?.terms ?? 'Syarat & Ketentuan',
-                  route: AppRoutes.terms,
-                ),
-                _SettingsRow(
-                  Icons.verified_user_outlined,
-                  i18n?.privacy ?? 'Kebijakan Privasi',
-                  route: AppRoutes.privacy,
-                ),
-                _SettingsRow(
-                  Icons.help_outline,
-                  i18n?.helpCenter ?? 'Pusat Bantuan',
-                  route: AppRoutes.support,
-                ),
-              ],
-            ),
+            const _SettingsAboutSection(),
             const SizedBox(height: 22),
             I18nText(
               i18n?.settingsFooter ?? 'PanganKita • Pengaturan contoh',
@@ -161,6 +100,113 @@ class SettingsPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _SettingsHeader extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) {
+    final i18n = context.i18n;
+    return Row(
+      children: [
+        IconButton.filledTonal(
+          tooltip: i18n?.backToProfile ?? 'Kembali ke Profil Saya',
+          style: IconButton.styleFrom(
+            backgroundColor: Colors.white,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(11)),
+            ),
+          ),
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back, color: _ink),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: I18nText(
+            i18n?.settingsTitle ?? 'Pengaturan',
+            style: Theme.of(context).textTheme.headlineLarge
+                ?.copyWith(color: _ink),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SettingsAccountSection extends StatelessWidget {
+  const new({required this.onChooseLanguage});
+
+  final VoidCallback onChooseLanguage;
+
+  @override
+  Widget build(BuildContext context) {
+    final i18n = context.i18n;
+    final language = Localizations.localeOf(context).languageCode;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _SectionTitle(i18n?.accountTitle ?? 'Akun'),
+        const SizedBox(height: 10),
+        _SettingsCard(
+          rows: [
+            _SettingsRow(
+              Icons.lock_outline,
+              i18n?.changePassword ?? 'Ubah Password',
+              route: AppRoutes.recover,
+            ),
+            _SettingsRow(
+              Icons.language,
+              i18n?.languageLabel ?? 'Bahasa',
+              detail: switch (language) {
+                'en' => 'English',
+                'zh' => '简体中文',
+                _ => 'Indonesia',
+              },
+              onTap: onChooseLanguage,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _SettingsAboutSection extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) {
+    final i18n = context.i18n;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _SectionTitle(i18n?.aboutPanganKita ?? 'Tentang PanganKita'),
+        const SizedBox(height: 10),
+        _SettingsCard(
+          rows: [
+            _SettingsRow(
+              Icons.description_outlined,
+              i18n?.terms ?? 'Syarat & Ketentuan',
+              route: AppRoutes.terms,
+            ),
+            _SettingsRow(
+              Icons.verified_user_outlined,
+              i18n?.privacy ?? 'Kebijakan Privasi',
+              route: AppRoutes.privacy,
+            ),
+            _SettingsRow(
+              Icons.help_outline,
+              i18n?.helpCenter ?? 'Pusat Bantuan',
+              route: AppRoutes.support,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -182,6 +228,30 @@ class _NotificationCard extends StatefulWidget {
 
   @override
   State<_NotificationCard> createState() => _NotificationCardState();
+}
+
+class _MessagesSwitch extends StatelessWidget {
+  const new({required this.value, required this.onChanged});
+
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final i18n = context.i18n;
+    return SwitchListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      secondary: const Icon(Icons.chat_bubble_outline, color: _green),
+      title: I18nText(i18n?.merchantMessages ?? 'Pesan dari toko'),
+      subtitle: I18nText(
+        i18n?.merchantMessagesDescription ??
+            'Dapatkan notifikasi pesan dari toko pilihanmu.',
+      ),
+      value: value,
+      activeTrackColor: _green,
+      onChanged: onChanged,
+    );
+  }
 }
 
 class _NotificationCardState extends State<_NotificationCard> {
@@ -213,19 +283,8 @@ class _NotificationCardState extends State<_NotificationCard> {
             onChanged: (value) => setState(() => _orders = value),
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
-          SwitchListTile(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-            secondary: const Icon(Icons.chat_bubble_outline, color: _green),
-            title: I18nText(i18n?.merchantMessages ?? 'Pesan dari toko'),
-            subtitle: I18nText(
-              i18n?.merchantMessagesDescription ??
-                  'Dapatkan notifikasi pesan dari toko pilihanmu.',
-            ),
+          _MessagesSwitch(
             value: _messages,
-            activeTrackColor: _green,
             onChanged: (value) => setState(() => _messages = value),
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),

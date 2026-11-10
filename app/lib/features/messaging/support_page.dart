@@ -55,6 +55,28 @@ class _SupportPageState extends State<SupportPage> {
   );
 }
 
+class _SupportBackButton extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Align(
+    alignment: Alignment.centerLeft,
+    child: IconButton.filledTonal(
+      tooltip: translateDisplayText(context, 'Kembali ke Profil Saya'),
+      onPressed: () => Navigator.pop(context),
+      style: IconButton.styleFrom(
+        backgroundColor: Colors.white,
+        foregroundColor: _ink,
+        minimumSize: const Size.square(52),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
+      ),
+      icon: const Icon(Icons.arrow_back),
+    ),
+  );
+}
+
 class _SupportHeader extends StatelessWidget {
   const new();
 
@@ -63,22 +85,7 @@ class _SupportHeader extends StatelessWidget {
     padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
     child: Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: IconButton.filledTonal(
-            tooltip: translateDisplayText(context, 'Kembali ke Profil Saya'),
-            onPressed: () => Navigator.pop(context),
-            style: IconButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: _ink,
-              minimumSize: const Size.square(52),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-              ),
-            ),
-            icon: const Icon(Icons.arrow_back),
-          ),
-        ),
+        const _SupportBackButton(),
         const SizedBox(height: 12),
         Row(
           children: [
@@ -119,6 +126,27 @@ class _SupportHeader extends StatelessWidget {
   );
 }
 
+class _ExampleOrderStatus extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+    decoration: const BoxDecoration(
+      color: PanganKitaColors.savingsSurface,
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+    child: const Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(Icons.shopping_bag_outlined, size: 18, color: _green),
+        SizedBox(width: 6),
+        Flexible(child: I18nText('Siap diambil • contoh')),
+      ],
+    ),
+  );
+}
+
 class _ExampleOrderCard extends StatelessWidget {
   const new();
 
@@ -153,28 +181,7 @@ class _ExampleOrderCard extends StatelessWidget {
                       ?.copyWith(color: _ink),
                 ),
                 const SizedBox(height: 8),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 7,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: PanganKitaColors.savingsSurface,
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                  ),
-                  child: const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.shopping_bag_outlined,
-                        size: 18,
-                        color: _green,
-                      ),
-                      SizedBox(width: 6),
-                      Flexible(child: I18nText('Siap diambil • contoh')),
-                    ],
-                  ),
-                ),
+                const _ExampleOrderStatus(),
               ],
             ),
           ),

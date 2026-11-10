@@ -118,33 +118,14 @@ class _OtpPageState extends State<OtpPage> {
             children: [
               for (var index = 0; index < _digits.length; index++)
                 Expanded(
-                  child: TextField(
-                    controller: _digits[index],
-                    focusNode: _focus[index],
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(
-                        RegExp('[0-9$_emptyDigit]'),
-                      ),
-                      LengthLimitingTextInputFormatter(_otpLength + 1),
-                    ],
-                    autofillHints: const [AutofillHints.oneTimeCode],
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontFamily: PanganKitaTheme.bodyFontFamily,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
+                  child: _OtpDigitField(
+                    index: index,
+                    input: (
+                      controller: _digits[index],
+                      focusNode: _focus[index],
                     ),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 18),
-                      labelText: translateDisplayText(
-                        context,
-                        'Digit ${index + 1}',
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                    ),
-                    onChanged: (value) => _changeDigit(index, value),
-                    onTap: () => _selectDigit(index),
+                    onChanged: _changeDigit,
+                    onTap: _selectDigit,
                   ),
                 ),
             ],
@@ -163,20 +144,65 @@ class _OtpPageState extends State<OtpPage> {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 12, color: Colors.blueGrey),
           ),
-          Wrap(
-            alignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              const I18nText('Belum menerima kode?'),
-              TextButton(
-                onPressed: _resend,
-                child: const I18nText('Kirim Ulang'),
-              ),
-            ],
-          ),
+          _OtpResend(onPressed: _resend),
         ],
       ),
     ),
+  );
+}
+
+class _OtpDigitField extends StatelessWidget {
+  const new({
+    required this.index,
+    required this.input,
+    required this.onChanged,
+    required this.onTap,
+  });
+
+  final int index;
+  final ({TextEditingController controller, FocusNode focusNode}) input;
+  final void Function(int index, String value) onChanged;
+  final ValueChanged<int> onTap;
+
+  @override
+  Widget build(BuildContext context) => TextField(
+    controller: input.controller,
+    focusNode: input.focusNode,
+    keyboardType: TextInputType.number,
+    inputFormatters: [
+      FilteringTextInputFormatter.allow(RegExp('[0-9$_emptyDigit]')),
+      LengthLimitingTextInputFormatter(_otpLength + 1),
+    ],
+    autofillHints: const [AutofillHints.oneTimeCode],
+    textAlign: TextAlign.center,
+    style: const TextStyle(
+      fontFamily: PanganKitaTheme.bodyFontFamily,
+      fontSize: 24,
+      fontWeight: FontWeight.w500,
+    ),
+    decoration: InputDecoration(
+      contentPadding: const EdgeInsets.symmetric(vertical: 18),
+      labelText: translateDisplayText(context, 'Digit ${index + 1}'),
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+    ),
+    onChanged: (value) => onChanged(index, value),
+    onTap: () => onTap(index),
+  );
+}
+
+class _OtpResend extends StatelessWidget {
+  const new({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) => Wrap(
+    alignment: WrapAlignment.center,
+    crossAxisAlignment: WrapCrossAlignment.center,
+    children: [
+      const I18nText('Belum menerima kode?'),
+      TextButton(onPressed: onPressed, child: const I18nText('Kirim Ulang')),
+    ],
   );
 }
 

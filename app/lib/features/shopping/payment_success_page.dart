@@ -109,6 +109,40 @@ class _SuccessHeader extends StatelessWidget {
   );
 }
 
+class _PaymentMerchantIdentity extends StatelessWidget {
+  const new({required this.cart});
+
+  final DemoCart cart;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      CircleAvatar(
+        radius: _merchantRadius,
+        backgroundImage: _merchantNames(cart).length == 1
+            ? AssetImage(cart.lines.first.food.image)
+            : null,
+        child: _merchantNames(cart).length == 1
+            ? null
+            : const Icon(Icons.storefront_outlined),
+      ),
+      const SizedBox(width: 12),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            I18nText(
+              _merchantNames(cart).join(', '),
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const I18nText('Merchant contoh'),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
 class _PaymentSummary extends StatelessWidget {
   const new({required this.cart});
 
@@ -125,32 +159,7 @@ class _PaymentSummary extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       child: Column(
         children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: _merchantRadius,
-                backgroundImage: _merchantNames(cart).length == 1
-                    ? AssetImage(cart.lines.first.food.image)
-                    : null,
-                child: _merchantNames(cart).length == 1
-                    ? null
-                    : const Icon(Icons.storefront_outlined),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    I18nText(
-                      _merchantNames(cart).join(', '),
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const I18nText('Merchant contoh'),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          _PaymentMerchantIdentity(cart: cart),
           const Divider(height: 16),
           _SummaryRow(
             label: 'Total contoh',

@@ -25,17 +25,7 @@ class TermsPage extends StatelessWidget {
           const SizedBox(height: 8),
           const I18nText('Informasi penggunaan versi contoh PanganKita'),
           const SizedBox(height: 24),
-          const Card(
-            color: PanganKitaColors.informationSurface,
-            child: Padding(
-              padding: EdgeInsets.all(18),
-              child: I18nText(
-                'Dokumen Syarat & Ketentuan resmi belum tersedia. '
-                'Halaman ini menjelaskan kemampuan aplikasi contoh saat ini '
-                'dan belum menjadi perjanjian penggunaan.',
-              ),
-            ),
-          ),
+          const _OfficialTermsNotice(),
           const SizedBox(height: 24),
           const _TermsSection(
             title: 'Akun',
@@ -65,6 +55,23 @@ class TermsPage extends StatelessWidget {
             style: TextStyle(color: Colors.black54),
           ),
         ],
+      ),
+    ),
+  );
+}
+
+class _OfficialTermsNotice extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const Card(
+    color: PanganKitaColors.informationSurface,
+    child: Padding(
+      padding: EdgeInsets.all(18),
+      child: I18nText(
+        'Dokumen Syarat & Ketentuan resmi belum tersedia. '
+        'Halaman ini menjelaskan kemampuan aplikasi contoh saat ini '
+        'dan belum menjadi perjanjian penggunaan.',
       ),
     ),
   );

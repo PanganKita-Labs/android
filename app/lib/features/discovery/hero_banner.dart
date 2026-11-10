@@ -101,24 +101,7 @@ class _HeroCopy extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const DecoratedBox(
-          decoration: BoxDecoration(
-            color: Color(0x25FFFFFF),
-            borderRadius: BorderRadius.all(Radius.circular(18)),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            child: I18nText(
-              'FLASH SALE',
-              style: TextStyle(
-                fontFamily: PanganKitaTheme.bodyFontFamily,
-                fontSize: 8,
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ),
+        const _FlashSaleBadge(),
         const SizedBox(height: 2),
         const I18nText(
           'Croissant Favoritmu,\nDiskon Hingga 60%',
@@ -151,6 +134,30 @@ class _HeroCopy extends StatelessWidget {
           child: const I18nText('Pesan Sekarang!'),
         ),
       ],
+    ),
+  );
+}
+
+class _FlashSaleBadge extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const DecoratedBox(
+    decoration: BoxDecoration(
+      color: Color(0x25FFFFFF),
+      borderRadius: BorderRadius.all(Radius.circular(18)),
+    ),
+    child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      child: I18nText(
+        'FLASH SALE',
+        style: TextStyle(
+          fontFamily: PanganKitaTheme.bodyFontFamily,
+          fontSize: 8,
+          color: Colors.white,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
     ),
   );
 }

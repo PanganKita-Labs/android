@@ -38,25 +38,7 @@ class OrderHelpSheet extends StatelessWidget {
           child: ListView(
             padding: const EdgeInsets.fromLTRB(20, 4, 20, 16),
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: I18nText(
-                      'Bantuan Pesanan',
-                      style: Theme.of(context).textTheme.headlineLarge
-                          ?.copyWith(color: _ink),
-                    ),
-                  ),
-                  IconButton(
-                    tooltip: translateDisplayText(
-                      context,
-                      'Tutup Bantuan Pesanan',
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.close, color: _ink),
-                  ),
-                ],
-              ),
+              const _OrderHelpHeader(),
               I18nText(
                 'Ada yang bisa kami bantu?',
                 style: Theme.of(context).textTheme.bodyLarge,
@@ -81,6 +63,28 @@ class OrderHelpSheet extends StatelessWidget {
         ),
       ],
     ),
+  );
+}
+
+class _OrderHelpHeader extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(
+        child: I18nText(
+          'Bantuan Pesanan',
+          style: Theme.of(context).textTheme.headlineLarge
+              ?.copyWith(color: _ink),
+        ),
+      ),
+      IconButton(
+        tooltip: translateDisplayText(context, 'Tutup Bantuan Pesanan'),
+        onPressed: () => Navigator.pop(context),
+        icon: const Icon(Icons.close, color: _ink),
+      ),
+    ],
   );
 }
 

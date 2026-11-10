@@ -96,6 +96,87 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets(
+    'price filter preserves empty bounds and rejects malformed text',
+    (tester) async {
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(390, 844);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.view.resetPhysicalSize);
+
+      Future<void> submitFilters() async {
+        FocusManager.instance.primaryFocus?.unfocus();
+        await tester.pumpAndSettle();
+        await tester.ensureVisible(find.text('Tampilkan Hasil'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Tampilkan Hasil'));
+        await tester.pumpAndSettle();
+      }
+
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: PanganKitaTheme.light,
+          home: const SearchPage(initialQuery: 'Roti'),
+        ),
+      );
+      await tester.tap(find.byTooltip('Filter pencarian'));
+      await tester.pumpAndSettle();
+      final minimum = find.byType(TextField).at(1);
+      final maximum = find.byType(TextField).at(2);
+
+      for (final invalid in ['abc', ' ', '12.5']) {
+        await tester.enterText(minimum, invalid);
+        await tester.ensureVisible(find.text('Tampilkan Hasil'));
+        await submitFilters();
+        await tester.pumpAndSettle();
+        expect(find.text('Masukkan rentang harga yang valid.'), findsOneWidget);
+      }
+
+      await tester.enterText(minimum, '');
+      await tester.enterText(maximum, 'invalid');
+      await submitFilters();
+      await tester.pumpAndSettle();
+      expect(find.text('Masukkan rentang harga yang valid.'), findsOneWidget);
+
+      await tester.enterText(maximum, '');
+      await submitFilters();
+      await tester.pumpAndSettle();
+      expect(find.text('Filter Pencarian'), findsNothing);
+      expect(find.text('3 makanan contoh ditemukan'), findsOneWidget);
+    },
+  );
+
+  testWidgets('price filter accepts trimmed equal bounds', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(390, 844);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+
+    Future<void> submitFilters() async {
+      FocusManager.instance.primaryFocus?.unfocus();
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('Tampilkan Hasil'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Tampilkan Hasil'));
+      await tester.pumpAndSettle();
+    }
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: const SearchPage(initialQuery: 'Roti'),
+      ),
+    );
+    await tester.tap(find.byTooltip('Filter pencarian'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).at(1), ' 10000 ');
+    await tester.enterText(find.byType(TextField).at(2), '10000');
+    await tester.ensureVisible(find.text('Tampilkan Hasil'));
+    await submitFilters();
+    await tester.pumpAndSettle();
+    expect(find.text('Filter Pencarian'), findsNothing);
+    expect(find.text('Masukkan rentang harga yang valid.'), findsNothing);
+  });
   testWidgets('price filter and reset update local results', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
