@@ -16,7 +16,15 @@ import check_i18n
 
 
 def wrap_long_lookup_label(match: re.Match[str], base: dict[str, object]) -> str | None:
-    """Reformat a real long lookup entry into adjacent Dart string literals."""
+    """Reformats an eligible presentation entry as adjacent Dart literals.
+
+    Args:
+        match: A complete generated-lookup entry match.
+        base: Indonesian catalog entries used to verify the source message.
+
+    Returns:
+        A rewritten mapping entry, or None if it cannot be split safely.
+    """
     label = "".join(
         check_i18n.decode_dart_literal(fragment.group(0))
         for fragment in re.finditer(check_i18n.LOOKUP_LITERAL, match.group(1))
@@ -37,6 +45,7 @@ class I18nCheckerTests(unittest.TestCase):
     """Prove the checker rejects common translation-contribution defects."""
 
     def setUp(self) -> None:
+        """Creates an isolated copy of source and catalog files for mutation tests."""
         self.temp = tempfile.TemporaryDirectory(prefix="pangankita-i18n-check-")
         self.root = Path(self.temp.name)
         shutil.copytree(check_i18n.APP_ROOT / "lib", self.root / "lib")
@@ -44,9 +53,15 @@ class I18nCheckerTests(unittest.TestCase):
         self.config = check_i18n.load_json(self.root / "tool/i18n_exceptions.json")
 
     def tearDown(self) -> None:
+        """Removes the temporary test workspace and its modified fixtures."""
         self.temp.cleanup()
 
     def check(self) -> list[str]:
+        """Runs catalog and source validation against temporary fixtures.
+
+        Returns:
+            Error messages or an empty list when checks pass.
+        """
         errors: list[str] = []
         catalogs = check_i18n.check_catalogs(self.root, self.config, errors)
         if "id" in catalogs:
@@ -54,15 +69,23 @@ class I18nCheckerTests(unittest.TestCase):
         return errors
 
     def mutate(self, locale: str, update) -> None:
+        """Applies a fixture mutation to one localization catalog.
+
+        Args:
+            locale: Catalog suffix such as en or zh_Hans.
+            update: Callback that modifies the decoded catalog in place.
+        """
         path = self.root / f"lib/i18n/arb/app_{locale}.arb"
         data = json.loads(path.read_text(encoding="utf-8"))
         update(data)
         path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     def test_clean_baseline(self) -> None:
+        """Accepts unchanged localization catalogs and source."""
         self.assertEqual([], self.check())
 
     def test_lookup_entry_line_wrapping(self) -> None:
+        """Accepts generated lookup entries with a wrapped expression."""
         path = self.root / "lib/i18n/generated/i18n_presentation_lookup.g.dart"
         text = path.read_text(encoding="utf-8")
         old = '"Contoh pesanan tidak tersedia." => strings.uiExampleOrderUnavailable,'
@@ -108,38 +131,46 @@ class I18nCheckerTests(unittest.TestCase):
         )
 
     def test_missing_translation_key(self) -> None:
+        """Rejects an English catalog missing an Indonesian source key."""
         self.mutate("en", lambda d: d.pop("navHome"))
         self.assertTrue(any("en: missing Indonesian source key navHome" in e for e in self.check()))
 
     def test_untranslated_copy_of_indonesian(self) -> None:
+        """Flags an untranslated Indonesian source string in English."""
         self.mutate("en", lambda d: d.__setitem__("navHome", "Beranda"))
         self.assertTrue(any("en:navHome: identical" in e for e in self.check()))
 
     def test_mismatched_placeholder(self) -> None:
+        """Rejects inconsistent message placeholders between locales."""
         self.mutate("en", lambda d: d.__setitem__("uiDigitValue", "Digit {count}"))
         self.assertTrue(any("en:uiDigitValue: placeholder mismatch" in e for e in self.check()))
 
     def test_duplicate_json_key(self) -> None:
+        """Rejects a duplicated ARB JSON message key."""
         path = self.root / "lib/i18n/arb/app_en.arb"
         content = path.read_text(encoding="utf-8")
         path.write_text(content.replace('"navHome": "Home",', '"navHome": "Home",\n  "navHome": "HOME",', 1), encoding="utf-8")
         self.assertTrue(any("duplicate JSON field 'navHome'" in e for e in self.check()))
 
     def test_chinese_script_fallback_divergence(self) -> None:
+        """Rejects divergent Simplified Chinese fallback catalogs."""
         self.mutate("zh_Hans", lambda d: d.__setitem__("navHome", "测试"))
         self.assertTrue(any("zh_Hans:navHome: differs from zh fallback" in e for e in self.check()))
 
     def test_new_unlocalized_text_widget(self) -> None:
+        """Finds new raw display strings that bypass translation."""
         path = self.root / "lib/features/profile/settings_page.dart"
         path.write_text(path.read_text(encoding="utf-8") + "\n// Example\nWidget bad() => Text('Hello from new source');\n", encoding="utf-8")
         self.assertTrue(any("raw Text 'Hello from new source'" in e for e in self.check()))
 
     def test_new_unmapped_i18n_text(self) -> None:
+        """Rejects localized widgets missing presentation lookup entries."""
         path = self.root / "lib/features/profile/settings_page.dart"
         path.write_text(path.read_text(encoding="utf-8") + "\nWidget bad() => I18nText('Belum masuk katalog');\n", encoding="utf-8")
         self.assertTrue(any("Belum masuk katalog" in e and "localized display" in e for e in self.check()))
 
     def test_missing_source_exception_fails(self) -> None:
+        """Rejects removal of a necessary source exception."""
         self.config["source_exceptions"] = self.config["source_exceptions"][1:]
         self.assertTrue(any("Mandala by Pass" in e for e in self.check()))
 
