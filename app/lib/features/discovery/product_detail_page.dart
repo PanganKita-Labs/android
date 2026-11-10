@@ -167,6 +167,112 @@ final ButtonStyle _toolbarStyle = IconButton.styleFrom(
   ),
 );
 
+class _MerchantImage extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => ClipRRect(
+    borderRadius: const BorderRadius.all(Radius.circular(10)),
+    child: SizedBox.square(
+      dimension: _merchantPhoto,
+      child: Image.asset(
+        food.image,
+        fit: BoxFit.cover,
+        semanticLabel: translateDisplayText(
+          context,
+          'Foto produk contoh dari ${food.merchant}',
+        ),
+      ),
+    ),
+  );
+}
+
+class _MerchantRating extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    width: _ratingWidth,
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: _metadataGap,
+          children: [
+            const ReferenceIcon(
+              'star',
+              size: 13,
+              color: PanganKitaColors.brandAccent,
+            ),
+            I18nText(
+              food.rating.split(' ').first,
+              style: const TextStyle(
+                fontSize: 12,
+                color: PanganKitaColors.brandAccent,
+              ),
+            ),
+          ],
+        ),
+        I18nText(
+          food.rating.substring(food.rating.indexOf(' ') + 1),
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 9, color: Colors.black54),
+        ),
+      ],
+    ),
+  );
+}
+
+class _DemoReviewBody extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: _savingsGap,
+    children: [
+      const I18nText(
+        'Pelanggan Demo',
+        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+      ),
+      Row(
+        spacing: 2,
+        children: [
+          ...List.filled(
+            _reviewStarCount,
+            const ReferenceIcon(
+              'star',
+              size: 11,
+              color: PanganKitaColors.brandAccent,
+            ),
+          ),
+          const I18nText(
+            '4.8',
+            style: TextStyle(
+              fontSize: 11,
+              color: PanganKitaColors.brandAccent,
+            ),
+          ),
+        ],
+      ),
+      const I18nText(
+        'Ulasan contoh',
+        style: TextStyle(fontSize: 9, color: Colors.black54),
+      ),
+      const SizedBox(height: _reviewGap),
+      const I18nText(
+        'Ini contoh tampilan ulasan pelanggan. '
+        'Belum ada ulasan nyata untuk produk demo ini.',
+        style: TextStyle(fontSize: 12, height: 1.4),
+      ),
+    ],
+  );
+}
+
 class _MerchantSummary extends StatelessWidget {
   const new({required this.food});
   final DemoFood food;
@@ -176,20 +282,7 @@ class _MerchantSummary extends StatelessWidget {
     spacing: _bodyGap,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        child: SizedBox.square(
-          dimension: _merchantPhoto,
-          child: Image.asset(
-            food.image,
-            fit: BoxFit.cover,
-            semanticLabel: translateDisplayText(
-              context,
-              'Foto produk contoh dari ${food.merchant}',
-            ),
-          ),
-        ),
-      ),
+      _MerchantImage(food: food),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,36 +307,7 @@ class _MerchantSummary extends StatelessWidget {
           ],
         ),
       ),
-      SizedBox(
-        width: _ratingWidth,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: _metadataGap,
-              children: [
-                const ReferenceIcon(
-                  'star',
-                  size: 13,
-                  color: PanganKitaColors.brandAccent,
-                ),
-                I18nText(
-                  food.rating.split(' ').first,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: PanganKitaColors.brandAccent,
-                  ),
-                ),
-              ],
-            ),
-            I18nText(
-              food.rating.substring(food.rating.indexOf(' ') + 1),
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 9, color: Colors.black54),
-            ),
-          ],
-        ),
-      ),
+      _MerchantRating(food: food),
     ],
   );
 }
@@ -470,51 +534,7 @@ class _ProductReviews extends StatelessWidget {
                 radius: _reviewAvatar,
                 child: Icon(Icons.person_outline),
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: _savingsGap,
-                  children: [
-                    const I18nText(
-                      'Pelanggan Demo',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Row(
-                      spacing: 2,
-                      children: [
-                        ...List.filled(
-                          _reviewStarCount,
-                          const ReferenceIcon(
-                            'star',
-                            size: 11,
-                            color: PanganKitaColors.brandAccent,
-                          ),
-                        ),
-                        const I18nText(
-                          '4.8',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: PanganKitaColors.brandAccent,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const I18nText(
-                      'Ulasan contoh',
-                      style: TextStyle(fontSize: 9, color: Colors.black54),
-                    ),
-                    const SizedBox(height: _reviewGap),
-                    const I18nText(
-                      'Ini contoh tampilan ulasan pelanggan. '
-                      'Belum ada ulasan nyata untuk produk demo ini.',
-                      style: TextStyle(fontSize: 12, height: 1.4),
-                    ),
-                  ],
-                ),
-              ),
+              const Expanded(child: _DemoReviewBody()),
             ],
           ),
         ),

@@ -116,6 +116,11 @@ class _SearchPageState extends State<SearchPage> {
     _lowestPriceFirst = false;
   });
 
+  void _acceptSuggestion(String query) {
+    _controller.text = query;
+    setState(() => _query = query);
+  }
+
   void _editSearch() => _searchFocus.requestFocus();
 
   void _toggleFavorite(String id) => setState(
@@ -139,15 +144,7 @@ class _SearchPageState extends State<SearchPage> {
               onFilter: _openFilters,
             ),
             const SizedBox(height: 12),
-            const Row(
-              children: [
-                Icon(Icons.location_on, color: PanganKitaColors.brandPrimary),
-                SizedBox(width: 8),
-                Expanded(
-                  child: I18nText('Mandala by Pass, Medan · contoh lokasi'),
-                ),
-              ],
-            ),
+            const _SearchLocation(),
             const SizedBox(height: 24),
             _QuickFilters(
               selected: _category,
@@ -159,17 +156,10 @@ class _SearchPageState extends State<SearchPage> {
               _EmptySearch(
                 onEditSearch: _editSearch,
                 onResetFilters: _resetFilters,
-                onSuggestion: (query) {
-                  _controller.text = query;
-                  setState(() => _query = query);
-                },
+                onSuggestion: _acceptSuggestion,
               )
             else ...[
-              I18nText(
-                _query.isEmpty ? 'Makanan contoh' : 'Hasil untuk “$_query”',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              I18nText('${results.length} makanan contoh ditemukan'),
+              _ResultHeading(query: _query, count: results.length),
               const SizedBox(height: 14),
               for (final food in results) ...[
                 _SearchResultCard(
@@ -185,6 +175,192 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
+}
+
+class _SearchLocation extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const Row(
+    children: [
+      Icon(Icons.location_on, color: PanganKitaColors.brandPrimary),
+      SizedBox(width: 8),
+      Expanded(child: I18nText('Mandala by Pass, Medan · contoh lokasi')),
+    ],
+  );
+}
+
+class _ResultHeading extends StatelessWidget {
+  const new({required this.query, required this.count});
+
+  final String query;
+  final int count;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      I18nText(
+        query.isEmpty ? 'Makanan contoh' : 'Hasil untuk “$query”',
+        style: Theme.of(context).textTheme.headlineSmall,
+      ),
+      I18nText('$count makanan contoh ditemukan'),
+    ],
+  );
+}
+
+class _SearchTitle extends StatelessWidget {
+  const new({required this.food, required this.favorite, required this.onFavorite});
+
+  final DemoFood food;
+  final bool favorite;
+  final VoidCallback onFavorite;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Expanded(
+        child: I18nText(
+          food.title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+      ),
+      IconButton(
+        tooltip: favorite ? 'Hapus favorit sementara' : 'Favoritkan sementara',
+        onPressed: onFavorite,
+        visualDensity: VisualDensity.compact,
+        icon: Icon(
+          favorite ? Icons.favorite : Icons.favorite_border,
+          size: _favoriteIconSize,
+          color: PanganKitaColors.textPrimary,
+        ),
+      ),
+    ],
+  );
+}
+
+class _SearchMerchant extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      CircleAvatar(
+        radius: _merchantAvatarRadius,
+        backgroundImage: AssetImage(food.image),
+      ),
+      const SizedBox(width: 5),
+      const Icon(
+        Icons.storefront_outlined,
+        size: 14,
+        color: PanganKitaColors.brandPrimaryStrong,
+      ),
+      const SizedBox(width: 3),
+      Expanded(
+        child: I18nText(
+          food.merchant,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+      ),
+    ],
+  );
+}
+
+class _EmptySearchIcon extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const Center(
+    child: CircleAvatar(
+      radius: 55,
+      backgroundColor: PanganKitaColors.savingsSurface,
+      child: Icon(
+        Icons.search,
+        size: 60,
+        color: PanganKitaColors.brandPrimaryStrong,
+      ),
+    ),
+  );
+}
+
+class _EmptySearchButtons extends StatelessWidget {
+  const new({required this.onEdit, required this.onReset});
+
+  final VoidCallback onEdit;
+  final VoidCallback onReset;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(
+        child: OutlinedButton(
+          onPressed: onEdit,
+          child: const I18nText('Ubah Pencarian'),
+        ),
+      ),
+      const SizedBox(width: 8),
+      Expanded(
+        child: TextButton(
+          onPressed: onReset,
+          child: const I18nText('Reset Filter'),
+        ),
+      ),
+    ],
+  );
+}
+
+class _FilterHeading extends StatelessWidget {
+  const new({required this.onReset});
+
+  final VoidCallback onReset;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(
+        child: I18nText(
+          'Filter Pencarian',
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+      ),
+      TextButton(onPressed: onReset, child: const I18nText('Reset')),
+    ],
+  );
+}
+
+class _FilterError extends StatelessWidget {
+  const new({required this.error});
+
+  final String error;
+
+  @override
+  Widget build(BuildContext context) => I18nText(
+    error,
+    style: const TextStyle(color: PanganKitaColors.danger),
+  );
+}
+
+class _FilterApply extends StatelessWidget {
+  const new({required this.onApply});
+
+  final VoidCallback onApply;
+
+  @override
+  Widget build(BuildContext context) => FilledButton(
+    style: FilledButton.styleFrom(
+      backgroundColor: PanganKitaColors.brandPrimaryStrong,
+      foregroundColor: Colors.white,
+    ),
+    onPressed: onApply,
+    child: const I18nText('Tampilkan Hasil'),
+  );
 }
 
 class _SearchBar extends StatelessWidget {
@@ -378,55 +554,9 @@ class _SearchResultInfo extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: I18nText(
-              food.title,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-          ),
-          IconButton(
-            tooltip: favorite
-                ? 'Hapus favorit sementara'
-                : 'Favoritkan sementara',
-            onPressed: onFavorite,
-            visualDensity: VisualDensity.compact,
-            icon: Icon(
-              favorite ? Icons.favorite : Icons.favorite_border,
-              size: _favoriteIconSize,
-              color: PanganKitaColors.textPrimary,
-            ),
-          ),
-        ],
-      ),
+      _SearchTitle(food: food, favorite: favorite, onFavorite: onFavorite),
       const SizedBox(height: 8),
-      Row(
-        children: [
-          CircleAvatar(
-            radius: _merchantAvatarRadius,
-            backgroundImage: AssetImage(food.image),
-          ),
-          const SizedBox(width: 5),
-          const Icon(
-            Icons.storefront_outlined,
-            size: 14,
-            color: PanganKitaColors.brandPrimaryStrong,
-          ),
-          const SizedBox(width: 3),
-          Expanded(
-            child: I18nText(
-              food.merchant,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ),
-        ],
-      ),
+      _SearchMerchant(food: food),
       const SizedBox(height: 8),
       Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
@@ -494,17 +624,7 @@ class _EmptySearch extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       const SizedBox(height: 35),
-      const Center(
-        child: CircleAvatar(
-          radius: 55,
-          backgroundColor: PanganKitaColors.savingsSurface,
-          child: Icon(
-            Icons.search,
-            size: 60,
-            color: PanganKitaColors.brandPrimaryStrong,
-          ),
-        ),
-      ),
+      const _EmptySearchIcon(),
       const SizedBox(height: 16),
       I18nText(
         'Belum ketemu makananmu',
@@ -516,23 +636,7 @@ class _EmptySearch extends StatelessWidget {
         textAlign: TextAlign.center,
       ),
       const SizedBox(height: 16),
-      Row(
-        children: [
-          Expanded(
-            child: OutlinedButton(
-              onPressed: onEditSearch,
-              child: const I18nText('Ubah Pencarian'),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: TextButton(
-              onPressed: onResetFilters,
-              child: const I18nText('Reset Filter'),
-            ),
-          ),
-        ],
-      ),
+      _EmptySearchButtons(onEdit: onEditSearch, onReset: onResetFilters),
       const SizedBox(height: 18),
       I18nText(
         'Mungkin Kamu Suka',
@@ -659,17 +763,7 @@ class _SearchFiltersState extends State<_SearchFilters> {
       child: ListView(
         shrinkWrap: true,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: I18nText(
-                  'Filter Pencarian',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
-              TextButton(onPressed: _reset, child: const I18nText('Reset')),
-            ],
-          ),
+          _FilterHeading(onReset: _reset),
           const Divider(),
           I18nText('Kategori', style: Theme.of(context).textTheme.titleMedium),
           _SearchCategoryChoices(
@@ -697,20 +791,10 @@ class _SearchFiltersState extends State<_SearchFilters> {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const I18nText('Status buka belum tersedia pada data contoh.'),
-          if (_error != null)
-            I18nText(
-              _error ?? '',
-              style: const TextStyle(color: PanganKitaColors.danger),
-            ),
+          if (_error case final String error)
+            _FilterError(error: error),
           const SizedBox(height: 16),
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: PanganKitaColors.brandPrimaryStrong,
-              foregroundColor: Colors.white,
-            ),
-            onPressed: _apply,
-            child: const I18nText('Tampilkan Hasil'),
-          ),
+          _FilterApply(onApply: _apply),
         ],
       ),
     ),
