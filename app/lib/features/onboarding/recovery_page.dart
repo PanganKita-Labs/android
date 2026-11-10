@@ -16,6 +16,7 @@ class RecoveryPage extends StatefulWidget {
   State<RecoveryPage> createState() => _RecoveryPageState();
 }
 
+/// Owns the recovery email input and local validation status.
 class _RecoveryPageState extends State<RecoveryPage> {
   final _form = GlobalKey<FormState>();
   final _email = TextEditingController();
@@ -26,6 +27,7 @@ class _RecoveryPageState extends State<RecoveryPage> {
     super.dispose();
   }
 
+/// Validates the local email input before opening recovery verification.
   void _continue() {
     if (!(_form.currentState?.validate() ?? false)) return;
     FocusScope.of(context).unfocus();
@@ -61,6 +63,7 @@ class _RecoveryPageState extends State<RecoveryPage> {
   );
 }
 
+/// Collects the recovery email for a demonstration route only.
 class _RecoveryForm extends StatelessWidget {
   const new({
     required this.form,
@@ -111,6 +114,7 @@ class _RecoveryForm extends StatelessWidget {
   );
 }
 
+/// Explains the account-recovery preview and navigation.
 class _RecoveryHeader extends StatelessWidget {
   const new();
 

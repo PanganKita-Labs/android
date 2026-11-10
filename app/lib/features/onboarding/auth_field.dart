@@ -31,6 +31,9 @@ class AuthField extends StatefulWidget {
   State<AuthField> createState() => _AuthFieldState();
 }
 
+/// Owns the local password-visibility state of one form field.
+///
+/// Toggling visibility changes presentation only, not stored credentials.
 class _AuthFieldState extends State<AuthField> {
   bool _visible = false;
 
@@ -80,6 +83,7 @@ class _AuthFieldState extends State<AuthField> {
   }
 }
 
+/// Shows or hides password text through its caller callback.
 class _AuthVisibilityButton extends StatelessWidget {
   const new({required this.visible, required this.onToggle});
 
