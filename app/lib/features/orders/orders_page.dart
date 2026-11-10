@@ -34,6 +34,9 @@ class OrdersPage extends StatefulWidget {
   State<OrdersPage> createState() => _OrdersPageState();
 }
 
+/// Owns the selected orders tab and optional local search query.
+///
+/// All displayed orders are static fixtures, not persisted reservations.
 class _OrdersPageState extends State<OrdersPage> {
   late int _selectedTab = widget.initialTab;
   bool _searching = false;
@@ -83,6 +86,7 @@ class _OrdersPageState extends State<OrdersPage> {
   );
 }
 
+/// Shows the orders heading and toggles local search.
 class _OrdersTitle extends StatelessWidget {
   const new({required this.onSearch});
 
@@ -111,6 +115,7 @@ class _OrdersTitle extends StatelessWidget {
   );
 }
 
+/// Labels the illustrative active-orders section.
 class _ActiveOrdersIntro extends StatelessWidget {
   const new();
 
@@ -133,6 +138,7 @@ class _ActiveOrdersIntro extends StatelessWidget {
   );
 }
 
+/// Displays fixture merchant identity and preview marking.
 class _OrderMerchantRow extends StatelessWidget {
   const new({required this.food});
 
@@ -165,6 +171,7 @@ class _OrderMerchantRow extends StatelessWidget {
   );
 }
 
+/// Shows the unavailable example pickup-code placeholder.
 class _OrderPickupCode extends StatelessWidget {
   const new();
 
@@ -194,6 +201,7 @@ class _OrderPickupCode extends StatelessWidget {
   );
 }
 
+/// Collects text for local order filtering.
 class _OrderSearchField extends StatelessWidget {
   const new({required this.onChanged});
 
@@ -220,6 +228,7 @@ class _OrderSearchField extends StatelessWidget {
   );
 }
 
+/// Selects active, completed, or canceled fixture groups.
 class _OrderTabs extends StatelessWidget {
   const new({required this.selected, required this.onSelected});
 
@@ -250,6 +259,7 @@ class _OrderTabs extends StatelessWidget {
   );
 }
 
+/// Displays one active-order example with navigation controls.
 class _OrderExampleCard extends StatelessWidget {
   const new({required this.food});
 
@@ -294,6 +304,7 @@ class _OrderExampleCard extends StatelessWidget {
   );
 }
 
+/// Shows fixture item, quantity, and subtotal information.
 class _OrderItemSummary extends StatelessWidget {
   const new({required this.food});
 
@@ -324,6 +335,7 @@ class _OrderItemSummary extends StatelessWidget {
   );
 }
 
+/// Provides navigation actions for one example order.
 class _OrderCardActions extends StatelessWidget {
   const new({required this.food});
 
@@ -361,6 +373,7 @@ class _OrderCardActions extends StatelessWidget {
   );
 }
 
+/// Marks an illustrative order or merchant as demo content.
 class _ExampleBadge extends StatelessWidget {
   const new();
 

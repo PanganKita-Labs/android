@@ -63,6 +63,7 @@ class OrderDetailPage extends StatelessWidget {
   );
 }
 
+/// Shows an unavailable pickup-code example, not a valid code.
 class _PickupCodeCard extends StatelessWidget {
   const new();
 
@@ -87,6 +88,7 @@ class _PickupCodeCard extends StatelessWidget {
   );
 }
 
+/// Displays merchant identity for the selected example order.
 class _OrderMerchantLine extends StatelessWidget {
   const new({required this.food});
 
@@ -116,6 +118,7 @@ class _OrderMerchantLine extends StatelessWidget {
   );
 }
 
+/// Displays fixture product details for the order preview.
 class _OrderFoodCard extends StatelessWidget {
   const new({required this.food});
 
@@ -161,6 +164,7 @@ class _OrderFoodCard extends StatelessWidget {
   );
 }
 
+/// Shows illustrative pickup instructions and status.
 class _PickupInfoCard extends StatelessWidget {
   const new({required this.food});
 
@@ -186,6 +190,7 @@ class _PickupInfoCard extends StatelessWidget {
   );
 }
 
+/// Shows a sample payment summary without transaction verification.
 class _PaymentInfoCard extends StatelessWidget {
   const new({required this.food});
 
@@ -218,6 +223,7 @@ class _PaymentInfoCard extends StatelessWidget {
   );
 }
 
+/// Explains the current example order status and limitations.
 class _StatusNotice extends StatelessWidget {
   const new();
 
@@ -256,6 +262,7 @@ class _StatusNotice extends StatelessWidget {
   );
 }
 
+/// Displays illustrative order lifecycle steps, not server state.
 class _ProgressPreview extends StatelessWidget {
   const new();
 
@@ -313,6 +320,7 @@ class _ProgressPreview extends StatelessWidget {
   );
 }
 
+/// Provides shared presentation styling for order detail sections.
 class _DetailCard extends StatelessWidget {
   const new({required this.child});
 
@@ -326,6 +334,7 @@ class _DetailCard extends StatelessWidget {
   );
 }
 
+/// Formats a label-value pair in the order preview.
 class _InfoRow extends StatelessWidget {
   const new({
     required this.label,

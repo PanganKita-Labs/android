@@ -68,6 +68,7 @@ class CanceledOrdersSection extends StatelessWidget {
   );
 }
 
+/// Displays one canceled-order fixture with its preview metadata.
 class _CanceledExampleCard extends StatelessWidget {
   const new();
 
@@ -100,6 +101,7 @@ class _CanceledExampleCard extends StatelessWidget {
   );
 }
 
+/// Shows the example merchant for a canceled order.
 class _CanceledMerchantHeader extends StatelessWidget {
   const new({required this.food});
 
@@ -135,6 +137,7 @@ class _CanceledMerchantHeader extends StatelessWidget {
   );
 }
 
+/// Displays the illustrative total for the canceled order.
 class _CanceledTotal extends StatelessWidget {
   const new({required this.priceRupiah});
 
@@ -153,6 +156,7 @@ class _CanceledTotal extends StatelessWidget {
   );
 }
 
+/// Shows the product fixture associated with the canceled order.
 class _CanceledProduct extends StatelessWidget {
   const new({required this.food});
 
@@ -197,6 +201,9 @@ class _CanceledProduct extends StatelessWidget {
   );
 }
 
+/// Shows demonstration actions for a canceled order.
+///
+/// No cancellation or refund operation is sent to a backend.
 class _CanceledActions extends StatelessWidget {
   const new();
 

@@ -49,6 +49,7 @@ class CompletedOrdersSection extends StatelessWidget {
   );
 }
 
+/// Groups completed-order fixtures under a sample date.
 class _DatedCompletedExample extends StatelessWidget {
   const new({required this.date, required this.food, required this.quantity});
 
@@ -95,6 +96,7 @@ class _DatedCompletedExample extends StatelessWidget {
   );
 }
 
+/// Shows the merchant identity for a completed-order example.
 class _MerchantHeader extends StatelessWidget {
   const new({required this.food});
 
@@ -133,6 +135,7 @@ class _MerchantHeader extends StatelessWidget {
   );
 }
 
+/// Displays one historical fixture item, quantity, and price.
 class _CompletedItem extends StatelessWidget {
   const new({required this.food, required this.quantity});
 
@@ -168,6 +171,9 @@ class _CompletedItem extends StatelessWidget {
   );
 }
 
+/// Provides display-only actions for the completed example.
+///
+/// No new purchase, review, or payment is created automatically.
 class _CompletedActions extends StatelessWidget {
   const new({required this.food, required this.quantity});
 

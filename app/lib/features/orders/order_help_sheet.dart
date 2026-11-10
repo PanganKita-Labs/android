@@ -66,6 +66,7 @@ class OrderHelpSheet extends StatelessWidget {
   );
 }
 
+/// Displays the help panel heading and its close action.
 class _OrderHelpHeader extends StatelessWidget {
   const new();
 
@@ -88,6 +89,7 @@ class _OrderHelpHeader extends StatelessWidget {
   );
 }
 
+/// Provides fixture product context to the local help panel.
 class _ExampleOrder extends StatelessWidget {
   const new({required this.food});
 
@@ -126,6 +128,7 @@ class _ExampleOrder extends StatelessWidget {
   );
 }
 
+/// Lists demonstration questions without contacting support.
 class _HelpQuestions extends StatelessWidget {
   const new();
 
@@ -169,6 +172,7 @@ class _HelpQuestions extends StatelessWidget {
   );
 }
 
+/// Displays an FAQ item and its static response.
 class _HelpQuestion extends StatelessWidget {
   const new({
     required this.title,
