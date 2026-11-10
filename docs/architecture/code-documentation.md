@@ -89,6 +89,10 @@ APIs or executable snippets expected to compile verbatim.
 - Do not manufacture repetitive comments for individual test assertions or
   configuration keys that already have self-explanatory names.
 
+See the [file-by-file API contract audit](api-contract-audit.md) for the
+maintained source inventory, explicit documentation decisions, and validation
+evidence boundaries.
+
 ## Coverage boundary
 
 - **Include:** hand-authored `app/lib/**/*.dart`, public types and useful
