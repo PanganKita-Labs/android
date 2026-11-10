@@ -91,6 +91,142 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     super.dispose();
   }
 
+  Map<String, WidgetBuilder> get _introRoutes => {
+    AppRoutes.splash: (context) => const SplashPage(),
+    AppRoutes.welcome: (context) => const WelcomePage(),
+    AppRoutes.login: (context) => const AuthPage.login(),
+    AppRoutes.register: (context) => const AuthPage.register(),
+    AppRoutes.verify: (context) => const OtpPage(),
+    AppRoutes.recover: (context) => const RecoveryPage(),
+    AppRoutes.recoverOtp: (context) => const OtpPage(recovery: true),
+    AppRoutes.password: (context) => const AuthPage.password(),
+    AppRoutes.success: (context) => const PasswordSuccessPage(),
+  };
+
+  Map<String, WidgetBuilder> get _accountRoutes => {
+    AppRoutes.home: (context) => ValueListenableBuilder<String>(
+      valueListenable: _selectedArea,
+      builder: (context, area, child) => HomePage(
+        initialLocation: area,
+        onLocationChanged: (selected) => _selectedArea.value = selected,
+      ),
+    ),
+    AppRoutes.profile: (context) => ProfilePage(
+      readLocation: () => _selectedArea.value,
+      onLocationChanged: (area) => _selectedArea.value = area,
+    ),
+    AppRoutes.editProfile: (context) => const EditProfilePage(),
+    AppRoutes.settings: (context) => SettingsPage(
+      onLocaleChanged: (locale) => _setLocale(locale).ignore(),
+    ),
+    AppRoutes.terms: (context) => const TermsPage(),
+    AppRoutes.privacy: (context) => const SettingsDocumentPage.privacy(),
+    AppRoutes.favorites: (context) => const FavoritesPage(),
+    AppRoutes.support: (context) => const SupportPage(),
+    AppRoutes.location: (context) => LocationSelectionPage(
+      initialArea:
+          ModalRoute.of(context)?.settings.arguments as String? ??
+          _selectedArea.value,
+    ),
+    AppRoutes.search: (context) => SearchPage(
+      initialQuery:
+          ModalRoute.of(context)?.settings.arguments as String? ?? '',
+    ),
+  };
+
+  Map<String, WidgetBuilder> get _merchantRoutes => {
+    AppRoutes.nearbyStores: (context) => const NearbyStoresPage(),
+    AppRoutes.nearbyMap: (context) => const NearbyMapPage(),
+  };
+
+  Map<String, WidgetBuilder> get _ordersRoutes => {
+    AppRoutes.orders: (context) {
+      final tab = ModalRoute.of(context)?.settings.arguments;
+      return OrdersPage(initialTab: tab is OrdersTab ? tab.index : 0);
+    },
+    AppRoutes.orderDetail: (context) {
+      final food = ModalRoute.of(context)?.settings.arguments;
+      return food is DemoFood
+          ? OrderDetailPage(food: food)
+          : const Scaffold(
+              body: Center(child: I18nText('Contoh pesanan tidak tersedia.')),
+            );
+    },
+  };
+
+  Map<String, WidgetBuilder> get _messagesRoutes => {
+    AppRoutes.chat: (context) => const ChatPage(),
+    AppRoutes.merchantChat: (context) {
+      final example = ModalRoute.of(context)?.settings.arguments;
+      return example is ({DemoFood food, String? message})
+          ? MerchantChatPage(
+              food: example.food,
+              previewMessage: example.message,
+            )
+          : const Scaffold(
+              body: Center(
+                child: I18nText('Contoh chat toko tidak tersedia.'),
+              ),
+            );
+    },
+    AppRoutes.notifications: (context) => const NotificationsPage(),
+  };
+
+  Map<String, WidgetBuilder> get _shoppingRoutes => {
+    AppRoutes.cart: (context) => CartPage(cart: _cart),
+    AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),
+    AppRoutes.paymentStatus: (context) => PaymentStatusPage(cart: _cart),
+    AppRoutes.paymentSuccessPreview: (context) =>
+        PaymentSuccessPage(cart: _cart),
+    AppRoutes.paymentFailedPreview: (context) =>
+        PaymentFailedPage(cart: _cart),
+  };
+
+  Map<String, WidgetBuilder> get _followupRoutes => {
+    AppRoutes.pickup: (context) {
+      final example = ModalRoute.of(context)?.settings.arguments;
+      return example is ({DemoFood food, int quantity})
+          ? PickupPage(food: example.food, quantity: example.quantity)
+          : const Scaffold(
+              body: Center(
+                child: I18nText('Contoh pengambilan tidak tersedia.'),
+              ),
+            );
+    },
+    AppRoutes.review: (context) {
+      final example = ModalRoute.of(context)?.settings.arguments;
+      return example is ({DemoFood food, int quantity})
+          ? ReviewPage(food: example.food, quantity: example.quantity)
+          : const Scaffold(
+              body: Center(child: I18nText('Contoh ulasan tidak tersedia.')),
+            );
+    },
+  };
+
+  Map<String, WidgetBuilder> get _dynamicRoutes => {
+    for (final food in DemoFood.examples)
+      AppRoutes.product(food.id): (context) =>
+          ProductDetailPage(food: food, cart: _cart),
+    AppRoutes.product(DemoFood.garlicBread.id): (context) =>
+        ProductDetailPage(food: DemoFood.garlicBread, cart: _cart),
+    for (final food in DemoFood.examples)
+      AppRoutes.directions(food.id): (context) => DirectionsPage(food: food),
+    for (final food in DemoFood.examples)
+      AppRoutes.store(food.id): (context) =>
+          StoreDetailPage(food: food, cart: _cart),
+  };
+
+  Map<String, WidgetBuilder> get _routes => {
+    ..._introRoutes,
+    ..._accountRoutes,
+    ..._merchantRoutes,
+    ..._ordersRoutes,
+    ..._messagesRoutes,
+    ..._shoppingRoutes,
+    ..._followupRoutes,
+    ..._dynamicRoutes,
+  };
+
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'PanganKita',
@@ -100,108 +236,6 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     debugShowCheckedModeBanner: false,
     initialRoute: AppRoutes.splash,
     theme: PanganKitaTheme.light,
-    routes: {
-      AppRoutes.splash: (context) => const SplashPage(),
-      AppRoutes.welcome: (context) => const WelcomePage(),
-      AppRoutes.login: (context) => const AuthPage.login(),
-      AppRoutes.register: (context) => const AuthPage.register(),
-      AppRoutes.verify: (context) => const OtpPage(),
-      AppRoutes.recover: (context) => const RecoveryPage(),
-      AppRoutes.recoverOtp: (context) => const OtpPage(recovery: true),
-      AppRoutes.password: (context) => const AuthPage.password(),
-      AppRoutes.success: (context) => const PasswordSuccessPage(),
-      AppRoutes.home: (context) => ValueListenableBuilder<String>(
-        valueListenable: _selectedArea,
-        builder: (context, area, child) => HomePage(
-          initialLocation: area,
-          onLocationChanged: (selected) => _selectedArea.value = selected,
-        ),
-      ),
-      AppRoutes.profile: (context) => ProfilePage(
-        readLocation: () => _selectedArea.value,
-        onLocationChanged: (area) => _selectedArea.value = area,
-      ),
-      AppRoutes.editProfile: (context) => const EditProfilePage(),
-      AppRoutes.settings: (context) => SettingsPage(
-        onLocaleChanged: (locale) => _setLocale(locale).ignore(),
-      ),
-      AppRoutes.terms: (context) => const TermsPage(),
-      AppRoutes.privacy: (context) => const SettingsDocumentPage.privacy(),
-      AppRoutes.favorites: (context) => const FavoritesPage(),
-      AppRoutes.support: (context) => const SupportPage(),
-      AppRoutes.location: (context) => LocationSelectionPage(
-        initialArea:
-            ModalRoute.of(context)?.settings.arguments as String? ??
-            _selectedArea.value,
-      ),
-      AppRoutes.search: (context) => SearchPage(
-        initialQuery:
-            ModalRoute.of(context)?.settings.arguments as String? ?? '',
-      ),
-      AppRoutes.nearbyStores: (context) => const NearbyStoresPage(),
-      AppRoutes.nearbyMap: (context) => const NearbyMapPage(),
-      AppRoutes.orders: (context) {
-        final tab = ModalRoute.of(context)?.settings.arguments;
-        return OrdersPage(initialTab: tab is OrdersTab ? tab.index : 0);
-      },
-      AppRoutes.orderDetail: (context) {
-        final food = ModalRoute.of(context)?.settings.arguments;
-        return food is DemoFood
-            ? OrderDetailPage(food: food)
-            : const Scaffold(
-                body: Center(child: I18nText('Contoh pesanan tidak tersedia.')),
-              );
-      },
-      AppRoutes.chat: (context) => const ChatPage(),
-      AppRoutes.merchantChat: (context) {
-        final example = ModalRoute.of(context)?.settings.arguments;
-        return example is ({DemoFood food, String? message})
-            ? MerchantChatPage(
-                food: example.food,
-                previewMessage: example.message,
-              )
-            : const Scaffold(
-                body: Center(
-                  child: I18nText('Contoh chat toko tidak tersedia.'),
-                ),
-              );
-      },
-      AppRoutes.notifications: (context) => const NotificationsPage(),
-      AppRoutes.cart: (context) => CartPage(cart: _cart),
-      AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),
-      AppRoutes.paymentStatus: (context) => PaymentStatusPage(cart: _cart),
-      AppRoutes.paymentSuccessPreview: (context) =>
-          PaymentSuccessPage(cart: _cart),
-      AppRoutes.paymentFailedPreview: (context) =>
-          PaymentFailedPage(cart: _cart),
-      AppRoutes.pickup: (context) {
-        final example = ModalRoute.of(context)?.settings.arguments;
-        return example is ({DemoFood food, int quantity})
-            ? PickupPage(food: example.food, quantity: example.quantity)
-            : const Scaffold(
-                body: Center(
-                  child: I18nText('Contoh pengambilan tidak tersedia.'),
-                ),
-              );
-      },
-      AppRoutes.review: (context) {
-        final example = ModalRoute.of(context)?.settings.arguments;
-        return example is ({DemoFood food, int quantity})
-            ? ReviewPage(food: example.food, quantity: example.quantity)
-            : const Scaffold(
-                body: Center(child: I18nText('Contoh ulasan tidak tersedia.')),
-              );
-      },
-      for (final food in DemoFood.examples)
-        AppRoutes.product(food.id): (context) =>
-            ProductDetailPage(food: food, cart: _cart),
-      AppRoutes.product(DemoFood.garlicBread.id): (context) =>
-          ProductDetailPage(food: DemoFood.garlicBread, cart: _cart),
-      for (final food in DemoFood.examples)
-        AppRoutes.directions(food.id): (context) => DirectionsPage(food: food),
-      for (final food in DemoFood.examples)
-        AppRoutes.store(food.id): (context) =>
-            StoreDetailPage(food: food, cart: _cart),
-    },
+    routes: _routes,
   );
 }
