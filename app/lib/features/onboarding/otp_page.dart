@@ -144,17 +144,7 @@ class _OtpPageState extends State<OtpPage> {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 12, color: Colors.blueGrey),
           ),
-          Wrap(
-            alignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              const I18nText('Belum menerima kode?'),
-              TextButton(
-                onPressed: _resend,
-                child: const I18nText('Kirim Ulang'),
-              ),
-            ],
-          ),
+          _OtpResend(onPressed: _resend),
         ],
       ),
     ),
@@ -197,6 +187,22 @@ class _OtpDigitField extends StatelessWidget {
     ),
     onChanged: (value) => onChanged(index, value),
     onTap: () => onTap(index),
+  );
+}
+
+class _OtpResend extends StatelessWidget {
+  const new({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) => Wrap(
+    alignment: WrapAlignment.center,
+    crossAxisAlignment: WrapCrossAlignment.center,
+    children: [
+      const I18nText('Belum menerima kode?'),
+      TextButton(onPressed: onPressed, child: const I18nText('Kirim Ulang')),
+    ],
   );
 }
 
