@@ -50,6 +50,7 @@ class PaymentMethodSheet extends StatelessWidget {
   );
 }
 
+/// Displays a QRIS-branded option for a nonfunctional payment preview.
 class _QrisOption extends StatelessWidget {
   const new();
 

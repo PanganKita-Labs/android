@@ -59,6 +59,7 @@ class PaymentFailedPage extends StatelessWidget {
   );
 }
 
+/// Displays the unavailable payment-result heading.
 class _FailedHeader extends StatelessWidget {
   const new();
 
@@ -87,6 +88,7 @@ class _FailedHeader extends StatelessWidget {
   );
 }
 
+/// Shows order-line fixtures without an attempted transaction.
 class _ExampleOrderCard extends StatelessWidget {
   const new({required this.cart});
 
@@ -119,6 +121,7 @@ class _ExampleOrderCard extends StatelessWidget {
   );
 }
 
+/// Displays illustrative merchant names from cart data.
 class _FailedMerchantRow extends StatelessWidget {
   const new({required this.cart});
 
@@ -147,6 +150,7 @@ class _FailedMerchantRow extends StatelessWidget {
   );
 }
 
+/// Displays one cart line in the unsuccessful-payment preview.
 class _FailedOrderLine extends StatelessWidget {
   const new({required this.line});
 
@@ -181,6 +185,7 @@ class _FailedOrderLine extends StatelessWidget {
   );
 }
 
+/// Shows unavailable payment metadata and the QRIS example.
 class _FailedDetails extends StatelessWidget {
   const new();
 
@@ -217,6 +222,7 @@ class _FailedDetails extends StatelessWidget {
   );
 }
 
+/// Formats a label and value for fixture payment details.
 class _CardDetail extends StatelessWidget {
   const new({required this.label, required this.value});
 
@@ -234,6 +240,7 @@ class _CardDetail extends StatelessWidget {
   );
 }
 
+/// Provides suggested next steps, without processing a retry.
 class _NextStepsCard extends StatelessWidget {
   const new();
 
@@ -272,6 +279,7 @@ class _NextStepsCard extends StatelessWidget {
   );
 }
 
+/// Displays one piece of static payment-preview guidance.
 class _AdviceRow extends StatelessWidget {
   const new({
     required this.icon,
@@ -305,6 +313,7 @@ class _AdviceRow extends StatelessWidget {
   );
 }
 
+/// Navigates to example routes without retrying a real payment.
 class _FailedActions extends StatelessWidget {
   const new();
 
