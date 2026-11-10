@@ -6,6 +6,9 @@ const _logoWidth = 48.0;
 const _logoHeight = 24.0;
 
 /// Shows the only illustrative payment method in the offline prototype.
+///
+/// The returned [Future] completes when the modal is dismissed. Selecting
+/// the QRIS preview does not create a transaction or payment result.
 Future<void> showPaymentMethodSheet(BuildContext context) =>
     showModalBottomSheet<void>(
       context: context,

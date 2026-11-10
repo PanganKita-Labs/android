@@ -16,6 +16,11 @@ const _merchantRadius = 26.0;
 Set<String> _merchantNames(DemoCart cart) =>
     cart.lines.map((line) => line.food.merchant).toSet();
 
+/// Returns a shared example pickup label for [cart], when available.
+///
+/// Uses the single pickup time only if all lines have one merchant and one
+/// time label. Otherwise returns a per-product Checkout hint. An empty cart
+/// also returns that hint.
 String _pickupTimeLabel(DemoCart cart) {
   final merchants = _merchantNames(cart);
   final times = cart.lines.map((line) => line.food.pickupTime).toSet();
