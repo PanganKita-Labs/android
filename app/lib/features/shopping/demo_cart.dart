@@ -19,11 +19,13 @@ class DemoCart extends ChangeNotifier {
   /// Whole-rupiah preview total; the demo service fee is zero.
   int get subtotal => _lines.values.fold(0, (sum, line) => sum + line.total);
 
-  /// Adds an item or combines it with an identically configured line.
+  /// Adds [food] or combines it with an identically configured cart line.
   ///
-  /// Add-on order is normalized before the line ID is calculated.
-  /// Returns false without changing state if that line would exceed
-  /// [quantityLimit]. Throws [RangeError] for an invalid [quantity].
+  /// [quantity] defaults to one and must be between 1 and [quantityLimit].
+  /// [addons] defaults to an empty set and is stored in [DemoAddon] enum order.
+  /// Returns `true` and notifies listeners when a line changes. Returns
+  /// `false` without mutation or notification at the combined-line limit.
+  /// Throws [RangeError] if [quantity] is outside the supported interval.
   bool add(
     DemoFood food, {
     int quantity = 1,
@@ -51,7 +53,8 @@ class DemoCart extends ChangeNotifier {
 
   /// Replaces the quantity of the existing line identified by [id].
   ///
-  /// An unknown [id] is a no-op, but [quantity] is still validated.
+  /// An unknown [id] or unchanged quantity causes no listener notification,
+  /// but [quantity] is validated first. A change notifies listeners once.
   /// Throws [RangeError] for quantities outside 1 to [quantityLimit].
   void setQuantity(String id, int quantity) {
     _checkQuantity(quantity);
@@ -65,18 +68,23 @@ class DemoCart extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Removes an individual configuration.
+  /// Removes the cart line identified by [id], if present.
+  ///
+  /// Notifies listeners only when an existing line is removed.
   void remove(String id) {
     if (_lines.remove(id) != null) notifyListeners();
   }
 
-  /// Clears the local cart without affecting any listing or inventory.
+  /// Clears local cart lines without changing any fixture inventory.
+  ///
+  /// Notifies listeners only when the cart was nonempty.
   void clear() {
     if (_lines.isEmpty) return;
     _lines.clear();
     notifyListeners();
   }
 
+  /// Throws [RangeError] if [quantity] is outside 1 to [quantityLimit].
   void _checkQuantity(int quantity) {
     if (quantity < 1 || quantity > quantityLimit) {
       throw RangeError.range(quantity, 1, quantityLimit, 'quantity');
@@ -84,9 +92,16 @@ class DemoCart extends ChangeNotifier {
   }
 }
 
-/// Immutable configuration of one local cart line.
+/// Display snapshot for one configured local-cart line.
+///
+/// Fields are final, but [addons] may be mutable if constructed directly.
+/// [DemoCart.add] supplies an unmodifiable add-on list instead.
 class DemoCartLine {
-  /// Creates a display snapshot, not an inventory reservation.
+  /// Creates a display line for [food], [quantity], and [addons].
+  ///
+  /// The constructor retains [addons] without copying or validation.
+  /// [DemoCart.add] validates quantity and normalizes the add-on list.
+  /// Direct construction neither notifies listeners nor reserves stock.
   const new({required this.food, required this.quantity, required this.addons});
 
   /// Selected home fixture.
@@ -95,8 +110,10 @@ class DemoCartLine {
   /// Preview quantity.
   final int quantity;
 
-  /// Canonically ordered options.
-  /// The cart stores these as an unmodifiable list.
+  /// Selected add-ons, retained by reference without copying.
+  ///
+  /// [DemoCart.add] supplies an unmodifiable list in canonical enum order;
+  /// a directly constructed line does not guarantee those properties.
   final List<DemoAddon> addons;
 
   /// Combines the food ID and selected add-ons into a line identity.
