@@ -246,17 +246,7 @@ class _AuthFormState extends State<_AuthForm> {
             password: true,
             validator: _confirmation,
           ),
-        if (_login)
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () => Navigator.pushNamed(context, AppRoutes.recover),
-              child: const I18nText(
-                'Lupa Password?',
-                style: TextStyle(fontSize: 13, color: Colors.blueGrey),
-              ),
-            ),
-          ),
+        if (_login) const _ForgotPasswordLink(),
         SizedBox(height: _login ? _submitGap : _compactSubmitGap),
         FilledButton(
           onPressed: () {
@@ -265,6 +255,22 @@ class _AuthFormState extends State<_AuthForm> {
           child: I18nText(widget.mode.submitLabel),
         ),
       ],
+    ),
+  );
+}
+
+class _ForgotPasswordLink extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Align(
+    alignment: Alignment.centerRight,
+    child: TextButton(
+      onPressed: () => Navigator.pushNamed(context, AppRoutes.recover),
+      child: const I18nText(
+        'Lupa Password?',
+        style: TextStyle(fontSize: 13, color: Colors.blueGrey),
+      ),
     ),
   );
 }

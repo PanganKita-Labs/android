@@ -48,62 +48,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
         children: [
-          Row(
-            children: [
-              IconButton.filledTonal(
-                tooltip: translateDisplayText(
-                  context,
-                  'Kembali ke Profil Saya',
-                ),
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(11)),
-                  ),
-                ),
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back, color: _ink),
-              ),
-              const SizedBox(width: 8),
-              I18nText(
-                'Edit Profil',
-                style: Theme.of(context).textTheme.headlineLarge
-                    ?.copyWith(color: _ink),
-              ),
-            ],
-          ),
+          const _EditProfileHeader(),
           const SizedBox(height: 36),
-          Center(
-            child: Stack(
-              children: [
-                const CircleAvatar(
-                  radius: 92,
-                  backgroundImage: AssetImage('assets/prototype/avatar.webp'),
-                ),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: IconButton.filled(
-                    tooltip: translateDisplayText(
-                      context,
-                      'Ubah foto belum tersedia',
-                    ),
-                    onPressed: () => DemoNotice.unavailable(context),
-                    icon: const Icon(Icons.camera_alt_outlined),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Center(
-            child: TextButton(
-              onPressed: () => DemoNotice.unavailable(context),
-              child: const I18nText(
-                'Ubah Foto',
-                style: TextStyle(decoration: TextDecoration.underline),
-              ),
-            ),
-          ),
+          const _EditPhotoControls(),
           const SizedBox(height: 28),
           Theme(
             data: Theme.of(context).copyWith(
@@ -120,23 +67,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           const SizedBox(height: 26),
           I18nText('Keamanan', style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 10),
-          Card(
-            color: Colors.white,
-            margin: EdgeInsets.zero,
-            child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 10,
-              ),
-              leading: const Icon(Icons.lock_outline, color: _ink),
-              title: I18nText(
-                'Ubah Password',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => DemoNotice.unavailable(context),
-            ),
-          ),
+          const _EditSecurityLink(),
           const SizedBox(height: 42),
           FilledButton(
             style: FilledButton.styleFrom(
@@ -149,6 +80,95 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ],
       ),
+    ),
+  );
+}
+
+class _EditProfileHeader extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      IconButton.filledTonal(
+        tooltip: translateDisplayText(context, 'Kembali ke Profil Saya'),
+        style: IconButton.styleFrom(
+          backgroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(11)),
+          ),
+        ),
+        onPressed: () => Navigator.pop(context),
+        icon: const Icon(Icons.arrow_back, color: _ink),
+      ),
+      const SizedBox(width: 8),
+      I18nText(
+        'Edit Profil',
+        style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: _ink),
+      ),
+    ],
+  );
+}
+
+class _EditPhotoControls extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Center(
+        child: Stack(
+          children: [
+            const CircleAvatar(
+              radius: 92,
+              backgroundImage: AssetImage('assets/prototype/avatar.webp'),
+            ),
+            Positioned(
+              right: 0,
+              bottom: 0,
+              child: IconButton.filled(
+                tooltip: translateDisplayText(
+                  context,
+                  'Ubah foto belum tersedia',
+                ),
+                onPressed: () => DemoNotice.unavailable(context),
+                icon: const Icon(Icons.camera_alt_outlined),
+              ),
+            ),
+          ],
+        ),
+      ),
+      Center(
+        child: TextButton(
+          onPressed: () => DemoNotice.unavailable(context),
+          child: const I18nText(
+            'Ubah Foto',
+            style: TextStyle(decoration: TextDecoration.underline),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+class _EditSecurityLink extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Card(
+    color: Colors.white,
+    margin: EdgeInsets.zero,
+    child: ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      leading: const Icon(Icons.lock_outline, color: _ink),
+      title: I18nText(
+        'Ubah Password',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => DemoNotice.unavailable(context),
     ),
   );
 }

@@ -105,102 +105,115 @@ class _ExampleOrderCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: _merchantRadius,
-                backgroundImage: _merchantNames(cart).length == 1
-                    ? AssetImage(cart.lines.first.food.image)
-                    : null,
-                child: _merchantNames(cart).length == 1
-                    ? null
-                    : const Icon(Icons.storefront_outlined),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: I18nText(
-                  _merchantNames(cart).join(', '),
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              ),
-            ],
-          ),
+          _FailedMerchantRow(cart: cart),
           const SizedBox(height: 16),
           for (final line in cart.lines) ...[
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(_productRadius),
-                  ),
-                  child: SizedBox.square(
-                    dimension: _productSize,
-                    child: Image.asset(line.food.image, fit: BoxFit.cover),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      I18nText(
-                        line.food.title,
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      I18nText(line.food.merchant),
-                      const SizedBox(height: 4),
-                      I18nText(
-                        '${line.quantity} x ${formatRupiah(line.unitPrice)}',
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            _FailedOrderLine(line: line),
             const SizedBox(height: 10),
           ],
           const Divider(height: 24),
-          const Wrap(
-            spacing: _detailSpacing,
-            runSpacing: _detailRunSpacing,
-            children: [
-              SizedBox(
-                width: _methodWidth,
-                child: _CardDetail(
-                  label: 'Metode pembayaran',
-                  value: 'QRIS contoh',
-                ),
-              ),
-              SizedBox(
-                width: _statusWidth,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    I18nText('Status'),
-                    SizedBox(height: 6),
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFCE8E5),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(_badgeRadius),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 5,
-                        ),
-                        child: I18nText('Belum tersedia'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          const _FailedDetails(),
         ],
       ),
     ),
+  );
+}
+
+class _FailedMerchantRow extends StatelessWidget {
+  const new({required this.cart});
+
+  final DemoCart cart;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      CircleAvatar(
+        radius: _merchantRadius,
+        backgroundImage: _merchantNames(cart).length == 1
+            ? AssetImage(cart.lines.first.food.image)
+            : null,
+        child: _merchantNames(cart).length == 1
+            ? null
+            : const Icon(Icons.storefront_outlined),
+      ),
+      const SizedBox(width: 10),
+      Expanded(
+        child: I18nText(
+          _merchantNames(cart).join(', '),
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ),
+    ],
+  );
+}
+
+class _FailedOrderLine extends StatelessWidget {
+  const new({required this.line});
+
+  final DemoCartLine line;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(_productRadius)),
+        child: SizedBox.square(
+          dimension: _productSize,
+          child: Image.asset(line.food.image, fit: BoxFit.cover),
+        ),
+      ),
+      const SizedBox(width: 12),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            I18nText(
+              line.food.title,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            I18nText(line.food.merchant),
+            const SizedBox(height: 4),
+            I18nText('${line.quantity} x ${formatRupiah(line.unitPrice)}'),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+class _FailedDetails extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const Wrap(
+    spacing: _detailSpacing,
+    runSpacing: _detailRunSpacing,
+    children: [
+      SizedBox(
+        width: _methodWidth,
+        child: _CardDetail(label: 'Metode pembayaran', value: 'QRIS contoh'),
+      ),
+      SizedBox(
+        width: _statusWidth,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            I18nText('Status'),
+            SizedBox(height: 6),
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: Color(0xFFFCE8E5),
+                borderRadius: BorderRadius.all(Radius.circular(_badgeRadius)),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: I18nText('Belum tersedia'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
   );
 }
 

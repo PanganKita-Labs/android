@@ -79,6 +79,128 @@ class _NearbyMapPageState extends State<NearbyMapPage> {
   }
 }
 
+class _MapLocationHeadline extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      I18nText(
+        'Toko di Sekitarmu',
+        style: Theme.of(context).textTheme.headlineSmall,
+      ),
+      Row(
+        children: [
+          const Icon(
+            Icons.location_on_outlined,
+            size: 16,
+            color: PanganKitaColors.brandPrimaryStrong,
+          ),
+          Expanded(
+            child: I18nText(
+              'Mandala by Pass, Medan',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+        ],
+      ),
+    ],
+  );
+}
+
+class _MapDeviceLocationButton extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Positioned(
+    right: _mapInset,
+    bottom: _mapBottomInset,
+    child: IconButton.filledTonal(
+      tooltip: translateDisplayText(context, 'Lokasi perangkat belum tersedia'),
+      style: IconButton.styleFrom(
+        backgroundColor: Colors.white,
+        foregroundColor: PanganKitaColors.brandPrimaryStrong,
+      ),
+      onPressed: () => DemoNotice.unavailable(context),
+      icon: const Icon(Icons.my_location),
+    ),
+  );
+}
+
+class _MapStoreSheetHeader extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Center(
+        child: Container(
+          width: _sheetHandleWidth,
+          height: _sheetHandleHeight,
+          decoration: const BoxDecoration(
+            color: PanganKitaColors.borderNeutral,
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+          ),
+        ),
+      ),
+      const SizedBox(height: 10),
+      Row(
+        children: [
+          const Spacer(),
+          SizedBox(
+            width: _listButtonWidth,
+            child: OutlinedButton.icon(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.list, size: 18),
+              label: const I18nText('Lihat daftar'),
+            ),
+          ),
+        ],
+      ),
+    ],
+  );
+}
+
+class _MapStorePhoto extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => ClipRRect(
+    borderRadius: const BorderRadius.all(Radius.circular(14)),
+    child: SizedBox.square(
+      dimension: _sheetImageSize,
+      child: Image.asset(
+        food.id == 'buns'
+            ? 'assets/prototype/store-croissants.webp'
+            : food.image,
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
+}
+
+class _MapStoreRating extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      const Icon(Icons.star, size: 17, color: PanganKitaColors.brandAccent),
+      Expanded(
+        child: I18nText('${food.rating.split(' ').first} · contoh rating'),
+      ),
+    ],
+  );
+}
+
 class _MapHeader extends StatelessWidget {
   const new();
 
@@ -93,34 +215,7 @@ class _MapHeader extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
         ),
         const SizedBox(width: 8),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              I18nText(
-                'Toko di Sekitarmu',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              Row(
-                children: [
-                  const Icon(
-                    Icons.location_on_outlined,
-                    size: 16,
-                    color: PanganKitaColors.brandPrimaryStrong,
-                  ),
-                  Expanded(
-                    child: I18nText(
-                      'Mandala by Pass, Medan',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+        const Expanded(child: _MapLocationHeadline()),
         IconButton.filledTonal(
           tooltip: translateDisplayText(context, 'Filter peta belum tersedia'),
           style: IconButton.styleFrom(
@@ -172,22 +267,7 @@ class _MerchantMap extends StatelessWidget {
           ),
         ),
       const _MapFilterChips(),
-      Positioned(
-        right: _mapInset,
-        bottom: _mapBottomInset,
-        child: IconButton.filledTonal(
-          tooltip: translateDisplayText(
-            context,
-            'Lokasi perangkat belum tersedia',
-          ),
-          style: IconButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: PanganKitaColors.brandPrimaryStrong,
-          ),
-          onPressed: () => DemoNotice.unavailable(context),
-          icon: const Icon(Icons.my_location),
-        ),
-      ),
+      const _MapDeviceLocationButton(),
       Positioned(
         left: _mapLabelInset,
         bottom: _mapBottomInset,
@@ -367,30 +447,7 @@ class _MapStoreSheet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Center(
-            child: Container(
-              width: _sheetHandleWidth,
-              height: _sheetHandleHeight,
-              decoration: const BoxDecoration(
-                color: PanganKitaColors.borderNeutral,
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              const Spacer(),
-              SizedBox(
-                width: _listButtonWidth,
-                child: OutlinedButton.icon(
-                  onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.list, size: 18),
-                  label: const I18nText('Lihat daftar'),
-                ),
-              ),
-            ],
-          ),
+          const _MapStoreSheetHeader(),
           _MapStoreSummary(food: food),
           const SizedBox(height: 14),
           OutlinedButton.icon(
@@ -433,18 +490,7 @@ class _MapStoreSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: [
-      ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(14)),
-        child: SizedBox.square(
-          dimension: _sheetImageSize,
-          child: Image.asset(
-            food.id == 'buns'
-                ? 'assets/prototype/store-croissants.webp'
-                : food.image,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
+      _MapStorePhoto(food: food),
       const SizedBox(width: 14),
       Expanded(
         child: Column(
@@ -457,20 +503,7 @@ class _MapStoreSummary extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 5),
-            Row(
-              children: [
-                const Icon(
-                  Icons.star,
-                  size: 17,
-                  color: PanganKitaColors.brandAccent,
-                ),
-                Expanded(
-                  child: I18nText(
-                    '${food.rating.split(' ').first} · contoh rating',
-                  ),
-                ),
-              ],
-            ),
+            _MapStoreRating(food: food),
             const SizedBox(height: 5),
             const Row(
               children: [
@@ -497,31 +530,7 @@ class _StreetPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawColor(const Color(0xFFF8F5EF), BlendMode.src);
-    final block = Paint()..color = const Color(0xFFECE8E1);
-    final parcel = Paint()..color = const Color(0xFFF4F0E9);
-    for (var x = -_streetStep; x < size.width; x += _streetStep) {
-      for (var y = -_streetStep; y < size.height; y += _streetStep) {
-        canvas
-          ..drawRect(
-            Rect.fromLTWH(
-              x + _blockInset,
-              y + _blockInset,
-              _streetStep - _blockInset,
-              _streetStep - _blockInset * 2,
-            ),
-            block,
-          )
-          ..drawRect(
-            Rect.fromLTWH(
-              x + _parcelInset,
-              y + _parcelInset,
-              _parcelWidth,
-              _parcelHeight,
-            ),
-            parcel,
-          );
-      }
-    }
+    _drawBlocks(canvas, size);
     canvas.drawRect(
       Rect.fromLTWH(
         size.width * _parkLeft,
@@ -561,6 +570,34 @@ class _StreetPainter extends CustomPainter {
           ..style = PaintingStyle.stroke
           ..strokeWidth = _mainRoadWidth,
       );
+  }
+
+  void _drawBlocks(Canvas canvas, Size size) {
+    final block = Paint()..color = const Color(0xFFECE8E1);
+    final parcel = Paint()..color = const Color(0xFFF4F0E9);
+    for (var x = -_streetStep; x < size.width; x += _streetStep) {
+      for (var y = -_streetStep; y < size.height; y += _streetStep) {
+        canvas
+          ..drawRect(
+            Rect.fromLTWH(
+              x + _blockInset,
+              y + _blockInset,
+              _streetStep - _blockInset,
+              _streetStep - _blockInset * 2,
+            ),
+            block,
+          )
+          ..drawRect(
+            Rect.fromLTWH(
+              x + _parcelInset,
+              y + _parcelInset,
+              _parcelWidth,
+              _parcelHeight,
+            ),
+            parcel,
+          );
+      }
+    }
   }
 
   @override

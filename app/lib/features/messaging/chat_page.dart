@@ -198,6 +198,33 @@ class _ChatFilters extends StatelessWidget {
   );
 }
 
+class _ConversationMeta extends StatelessWidget {
+  const new({required this.time, required this.unreadCount});
+
+  final String time;
+  final int unreadCount;
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    width: _trailingWidth,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        I18nText(time, style: Theme.of(context).textTheme.bodySmall),
+        if (unreadCount > 0)
+          CircleAvatar(
+            radius: _unreadBadgeRadius,
+            backgroundColor: PanganKitaColors.brandPrimaryStrong,
+            child: I18nText(
+              '$unreadCount',
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+      ],
+    ),
+  );
+}
+
 class _ConversationRow extends StatelessWidget {
   const new({
     required this.food,
@@ -249,24 +276,7 @@ class _ConversationRow extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        trailing: SizedBox(
-          width: _trailingWidth,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              I18nText(time, style: Theme.of(context).textTheme.bodySmall),
-              if (unreadCount > 0)
-                CircleAvatar(
-                  radius: _unreadBadgeRadius,
-                  backgroundColor: PanganKitaColors.brandPrimaryStrong,
-                  child: I18nText(
-                    '$unreadCount',
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-            ],
-          ),
-        ),
+        trailing: _ConversationMeta(time: time, unreadCount: unreadCount),
         onTap: () => Navigator.pushNamed<void>(
           context,
           AppRoutes.merchantChat,

@@ -46,28 +46,11 @@ class _OrdersPageState extends State<OrdersPage> {
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 24),
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: I18nText(
-                  'Pesanan',
-                  style: Theme.of(context).textTheme.displayLarge
-                      ?.copyWith(color: _ink),
-                ),
-              ),
-              IconButton(
-                tooltip: translateDisplayText(context, 'Cari pesanan'),
-                onPressed: () => setState(() {
-                  _searching = !_searching;
-                  if (!_searching) _query = '';
-                }),
-                icon: const Image(
-                  image: AssetImage('assets/prototype/icon-search.png'),
-                  width: 26,
-                  height: 26,
-                ),
-              ),
-            ],
+          _OrdersTitle(
+            onSearch: () => setState(() {
+              _searching = !_searching;
+              if (!_searching) _query = '';
+            }),
           ),
           const I18nText('Makanan favoritmu, siap dinikmati.'),
           if (_searching) ...[
@@ -83,17 +66,7 @@ class _OrdersPageState extends State<OrdersPage> {
           ),
           const SizedBox(height: 22),
           if (_selectedTab == 0) ...[
-            I18nText(
-              'Contoh pesanan aktif',
-              style: Theme.of(context).textTheme.titleLarge
-                  ?.copyWith(color: _ink),
-            ),
-            const SizedBox(height: 6),
-            const I18nText(
-              'Contoh tampilan · belum ada pesanan nyata.',
-              style: TextStyle(color: Colors.black54),
-            ),
-            const SizedBox(height: 16),
+            const _ActiveOrdersIntro(),
             for (final food in _sampleFoods.where(
               (food) => food.matches(_query, 'Semua'),
             )) ...[_OrderExampleCard(food: food), const SizedBox(height: 16)],
@@ -107,6 +80,117 @@ class _OrdersPageState extends State<OrdersPage> {
       ),
     ),
     bottomNavigationBar: const AppBottomNavigation(selectedIndex: 1),
+  );
+}
+
+class _OrdersTitle extends StatelessWidget {
+  const new({required this.onSearch});
+
+  final VoidCallback onSearch;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(
+        child: I18nText(
+          'Pesanan',
+          style: Theme.of(context).textTheme.displayLarge
+              ?.copyWith(color: _ink),
+        ),
+      ),
+      IconButton(
+        tooltip: translateDisplayText(context, 'Cari pesanan'),
+        onPressed: onSearch,
+        icon: const Image(
+          image: AssetImage('assets/prototype/icon-search.png'),
+          width: 26,
+          height: 26,
+        ),
+      ),
+    ],
+  );
+}
+
+class _ActiveOrdersIntro extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      I18nText(
+        'Contoh pesanan aktif',
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(color: _ink),
+      ),
+      const SizedBox(height: 6),
+      const I18nText(
+        'Contoh tampilan · belum ada pesanan nyata.',
+        style: TextStyle(color: Colors.black54),
+      ),
+      const SizedBox(height: 16),
+    ],
+  );
+}
+
+class _OrderMerchantRow extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      CircleAvatar(
+        radius: _merchantRadius,
+        backgroundColor: PanganKitaColors.savingsSurface,
+        backgroundImage: food.merchant == 'Mawar Bakery & Cake'
+            ? const AssetImage('assets/prototype/mawar-mark.webp')
+            : null,
+        child: food.merchant == 'Mawar Bakery & Cake'
+            ? null
+            : I18nText(food.merchant.substring(0, 1)),
+      ),
+      const SizedBox(width: 8),
+      Expanded(
+        child: I18nText(
+          food.merchant,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+      ),
+      const _ExampleBadge(),
+    ],
+  );
+}
+
+class _OrderPickupCode extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const DecoratedBox(
+    decoration: BoxDecoration(
+      color: PanganKitaColors.positiveSurfaceMuted,
+      borderRadius: BorderRadius.all(Radius.circular(_codeRadius)),
+    ),
+    child: Padding(
+      padding: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          I18nText('Kode pengambilan'),
+          I18nText(
+            'Belum tersedia',
+            style: TextStyle(
+              fontFamily: PanganKitaTheme.emphasisFontFamily,
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    ),
   );
 }
 
@@ -180,30 +264,7 @@ class _OrderExampleCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: _cardGap,
         children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: _merchantRadius,
-                backgroundColor: PanganKitaColors.savingsSurface,
-                backgroundImage: food.merchant == 'Mawar Bakery & Cake'
-                    ? const AssetImage('assets/prototype/mawar-mark.webp')
-                    : null,
-                child: food.merchant == 'Mawar Bakery & Cake'
-                    ? null
-                    : I18nText(food.merchant.substring(0, 1)),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: I18nText(
-                  food.merchant,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-              ),
-              const _ExampleBadge(),
-            ],
-          ),
+          _OrderMerchantRow(food: food),
           _OrderItemSummary(food: food),
           const Divider(height: 1),
           Row(
@@ -215,29 +276,7 @@ class _OrderExampleCard extends StatelessWidget {
               ),
             ],
           ),
-          const DecoratedBox(
-            decoration: BoxDecoration(
-              color: PanganKitaColors.positiveSurfaceMuted,
-              borderRadius: BorderRadius.all(Radius.circular(_codeRadius)),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  I18nText('Kode pengambilan'),
-                  I18nText(
-                    'Belum tersedia',
-                    style: TextStyle(
-                      fontFamily: PanganKitaTheme.emphasisFontFamily,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const _OrderPickupCode(),
           Row(
             children: [
               const Expanded(child: I18nText('Total pembayaran contoh')),

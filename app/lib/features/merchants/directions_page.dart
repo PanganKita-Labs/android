@@ -54,65 +54,84 @@ class _DirectionsPageState extends State<DirectionsPage> {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
-              child: Row(
-                children: [
-                  IconButton(
-                    tooltip: translateDisplayText(
-                      context,
-                      'Kembali ke peta toko',
-                    ),
-                    onPressed: _backToMap,
-                    icon: const Icon(Icons.arrow_back),
-                  ),
-                  const SizedBox(width: 8),
-                  I18nText(
-                    'Petunjuk Arah',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ],
-              ),
-            ),
+            _DirectionsHeader(onBack: _backToMap),
             _Destination(food: widget.food),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 10),
-              child: Row(
-                children: [
-                  for (var i = 0; i < _modes.length; i++) ...[
-                    if (i > 0) const SizedBox(width: 8),
-                    Expanded(
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          backgroundColor: _mode == i
-                              ? PanganKitaColors.savingsSurface
-                              : Colors.white,
-                          foregroundColor: _green,
-                        ),
-                        onPressed: () => setState(() => _mode = i),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(_modes[i].icon),
-                            I18nText(
-                              _modes[i].label,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ],
-              ),
+            _DirectionsModes(
+              selected: _mode,
+              onSelected: (index) => setState(() => _mode = index),
             ),
             const Expanded(child: _RouteMap()),
             _DirectionsSheet(food: widget.food, mode: _modes[_mode].label),
           ],
         ),
       ),
+    ),
+  );
+}
+
+class _DirectionsHeader extends StatelessWidget {
+  const new({required this.onBack});
+
+  final VoidCallback onBack;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
+    child: Row(
+      children: [
+        IconButton(
+          tooltip: translateDisplayText(context, 'Kembali ke peta toko'),
+          onPressed: onBack,
+          icon: const Icon(Icons.arrow_back),
+        ),
+        const SizedBox(width: 8),
+        I18nText(
+          'Petunjuk Arah',
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+      ],
+    ),
+  );
+}
+
+class _DirectionsModes extends StatelessWidget {
+  const new({required this.selected, required this.onSelected});
+
+  final int selected;
+  final ValueChanged<int> onSelected;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 10),
+    child: Row(
+      children: [
+        for (var i = 0; i < _modes.length; i++) ...[
+          if (i > 0) const SizedBox(width: 8),
+          Expanded(
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                backgroundColor: selected == i
+                    ? PanganKitaColors.savingsSurface
+                    : Colors.white,
+                foregroundColor: _green,
+              ),
+              onPressed: () => onSelected(i),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(_modes[i].icon),
+                  I18nText(
+                    _modes[i].label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ],
     ),
   );
 }

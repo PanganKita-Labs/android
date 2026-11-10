@@ -44,24 +44,7 @@ class OrderDetailPage extends StatelessWidget {
           const SizedBox(height: 16),
           const _ProgressPreview(),
           const SizedBox(height: 16),
-          _DetailCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                I18nText(
-                  'Kode pengambilan',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                I18nText(
-                  'Belum tersedia',
-                  style: Theme.of(context).textTheme.headlineMedium
-                      ?.copyWith(color: _ink),
-                ),
-                const SizedBox(height: 6),
-                const I18nText('Belum ada pesanan atau kode yang dibuat.'),
-              ],
-            ),
-          ),
+          const _PickupCodeCard(),
           const SizedBox(height: 12),
           _OrderFoodCard(food: food),
           const SizedBox(height: 12),
@@ -80,6 +63,59 @@ class OrderDetailPage extends StatelessWidget {
   );
 }
 
+class _PickupCodeCard extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => _DetailCard(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        I18nText(
+          'Kode pengambilan',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        I18nText(
+          'Belum tersedia',
+          style: Theme.of(context).textTheme.headlineMedium
+              ?.copyWith(color: _ink),
+        ),
+        const SizedBox(height: 6),
+        const I18nText('Belum ada pesanan atau kode yang dibuat.'),
+      ],
+    ),
+  );
+}
+
+class _OrderMerchantLine extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      CircleAvatar(
+        radius: _merchantRadius,
+        backgroundImage: AssetImage(food.image),
+      ),
+      const SizedBox(width: 12),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            I18nText(
+              food.merchant,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            I18nText(food.pickupAddress),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
 class _OrderFoodCard extends StatelessWidget {
   const new({required this.food});
 
@@ -90,27 +126,7 @@ class _OrderFoodCard extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Row(
-          children: [
-            CircleAvatar(
-              radius: _merchantRadius,
-              backgroundImage: AssetImage(food.image),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  I18nText(
-                    food.merchant,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  I18nText(food.pickupAddress),
-                ],
-              ),
-            ),
-          ],
-        ),
+        _OrderMerchantLine(food: food),
         const Divider(height: 24),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,

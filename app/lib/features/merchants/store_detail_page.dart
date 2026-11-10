@@ -187,24 +187,7 @@ class _MerchantSummary extends StatelessWidget {
               '${_storeCategory(food)} · contoh',
               style: Theme.of(context).textTheme.bodySmall,
             ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.star,
-                  size: 14,
-                  color: PanganKitaColors.brandAccent,
-                ),
-                const SizedBox(width: 3),
-                Flexible(
-                  child: I18nText(
-                    '${food.rating} · contoh',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ),
-              ],
-            ),
+            _StoreRating(food: food),
             I18nText(
               'Jarak belum tersedia',
               style: Theme.of(context).textTheme.bodySmall,
@@ -212,17 +195,46 @@ class _MerchantSummary extends StatelessWidget {
           ],
         ),
       ),
-      const DecoratedBox(
-        decoration: BoxDecoration(
-          color: PanganKitaColors.savingsSurface,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 9, vertical: 5),
-          child: I18nText('Contoh'),
+      const _StoreDemoBadge(),
+    ],
+  );
+}
+
+class _StoreRating extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      const Icon(Icons.star, size: 14, color: PanganKitaColors.brandAccent),
+      const SizedBox(width: 3),
+      Flexible(
+        child: I18nText(
+          '${food.rating} · contoh',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
       ),
     ],
+  );
+}
+
+class _StoreDemoBadge extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const DecoratedBox(
+    decoration: BoxDecoration(
+      color: PanganKitaColors.savingsSurface,
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+    ),
+    child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+      child: I18nText('Contoh'),
+    ),
   );
 }
 

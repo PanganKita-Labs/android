@@ -46,111 +46,14 @@ class ProfilePage extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
         children: [
-          Row(
-            children: [
-              IconButton(
-                tooltip: translateDisplayText(context, 'Kembali ke Beranda'),
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back, color: _profileInk),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: I18nText(
-                  'Profil Saya',
-                  style: Theme.of(context).textTheme.headlineMedium
-                      ?.copyWith(color: _profileInk),
-                ),
-              ),
-              IconButton(
-                tooltip: translateDisplayText(context, 'Buka Pengaturan'),
-                onPressed: () =>
-                    Navigator.pushNamed(context, AppRoutes.settings).ignore(),
-                icon: const Icon(Icons.settings_outlined, color: _profileInk),
-              ),
-            ],
-          ),
+          const _ProfileHeader(),
           const SizedBox(height: 20),
-          const Center(
-            child: CircleAvatar(
-              radius: 72,
-              backgroundImage: AssetImage('assets/prototype/avatar.webp'),
-            ),
-          ),
-          const SizedBox(height: 12),
-          I18nText(
-            'Vincent',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineMedium
-                ?.copyWith(color: _profileInk),
-          ),
-          I18nText(
-            'vincent@example.com • contoh',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          const SizedBox(height: 14),
-          Center(
-            child: OutlinedButton.icon(
-              onPressed: () =>
-                  Navigator.pushNamed(context, AppRoutes.editProfile).ignore(),
-              icon: const Icon(Icons.edit_outlined),
-              label: const I18nText('Edit Profil'),
-            ),
-          ),
+          const _ProfileIdentity(),
           const SizedBox(height: 18),
-          Container(
-            padding: const EdgeInsets.all(18),
-            decoration: const BoxDecoration(
-              color: PanganKitaColors.savingsSurface,
-              borderRadius: BorderRadius.all(Radius.circular(14)),
-            ),
-            child: Row(
-              children: [
-                const CircleAvatar(
-                  backgroundColor: Color(0xFFD8F2E0),
-                  child: Icon(Icons.eco_outlined, color: _profileGreen),
-                ),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: I18nText(
-                    'Terima kasih sudah ikut menyelamatkan makanan.',
-                    style: Theme.of(context).textTheme.titleMedium
-                        ?.copyWith(color: _profileInk),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          const _ProfileImpactNotice(),
           const SizedBox(height: 16),
-          _ProfileMenu(
-            items: [
-              _ProfileItem(
-                Icons.receipt_long_outlined,
-                'Riwayat Pesanan',
-                () => Navigator.pushNamed(context, AppRoutes.orders).ignore(),
-              ),
-              _ProfileItem(
-                Icons.favorite_border,
-                'Favorit Saya',
-                () =>
-                    Navigator.pushNamed(context, AppRoutes.favorites).ignore(),
-              ),
-              _ProfileItem(
-                Icons.location_on_outlined,
-                'Lokasi Saya',
-                () => _chooseLocation(context).ignore(),
-              ),
-              _ProfileItem(
-                Icons.settings_outlined,
-                'Pengaturan',
-                () => Navigator.pushNamed(context, AppRoutes.settings).ignore(),
-              ),
-              _ProfileItem(
-                Icons.help_outline,
-                'Pusat Bantuan',
-                () => Navigator.pushNamed(context, AppRoutes.support).ignore(),
-              ),
-            ],
+          _ProfileNavigation(
+            onChooseLocation: () => _chooseLocation(context).ignore(),
           ),
           const SizedBox(height: 14),
           _ProfileMenu(
@@ -166,6 +69,136 @@ class ProfilePage extends StatelessWidget {
         ],
       ),
     ),
+  );
+}
+
+class _ProfileHeader extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      IconButton(
+        tooltip: translateDisplayText(context, 'Kembali ke Beranda'),
+        onPressed: () => Navigator.pop(context),
+        icon: const Icon(Icons.arrow_back, color: _profileInk),
+      ),
+      const SizedBox(width: 8),
+      Expanded(
+        child: I18nText(
+          'Profil Saya',
+          style: Theme.of(context).textTheme.headlineMedium
+              ?.copyWith(color: _profileInk),
+        ),
+      ),
+      IconButton(
+        tooltip: translateDisplayText(context, 'Buka Pengaturan'),
+        onPressed: () =>
+            Navigator.pushNamed(context, AppRoutes.settings).ignore(),
+        icon: const Icon(Icons.settings_outlined, color: _profileInk),
+      ),
+    ],
+  );
+}
+
+class _ProfileIdentity extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      const Center(
+        child: CircleAvatar(
+          radius: 72,
+          backgroundImage: AssetImage('assets/prototype/avatar.webp'),
+        ),
+      ),
+      const SizedBox(height: 12),
+      I18nText(
+        'Vincent',
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.headlineMedium
+            ?.copyWith(color: _profileInk),
+      ),
+      I18nText(
+        'vincent@example.com • contoh',
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
+      const SizedBox(height: 14),
+      Center(
+        child: OutlinedButton.icon(
+          onPressed: () =>
+              Navigator.pushNamed(context, AppRoutes.editProfile).ignore(),
+          icon: const Icon(Icons.edit_outlined),
+          label: const I18nText('Edit Profil'),
+        ),
+      ),
+    ],
+  );
+}
+
+class _ProfileImpactNotice extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(18),
+    decoration: const BoxDecoration(
+      color: PanganKitaColors.savingsSurface,
+      borderRadius: BorderRadius.all(Radius.circular(14)),
+    ),
+    child: Row(
+      children: [
+        const CircleAvatar(
+          backgroundColor: Color(0xFFD8F2E0),
+          child: Icon(Icons.eco_outlined, color: _profileGreen),
+        ),
+        const SizedBox(width: 14),
+        Expanded(
+          child: I18nText(
+            'Terima kasih sudah ikut menyelamatkan makanan.',
+            style: Theme.of(context).textTheme.titleMedium
+                ?.copyWith(color: _profileInk),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+class _ProfileNavigation extends StatelessWidget {
+  const new({required this.onChooseLocation});
+
+  final VoidCallback onChooseLocation;
+
+  @override
+  Widget build(BuildContext context) => _ProfileMenu(
+    items: [
+      _ProfileItem(
+        Icons.receipt_long_outlined,
+        'Riwayat Pesanan',
+        () => Navigator.pushNamed(context, AppRoutes.orders).ignore(),
+      ),
+      _ProfileItem(
+        Icons.favorite_border,
+        'Favorit Saya',
+        () => Navigator.pushNamed(context, AppRoutes.favorites).ignore(),
+      ),
+      _ProfileItem(Icons.location_on_outlined, 'Lokasi Saya', onChooseLocation),
+      _ProfileItem(
+        Icons.settings_outlined,
+        'Pengaturan',
+        () => Navigator.pushNamed(context, AppRoutes.settings).ignore(),
+      ),
+      _ProfileItem(
+        Icons.help_outline,
+        'Pusat Bantuan',
+        () => Navigator.pushNamed(context, AppRoutes.support).ignore(),
+      ),
+    ],
   );
 }
 

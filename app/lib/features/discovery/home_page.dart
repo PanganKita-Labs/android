@@ -74,6 +74,16 @@ class _HomePageState extends State<HomePage> {
 
   void _selectCategory(String category) => setState(() => _category = category);
 
+  void _searchChanged(String value) => setState(() => _query = value);
+
+  void _submitSearch(String value) => Navigator.pushNamed(
+    context,
+    AppRoutes.search,
+    arguments: value.trim(),
+  ).ignore();
+
+  void _openFilter() => unawaited(_filter());
+
   Future<void> _filter() async {
     await showModalBottomSheet<void>(
       context: context,
@@ -120,30 +130,14 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 14),
             _HomeSearch(
-              onChanged: (value) => setState(() => _query = value),
-              onSubmitted: (value) => Navigator.pushNamed(
-                context,
-                AppRoutes.search,
-                arguments: value.trim(),
-              ).ignore(),
-              onFilter: () {
-                unawaited(_filter());
-              },
+              onChanged: _searchChanged,
+              onSubmitted: _submitSearch,
+              onFilter: _openFilter,
             ),
             const SizedBox(height: 10),
             const HeroBanner(),
             const SizedBox(height: 20),
-            const I18nText(
-              'Kategori',
-              style: TextStyle(
-                fontFamily: PanganKitaTheme.emphasisFontFamily,
-                fontSize: 23,
-                height: 1.16,
-                letterSpacing: -.45,
-                fontWeight: FontWeight.w700,
-                color: PanganKitaColors.inkCool,
-              ),
-            ),
+            const _HomeCategoryHeading(),
             const SizedBox(height: 2),
             _HomeCategories(selected: _category, onSelected: _selectCategory),
             _FeedSection(
@@ -159,21 +153,112 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 8),
             const _MerchantBanner(),
             const SizedBox(height: 12),
-            const I18nText(
-              'Demo offline · Semua penawaran, lokasi, rating, dan stok '
-              'adalah contoh.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: _categoryFontSize,
-                color: Colors.blueGrey,
-              ),
-            ),
+            const _HomeDemoDisclaimer(),
           ],
         ),
       ),
       bottomNavigationBar: const AppBottomNavigation(selectedIndex: 0),
     );
   }
+}
+
+class _HomeCategoryHeading extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const I18nText(
+    'Kategori',
+    style: TextStyle(
+      fontFamily: PanganKitaTheme.emphasisFontFamily,
+      fontSize: 23,
+      height: 1.16,
+      letterSpacing: -.45,
+      fontWeight: FontWeight.w700,
+      color: PanganKitaColors.inkCool,
+    ),
+  );
+}
+
+class _HomeDemoDisclaimer extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const I18nText(
+    'Demo offline · Semua penawaran, lokasi, rating, dan stok '
+    'adalah contoh.',
+    textAlign: TextAlign.center,
+    style: TextStyle(fontSize: _categoryFontSize, color: Colors.blueGrey),
+  );
+}
+
+class _FeedHeading extends StatelessWidget {
+  const new({required this.title, required this.flash});
+
+  final String title;
+  final bool flash;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            I18nText(
+              title,
+              style: const TextStyle(
+                fontFamily: PanganKitaTheme.emphasisFontFamily,
+                fontSize: 18,
+                height: 1.2,
+                fontWeight: FontWeight.w700,
+                letterSpacing: -.45,
+                color: PanganKitaColors.inkCool,
+              ),
+            ),
+            if (!flash)
+              const I18nText(
+                'Diurutkan dari jarak pickup terdekat',
+                style: TextStyle(fontSize: 9, color: Colors.blueGrey),
+              ),
+          ],
+        ),
+      ),
+      TextButton(
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+          foregroundColor: PanganKitaColors.textSecondaryCool,
+        ),
+        onPressed: () => DemoNotice.show(
+          context,
+          'Semua contoh untuk bagian ini sudah ditampilkan.',
+        ),
+        child: const I18nText(
+          'Lihat Semua',
+          style: TextStyle(
+            fontFamily: PanganKitaTheme.emphasisFontFamily,
+            fontSize: 9,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+class _MerchantBannerIcon extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const DecoratedBox(
+    decoration: BoxDecoration(
+      color: Color(0x22FFFFFF),
+      borderRadius: BorderRadius.all(Radius.circular(9)),
+    ),
+    child: Padding(
+      padding: EdgeInsets.all(10),
+      child: ReferenceIcon('store', size: 21),
+    ),
+  );
 }
 
 class _FeedSection extends StatelessWidget {
@@ -188,51 +273,7 @@ class _FeedSection extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  I18nText(
-                    title,
-                    style: const TextStyle(
-                      fontFamily: PanganKitaTheme.emphasisFontFamily,
-                      fontSize: 18,
-                      height: 1.2,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: -.45,
-                      color: PanganKitaColors.inkCool,
-                    ),
-                  ),
-                  if (!flash)
-                    const I18nText(
-                      'Diurutkan dari jarak pickup terdekat',
-                      style: TextStyle(fontSize: 9, color: Colors.blueGrey),
-                    ),
-                ],
-              ),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-                foregroundColor: PanganKitaColors.textSecondaryCool,
-              ),
-              onPressed: () => DemoNotice.show(
-                context,
-                'Semua contoh untuk bagian ini sudah ditampilkan.',
-              ),
-              child: const I18nText(
-                'Lihat Semua',
-                style: TextStyle(
-                  fontFamily: PanganKitaTheme.emphasisFontFamily,
-                  fontSize: 9,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ],
-        ),
+        _FeedHeading(title: title, flash: flash),
         const SizedBox(height: 2),
         if (foods.isEmpty)
           const I18nText('Tidak ada makanan yang cocok dengan pencarianmu.'),
@@ -262,16 +303,7 @@ class _MerchantBanner extends StatelessWidget {
     child: const Row(
       spacing: 15,
       children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: Color(0x22FFFFFF),
-            borderRadius: BorderRadius.all(Radius.circular(9)),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: ReferenceIcon('store', size: 21),
-          ),
-        ),
+        _MerchantBannerIcon(),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

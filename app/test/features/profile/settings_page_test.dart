@@ -88,6 +88,32 @@ void main() {
     expect(find.text('Kebijakan Privasi belum tersedia'), findsOneWidget);
   });
 
+  testWidgets('language selection returns Simplified Chinese locale', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(390, 844);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+    Locale? chosen;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: PanganKitaTheme.light,
+        home: SettingsPage(onLocaleChanged: (locale) => chosen = locale),
+      ),
+    );
+    await tester.ensureVisible(find.text('Bahasa'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Bahasa'));
+    await tester.pumpAndSettle();
+    expect(find.text('English'), findsWidgets);
+    await tester.tap(find.text('简体中文'));
+    await tester.pumpAndSettle();
+    expect(chosen?.languageCode, 'zh');
+    expect(chosen?.scriptCode, 'Hans');
+    expect(tester.takeException(), isNull);
+  });
+
   for (final width in [320.0, 360.0, 390.0, 412.0]) {
     for (final scale in [1.0, 1.6]) {
       testWidgets('settings fits $width at scale $scale', (tester) async {
