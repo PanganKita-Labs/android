@@ -303,7 +303,7 @@ class _MerchantBanner extends StatelessWidget {
     child: const Row(
       spacing: 15,
       children: [
-        const _MerchantBannerIcon(),
+        _MerchantBannerIcon(),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

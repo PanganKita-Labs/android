@@ -516,22 +516,22 @@ class _ProductReviews extends StatelessWidget {
         'Ulasan Pelanggan',
         style: Theme.of(context).textTheme.titleMedium,
       ),
-      DecoratedBox(
-        decoration: const BoxDecoration(
+      const DecoratedBox(
+        decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(24)),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: _contentGap,
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: _reviewAvatar,
                 child: Icon(Icons.person_outline),
               ),
-              const Expanded(child: _DemoReviewBody()),
+              Expanded(child: _DemoReviewBody()),
             ],
           ),
         ),
