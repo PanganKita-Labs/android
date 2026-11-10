@@ -15,7 +15,16 @@ FONT_DIR = Path(__file__).resolve().parents[2] / "app/assets/fonts"
 
 
 def main():
-    """Download the font and its license without redistributing them in Git."""
+    """Fetch pinned Satoshi weights and install their matching license.
+
+    Downloads Regular, Medium, and Bold from the configured Fontshare
+    archive, verifies each font against its checked-in SHA-256 digest,
+    and writes the font files and license under the app's asset directory.
+    Assets are installed for local builds and are not added to Git.
+
+    Raises:
+        ValueError: If a downloaded font's SHA-256 differs from its pin.
+    """
     with urlopen("https://api.fontshare.com/v2/fonts/download/satoshi", timeout=60) as response:
         with ZipFile(io.BytesIO(response.read())) as archive:
             fonts = {
