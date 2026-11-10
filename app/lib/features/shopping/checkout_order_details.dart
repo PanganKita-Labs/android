@@ -38,6 +38,7 @@ class CheckoutOrderDetails extends StatelessWidget {
   );
 }
 
+/// Displays the local product image for a checkout line.
 class _CheckoutLinePhoto extends StatelessWidget {
   const new({required this.line});
 
@@ -57,6 +58,7 @@ class _CheckoutLinePhoto extends StatelessWidget {
   );
 }
 
+/// Renders one selected cart configuration and its example price.
 class _CheckoutLine extends StatelessWidget {
   const new({required this.line});
   final DemoCartLine line;

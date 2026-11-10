@@ -71,6 +71,9 @@ class CartLineCard extends StatelessWidget {
   );
 }
 
+/// Changes a fixture cart line's quantity within its demo limit.
+///
+/// Controls use [DemoCart.setQuantity] rather than modifying inventory.
 class _CartQuantityControls extends StatelessWidget {
   const new({required this.line, required this.cart});
 

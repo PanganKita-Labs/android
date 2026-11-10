@@ -32,9 +32,13 @@ class CheckoutPage extends StatefulWidget {
   State<CheckoutPage> createState() => _CheckoutPageState();
 }
 
+/// Owns the local checkout acknowledgment state.
+///
+/// Checkout remains a read-only preview and creates no server order.
 class _CheckoutPageState extends State<CheckoutPage> {
   bool _understood = false;
 
+/// Updates the local pickup acknowledgment checkbox state.
   void _setUnderstood(bool? value) =>
       setState(() => _understood = value ?? false);
 
@@ -89,6 +93,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   );
 }
 
+/// Shows the checkout fallback when no cart lines are selected.
 class _CheckoutEmpty extends StatelessWidget {
   const new();
   @override
@@ -104,6 +109,7 @@ class _CheckoutEmpty extends StatelessWidget {
   );
 }
 
+/// Explains that pickup times and fulfillment are illustrative.
 class _PickupNotice extends StatelessWidget {
   const new();
   @override
@@ -149,6 +155,7 @@ class _PickupNotice extends StatelessWidget {
   );
 }
 
+/// Displays the example merchant name and preview badge.
 class _CheckoutMerchantName extends StatelessWidget {
   const new({required this.merchant});
 
@@ -176,6 +183,7 @@ class _CheckoutMerchantName extends StatelessWidget {
   );
 }
 
+/// Shows a fixture pickup window without a live deadline.
 class _CheckoutPickupTime extends StatelessWidget {
   const new({required this.pickupTimes});
 
@@ -200,6 +208,7 @@ class _CheckoutPickupTime extends StatelessWidget {
   );
 }
 
+/// Displays the in-memory cart subtotal in whole rupiah.
 class _CheckoutTotalLabel extends StatelessWidget {
   const new({required this.cart});
 
@@ -220,6 +229,7 @@ class _CheckoutTotalLabel extends StatelessWidget {
   );
 }
 
+/// Groups fixture merchant identity, location, and pickup window.
 class _CheckoutMerchant extends StatelessWidget {
   const new({required this.cart, required this.merchant});
   final DemoCart cart;
@@ -258,6 +268,7 @@ class _CheckoutMerchant extends StatelessWidget {
   }
 }
 
+/// Displays the merchant address supplied in fixture data.
 class _MerchantLocation extends StatelessWidget {
   const new({required this.address});
   final String address;
@@ -298,6 +309,7 @@ class _MerchantLocation extends StatelessWidget {
   );
 }
 
+/// Shows the example pickup-person section.
 class _PickupPerson extends StatelessWidget {
   const new();
   @override
@@ -328,6 +340,7 @@ class _PickupPerson extends StatelessWidget {
   );
 }
 
+/// Presents an illustrative payment choice without charging a card.
 class _PaymentMethod extends StatelessWidget {
   const new();
   @override
@@ -372,6 +385,7 @@ class _PaymentMethod extends StatelessWidget {
   );
 }
 
+/// Lists the local totals and preview payment metadata.
 class _PaymentSummary extends StatelessWidget {
   const new({required this.cart});
   final DemoCart cart;
@@ -405,6 +419,7 @@ class _PaymentSummary extends StatelessWidget {
   );
 }
 
+/// Displays one label and value in the checkout summary.
 class _PaymentRow extends StatelessWidget {
   const new({
     required this.label,
@@ -437,11 +452,13 @@ class _PaymentRow extends StatelessWidget {
   );
 }
 
+/// Collects a local acknowledgment, not a legal or server consent.
 class _PickupAgreement extends StatelessWidget {
   const new({required this.value, required this.onChanged});
   final bool value;
   final ValueChanged<bool?> onChanged;
 
+/// Opens the reference terms preview rather than official binding terms.
   void _showTerms(BuildContext context) {
     unawaited(
       showDialog<void>(
@@ -507,6 +524,7 @@ class _PickupAgreement extends StatelessWidget {
   );
 }
 
+/// Offers navigation to the display-only payment-status preview.
 class _CheckoutFooter extends StatelessWidget {
   const new({required this.cart, required this.enabled});
   final DemoCart cart;
