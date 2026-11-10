@@ -84,6 +84,9 @@ class NotificationsPage extends StatefulWidget {
   State<NotificationsPage> createState() => _NotificationsPageState();
 }
 
+/// Owns local notification read markers and filter selection.
+///
+/// The list is fixture data; it does not receive device push notifications.
 class _NotificationsPageState extends State<NotificationsPage> {
   String _filter = 'Semua';
   final Set<int> _read = {};
@@ -131,6 +134,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   }
 }
 
+/// Groups sample notifications by their display category.
 class _NotificationGroup extends StatelessWidget {
   const new({
     required this.today,
@@ -144,6 +148,7 @@ class _NotificationGroup extends StatelessWidget {
   final Set<int> read;
   final ValueChanged<int> onOpened;
 
+/// Marks a fixture notification as read before opening its example destination.
   void _openNotice(BuildContext context, _Notice notice) {
     onOpened(notice.id);
     if (notice.order) {
@@ -185,6 +190,7 @@ class _NotificationGroup extends StatelessWidget {
   }
 }
 
+/// Displays navigation and the local mark-all-read control.
 class _NotificationsHeader extends StatelessWidget {
   const new({required this.onMarkRead});
 
@@ -215,6 +221,7 @@ class _NotificationsHeader extends StatelessWidget {
   );
 }
 
+/// Selects which example notices are visible.
 class _NotificationFilters extends StatelessWidget {
   const new({required this.selected, required this.onSelected});
 
@@ -244,6 +251,7 @@ class _NotificationFilters extends StatelessWidget {
   );
 }
 
+/// Displays a decorative icon based on notice category.
 class _NotificationIcon extends StatelessWidget {
   const new({required this.order});
 
@@ -262,6 +270,7 @@ class _NotificationIcon extends StatelessWidget {
   );
 }
 
+/// Shows a fixture notice with local read-state feedback.
 class _NotificationCard extends StatelessWidget {
   const new({required this.notice, required this.unread, required this.onTap});
 

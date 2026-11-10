@@ -19,6 +19,7 @@ class SupportPage extends StatefulWidget {
   State<SupportPage> createState() => _SupportPageState();
 }
 
+/// Owns local support suggestions and the example draft field.
 class _SupportPageState extends State<SupportPage> {
   final _message = TextEditingController();
 
@@ -28,11 +29,13 @@ class _SupportPageState extends State<SupportPage> {
     super.dispose();
   }
 
+/// Explains that support message delivery is unavailable in this demo.
   void _unavailable() => DemoNotice.show(
     context,
     'Contoh tampilan. Pesan tidak dikirim ke customer service.',
   );
 
+/// Copies a canned response into the local support draft.
   void _useSuggestion(String suggestion) {
     _message.text = suggestion;
     _message.selection = TextSelection.collapsed(offset: suggestion.length);
@@ -55,6 +58,7 @@ class _SupportPageState extends State<SupportPage> {
   );
 }
 
+/// Returns to the previous local support entry point.
 class _SupportBackButton extends StatelessWidget {
   const new();
 
@@ -77,6 +81,7 @@ class _SupportBackButton extends StatelessWidget {
   );
 }
 
+/// Displays the support preview heading and status.
 class _SupportHeader extends StatelessWidget {
   const new();
 
@@ -126,6 +131,7 @@ class _SupportHeader extends StatelessWidget {
   );
 }
 
+/// Shows static sample order-status information.
 class _ExampleOrderStatus extends StatelessWidget {
   const new();
 
@@ -147,6 +153,7 @@ class _ExampleOrderStatus extends StatelessWidget {
   );
 }
 
+/// Displays an illustrative order reference for support context.
 class _ExampleOrderCard extends StatelessWidget {
   const new();
 
@@ -191,6 +198,7 @@ class _ExampleOrderCard extends StatelessWidget {
   );
 }
 
+/// Shows sample support conversation bubbles, not a live chat.
 class _ExampleMessages extends StatelessWidget {
   const new();
 
@@ -226,6 +234,7 @@ class _ExampleMessages extends StatelessWidget {
   );
 }
 
+/// Renders one local support message without a backend connection.
 class _MessageBubble extends StatelessWidget {
   const new({required this.message, required this.time, this.outgoing = false});
 
@@ -284,6 +293,7 @@ class _MessageBubble extends StatelessWidget {
   );
 }
 
+/// Offers canned responses to populate the local message draft.
 class _Suggestions extends StatelessWidget {
   const new({required this.onSelected});
 
@@ -311,6 +321,7 @@ class _Suggestions extends StatelessWidget {
   );
 }
 
+/// Displays the support draft input and unavailable send action.
 class _Composer extends StatelessWidget {
   const new({required this.controller, required this.onUnavailable});
 

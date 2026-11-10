@@ -22,6 +22,9 @@ class MerchantChatPage extends StatefulWidget {
   State<MerchantChatPage> createState() => _MerchantChatPageState();
 }
 
+/// Owns the message draft and session-only preview conversation.
+///
+/// Submitting a draft adds local UI text; no network message is sent.
 class _MerchantChatPageState extends State<MerchantChatPage> {
   final _controller = TextEditingController();
   final _localMessages = <String>[];
@@ -32,6 +35,7 @@ class _MerchantChatPageState extends State<MerchantChatPage> {
     super.dispose();
   }
 
+/// Adds the current draft to the in-memory conversation preview.
   void _addLocalMessage() {
     final message = _controller.text.trim();
     if (message.isEmpty) return;
@@ -75,6 +79,7 @@ class _MerchantChatPageState extends State<MerchantChatPage> {
   );
 }
 
+/// Shows the fixture merchant identity and navigation controls.
 class _MerchantHeader extends StatelessWidget implements PreferredSizeWidget {
   const new({required this.food});
 
@@ -107,6 +112,7 @@ class _MerchantHeader extends StatelessWidget implements PreferredSizeWidget {
   );
 }
 
+/// Explains that the displayed chat is a local demonstration.
 class _PreviewNotice extends StatelessWidget {
   const new();
 
@@ -121,6 +127,7 @@ class _PreviewNotice extends StatelessWidget {
   );
 }
 
+/// Displays the selected food fixture above the conversation.
 class _ProductContext extends StatelessWidget {
   const new({required this.food});
 
@@ -160,6 +167,7 @@ class _ProductContext extends StatelessWidget {
   );
 }
 
+/// Renders one local example message and its alignment.
 class _MessageBubble extends StatelessWidget {
   const new({required this.message, required this.local});
 
@@ -197,6 +205,7 @@ class _MessageBubble extends StatelessWidget {
   );
 }
 
+/// Collects a draft message and invokes the local submit callback.
 class _Composer extends StatelessWidget {
   const new({required this.controller, required this.onSend});
 
