@@ -37,7 +37,7 @@ class DirectionsPage extends StatefulWidget {
 class _DirectionsPageState extends State<DirectionsPage> {
   int _mode = 0;
 
-/// Returns to the existing map route, avoiding an extra directions screen.
+  /// Returns to the existing map route, avoiding an extra directions screen.
   void _backToMap() {
     final navigator = Navigator.of(context);
     if (navigator.canPop()) {

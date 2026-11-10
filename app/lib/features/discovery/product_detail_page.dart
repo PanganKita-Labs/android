@@ -57,9 +57,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   void _selectAddons(Set<DemoAddon> addons) => setState(() => _addons = addons);
 
-/// Adds the configured local listing to the session cart.
-///
-/// If the per-line quantity limit is exceeded, shows a demo notice instead.
+  /// Adds the configured local listing to the session cart.
+  ///
+  /// If the per-line quantity limit is exceeded, shows a demo notice instead.
   void _addToCart() {
     final added = widget.cart.add(
       widget.food,
@@ -80,9 +80,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   void _decrease() => setState(() => _quantity--);
   void _increase() => setState(() => _quantity++);
 
-/// Copies labeled example product details to the device clipboard.
-///
-/// Shows confirmation only while this page remains mounted.
+  /// Copies labeled example product details to the device clipboard.
+  ///
+  /// Shows confirmation only while this page remains mounted.
   Future<void> _copyProduct() async {
     await Clipboard.setData(
       ClipboardData(

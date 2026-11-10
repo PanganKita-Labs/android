@@ -21,9 +21,9 @@ class AppBottomNavigation extends StatelessWidget {
   /// Active destination index.
   final int selectedIndex;
 
-/// Replaces the current route for a different tab.
-///
-/// An invalid tab index displays a local unavailable-feature notice.
+  /// Replaces the current route for a different tab.
+  ///
+  /// An invalid tab index displays a local unavailable-feature notice.
   void _selectDestination(BuildContext context, int index) {
     if (index == selectedIndex) return;
     switch (index) {

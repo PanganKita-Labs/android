@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-/// Opens the example-area selector and reports a selected area only while mounted.
+  /// Opens the example-area selector and reports a selected area only while mounted.
   Future<void> _chooseLocation() async {
     final selected = await Navigator.pushNamed(
       context,
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
 
   void _openFilter() => unawaited(_filter());
 
-/// Displays the category picker for the local food fixtures.
+  /// Displays the category picker for the local food fixtures.
   Future<void> _filter() async {
     await showModalBottomSheet<void>(
       context: context,

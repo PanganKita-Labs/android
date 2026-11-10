@@ -61,9 +61,9 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
-/// Returns fixture results matching the active query, category, and price range.
-///
-/// The optional sort only reorders the in-memory list.
+  /// Returns fixture results matching the active query, category, and price range.
+  ///
+  /// The optional sort only reorders the in-memory list.
   List<DemoFood> get _results {
     final minimum = _minimum;
     final maximum = _maximum;
@@ -81,7 +81,7 @@ class _SearchPageState extends State<SearchPage> {
     return foods;
   }
 
-/// Opens a modal with a temporary copy of the current search filters.
+  /// Opens a modal with a temporary copy of the current search filters.
   void _openFilters() {
     unawaited(
       showModalBottomSheet<void>(
@@ -103,7 +103,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-/// Applies validated filter values and dismisses the filter sheet.
+  /// Applies validated filter values and dismisses the filter sheet.
   void _applyFilters(
     ({String category, int? minimum, int? maximum, bool lowestPriceFirst})
     filters,
@@ -117,7 +117,7 @@ class _SearchPageState extends State<SearchPage> {
     Navigator.pop(context);
   }
 
-/// Restores the default category, price bounds, and sort order.
+  /// Restores the default category, price bounds, and sort order.
   void _resetFilters() => setState(() {
     _category = 'Semua';
     _minimum = null;
@@ -125,7 +125,7 @@ class _SearchPageState extends State<SearchPage> {
     _lowestPriceFirst = false;
   });
 
-/// Copies a suggested query into the text field and updates local results.
+  /// Copies a suggested query into the text field and updates local results.
   void _acceptSuggestion(String query) {
     _controller.text = query;
     setState(() => _query = query);
@@ -766,7 +766,7 @@ class _SearchFiltersState extends State<_SearchFilters> {
     super.dispose();
   }
 
-/// Validates the current price range before notifying the search page.
+  /// Validates the current price range before notifying the search page.
   void _apply() {
     final range = _parseSearchPriceRange(_minimum.text, _maximum.text);
     if (range == null) {
@@ -781,7 +781,7 @@ class _SearchFiltersState extends State<_SearchFilters> {
     ));
   }
 
-/// Clears all temporary filter values and their validation message.
+  /// Clears all temporary filter values and their validation message.
   void _reset() {
     setState(() {
       _category = 'Semua';

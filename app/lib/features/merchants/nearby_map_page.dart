@@ -589,7 +589,7 @@ class _StreetPainter extends CustomPainter {
       );
   }
 
-/// Draws fixed parcel outlines used by the illustrative map background.
+  /// Draws fixed parcel outlines used by the illustrative map background.
   void _drawBlocks(Canvas canvas, Size size) {
     final block = Paint()..color = const Color(0xFFECE8E1);
     final parcel = Paint()..color = const Color(0xFFF4F0E9);

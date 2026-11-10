@@ -94,7 +94,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     super.dispose();
   }
 
-/// Registers welcome, authentication, and recovery preview routes.
+  /// Registers welcome, authentication, and recovery preview routes.
   Map<String, WidgetBuilder> get _introRoutes => {
     AppRoutes.splash: (context) => const SplashPage(),
     AppRoutes.welcome: (context) => const WelcomePage(),
@@ -107,7 +107,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     AppRoutes.success: (context) => const PasswordSuccessPage(),
   };
 
-/// Builds profile, search, and settings routes using app-owned state.
+  /// Builds profile, search, and settings routes using app-owned state.
   Map<String, WidgetBuilder> get _accountRoutes => {
     AppRoutes.home: (context) => ValueListenableBuilder<String>(
       valueListenable: _selectedArea,
@@ -137,13 +137,13 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     ),
   };
 
-/// Registers the nearby-stores list and illustrative map routes.
+  /// Registers the nearby-stores list and illustrative map routes.
   Map<String, WidgetBuilder> get _merchantRoutes => {
     AppRoutes.nearbyStores: (context) => const NearbyStoresPage(),
     AppRoutes.nearbyMap: (context) => const NearbyMapPage(),
   };
 
-/// Validates order arguments and provides a fallback for unsupported examples.
+  /// Validates order arguments and provides a fallback for unsupported examples.
   Map<String, WidgetBuilder> get _ordersRoutes => {
     AppRoutes.orders: (context) {
       final tab = ModalRoute.of(context)?.settings.arguments;
@@ -159,7 +159,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     },
   };
 
-/// Builds local messaging and notification previews with argument checks.
+  /// Builds local messaging and notification previews with argument checks.
   Map<String, WidgetBuilder> get _messagesRoutes => {
     AppRoutes.chat: (context) => const ChatPage(),
     AppRoutes.merchantChat: (context) {
@@ -176,7 +176,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     AppRoutes.notifications: (context) => const NotificationsPage(),
   };
 
-/// Provides the shared demo cart to checkout and payment preview screens.
+  /// Provides the shared demo cart to checkout and payment preview screens.
   Map<String, WidgetBuilder> get _shoppingRoutes => {
     AppRoutes.cart: (context) => CartPage(cart: _cart),
     AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),
@@ -186,7 +186,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     AppRoutes.paymentFailedPreview: (context) => PaymentFailedPage(cart: _cart),
   };
 
-/// Builds pickup and review previews from validated fixture arguments.
+  /// Builds pickup and review previews from validated fixture arguments.
   Map<String, WidgetBuilder> get _followupRoutes => {
     AppRoutes.pickup: (context) {
       final example = ModalRoute.of(context)?.settings.arguments;
@@ -208,7 +208,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     },
   };
 
-/// Registers product, directions, and merchant paths for known fixture IDs.
+  /// Registers product, directions, and merchant paths for known fixture IDs.
   Map<String, WidgetBuilder> get _dynamicRoutes => {
     for (final food in DemoFood.examples)
       AppRoutes.product(food.id): (context) =>
@@ -222,7 +222,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
           StoreDetailPage(food: food, cart: _cart),
   };
 
-/// Combines all local route groups into the app's named-route map.
+  /// Combines all local route groups into the app's named-route map.
   Map<String, WidgetBuilder> get _routes => {
     ..._introRoutes,
     ..._accountRoutes,
