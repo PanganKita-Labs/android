@@ -95,6 +95,9 @@ For a quick targeted iteration, `flutter test test/orders_page_test.dart` is an 
 
 GitHub Actions uses the same pinned Flutter version, installs Satoshi separately and runs quality and Android debug-build jobs. Screenshot review complements tests: an image proves a particular UI render, **not** a server-side workflow.
 
+See [source documentation conventions](../docs/architecture/code-documentation.md)
+for Dart API comments, Python helper docstrings and coverage boundaries.
+
 ## Working on this project
 
 - Check the [product requirements](../PRD.md), [design contract](../docs/DESIGN.md), [implementation notes](../docs/IMPLEMENTATION.md), root [contribution rules](../rules.md), and [app-specific instructions](AGENTS.md) before changing behavior.
