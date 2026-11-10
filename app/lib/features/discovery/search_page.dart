@@ -65,9 +65,10 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
-  /// Returns fixture results matching the active query and price filters.
+  /// Returns fixture results matching the active text, category, and price
+  /// filters. Both non-null price bounds are inclusive.
   ///
-  /// The optional sort only reorders the in-memory list.
+  /// The optional lowest-price-first sort reorders this local list only.
   List<DemoFood> get _results {
     final minimum = _minimum;
     final maximum = _maximum;

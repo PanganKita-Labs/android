@@ -49,7 +49,8 @@ class HomePage extends StatefulWidget {
 
 /// Owns the home screen's local query, category, and selected area.
 ///
-/// The selected area is reported to the root app through the provided callback.
+/// A confirmed area is sent through [HomePage.onLocationChanged]. Only a
+/// caller-supplied callback can propagate it beyond this page.
 class _HomePageState extends State<HomePage> {
   String _query = '';
   String _category = 'Semua';

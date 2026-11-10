@@ -74,8 +74,8 @@ class DemoFood {
 
   /// Resolves the local prototype image path for [id].
   ///
-  /// The `garlic-bread` fixture uses a special asset filename; other IDs
-  /// resolve to `assets/prototype/<id>.webp`. No asset check occurs here.
+  /// Every ID currently resolves to `assets/prototype/<id>.webp`, including
+  /// `garlic-bread`. This getter does not check whether that asset exists.
   String get image => id == 'garlic-bread'
       ? 'assets/prototype/garlic-bread.webp'
       : 'assets/prototype/$id.webp';
