@@ -135,6 +135,42 @@ jobs:
       - name: Enforce zero Dartrics violations
         run: dart run dartrics analyze --snapshot none --strict-dismiss --fatal-warnings lib
 
+  documentation:
+    name: API documentation and Python syntax
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.4
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get --enforce-lockfile
+
+      - name: Validate Dart API documentation
+        run: dart doc --dry-run .
+
+      - name: Validate maintained Python syntax
+        working-directory: .
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+
+          paths = sorted(Path("app/tool").glob("*.py"))
+          paths += sorted(Path(".github/scripts").glob("*.py"))
+          for path in paths:
+              ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+              print(f"Validated {path}")
+          print(f"Parsed {len(paths)} Python source files")
+          PY
+
   tests:
     name: Flutter tests (coverage)
     runs-on: ubuntu-latest
@@ -172,6 +208,7 @@ jobs:
       - analyzer
       - dcl
       - complexity
+      - documentation
       - tests
     runs-on: ubuntu-latest
     timeout-minutes: 2
@@ -183,6 +220,7 @@ jobs:
           ANALYZER_RESULT: ${{ needs.analyzer.result }}
           DCL_RESULT: ${{ needs.dcl.result }}
           COMPLEXITY_RESULT: ${{ needs.complexity.result }}
+          DOCUMENTATION_RESULT: ${{ needs.documentation.result }}
           TESTS_RESULT: ${{ needs.tests.result }}
         run: |
           failed=0
@@ -191,6 +229,7 @@ jobs:
             "Flutter analyzer:$ANALYZER_RESULT" \
             "Dart Code Linter:$DCL_RESULT" \
             "Complexity:$COMPLEXITY_RESULT" \
+            "API documentation:$DOCUMENTATION_RESULT" \
             "Flutter tests:$TESTS_RESULT"; do
             name="${entry%%:*}"
             result="${entry#*:}"
