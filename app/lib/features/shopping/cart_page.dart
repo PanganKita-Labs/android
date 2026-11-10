@@ -405,9 +405,7 @@ class _CartFooter extends StatelessWidget {
         child: Row(
           spacing: _panelGap,
           children: [
-            Expanded(
-              child: _CartTotalLabel(cart: cart),
-            ),
+            Expanded(child: _CartTotalLabel(cart: cart)),
             Expanded(
               child: FilledButton(
                 style: FilledButton.styleFrom(

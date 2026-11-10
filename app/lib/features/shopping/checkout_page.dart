@@ -521,9 +521,7 @@ class _CheckoutFooter extends StatelessWidget {
         child: Row(
           spacing: _checkoutPanelGap,
           children: [
-            Expanded(
-              child: _CheckoutTotalLabel(cart: cart),
-            ),
+            Expanded(child: _CheckoutTotalLabel(cart: cart)),
             Expanded(
               child: FilledButton(
                 style: FilledButton.styleFrom(
