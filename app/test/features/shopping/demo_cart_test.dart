@@ -69,8 +69,9 @@ void main() {
     expect(notifications, 1);
 
     final id = cart.lines.single.id;
-    cart.setQuantity(id, 1);
-    cart.setQuantity('unknown-line', 2);
+    cart
+      ..setQuantity(id, 1)
+      ..setQuantity('unknown-line', 2);
     expect(notifications, 1);
 
     expect(cart.add(food, quantity: 9), isTrue);
