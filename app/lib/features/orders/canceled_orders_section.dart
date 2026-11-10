@@ -17,7 +17,10 @@ const _merchantRadius = 18.0;
 
 /// Display-only example for the canceled-orders tab.
 class CanceledOrdersSection extends StatelessWidget {
-  /// Creates the preview without a real canceled order.
+  /// Displays the canceled-order fixture filtered by [query].
+  ///
+  /// [query] defaults to empty and is matched against sample food data.
+  /// No cancellation, refund, or real order history is involved.
   const new({super.key, this.query = ''});
 
   /// Filters the local canceled example by product or merchant name.

@@ -14,7 +14,10 @@ const _merchantRadius = 26.0;
 
 /// Read-only completed-pickup example from the local orders preview.
 class PickupPage extends StatelessWidget {
-  /// Shows the selected example without confirming a real pickup.
+  /// Displays a completed-pickup preview for [food] and [quantity].
+  ///
+  /// [quantity] is display input, not confirmation of collected stock.
+  /// A review action forwards both values to another local preview route.
   const new({required this.food, required this.quantity, super.key});
 
   /// Example listing displayed in the completed order.

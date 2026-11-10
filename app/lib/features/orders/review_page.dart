@@ -23,7 +23,10 @@ const _merchantRadius = 24.0;
 
 /// Local review-form preview without a submitted or saved review.
 class ReviewPage extends StatefulWidget {
-  /// Shows the selected completed-order example.
+  /// Creates a review-form preview for [food] and [quantity].
+  ///
+  /// The example quantity identifies the displayed pickup context; rating,
+  /// tags, and name visibility stay local. No review submission occurs.
   const new({required this.food, required this.quantity, super.key});
 
   /// Example product to describe.

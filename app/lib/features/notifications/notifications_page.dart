@@ -86,7 +86,9 @@ class NotificationsPage extends StatefulWidget {
 
 /// Owns local notification read markers and filter selection.
 ///
-/// The list is fixture data; it does not receive device push notifications.
+/// Read IDs and category filters are discarded when the page is removed.
+/// Marking one notice as read happens before local route navigation. No
+/// device push notification is received or acknowledged.
 class _NotificationsPageState extends State<NotificationsPage> {
   String _filter = 'Semua';
   final Set<int> _read = {};
@@ -148,8 +150,10 @@ class _NotificationGroup extends StatelessWidget {
   final Set<int> read;
   final ValueChanged<int> onOpened;
 
-  /// Marks a fixture notification as read before opening its example
-  /// destination.
+  /// Reports [notice] as read via [onOpened] before navigation.
+  ///
+  /// Order notices route to the active or completed example tab; other
+  /// notices route home. [context] is used only for local navigation.
   void _openNotice(BuildContext context, _Notice notice) {
     onOpened(notice.id);
     if (notice.order) {

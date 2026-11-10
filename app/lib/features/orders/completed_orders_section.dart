@@ -14,7 +14,10 @@ const Color _badgeColor = PanganKitaColors.positiveSurfaceMuted;
 
 /// Display-only examples for the completed orders tab.
 class CompletedOrdersSection extends StatelessWidget {
-  /// Creates the sample section without a real order history.
+  /// Displays completed-order examples matching [query].
+  ///
+  /// The empty-string default shows both fixtures. Matching uses local
+  /// food metadata and does not query an account or order service.
   const new({super.key, this.query = ''});
 
   /// Filters the two local examples by product or merchant name.

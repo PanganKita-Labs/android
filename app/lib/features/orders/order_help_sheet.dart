@@ -11,13 +11,18 @@ const _merchantRadius = 22.0;
 
 /// Local help panel for the illustrative order-detail screen.
 class OrderHelpSheet extends StatelessWidget {
-  /// Creates the example FAQ for the selected merchant.
+  /// Shows static FAQ content for the order fixture [food].
+  ///
+  /// The page does not load case details or contact customer support.
   const new({required this.food, super.key});
 
   /// Example item displayed in the order detail.
   final DemoFood food;
 
-  /// Opens the order help as a modal sheet without contacting a service.
+  /// Opens a local order-help sheet for [food] using [context].
+  ///
+  /// The returned [Future] completes after dismissal. The sheet's content
+  /// is illustrative; opening it does not create a support request.
   static Future<void> show(BuildContext context, {required DemoFood food}) =>
       showModalBottomSheet<void>(
         context: context,

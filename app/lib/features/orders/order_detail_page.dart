@@ -15,7 +15,9 @@ const _noticeRadius = 16.0;
 
 /// Read-only detail for one local order example, not a real reservation.
 class OrderDetailPage extends StatelessWidget {
-  /// Displays the selected example food without creating an order.
+  /// Displays a read-only order preview for the fixture [food].
+  ///
+  /// No order is created, paid for, reserved, or confirmed; help is local.
   const new({required this.food, super.key});
 
   /// Food shown by the order preview card that opened this page.
