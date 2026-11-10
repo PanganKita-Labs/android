@@ -214,120 +214,148 @@ class _StoreCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Stack(
-            alignment: Alignment.bottomRight,
-            children: [
-              Image.asset(
-                food.id == 'buns'
-                    ? 'assets/prototype/store-croissants.webp'
-                    : food.image,
-                height: _imageHeight,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: DecoratedBox(
-                  decoration: const BoxDecoration(
-                    color: _orange,
-                    borderRadius: BorderRadius.all(Radius.circular(14)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 9,
-                      vertical: 5,
-                    ),
-                    child: I18nText(
-                      '${food.saving} · contoh',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          _StoreBanner(food: food),
           Padding(
             padding: const EdgeInsets.all(14),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: _avatarRadius,
-                      backgroundColor: PanganKitaColors.savingsSurface,
-                      backgroundImage: food.id == 'buns'
-                          ? const AssetImage('assets/prototype/mawar-mark.webp')
-                          : null,
-                      child: food.id == 'buns'
-                          ? null
-                          : I18nText(
-                              food.merchant.substring(0, 1),
-                              style: Theme.of(context).textTheme.titleMedium
-                                  ?.copyWith(
-                                    color: PanganKitaColors.brandPrimaryStrong,
-                                  ),
-                            ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          I18nText(
-                            food.merchant,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          I18nText(
-                            food.id == 'buns' ? 'Roti & Pastry' : food.category,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Icon(Icons.chevron_right),
-                  ],
-                ),
+                _StoreIdentity(food: food),
                 const SizedBox(height: 12),
-                DecoratedBox(
-                  decoration: const BoxDecoration(
-                    color: PanganKitaColors.surfaceWarm,
-                    borderRadius: BorderRadius.all(Radius.circular(14)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: _StoreStat(
-                            value: food.rating.split(' ').first,
-                            label: '$_reviewCount ulasan contoh',
-                            isRating: true,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: _statDividerHeight,
-                          child: VerticalDivider(),
-                        ),
-                        const Expanded(
-                          child: _StoreStat(
-                            value: '—',
-                            label: 'jarak belum ada',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: _statDividerHeight,
-                          child: VerticalDivider(),
-                        ),
-                        Expanded(
-                          child: _StoreStat(
-                            value: food.id == 'buns' ? '2' : '1',
-                            label: 'produk contoh',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                _StoreStats(food: food, reviewCount: _reviewCount),
               ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+class _StoreBanner extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Stack(
+    alignment: Alignment.bottomRight,
+    children: [
+      Image.asset(
+        food.id == 'buns'
+            ? 'assets/prototype/store-croissants.webp'
+            : food.image,
+        height: _imageHeight,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      ),
+      Padding(
+        padding: const EdgeInsets.all(10),
+        child: DecoratedBox(
+          decoration: const BoxDecoration(
+            color: _orange,
+            borderRadius: BorderRadius.all(Radius.circular(14)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 9,
+              vertical: 5,
+            ),
+            child: I18nText(
+              '${food.saving} · contoh',
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+class _StoreIdentity extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      CircleAvatar(
+        radius: _avatarRadius,
+        backgroundColor: PanganKitaColors.savingsSurface,
+        backgroundImage: food.id == 'buns'
+            ? const AssetImage('assets/prototype/mawar-mark.webp')
+            : null,
+        child: food.id == 'buns'
+            ? null
+            : I18nText(
+                food.merchant.substring(0, 1),
+                style: Theme.of(context).textTheme.titleMedium
+                    ?.copyWith(
+                      color: PanganKitaColors.brandPrimaryStrong,
+                    ),
+              ),
+      ),
+      const SizedBox(width: 10),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            I18nText(
+              food.merchant,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            I18nText(
+              food.id == 'buns' ? 'Roti & Pastry' : food.category,
+            ),
+          ],
+        ),
+      ),
+      const Icon(Icons.chevron_right),
+    ],
+  );
+}
+
+class _StoreStats extends StatelessWidget {
+  const new({required this.food, required this.reviewCount});
+
+  final DemoFood food;
+  final String reviewCount;
+
+  @override
+  Widget build(BuildContext context) => DecoratedBox(
+    decoration: const BoxDecoration(
+      color: PanganKitaColors.surfaceWarm,
+      borderRadius: BorderRadius.all(Radius.circular(14)),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: _StoreStat(
+              value: food.rating.split(' ').first,
+              label: '$reviewCount ulasan contoh',
+              isRating: true,
+            ),
+          ),
+          const SizedBox(
+            height: _statDividerHeight,
+            child: VerticalDivider(),
+          ),
+          const Expanded(
+            child: _StoreStat(
+              value: '—',
+              label: 'jarak belum ada',
+            ),
+          ),
+          const SizedBox(
+            height: _statDividerHeight,
+            child: VerticalDivider(),
+          ),
+          Expanded(
+            child: _StoreStat(
+              value: food.id == 'buns' ? '2' : '1',
+              label: 'produk contoh',
             ),
           ),
         ],
