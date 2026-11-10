@@ -28,7 +28,7 @@ class ProfilePage extends StatelessWidget {
   /// Reports a confirmed area to the app-session owner.
   final ValueChanged<String> onLocationChanged;
 
-/// Opens the example-area selector and reports its selected value.
+  /// Opens the example-area selector and reports its selected value.
   Future<void> _chooseLocation(BuildContext context) async {
     final selected = await Navigator.pushNamed(
       context,

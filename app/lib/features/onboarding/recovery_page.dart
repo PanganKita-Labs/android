@@ -27,7 +27,7 @@ class _RecoveryPageState extends State<RecoveryPage> {
     super.dispose();
   }
 
-/// Validates the local email input before opening recovery verification.
+  /// Validates the local email input before opening recovery verification.
   void _continue() {
     if (!(_form.currentState?.validate() ?? false)) return;
     FocusScope.of(context).unfocus();

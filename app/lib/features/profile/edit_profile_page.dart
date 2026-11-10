@@ -35,7 +35,7 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
 
-/// Validates the local form, then explains that profile saving is unavailable.
+  /// Validates the local form, then explains that profile saving is unavailable.
   void _save() {
     if (_formKey.currentState?.validate() ?? false) {
       DemoNotice.show(

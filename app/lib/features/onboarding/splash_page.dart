@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
     _timer = Timer(const Duration(milliseconds: 1700), _continue);
   }
 
-/// Continues to the welcome route through the splash's existing transition.
+  /// Continues to the welcome route through the splash's existing transition.
   void _continue() {
     if (!mounted || _leaving) return;
     _leaving = true;

@@ -23,7 +23,7 @@ class SettingsPage extends StatelessWidget {
     return;
   }
 
-/// Shows available UI languages and forwards the chosen locale to the app owner.
+  /// Shows available UI languages and forwards the chosen locale to the app owner.
   Future<void> _chooseLanguage(BuildContext context) async {
     final selected = await showModalBottomSheet<Locale>(
       context: context,
@@ -336,7 +336,7 @@ class _SettingsCard extends StatelessWidget {
 
   final List<_SettingsRow> rows;
 
-/// Invokes the selected settings action, preserving unavailable-feature feedback.
+  /// Invokes the selected settings action, preserving unavailable-feature feedback.
   void _openRow(BuildContext context, _SettingsRow row) {
     if (row.onTap case final tap?) {
       tap();

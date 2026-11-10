@@ -38,7 +38,7 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   bool _understood = false;
 
-/// Updates the local pickup acknowledgment checkbox state.
+  /// Updates the local pickup acknowledgment checkbox state.
   void _setUnderstood(bool? value) =>
       setState(() => _understood = value ?? false);
 
@@ -458,7 +458,7 @@ class _PickupAgreement extends StatelessWidget {
   final bool value;
   final ValueChanged<bool?> onChanged;
 
-/// Opens the reference terms preview rather than official binding terms.
+  /// Opens the reference terms preview rather than official binding terms.
   void _showTerms(BuildContext context) {
     unawaited(
       showDialog<void>(
