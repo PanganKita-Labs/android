@@ -230,6 +230,30 @@ class _NotificationCard extends StatefulWidget {
   State<_NotificationCard> createState() => _NotificationCardState();
 }
 
+class _MessagesSwitch extends StatelessWidget {
+  const new({required this.value, required this.onChanged});
+
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final i18n = context.i18n;
+    return SwitchListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      secondary: const Icon(Icons.chat_bubble_outline, color: _green),
+      title: I18nText(i18n?.merchantMessages ?? 'Pesan dari toko'),
+      subtitle: I18nText(
+        i18n?.merchantMessagesDescription ??
+            'Dapatkan notifikasi pesan dari toko pilihanmu.',
+      ),
+      value: value,
+      activeTrackColor: _green,
+      onChanged: onChanged,
+    );
+  }
+}
+
 class _NotificationCardState extends State<_NotificationCard> {
   bool _orders = true;
   bool _messages = true;
@@ -259,19 +283,8 @@ class _NotificationCardState extends State<_NotificationCard> {
             onChanged: (value) => setState(() => _orders = value),
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
-          SwitchListTile(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-            secondary: const Icon(Icons.chat_bubble_outline, color: _green),
-            title: I18nText(i18n?.merchantMessages ?? 'Pesan dari toko'),
-            subtitle: I18nText(
-              i18n?.merchantMessagesDescription ??
-                  'Dapatkan notifikasi pesan dari toko pilihanmu.',
-            ),
+          _MessagesSwitch(
             value: _messages,
-            activeTrackColor: _green,
             onChanged: (value) => setState(() => _messages = value),
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),

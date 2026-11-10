@@ -56,28 +56,7 @@ class PickupPage extends StatelessWidget {
           const SizedBox(height: 16),
           _PickupSummary(food: food, quantity: quantity),
           const SizedBox(height: 12),
-          DecoratedBox(
-            decoration: const BoxDecoration(
-              color: PanganKitaColors.positiveSurface,
-              borderRadius: BorderRadius.all(Radius.circular(_noticeRadius)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(14),
-              child: Row(
-                children: [
-                  const Icon(Icons.eco_outlined, size: 32, color: _green),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: I18nText(
-                      'Terima kasih telah memilih makanan surplus.',
-                      style: Theme.of(context).textTheme.titleMedium
-                          ?.copyWith(color: _green),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const _PickupThankYou(),
           const SizedBox(height: 12),
           _PickupActions(food: food, quantity: quantity),
         ],
@@ -124,6 +103,96 @@ class _PickupActions extends StatelessWidget {
   );
 }
 
+class _PickupThankYou extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => DecoratedBox(
+    decoration: const BoxDecoration(
+      color: PanganKitaColors.positiveSurface,
+      borderRadius: BorderRadius.all(Radius.circular(_noticeRadius)),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(14),
+      child: Row(
+        children: [
+          const Icon(Icons.eco_outlined, size: 32, color: _green),
+          const SizedBox(width: 16),
+          Expanded(
+            child: I18nText(
+              'Terima kasih telah memilih makanan surplus.',
+              style: Theme.of(context).textTheme.titleMedium
+                  ?.copyWith(color: _green),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+class _PickupMerchant extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      CircleAvatar(
+        radius: _merchantRadius,
+        backgroundImage: AssetImage(food.image),
+      ),
+      const SizedBox(width: 10),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            I18nText(
+              food.merchant,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            I18nText(food.pickupAddress),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+class _PickupProduct extends StatelessWidget {
+  const new({required this.food, required this.quantity});
+
+  final DemoFood food;
+  final int quantity;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(_photoRadius)),
+        child: SizedBox.square(
+          dimension: _photoSize,
+          child: Image.asset(food.image, fit: BoxFit.cover),
+        ),
+      ),
+      const SizedBox(width: 12),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            I18nText(
+              food.title,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            I18nText('$quantity × ${food.price}'),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
 class _PickupSummary extends StatelessWidget {
   const new({required this.food, required this.quantity});
 
@@ -139,54 +208,9 @@ class _PickupSummary extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: _merchantRadius,
-                backgroundImage: AssetImage(food.image),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    I18nText(
-                      food.merchant,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    I18nText(food.pickupAddress),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          _PickupMerchant(food: food),
           const SizedBox(height: 12),
-          Row(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(_photoRadius),
-                ),
-                child: SizedBox.square(
-                  dimension: _photoSize,
-                  child: Image.asset(food.image, fit: BoxFit.cover),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    I18nText(
-                      food.title,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    I18nText('$quantity × ${food.price}'),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          _PickupProduct(food: food, quantity: quantity),
           const Divider(height: 20),
           const _SummaryRow(label: 'Kode pengambilan', value: 'Belum tersedia'),
           const SizedBox(height: 12),

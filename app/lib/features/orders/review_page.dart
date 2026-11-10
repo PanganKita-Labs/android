@@ -75,42 +75,15 @@ class _ReviewPageState extends State<ReviewPage> {
             }),
           ),
           const SizedBox(height: 18),
-          I18nText(
-            'Ceritakan pengalamanmu',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            maxLines: _reviewTextMaxLines,
-            maxLength: _maxReviewLength,
-            decoration: InputDecoration(
-              hintText: translateDisplayText(
-                context,
-                'Bagaimana rasa makanan dan pengalaman pengambilanmu?',
-              ),
-            ),
-          ),
+          const _ReviewNarrativeInput(),
           const SizedBox(height: 6),
           const _PhotoPicker(),
-          CheckboxListTile(
+          _ReviewDisplayName(
             value: _showName,
             onChanged: (value) => setState(() => _showName = value ?? false),
-            title: const I18nText('Tampilkan nama saya'),
-            subtitle: const I18nText(
-              'Pilihan ini hanya contoh dan tidak disimpan.',
-            ),
-            controlAffinity: ListTileControlAffinity.leading,
-            contentPadding: EdgeInsets.zero,
           ),
           const SizedBox(height: 8),
-          FilledButton.icon(
-            style: FilledButton.styleFrom(
-              minimumSize: const Size.fromHeight(54),
-            ),
-            onPressed: () => DemoNotice.unavailable(context),
-            icon: const Icon(Icons.send_outlined),
-            label: const I18nText('Kirim Ulasan'),
-          ),
+          const _ReviewSubmitButton(),
         ],
       ),
     ),
@@ -226,6 +199,125 @@ class _TagPicker extends StatelessWidget {
   );
 }
 
+class _ReviewNarrativeInput extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      I18nText(
+        'Ceritakan pengalamanmu',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
+      const SizedBox(height: 8),
+      TextField(
+        maxLines: _reviewTextMaxLines,
+        maxLength: _maxReviewLength,
+        decoration: InputDecoration(
+          hintText: translateDisplayText(
+            context,
+            'Bagaimana rasa makanan dan pengalaman pengambilanmu?',
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+class _ReviewDisplayName extends StatelessWidget {
+  const new({required this.value, required this.onChanged});
+
+  final bool value;
+  final ValueChanged<bool?> onChanged;
+
+  @override
+  Widget build(BuildContext context) => CheckboxListTile(
+    value: value,
+    onChanged: onChanged,
+    title: const I18nText('Tampilkan nama saya'),
+    subtitle: const I18nText(
+      'Pilihan ini hanya contoh dan tidak disimpan.',
+    ),
+    controlAffinity: ListTileControlAffinity.leading,
+    contentPadding: EdgeInsets.zero,
+  );
+}
+
+class _ReviewSubmitButton extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => FilledButton.icon(
+    style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(54)),
+    onPressed: () => DemoNotice.unavailable(context),
+    icon: const Icon(Icons.send_outlined),
+    label: const I18nText('Kirim Ulasan'),
+  );
+}
+
+class _ReviewMerchant extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      CircleAvatar(
+        radius: _merchantRadius,
+        backgroundImage: AssetImage(food.image),
+      ),
+      const SizedBox(width: 10),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            I18nText(
+              food.merchant,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            I18nText(food.pickupAddress),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+class _ReviewFood extends StatelessWidget {
+  const new({required this.food, required this.quantity});
+
+  final DemoFood food;
+  final int quantity;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(_photoRadius)),
+        child: SizedBox.square(
+          dimension: _photoSize,
+          child: Image.asset(food.image, fit: BoxFit.cover),
+        ),
+      ),
+      const SizedBox(width: 12),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            I18nText(
+              food.title,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            I18nText('$quantity × ${food.price}'),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
 class _ReviewProduct extends StatelessWidget {
   const new({required this.food, required this.quantity});
 
@@ -243,54 +335,9 @@ class _ReviewProduct extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       child: Column(
         children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: _merchantRadius,
-                backgroundImage: AssetImage(food.image),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    I18nText(
-                      food.merchant,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    I18nText(food.pickupAddress),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          _ReviewMerchant(food: food),
           const SizedBox(height: 12),
-          Row(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(_photoRadius),
-                ),
-                child: SizedBox.square(
-                  dimension: _photoSize,
-                  child: Image.asset(food.image, fit: BoxFit.cover),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    I18nText(
-                      food.title,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    I18nText('$quantity × ${food.price}'),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          _ReviewFood(food: food, quantity: quantity),
         ],
       ),
     ),
