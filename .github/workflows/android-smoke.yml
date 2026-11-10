@@ -14,6 +14,7 @@ on:
       - '.github/scripts/run_android_smoke.sh'
       - '.github/scripts/fetch_satoshi.py'
       - 'app/lib/**/*.dart'
+      - 'app/lib/i18n/arb/*.arb'
       - 'app/android/**'
       - 'app/assets/**'
       - 'app/pubspec.yaml'
