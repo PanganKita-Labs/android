@@ -13,7 +13,10 @@ const _dividerColor = Color(0xFFE4E8EB);
 ///
 /// These buttons display a notice; they do not authenticate users.
 class SocialSignIn extends StatelessWidget {
-  /// Creates the social sign-in group.
+  /// Creates provider-branded demonstration buttons.
+  ///
+  /// [register] selects registration or sign-in wording for the divider.
+  /// Provider taps only show an unavailable-feature notice, not OAuth.
   const new({required this.register, super.key});
 
   /// Whether this group appears below registration.

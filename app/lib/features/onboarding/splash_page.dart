@@ -29,7 +29,10 @@ class _SplashPageState extends State<SplashPage> {
     _timer = Timer(const Duration(milliseconds: 1700), _continue);
   }
 
-  /// Continues to the welcome route through the splash's existing transition.
+  /// Replaces the splash with the welcome screen at most once.
+  ///
+  /// Ignores calls after disposal or after departure begins. Cancels the
+  /// pending timer; reduced-motion settings disable the fade duration.
   void _continue() {
     if (!mounted || _leaving) return;
     _leaving = true;

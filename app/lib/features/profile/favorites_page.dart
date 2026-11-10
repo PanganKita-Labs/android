@@ -28,7 +28,8 @@ class FavoritesPage extends StatefulWidget {
 
 /// Owns local favorite item visibility and the food/store tab.
 ///
-/// Favorites exist only in the current demonstration screen.
+/// Food removals update an ID set, while the example merchant has a
+/// separate visibility flag. Neither removal updates other pages or storage.
 class _FavoritesPageState extends State<FavoritesPage> {
   final Set<String> _visibleFoodIds = _foodIds.toSet();
   bool _showStores = false;

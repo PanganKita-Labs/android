@@ -269,7 +269,8 @@ class _MessagesSwitch extends StatelessWidget {
 
 /// Owns three in-memory notification preference toggles.
 ///
-/// These choices do not enroll a device in push notifications.
+/// Orders and messages start enabled while promotions start disabled.
+/// Changes are discarded with the widget, and no device push service is used.
 class _NotificationCardState extends State<_NotificationCard> {
   bool _orders = true;
   bool _messages = true;
@@ -342,8 +343,10 @@ class _SettingsCard extends StatelessWidget {
 
   final List<_SettingsRow> rows;
 
-  /// Invokes the selected settings action, preserving unavailable-feature
-  /// feedback.
+  /// Opens the selected [row] action using [context].
+  ///
+  /// A supplied callback wins over a named route. When neither exists, a
+  /// local unavailable-feature notice is shown instead.
   void _openRow(BuildContext context, _SettingsRow row) {
     if (row.onTap case final tap?) {
       tap();

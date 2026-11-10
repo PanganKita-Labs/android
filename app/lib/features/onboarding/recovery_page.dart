@@ -27,7 +27,10 @@ class _RecoveryPageState extends State<RecoveryPage> {
     super.dispose();
   }
 
-  /// Validates the local email input before opening recovery verification.
+  /// Validates the entered email before opening the offline OTP preview.
+  ///
+  /// Invalid input leaves navigation unchanged. A valid form shows an
+  /// explanatory notice, then opens a route without sending an email or code.
   void _continue() {
     if (!(_form.currentState?.validate() ?? false)) return;
     FocusScope.of(context).unfocus();
