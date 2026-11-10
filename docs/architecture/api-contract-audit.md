@@ -111,16 +111,56 @@ Short, private, presentation-only constructors are covered by their surrounding
 widget descriptions unless they introduce ownership, validation or callback
 semantics that callers must know.
 
-## Validation evidence required at review
+## API documentation certification evidence
 
-- Hosted Quality: formatting, fatal Flutter analyzer, DCL including unused-code,
-  unused-files and unnecessary-nullable checks, strict Dartrics and tests with
-  coverage. Read the actual status for the **current** PR head.
-- Documentation generation: `dart doc --dry-run .` from `app/` (not present
-  in the existing hosted Quality job). Verify unresolved references/warnings.
-- Python: syntax, i18n checker mutation tests and applicable text-integrity
-  scripts. Respect tool availability and do not call unexecuted checks green.
-- Confirm `git diff --check`, documentation links and generated-file exclusion.
+**Validated commit:** `d026141893f788fa05f0bbcd50b5ac5e2a24c4a3`
+([hosted Quality evidence](https://github.com/PanganKita-Labs/android/actions/runs/42835457221)).
+This is a scoped source-documentation certification, not a claim of live
+production functionality or a guarantee that prose can never become stale.
 
-This document inventories decisions, not a certification of production behavior
-or a replacement for executing the remaining checks.
+### Declaration and contract review
+
+- All 58 hand-authored `app/lib/` Dart files are represented in the inventory.
+- A separate public-member scan identified 61 public types, 49 public
+  constructors, 20 public method candidates, and 128 public field candidates.
+  Every recognized candidate had adjacent Dart documentation. These are
+  conservative syntactic counts rather than a substitute for source review,
+  and they exclude ordinary inherited overrides and uninteresting private
+  presentation details.
+- Manual contract review addressed inputs, significant defaults, boolean and
+  nullable results, validated exceptions, callbacks, asynchronous navigation,
+  ownership/disposal, session persistence, and demo-only domain boundaries.
+- Existing comments were corrected for accurate locale restoration, add-on
+  list aliasing, example pricing, and local-only behavior. Public contracts
+  should not invent production integrations.
+
+### Executed checks
+
+| Validation | Evidence and result |
+| --- | --- |
+| `dart doc --dry-run .` | PASS: **0 warnings, 0 errors** in the API documentation job |
+| Maintained Python syntax | PASS: all 5 files parsed with `ast.parse` |
+| Strict Flutter analyzer | PASS in hosted Quality |
+| Dart formatting | PASS in hosted Quality |
+| Dart Code Linter and unused checks | PASS in hosted Quality |
+| Strict Dartrics (`--snapshot none --strict-dismiss --fatal-warnings`) | PASS in hosted Quality |
+| `flutter test --coverage` | PASS: 291 tests |
+| Aggregate Quality gate | PASS |
+| i18n / Text Integrity / Links | PASS on the validated commit |
+| PR patch whitespace inspection | No added trailing whitespace identified |
+| PR Dart patch review | No executable Dart lines changed |
+
+The PR's Quality workflow now runs documentation generation and Python syntax
+verification as required checks; it was not part of the earlier workflow.
+Recheck the latest branch HEAD's workflows after any subsequent commit. The
+Android Build and Launch Smoke workflows are separate from API-documentation
+certification and should also pass before release approval.
+
+### Certification boundary
+
+For the inspected, maintained hand-written source, **the required API
+documentation contracts and checks are satisfied at the validated commit**.
+Generated localization Dart, vendored code, third-party libraries and framework
+overrides are intentionally excluded from manual documentation. No comment
+volume target substitutes for semantic review. The latest PR HEAD must retain
+all required successful checks before review approval or merge.
