@@ -113,7 +113,7 @@ flutter run -d emulator-5554
 
 Replace `emulator-5554` with the **full ID shown by `flutter devices`** on your machine, or use `flutter run` to choose a supported device. You do not need to restart an already-running emulator. In the Flutter terminal, press `r` to hot reload or `R` to hot restart.
 
-For another platform or fuller troubleshooting instructions, see the [Flutter app developer guide](app/README.md).
+For Android setup and troubleshooting, see the [Flutter app developer guide](app/README.md). This repository does not currently maintain a Flutter web target.
 
 ### Fonts and assets
 
