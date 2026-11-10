@@ -47,7 +47,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
   bool _favorite = false;
   int _tab = 0;
 
-/// Adds one illustrative store item to the session cart, subject to its limit.
+  /// Adds one illustrative store item to the session cart, subject to its limit.
   void _add(DemoFood food) {
     final added = widget.cart.add(food);
     final notice = ScaffoldMessenger.of(context).showSnackBar(
@@ -62,7 +62,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
     unawaited(notice.closed);
   }
 
-/// Copies the example merchant information for sharing.
+  /// Copies the example merchant information for sharing.
   void _copyMerchant() {
     unawaited(Clipboard.setData(ClipboardData(text: widget.food.merchant)));
     final notice = ScaffoldMessenger.of(context).showSnackBar(

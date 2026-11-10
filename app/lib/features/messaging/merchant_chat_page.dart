@@ -35,7 +35,7 @@ class _MerchantChatPageState extends State<MerchantChatPage> {
     super.dispose();
   }
 
-/// Adds the current draft to the in-memory conversation preview.
+  /// Adds the current draft to the in-memory conversation preview.
   void _addLocalMessage() {
     final message = _controller.text.trim();
     if (message.isEmpty) return;

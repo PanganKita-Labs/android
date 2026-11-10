@@ -200,13 +200,13 @@ class _AuthFormState extends State<_AuthForm> {
     super.dispose();
   }
 
-/// Returns a validation message when the confirmation differs from its password.
+  /// Returns a validation message when the confirmation differs from its password.
   String? _confirmation(String? value) =>
       value != _password.text || value == null || value.isEmpty
       ? 'Konfirmasi password tidak cocok.'
       : null;
 
-/// Validates local form fields and advances to the matching demo route.
+  /// Validates local form fields and advances to the matching demo route.
   Future<void> _submit() async {
     if (!(_form.currentState?.validate() ?? false)) return;
     FocusScope.of(context).unfocus();

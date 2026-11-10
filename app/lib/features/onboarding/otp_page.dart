@@ -46,7 +46,7 @@ class _OtpPageState extends State<OtpPage> {
     super.dispose();
   }
 
-/// Checks the fixed demo code and chooses the recovery or home route.
+  /// Checks the fixed demo code and chooses the recovery or home route.
   void _verify() {
     if (_values.join() != '5102') {
       setState(() => _error = 'Kode demo tidak cocok. Gunakan 5102.');
@@ -58,7 +58,7 @@ class _OtpPageState extends State<OtpPage> {
     ).ignore();
   }
 
-/// Resets digits and focus, then explains that no message was sent.
+  /// Resets digits and focus, then explains that no message was sent.
   void _resend() {
     for (final digit in _digits) {
       digit.text = _emptyDigit;
@@ -72,9 +72,9 @@ class _OtpPageState extends State<OtpPage> {
     );
   }
 
-/// Handles editing, deletion, and multi-digit paste across OTP inputs.
-///
-/// Clears the current error and advances focus within the four-digit range.
+  /// Handles editing, deletion, and multi-digit paste across OTP inputs.
+  ///
+  /// Clears the current error and advances focus within the four-digit range.
   void _changeDigit(int index, String value) {
     final wasEmpty = _values[index].isEmpty;
     final digits = value.replaceAll(_emptyDigit, '').split('');
@@ -101,13 +101,13 @@ class _OtpPageState extends State<OtpPage> {
     if (_error != null) setState(() => _error = null);
   }
 
-/// Focuses one OTP field and selects its existing visible digit.
+  /// Focuses one OTP field and selects its existing visible digit.
   void _focusDigit(int index) {
     _focus[index].requestFocus();
     _selectDigit(index);
   }
 
-/// Selects a field's text, handling the invisible empty placeholder.
+  /// Selects a field's text, handling the invisible empty placeholder.
   void _selectDigit(int index) {
     final text = _digits[index].text;
     _digits[index].selection = TextSelection(

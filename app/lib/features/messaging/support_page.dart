@@ -29,13 +29,13 @@ class _SupportPageState extends State<SupportPage> {
     super.dispose();
   }
 
-/// Explains that support message delivery is unavailable in this demo.
+  /// Explains that support message delivery is unavailable in this demo.
   void _unavailable() => DemoNotice.show(
     context,
     'Contoh tampilan. Pesan tidak dikirim ke customer service.',
   );
 
-/// Copies a canned response into the local support draft.
+  /// Copies a canned response into the local support draft.
   void _useSuggestion(String suggestion) {
     _message.text = suggestion;
     _message.selection = TextSelection.collapsed(offset: suggestion.length);

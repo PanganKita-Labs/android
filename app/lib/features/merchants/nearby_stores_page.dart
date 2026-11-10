@@ -205,7 +205,7 @@ class _StoreCard extends StatelessWidget {
 
   final DemoFood food;
 
-/// Opens the local detail route for the selected fixture merchant.
+  /// Opens the local detail route for the selected fixture merchant.
   void _openStore(BuildContext context) =>
       Navigator.pushNamed(context, AppRoutes.store(food.id)).ignore();
 
