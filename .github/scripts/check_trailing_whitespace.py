@@ -20,11 +20,29 @@ FENCE = re.compile(rb"^[ \t]{0,3}(`{3,}|~{3,})")
 
 @dataclass(frozen=True)
 class PlannedFix:
+    """Describes a safe working-tree replacement derived from staged bytes.
+
+    Attributes:
+        path: File whose working-tree bytes may be updated.
+        repaired: Replacement bytes, preserving safe Markdown line breaks.
+    """
     path: Path
     repaired: bytes
 
 
 def run_git(*args: str, check: bool = True) -> subprocess.CompletedProcess[bytes]:
+    """Executes a Git subcommand without interpreting its output.
+
+    Args:
+        *args: Command arguments following the executable name.
+        check: Whether a nonzero exit status should raise an error.
+
+    Returns:
+        The process result, including standard output and standard error.
+
+    Raises:
+        RuntimeError: If check is true and Git exits unsuccessfully.
+    """
     result = subprocess.run(
         ["git", *args],
         stdout=subprocess.PIPE,
@@ -40,6 +58,14 @@ def run_git(*args: str, check: bool = True) -> subprocess.CompletedProcess[bytes
 
 
 def split_eol(line: bytes) -> tuple[bytes, bytes]:
+    """Separates a byte string from its terminal line ending.
+
+    Args:
+        line: Raw line, possibly ending in CRLF, CR, or LF.
+
+    Returns:
+        A pair containing the line body and original line ending.
+    """
     if line.endswith(b"\r\n"):
         return line[:-2], b"\r\n"
     if line.endswith(b"\n") or line.endswith(b"\r"):
@@ -48,6 +74,14 @@ def split_eol(line: bytes) -> tuple[bytes, bytes]:
 
 
 def preferred_eol(data: bytes) -> bytes:
+    """Finds the preferred existing line-ending bytes.
+
+    Args:
+        data: Raw file contents to inspect.
+
+    Returns:
+        The first recognized CRLF, LF, or CR style, defaulting to LF.
+    """
     if b"\r\n" in data:
         return b"\r\n"
     if b"\n" in data:
@@ -58,6 +92,14 @@ def preferred_eol(data: bytes) -> bytes:
 
 
 def is_markdown(path: Path) -> bool:
+    """Checks whether a file extension represents Markdown.
+
+    Args:
+        path: Candidate text-file path.
+
+    Returns:
+        True for Markdown extensions; otherwise false.
+    """
     return path.suffix.lower() in {".md", ".markdown"}
 
 
@@ -143,6 +185,14 @@ def repair_from_staged(
 
 
 def git_text_files() -> list[Path]:
+    """Lists text files according to Git's own classification.
+
+    Returns:
+        Non-ignored paths reported by Git as text files.
+
+    Raises:
+        RuntimeError: If the Git text-file query fails unexpectedly.
+    """
     result = run_git(
         "grep",
         "--no-index",
@@ -168,6 +218,14 @@ def git_text_files() -> list[Path]:
 
 
 def trailing_lines(data: bytes) -> list[int]:
+    """Finds lines ending with spaces or tab characters.
+
+    Args:
+        data: Raw file bytes, including the original line endings.
+
+    Returns:
+        One-based line numbers containing trailing whitespace.
+    """
     failures: list[int] = []
 
     for number, line in enumerate(data.splitlines(keepends=True), start=1):
@@ -179,6 +237,12 @@ def trailing_lines(data: bytes) -> list[int]:
 
 
 def check_all() -> int:
+    """Checks all Git-classified text files without editing them.
+
+    Returns:
+        Zero when clean or one when any trailing whitespace or read
+        failure is detected.
+    """
     failures: list[str] = []
 
     for path in git_text_files():
@@ -205,6 +269,14 @@ def check_all() -> int:
 
 
 def staged_trailing_paths() -> list[Path]:
+    """Finds paths that Git reports with staged whitespace errors.
+
+    Returns:
+        A deduplicated list of affected staged paths.
+
+    Raises:
+        RuntimeError: If Git reports an unexpected diff-check failure.
+    """
     result = run_git("diff", "--cached", "--check", check=False)
 
     if result.returncode == 0:
@@ -235,6 +307,14 @@ def staged_trailing_paths() -> list[Path]:
 
 
 def staged_bytes(path: Path) -> bytes | None:
+    """Reads the indexed version of a file without using working-tree bytes.
+
+    Args:
+        path: Path whose staged blob should be inspected.
+
+    Returns:
+        Staged bytes, or None when the index blob is unavailable.
+    """
     result = run_git("show", f":{path.as_posix()}", check=False)
 
     if result.returncode != 0:
@@ -244,6 +324,15 @@ def staged_bytes(path: Path) -> bytes | None:
 
 
 def plan_fixes(paths: list[Path]) -> tuple[list[PlannedFix], list[str]]:
+    """Plans repairs only when unstaged content is substantively unchanged.
+
+    Args:
+        paths: Staged paths reported with whitespace errors.
+
+    Returns:
+        Safe replacement plans and reasons for refusing unsafe paths.
+        Nothing is written to the working tree or Git index.
+    """
     plans: list[PlannedFix] = []
     unsafe: list[str] = []
 
@@ -287,6 +376,13 @@ def plan_fixes(paths: list[Path]) -> tuple[list[PlannedFix], list[str]]:
 
 
 def fix_staged() -> int:
+    """Repairs safely reconstructible staged whitespace in the working tree.
+
+    Returns:
+        Zero if no repair is needed, the restaging-required status after
+        repair, or the unsafe-refusal status if any path cannot be proven
+        safe. This function does not modify the Git index.
+    """
     paths = staged_trailing_paths()
 
     if not paths:
@@ -337,6 +433,11 @@ def fix_staged() -> int:
 
 
 def parse_args() -> argparse.Namespace:
+    """Parses the check and safe staged-repair CLI options.
+
+    Returns:
+        Parsed command-line arguments.
+    """
     parser = argparse.ArgumentParser(
         description="Check or safely repair trailing whitespace."
     )
@@ -352,6 +453,11 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    """Runs the whitespace check or the requested safe repair mode.
+
+    Returns:
+        The selected command status, or two when a Git command fails.
+    """
     args = parse_args()
 
     try:

@@ -108,6 +108,14 @@ def escaped(value: str) -> str:
 
 
 def check_file(path: Path) -> list[str]:
+    """Checks one Git-classified text file for invalid UTF-8 or mojibake.
+
+    Args:
+        path: Text file to inspect without modifying it.
+
+    Returns:
+        Human-readable diagnostics, or an empty list when no issue is found.
+    """
     failures: list[str] = []
 
     try:
@@ -155,6 +163,12 @@ def check_file(path: Path) -> list[str]:
 
 
 def main() -> int:
+    """Checks repository text files and returns the command exit status.
+
+    Returns:
+        Zero when all checked files pass, one for detected text problems,
+        or two if Git-based discovery fails.
+    """
     try:
         files = git_text_files()
     except RuntimeError as error:
