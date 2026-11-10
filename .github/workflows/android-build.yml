@@ -4,9 +4,29 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - '.github/workflows/android-build.yml'
+      - '.github/scripts/fetch_satoshi.py'
+      - 'app/lib/**/*.dart'
+      - 'app/lib/i18n/arb/*.arb'
+      - 'app/android/**'
+      - 'app/assets/**'
+      - 'app/pubspec.yaml'
+      - 'app/pubspec.lock'
+      - 'app/l10n.yaml'
   push:
     branches:
       - main
+    paths:
+      - '.github/workflows/android-build.yml'
+      - '.github/scripts/fetch_satoshi.py'
+      - 'app/lib/**/*.dart'
+      - 'app/lib/i18n/arb/*.arb'
+      - 'app/android/**'
+      - 'app/assets/**'
+      - 'app/pubspec.yaml'
+      - 'app/pubspec.lock'
+      - 'app/l10n.yaml'
   workflow_dispatch:
 
 concurrency:
