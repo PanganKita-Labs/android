@@ -36,8 +36,6 @@ class _AuthFieldState extends State<AuthField> {
 
   @override
   Widget build(BuildContext context) {
-    final tooltip = _visible ? 'Sembunyikan password' : 'Tampilkan password';
-    final visibilityIcon = _visible ? 'eye-off' : 'eye';
     return TextFormField(
       controller: widget.controller,
       style: const TextStyle(
@@ -72,17 +70,30 @@ class _AuthFieldState extends State<AuthField> {
           borderSide: BorderSide(color: PanganKitaColors.borderNeutral),
         ),
         suffixIcon: widget.password
-            ? IconButton(
-                tooltip: tooltip,
-                onPressed: () => setState(() => _visible = !_visible),
-                icon: ReferenceIcon(
-                  visibilityIcon,
-                  size: _visibilityIconSize,
-                  color: const Color(0xFF657181),
-                ),
+            ? _AuthVisibilityButton(
+                visible: _visible,
+                onToggle: () => setState(() => _visible = !_visible),
               )
             : null,
       ),
     );
   }
+}
+
+class _AuthVisibilityButton extends StatelessWidget {
+  const new({required this.visible, required this.onToggle});
+
+  final bool visible;
+  final VoidCallback onToggle;
+
+  @override
+  Widget build(BuildContext context) => IconButton(
+    tooltip: visible ? 'Sembunyikan password' : 'Tampilkan password',
+    onPressed: onToggle,
+    icon: ReferenceIcon(
+      visible ? 'eye-off' : 'eye',
+      size: _visibilityIconSize,
+      color: const Color(0xFF657181),
+    ),
+  );
 }

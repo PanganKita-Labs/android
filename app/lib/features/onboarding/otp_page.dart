@@ -106,6 +106,30 @@ class _OtpPageState extends State<OtpPage> {
     );
   }
 
+  TextField _digitField(int index) => TextField(
+    controller: _digits[index],
+    focusNode: _focus[index],
+    keyboardType: TextInputType.number,
+    inputFormatters: [
+      FilteringTextInputFormatter.allow(RegExp('[0-9$_emptyDigit]')),
+      LengthLimitingTextInputFormatter(_otpLength + 1),
+    ],
+    autofillHints: const [AutofillHints.oneTimeCode],
+    textAlign: TextAlign.center,
+    style: const TextStyle(
+      fontFamily: PanganKitaTheme.bodyFontFamily,
+      fontSize: 24,
+      fontWeight: FontWeight.w500,
+    ),
+    decoration: InputDecoration(
+      contentPadding: const EdgeInsets.symmetric(vertical: 18),
+      labelText: translateDisplayText(context, 'Digit ${index + 1}'),
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+    ),
+    onChanged: (value) => _changeDigit(index, value),
+    onTap: () => _selectDigit(index),
+  );
+
   @override
   Widget build(BuildContext context) => Scaffold(
     body: SafeArea(
@@ -117,36 +141,7 @@ class _OtpPageState extends State<OtpPage> {
             spacing: _digitGap,
             children: [
               for (var index = 0; index < _digits.length; index++)
-                Expanded(
-                  child: TextField(
-                    controller: _digits[index],
-                    focusNode: _focus[index],
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(
-                        RegExp('[0-9$_emptyDigit]'),
-                      ),
-                      LengthLimitingTextInputFormatter(_otpLength + 1),
-                    ],
-                    autofillHints: const [AutofillHints.oneTimeCode],
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontFamily: PanganKitaTheme.bodyFontFamily,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 18),
-                      labelText: translateDisplayText(
-                        context,
-                        'Digit ${index + 1}',
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                    ),
-                    onChanged: (value) => _changeDigit(index, value),
-                    onTap: () => _selectDigit(index),
-                  ),
-                ),
+                Expanded(child: _digitField(index)),
             ],
           ),
           if (_error case final String error)
