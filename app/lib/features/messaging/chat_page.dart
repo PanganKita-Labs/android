@@ -63,7 +63,10 @@ class ChatPage extends StatefulWidget {
   State<ChatPage> createState() => _ChatPageState();
 }
 
-/// Owns the local conversation query and illustrative filter selection.
+/// Owns the local query and unread-only conversation filter.
+///
+/// Both controls filter fixed sample messages by merchant and preview text.
+/// They neither read a mailbox nor change unread state on the server.
 class _ChatPageState extends State<ChatPage> {
   String _query = '';
   bool _unreadOnly = false;

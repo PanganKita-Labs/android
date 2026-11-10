@@ -4,7 +4,11 @@ const _defaultIconSize = 22.0;
 
 /// Rasterized SVG symbol from the supplied HTML, kept sharp at four times size.
 class ReferenceIcon extends StatelessWidget {
-  /// Creates one of the reference's named symbols.
+  /// Renders the local asset for [name] at logical [size].
+  ///
+  /// [size] defaults to 22 logical pixels. [color] is an optional tint;
+  /// otherwise the surrounding icon theme provides a tint. The widget does
+  /// not verify asset existence or expose its image as screen-reader text.
   const new(this.name, {this.size = _defaultIconSize, this.color, super.key});
 
   /// Symbol identifier in the HTML sprite.

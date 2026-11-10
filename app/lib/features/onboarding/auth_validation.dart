@@ -6,8 +6,11 @@ abstract final class AuthValidation {
   static String? requiredValue(String? value) =>
       value == null || value.trim().isEmpty ? 'Kolom wajib diisi.' : null;
 
-  /// Validates a local email shape without checking account ownership.
-  /// Returns null for accepted input; no email or verification is sent.
+  /// Validates the shape of [value] without verifying an email account.
+  ///
+  /// Returns the required-field error for null or blank text, a format
+  /// error for rejected input, or `null` for an accepted email shape.
+  /// No email is sent and no identity is authenticated.
   static String? email(String? value) {
     final required = requiredValue(value);
     if (required != null) return required;
@@ -17,8 +20,11 @@ abstract final class AuthValidation {
         : 'Masukkan format email yang valid.';
   }
 
-  /// Requires eight or more characters including a letter and a digit.
-  /// Returns null when valid; does not authenticate or store a password.
+  /// Validates [value] as a local password-form input.
+  ///
+  /// Returns an error for null, fewer than eight characters, or missing
+  /// ASCII letters or digits; otherwise returns `null`. This does not
+  /// authenticate or persist the password.
   static String? password(String? value) {
     if (value == null ||
         value.length < _minimumPasswordLength ||

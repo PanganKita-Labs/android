@@ -19,7 +19,10 @@ class SupportPage extends StatefulWidget {
   State<SupportPage> createState() => _SupportPageState();
 }
 
-/// Owns local support suggestions and the example draft field.
+/// Owns the local support draft and its prewritten suggestions.
+///
+/// Creates and disposes the draft controller. Suggestions fill that input
+/// without sending it, and tapping send only shows unavailable feedback.
 class _SupportPageState extends State<SupportPage> {
   final _message = TextEditingController();
 
@@ -35,7 +38,9 @@ class _SupportPageState extends State<SupportPage> {
     'Contoh tampilan. Pesan tidak dikirim ke customer service.',
   );
 
-  /// Copies a canned response into the local support draft.
+  /// Inserts [suggestion] into the local draft and moves the cursor to end.
+  ///
+  /// No message is sent or persisted.
   void _useSuggestion(String suggestion) {
     _message.text = suggestion;
     _message.selection = TextSelection.collapsed(offset: suggestion.length);
