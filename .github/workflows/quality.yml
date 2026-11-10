@@ -21,11 +21,10 @@ defaults:
     working-directory: app
 
 jobs:
-  quality:
-    name: Quality gate
+  formatting:
+    name: Formatting
     runs-on: ubuntu-latest
     timeout-minutes: 20
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -37,10 +36,28 @@ jobs:
           flutter-version: 3.47.4
           cache: true
 
-      - name: Show toolchain versions
+      - name: Install dependencies
+        run: flutter pub get --enforce-lockfile
+
+      - name: Verify formatting
         run: |
-          flutter --version
-          dart --version
+          dart format --output=write .
+          git diff --exit-code -- .
+
+  analyzer:
+    name: Flutter analyzer
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.4
+          cache: true
 
       - name: Install dependencies
         run: flutter pub get --enforce-lockfile
@@ -48,13 +65,26 @@ jobs:
       - name: Fetch licensed Satoshi font
         run: python3 ../.github/scripts/fetch_satoshi.py
 
-      - name: Verify formatting
-        run: |
-          dart format --output=write .
-          git diff --exit-code -- .
-
       - name: Run strict Flutter analyzer
         run: flutter analyze --fatal-infos --fatal-warnings
+
+  dcl:
+    name: Dart Code Linter
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.4
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get --enforce-lockfile
 
       - name: Run Dart Code Linter
         run: >
@@ -84,8 +114,90 @@ jobs:
           check-unnecessary-nullable
           lib
 
-      - name: Run complexity analysis
-        run: dart run dartrics analyze lib
+  complexity:
+    name: Complexity (Dartrics strict)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.4
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get --enforce-lockfile
+
+      - name: Enforce zero Dartrics violations
+        run: dart run dartrics analyze --snapshot none --strict-dismiss --fatal-warnings lib
+
+  tests:
+    name: Flutter tests (coverage)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.4
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get --enforce-lockfile
+
+      - name: Show toolchain versions
+        run: |
+          flutter --version
+          dart --version
+
+      - name: Fetch licensed Satoshi font
+        run: python3 ../.github/scripts/fetch_satoshi.py
 
       - name: Run tests with coverage
         run: flutter test --coverage
+
+  quality:
+    name: Quality gate
+    if: ${{ always() }}
+    needs:
+      - formatting
+      - analyzer
+      - dcl
+      - complexity
+      - tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Verify required jobs
+        working-directory: .
+        env:
+          FORMATTING_RESULT: ${{ needs.formatting.result }}
+          ANALYZER_RESULT: ${{ needs.analyzer.result }}
+          DCL_RESULT: ${{ needs.dcl.result }}
+          COMPLEXITY_RESULT: ${{ needs.complexity.result }}
+          TESTS_RESULT: ${{ needs.tests.result }}
+        run: |
+          failed=0
+          for entry in \
+            "Formatting:$FORMATTING_RESULT" \
+            "Flutter analyzer:$ANALYZER_RESULT" \
+            "Dart Code Linter:$DCL_RESULT" \
+            "Complexity:$COMPLEXITY_RESULT" \
+            "Flutter tests:$TESTS_RESULT"; do
+            name="${entry%%:*}"
+            result="${entry#*:}"
+            echo "$name: $result"
+            if [ "$result" != "success" ]; then
+              echo "::error title=Quality gate::$name finished with '$result'; required 'success'."
+              failed=1
+            fi
+          done
+          exit "$failed"
