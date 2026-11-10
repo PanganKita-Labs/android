@@ -22,7 +22,10 @@ const Color _pickupTextColor = PanganKitaColors.attentionText;
 
 /// Pickup checkout preview; never submits an order or initiates payment.
 class CheckoutPage extends StatefulWidget {
-  /// Uses the same cart as Home, product details and the cart route.
+  /// Displays the current app-owned [cart] without submitting an order.
+  ///
+  /// The acknowledgment starts unchecked on each page-state creation.
+  /// This screen observes cart changes but never disposes the shared cart.
   const new({required this.cart, super.key});
 
   /// App-session preview state.
@@ -38,7 +41,10 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   bool _understood = false;
 
-  /// Updates the local pickup acknowledgment checkbox state.
+  /// Updates the local preview acknowledgment from [value].
+  ///
+  /// A null checkbox value is interpreted as `false`. This selection
+  /// controls only navigation to the payment preview, not legal consent.
   void _setUnderstood(bool? value) =>
       setState(() => _understood = value ?? false);
 

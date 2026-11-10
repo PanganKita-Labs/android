@@ -25,7 +25,10 @@ Set<String> _merchantNames(DemoCart cart) =>
 
 /// Displays the unsuccessful-payment reference without a real payment attempt.
 class PaymentFailedPage extends StatelessWidget {
-  /// Uses the session cart only to populate the example order card.
+  /// Displays an illustrative failure state using the shared [cart].
+  ///
+  /// The caller retains ownership; this page does not attempt a payment,
+  /// remove cart lines, or retry an actual transaction.
   const new({required this.cart, super.key});
 
   /// Cart contents are never charged or cleared by this page.

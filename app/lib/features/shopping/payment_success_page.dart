@@ -32,7 +32,10 @@ String _pickupTimeLabel(DemoCart cart) {
 
 /// A success-layout example without payment or order confirmation.
 class PaymentSuccessPage extends StatelessWidget {
-  /// Reads the session cart solely to populate the example layout.
+  /// Renders a hypothetical success layout for the shared [cart].
+  ///
+  /// The caller retains cart ownership. This page neither confirms a
+  /// payment nor clears the cart or creates a real order.
   const new({required this.cart, super.key});
 
   /// App-owned preview cart; it is never charged or cleared here.

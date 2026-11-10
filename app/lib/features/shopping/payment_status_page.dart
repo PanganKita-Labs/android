@@ -20,7 +20,10 @@ const _qrPlaceholderSize = 166.0;
 
 /// Payment layout preview without a transaction, QR code, or order.
 class PaymentStatusPage extends StatelessWidget {
-  /// Reads the session cart without changing inventory or charging anyone.
+  /// Displays a nonfunctional payment status for [cart].
+  ///
+  /// The page observes the app-owned cart and does not dispose or clear it.
+  /// No invoice, payable QR code, transaction, or order is created.
   const new({required this.cart, super.key});
 
   /// App-owned preview cart.

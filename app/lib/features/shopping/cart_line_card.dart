@@ -11,10 +11,15 @@ const _cartTextGap = 6.0;
 
 /// One configured product with local quantity and removal controls.
 class CartLineCard extends StatelessWidget {
-  /// Uses the app-owned cart; does not reserve or persist stock.
+  /// Displays [line] and changes its quantity through [cart].
+  ///
+  /// The caller owns [cart]. This widget never disposes it or reserves stock.
   const new({required this.line, required this.cart, super.key});
 
-  /// Current immutable line snapshot.
+  /// Display snapshot of a cart line, identified by [DemoCartLine.id].
+  ///
+  /// The cart replaces lines on mutation; callers must supply a fresh line
+  /// when rebuilding. Directly constructed lines may hold mutable add-ons.
   final DemoCartLine line;
 
   /// Local cart state owner.

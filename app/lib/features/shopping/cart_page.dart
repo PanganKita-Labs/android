@@ -15,10 +15,14 @@ const _notesMaxLines = 3;
 
 /// Session-only cart preview matching the supplied shopping reference.
 class CartPage extends StatelessWidget {
-  /// Receives state owned by the application, never by a global singleton.
+  /// Reads and updates the app-session [cart] without taking ownership.
+  ///
+  /// The cart notifies this page when its contents change. This page does
+  /// not dispose, persist, or submit the cart to any backend.
   const new({required this.cart, super.key});
 
-  /// Local demo cart; no backend or inventory authority.
+  /// Shared [DemoCart] whose lines and subtotal are observed live.
+  /// No backend persistence or merchant inventory is involved.
   final DemoCart cart;
 
   @override
