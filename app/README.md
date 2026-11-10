@@ -2,6 +2,11 @@
 
 The mobile interface for [PanganKita](../README.md), a pickup-first surplus-food marketplace concept for Indonesia. This package is an **interactive local demonstration** built with Flutter. It does not connect to production authentication, inventory, payments, maps, or messaging services.
 
+**Supported target:** Android. The unused Flutter web bootstrap was removed because
+this repository neither builds nor deploys a browser app. Restore web assets only
+if browser support becomes an approved target (using `flutter create . --platforms web`
+from `app/` and reviewing the generated files).
+
 For the product story and screenshots, start with the [root README](../README.md). For all 37 distinct UI captures, browse the [screenshot catalog](../docs/screenshots/README.md).
 
 ## Development environment
