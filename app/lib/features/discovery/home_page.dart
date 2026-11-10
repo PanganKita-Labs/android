@@ -41,6 +41,9 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+/// Owns the home screen's local query, category, and selected area.
+///
+/// The selected area is reported to the root app through the provided callback.
 class _HomePageState extends State<HomePage> {
   String _query = '';
   String _category = 'Semua';
@@ -60,6 +63,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+/// Opens the example-area selector and reports a selected area only while mounted.
   Future<void> _chooseLocation() async {
     final selected = await Navigator.pushNamed(
       context,
@@ -84,6 +88,7 @@ class _HomePageState extends State<HomePage> {
 
   void _openFilter() => unawaited(_filter());
 
+/// Displays the category picker for the local food fixtures.
   Future<void> _filter() async {
     await showModalBottomSheet<void>(
       context: context,
@@ -162,6 +167,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+/// Displays the category section's branded title.
 class _HomeCategoryHeading extends StatelessWidget {
   const new();
 
@@ -179,6 +185,7 @@ class _HomeCategoryHeading extends StatelessWidget {
   );
 }
 
+/// Identifies offers, locations, ratings, and stock as examples.
 class _HomeDemoDisclaimer extends StatelessWidget {
   const new();
 
@@ -191,6 +198,7 @@ class _HomeDemoDisclaimer extends StatelessWidget {
   );
 }
 
+/// Displays a feed title and its display-only See All action.
 class _FeedHeading extends StatelessWidget {
   const new({required this.title, required this.flash});
 
@@ -245,6 +253,7 @@ class _FeedHeading extends StatelessWidget {
   );
 }
 
+/// Displays the store illustration in the merchant banner.
 class _MerchantBannerIcon extends StatelessWidget {
   const new();
 
@@ -261,6 +270,7 @@ class _MerchantBannerIcon extends StatelessWidget {
   );
 }
 
+/// Renders one category feed using the provided local food examples.
 class _FeedSection extends StatelessWidget {
   const new({required this.title, required this.foods, required this.flash});
   final String title;
@@ -286,6 +296,7 @@ class _FeedSection extends StatelessWidget {
   );
 }
 
+/// Promotes the nearby-stores preview without querying live merchants.
 class _MerchantBanner extends StatelessWidget {
   const new();
 
@@ -334,6 +345,7 @@ class _MerchantBanner extends StatelessWidget {
   );
 }
 
+/// Connects the home search input and filter button to caller callbacks.
 class _HomeSearch extends StatelessWidget {
   const new({
     required this.onChanged,
@@ -376,6 +388,7 @@ class _HomeSearch extends StatelessWidget {
   );
 }
 
+/// Shows the available fixture categories and selected category.
 class _HomeCategories extends StatelessWidget {
   const new({required this.selected, required this.onSelected});
   final String selected;
@@ -420,6 +433,7 @@ class _HomeCategories extends StatelessWidget {
   );
 }
 
+/// Displays the illustrative count or caption for a category.
 class _ReferenceCategoryCount extends StatelessWidget {
   const new();
 

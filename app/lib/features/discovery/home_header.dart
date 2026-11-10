@@ -57,6 +57,7 @@ class HomeHeader extends StatelessWidget {
   );
 }
 
+/// Opens the local profile preview from the home screen.
 class _HomeAvatarLink extends StatelessWidget {
   const new();
 
@@ -74,6 +75,7 @@ class _HomeAvatarLink extends StatelessWidget {
   );
 }
 
+/// Displays the current example area and forwards location taps.
 class _HomeLocationSummary extends StatelessWidget {
   const new({required this.location, required this.onLocationTap});
 

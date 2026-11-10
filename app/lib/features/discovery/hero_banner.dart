@@ -58,6 +58,7 @@ class HeroBanner extends StatelessWidget {
   );
 }
 
+/// Displays the decorative pagination indicators for the static campaign.
 class _HeroDots extends StatelessWidget {
   const new();
 
@@ -91,6 +92,7 @@ class _HeroDots extends StatelessWidget {
   );
 }
 
+/// Shows the banner's marketing copy and navigation affordance.
 class _HeroCopy extends StatelessWidget {
   const new();
 
@@ -138,6 +140,7 @@ class _HeroCopy extends StatelessWidget {
   );
 }
 
+/// Displays a promotional badge for an illustrative offer.
 class _FlashSaleBadge extends StatelessWidget {
   const new();
 

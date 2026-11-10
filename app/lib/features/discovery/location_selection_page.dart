@@ -40,6 +40,9 @@ class LocationSelectionPage extends StatefulWidget {
   State<LocationSelectionPage> createState() => _LocationSelectionPageState();
 }
 
+/// Owns the current area query and selection until confirmation.
+///
+/// Selection uses supplied area examples, not device GPS or reverse geocoding.
 class _LocationSelectionPageState extends State<LocationSelectionPage> {
   final _search = TextEditingController();
   String _selected = _sampleAreas.first.name;
@@ -93,6 +96,7 @@ class _LocationSelectionPageState extends State<LocationSelectionPage> {
   }
 }
 
+/// Displays filtered example areas and selection controls.
 class _LocationSelectionList extends StatelessWidget {
   const new({
     required this.controller,
@@ -152,6 +156,7 @@ class _LocationSelectionList extends StatelessWidget {
   );
 }
 
+/// Labels a group of nearby or suggested example areas.
 class _LocationSectionHeading extends StatelessWidget {
   const new(this.title);
 
@@ -167,6 +172,7 @@ class _LocationSectionHeading extends StatelessWidget {
   );
 }
 
+/// Introduces the local area selection list and its limitations.
 class _LocationListIntro extends StatelessWidget {
   const new({
     required this.controller,
@@ -200,6 +206,7 @@ class _LocationListIntro extends StatelessWidget {
   );
 }
 
+/// Displays the area selector's title and navigation affordance.
 class _LocationHeading extends StatelessWidget {
   const new();
 
@@ -220,6 +227,7 @@ class _LocationHeading extends StatelessWidget {
   );
 }
 
+/// Collects a local area search query without network requests.
 class _AreaSearchField extends StatelessWidget {
   const new({
     required this.controller,
@@ -251,6 +259,7 @@ class _AreaSearchField extends StatelessWidget {
   );
 }
 
+/// Shows a nonfunctional device-location preview and explanation.
 class _CurrentLocationPreview extends StatelessWidget {
   const new();
 
@@ -274,6 +283,7 @@ class _CurrentLocationPreview extends StatelessWidget {
   );
 }
 
+/// Explains that the listed areas are illustrative.
 class _AreaExampleDisclaimer extends StatelessWidget {
   const new();
 
@@ -299,6 +309,7 @@ class _AreaExampleDisclaimer extends StatelessWidget {
   );
 }
 
+/// Confirms the selected example area through its callback.
 class _AreaConfirmation extends StatelessWidget {
   const new({required this.onPressed});
 
@@ -322,6 +333,7 @@ class _AreaConfirmation extends StatelessWidget {
   );
 }
 
+/// Displays one selectable example area and its selected state.
 class _AreaTile extends StatelessWidget {
   const new({
     required this.name,
@@ -354,6 +366,7 @@ class _AreaTile extends StatelessWidget {
   );
 }
 
+/// Draws a schematic map preview rather than real coordinates.
 class _IllustrativeMap extends StatelessWidget {
   const new();
 
@@ -390,6 +403,7 @@ class _IllustrativeMap extends StatelessWidget {
   );
 }
 
+/// Places street captions on the illustrative map.
 class _MapStreetLabels extends StatelessWidget {
   const new();
 
@@ -412,6 +426,7 @@ class _MapStreetLabels extends StatelessWidget {
   );
 }
 
+/// Explains the map's preview-only nature.
 class _MapPreviewCaption extends StatelessWidget {
   const new();
 
@@ -431,6 +446,7 @@ class _MapPreviewCaption extends StatelessWidget {
   );
 }
 
+/// Styles one static street label in the map illustration.
 class _MapStreetLabel extends StatelessWidget {
   const new(this.label);
 
@@ -443,6 +459,7 @@ class _MapStreetLabel extends StatelessWidget {
   );
 }
 
+/// Paints schematic map roads and parks without live map tiles.
 class _MapPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
