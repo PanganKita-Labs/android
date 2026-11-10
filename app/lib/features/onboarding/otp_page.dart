@@ -106,30 +106,6 @@ class _OtpPageState extends State<OtpPage> {
     );
   }
 
-  TextField _digitField(int index) => TextField(
-    controller: _digits[index],
-    focusNode: _focus[index],
-    keyboardType: TextInputType.number,
-    inputFormatters: [
-      FilteringTextInputFormatter.allow(RegExp('[0-9$_emptyDigit]')),
-      LengthLimitingTextInputFormatter(_otpLength + 1),
-    ],
-    autofillHints: const [AutofillHints.oneTimeCode],
-    textAlign: TextAlign.center,
-    style: const TextStyle(
-      fontFamily: PanganKitaTheme.bodyFontFamily,
-      fontSize: 24,
-      fontWeight: FontWeight.w500,
-    ),
-    decoration: InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(vertical: 18),
-      labelText: translateDisplayText(context, 'Digit ${index + 1}'),
-      floatingLabelBehavior: FloatingLabelBehavior.never,
-    ),
-    onChanged: (value) => _changeDigit(index, value),
-    onTap: () => _selectDigit(index),
-  );
-
   @override
   Widget build(BuildContext context) => Scaffold(
     body: SafeArea(
@@ -141,7 +117,17 @@ class _OtpPageState extends State<OtpPage> {
             spacing: _digitGap,
             children: [
               for (var index = 0; index < _digits.length; index++)
-                Expanded(child: _digitField(index)),
+                Expanded(
+                  child: _OtpDigitField(
+                    index: index,
+                    input: (
+                      controller: _digits[index],
+                      focusNode: _focus[index],
+                    ),
+                    onChanged: _changeDigit,
+                    onTap: _selectDigit,
+                  ),
+                ),
             ],
           ),
           if (_error case final String error)
@@ -172,6 +158,45 @@ class _OtpPageState extends State<OtpPage> {
         ],
       ),
     ),
+  );
+}
+
+class _OtpDigitField extends StatelessWidget {
+  const new({
+    required this.index,
+    required this.input,
+    required this.onChanged,
+    required this.onTap,
+  });
+
+  final int index;
+  final ({TextEditingController controller, FocusNode focusNode}) input;
+  final void Function(int index, String value) onChanged;
+  final ValueChanged<int> onTap;
+
+  @override
+  Widget build(BuildContext context) => TextField(
+    controller: input.controller,
+    focusNode: input.focusNode,
+    keyboardType: TextInputType.number,
+    inputFormatters: [
+      FilteringTextInputFormatter.allow(RegExp('[0-9$_emptyDigit]')),
+      LengthLimitingTextInputFormatter(_otpLength + 1),
+    ],
+    autofillHints: const [AutofillHints.oneTimeCode],
+    textAlign: TextAlign.center,
+    style: const TextStyle(
+      fontFamily: PanganKitaTheme.bodyFontFamily,
+      fontSize: 24,
+      fontWeight: FontWeight.w500,
+    ),
+    decoration: InputDecoration(
+      contentPadding: const EdgeInsets.symmetric(vertical: 18),
+      labelText: translateDisplayText(context, 'Digit ${index + 1}'),
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+    ),
+    onChanged: (value) => onChanged(index, value),
+    onTap: () => onTap(index),
   );
 }
 
