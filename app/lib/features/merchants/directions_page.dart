@@ -40,10 +40,11 @@ class DirectionsPage extends StatefulWidget {
 class _DirectionsPageState extends State<DirectionsPage> {
   int _mode = 0;
 
-  /// Returns to the map using the current navigator, if possible.
+  /// Leaves this illustration using the current navigator.
   ///
-  /// Pops when a previous route exists; otherwise replaces this page with
-  /// the map preview. Neither path starts a navigation service.
+  /// If this route can pop, returns to its preceding route, which need not
+  /// be the map. Otherwise replaces this page with the nearby-map preview.
+  /// Neither path starts a navigation service.
   void _backToMap() {
     final navigator = Navigator.of(context);
     if (navigator.canPop()) {

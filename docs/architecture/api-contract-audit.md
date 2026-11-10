@@ -125,6 +125,7 @@ were treated as hypotheses, **not** proof of semantic correctness.
 | Search-result criteria | `_SearchPageState._results` | Text, category, inclusive optional bounds, and local sorting all affect results; clarified the incomplete comment |
 | QRIS modal result | `showPaymentMethodSheet`, `PaymentMethodSheet.build` | QRIS is presented statically; the button dismisses the sheet and no payment choice or transaction is recorded |
 | Cart notification semantics | `DemoCart.add`, `setQuantity`, `remove`, `clear` | Added a focused regression test for successful mutation versus rejection, unknown IDs, unchanged values, and empty-cart operations |
+| Directions back behavior | `_DirectionsPageState._backToMap` | A programmatic pop returns to the previous route, not necessarily a map. Corrected an unconditional map-destination description |
 | Authentication and OTP | `_AuthFormState._submit`, `_OtpPageState._verify` | No network authentication or code delivery; form validation and fixed-code navigation match the documented demo boundary |
 | Preference restoration | `main.dart` and `_PanganKitaAppState._setLocale` | Startup reads preferences before constructing the app; root handles subsequent writes |
 | Cart line aliasing | `DemoCartLine` constructor and `DemoCart.add` | Direct callers can pass mutable add-ons, whereas canonical cart additions normalize and freeze them |
