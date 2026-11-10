@@ -44,57 +44,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton.filledTonal(
-                tooltip: translateDisplayText(
-                  context,
-                  'Kembali ke Profil Saya',
-                ),
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(_cornerRadius),
-                    ),
-                  ),
-                ),
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back, color: _ink),
-              ),
-            ),
-            const SizedBox(height: 18),
-            I18nText(
-              'Favorit Saya',
-              style: Theme.of(context).textTheme.headlineLarge
-                  ?.copyWith(color: _ink),
-            ),
-            const SizedBox(height: 4),
-            I18nText(
-              'Simpan yang kamu suka, temukan lagi kapan saja.',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: _TabButton(
-                    label: 'Makanan',
-                    icon: Icons.restaurant,
-                    selected: !_showStores,
-                    onPressed: () => setState(() => _showStores = false),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _TabButton(
-                    label: 'Toko',
-                    icon: Icons.storefront_outlined,
-                    selected: _showStores,
-                    onPressed: () => setState(() => _showStores = true),
-                  ),
-                ),
-              ],
+            const _FavoritesHeading(),
+            _FavoritesTabs(
+              showStores: _showStores,
+              onFood: () => setState(() => _showStores = false),
+              onStores: () => setState(() => _showStores = true),
             ),
             const SizedBox(height: 16),
             if (_showStores)
@@ -116,29 +70,111 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 const SizedBox(height: 12),
               ],
             const SizedBox(height: 12),
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: const BoxDecoration(
-                color: PanganKitaColors.savingsSurface,
-                borderRadius: BorderRadius.all(Radius.circular(14)),
-              ),
-              child: const Row(
-                children: [
-                  Icon(Icons.info_outline, color: _green),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: I18nText(
-                      'Favorit contoh. Harga dan ketersediaan belum terhubung.',
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const _FavoritesDisclosure(),
           ],
         ),
       ),
     );
   }
+}
+
+class _FavoritesHeading extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Align(
+        alignment: Alignment.centerLeft,
+        child: IconButton.filledTonal(
+          tooltip: translateDisplayText(context, 'Kembali ke Profil Saya'),
+          style: IconButton.styleFrom(
+            backgroundColor: Colors.white,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(_cornerRadius),
+              ),
+            ),
+          ),
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back, color: _ink),
+        ),
+      ),
+      const SizedBox(height: 18),
+      I18nText(
+        'Favorit Saya',
+        style: Theme.of(context).textTheme.headlineLarge
+            ?.copyWith(color: _ink),
+      ),
+      const SizedBox(height: 4),
+      I18nText(
+        'Simpan yang kamu suka, temukan lagi kapan saja.',
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
+      const SizedBox(height: 20),
+    ],
+  );
+}
+
+class _FavoritesTabs extends StatelessWidget {
+  const new({
+    required this.showStores,
+    required this.onFood,
+    required this.onStores,
+  });
+
+  final bool showStores;
+  final VoidCallback onFood;
+  final VoidCallback onStores;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(
+        child: _TabButton(
+          label: 'Makanan',
+          icon: Icons.restaurant,
+          selected: !showStores,
+          onPressed: onFood,
+        ),
+      ),
+      const SizedBox(width: 10),
+      Expanded(
+        child: _TabButton(
+          label: 'Toko',
+          icon: Icons.storefront_outlined,
+          selected: showStores,
+          onPressed: onStores,
+        ),
+      ),
+    ],
+  ),
+}
+
+class _FavoritesDisclosure extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(14),
+    decoration: const BoxDecoration(
+      color: PanganKitaColors.savingsSurface,
+      borderRadius: BorderRadius.all(Radius.circular(14)),
+    ),
+    child: const Row(
+      children: [
+        Icon(Icons.info_outline, color: _green),
+        SizedBox(width: 10),
+        Expanded(
+          child: I18nText(
+            'Favorit contoh. Harga dan ketersediaan belum terhubung.',
+          ),
+        ),
+      ],
+    ),
+  ),
 }
 
 class _TabButton extends StatelessWidget {
@@ -187,96 +223,127 @@ class _FoodCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(_cornerRadius),
-              ),
-              child: Image.asset(
-                food.image,
-                width: _foodImageWidth,
-                height: _foodImageHeight,
-                fit: BoxFit.cover,
-              ),
-            ),
+            _FavoriteFoodPhoto(food: food),
             const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: I18nText(
-                          food.title,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.titleSmall
-                              ?.copyWith(color: _ink),
-                        ),
-                      ),
-                      IconButton.filledTonal(
-                        tooltip: translateDisplayText(
-                          context,
-                          'Hapus ${food.title} dari favorit contoh',
-                        ),
-                        onPressed: onRemove,
-                        style: IconButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          side: const BorderSide(color: Color(0xFFE1E4E7)),
-                        ),
-                        icon: const Icon(Icons.favorite, color: _orange),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: _merchantAvatarRadius,
-                        backgroundImage: food.merchant.startsWith('Mawar')
-                            ? const AssetImage(
-                                'assets/prototype/mawar-mark.webp',
-                              )
-                            : null,
-                        child: food.merchant.startsWith('Mawar')
-                            ? null
-                            : const I18nText('R'),
-                      ),
-                      const SizedBox(width: 5),
-                      Expanded(
-                        child: I18nText(
-                          food.merchant,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Icon(Icons.star, size: 14, color: _orange),
-                      const SizedBox(width: 3),
-                      I18nText(
-                        '${food.rating.split(' ').first} · contoh',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  I18nText(
-                    food.price,
-                    style: Theme.of(context).textTheme.titleLarge
-                        ?.copyWith(color: _green),
-                  ),
-                ],
-              ),
-            ),
+            Expanded(child: _FavoriteFoodDetails(food: food, onRemove: onRemove)),
           ],
         ),
       ),
     ),
+  );
+}
+
+class _FavoriteFoodPhoto extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => ClipRRect(
+    borderRadius: const BorderRadius.all(Radius.circular(_cornerRadius)),
+    child: Image.asset(
+      food.image,
+      width: _foodImageWidth,
+      height: _foodImageHeight,
+      fit: BoxFit.cover,
+    ),
+  );
+}
+
+class _FavoriteFoodDetails extends StatelessWidget {
+  const new({required this.food, required this.onRemove});
+
+  final DemoFood food;
+  final VoidCallback onRemove;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _FavoriteFoodTitle(food: food, onRemove: onRemove),
+      const SizedBox(height: 5),
+      _FavoriteMerchant(food: food),
+      Row(
+        children: [
+          const Icon(Icons.star, size: 14, color: _orange),
+          const SizedBox(width: 3),
+          I18nText(
+            '${food.rating.split(' ').first} · contoh',
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
+      ),
+      const SizedBox(height: 8),
+      I18nText(
+        food.price,
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(color: _green),
+      ),
+    ],
+  );
+}
+
+class _FavoriteFoodTitle extends StatelessWidget {
+  const new({required this.food, required this.onRemove});
+
+  final DemoFood food;
+  final VoidCallback onRemove;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Expanded(
+        child: I18nText(
+          food.title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.titleSmall
+              ?.copyWith(color: _ink),
+        ),
+      ),
+      IconButton.filledTonal(
+        tooltip: translateDisplayText(
+          context,
+          'Hapus ${food.title} dari favorit contoh',
+        ),
+        onPressed: onRemove,
+        style: IconButton.styleFrom(
+          backgroundColor: Colors.white,
+          side: const BorderSide(color: Color(0xFFE1E4E7)),
+        ),
+        icon: const Icon(Icons.favorite, color: _orange),
+      ),
+    ],
+  );
+}
+
+class _FavoriteMerchant extends StatelessWidget {
+  const new({required this.food});
+
+  final DemoFood food;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      CircleAvatar(
+        radius: _merchantAvatarRadius,
+        backgroundImage: food.merchant.startsWith('Mawar')
+            ? const AssetImage('assets/prototype/mawar-mark.webp')
+            : null,
+        child: food.merchant.startsWith('Mawar')
+            ? null
+            : const I18nText('R'),
+      ),
+      const SizedBox(width: 5),
+      Expanded(
+        child: I18nText(
+          food.merchant,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+      ),
+    ],
   );
 }
 
