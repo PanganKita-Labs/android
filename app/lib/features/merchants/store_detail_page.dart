@@ -354,7 +354,10 @@ class _StoreTabs extends StatelessWidget {
   );
 }
 
-/// Displays a fixture listing offered in the example store.
+/// Displays [food] from the local example store.
+///
+/// The caller supplies [onAdd], which is invoked by the product action.
+/// This display widget does not own or mutate a cart directly.
 class _StoreProduct extends StatelessWidget {
   const new({required this.food, required this.onAdd});
 

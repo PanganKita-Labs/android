@@ -25,9 +25,10 @@ class NearbyStoresPage extends StatefulWidget {
   State<NearbyStoresPage> createState() => _NearbyStoresPageState();
 }
 
-/// Owns the local store query and category selection.
+/// Owns the local store query for the nearby-stores example.
 ///
-/// The list is filtered from examples, not discovered via device location.
+/// Searches fixture merchant names and categories case-insensitively.
+/// The list is not discovered through device location or a merchant service.
 class _NearbyStoresPageState extends State<NearbyStoresPage> {
   String _query = '';
 

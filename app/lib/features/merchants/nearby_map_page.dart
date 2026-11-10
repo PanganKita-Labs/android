@@ -53,6 +53,9 @@ class NearbyMapPage extends StatefulWidget {
 }
 
 /// Owns the selected fixture merchant for the nearby-map preview.
+///
+/// A marker tap updates a page-local index, and the details panel reads the
+/// corresponding item from a fixed fixture list. No GPS lookup is performed.
 class _NearbyMapPageState extends State<NearbyMapPage> {
   int _selected = 0;
 

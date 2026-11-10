@@ -89,6 +89,9 @@ class _HomePageState extends State<HomePage> {
 
   void _searchChanged(String value) => setState(() => _query = value);
 
+  /// Opens local search with the trimmed [value] as its initial query.
+  ///
+  /// Navigation does not issue any network search request.
   void _submitSearch(String value) => Navigator.pushNamed(
     context,
     AppRoutes.search,

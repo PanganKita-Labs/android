@@ -58,6 +58,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   int _quantity = 1;
   Set<DemoAddon> _addons = {};
 
+  /// Replaces page-local add-on choices with [addons].
+  ///
+  /// The selection is sent to [DemoCart.add] only on an add-to-cart action.
   void _selectAddons(Set<DemoAddon> addons) => setState(() => _addons = addons);
 
   /// Adds the chosen quantity and add-ons to the app-session cart.
@@ -476,6 +479,9 @@ class _ProductAddons extends StatelessWidget {
   final Set<DemoAddon> selected;
   final ValueChanged<Set<DemoAddon>> onChanged;
 
+  /// Reports a new add-on set after toggling [option] to [value].
+  ///
+  /// The caller owns the selection; this widget creates a replacement set.
   void _select(DemoAddon option, bool value) => onChanged(
     value
         ? {...selected, option}

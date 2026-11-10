@@ -140,6 +140,9 @@ class _SearchPageState extends State<SearchPage> {
 
   void _editSearch() => _searchFocus.requestFocus();
 
+  /// Toggles the fixture favorite [id] only in this search screen.
+  ///
+  /// No favorites list, profile data, or storage is updated elsewhere.
   void _toggleFavorite(String id) => setState(
     () => _favorites.contains(id) ? _favorites.remove(id) : _favorites.add(id),
   );

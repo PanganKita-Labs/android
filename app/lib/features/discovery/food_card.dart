@@ -26,7 +26,10 @@ String _cardTitle(DemoFood food) => switch (food.id) {
 
 /// Read-only listing card matching the pickup-oriented home reference.
 class FoodCard extends StatelessWidget {
-  /// Creates a card for an illustrative local offer.
+  /// Creates a display-only listing card for the fixture [food].
+  ///
+  /// Tapping the card opens the registered local product route for [food].
+  /// The card neither reserves stock nor verifies merchant information.
   const new({required this.food, super.key});
 
   /// Display data, not live stock or a verified merchant.
