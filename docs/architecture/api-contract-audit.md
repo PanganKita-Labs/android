@@ -111,6 +111,40 @@ Short, private, presentation-only constructors are covered by their surrounding
 widget descriptions unless they introduce ownership, validation or callback
 semantics that callers must know.
 
+## Adversarial semantic re-audit
+
+**Primary evidence:** source and call sites at commit
+`8ea0b5f66c2734ec2ef5d0933e6bca7fe611efef`, compared with
+current PR implementation. Prior documentation counts and PR descriptions
+were treated as hypotheses, **not** proof of semantic correctness.
+
+| Contract checked | Primary implementation evidence | Review result |
+| --- | --- | --- |
+| Fixture image path | `DemoFood.image` in `shared/models/demo_food.dart` | The `garlic-bread` branch produces the same path as ordinary ID interpolation; corrected a misleading "special filename" claim |
+| Home location ownership | `HomePage.onLocationChanged`, `_ignoreAreaChange`, `_chooseLocation` | Default callback validates but does not persist; corrected the unconditional "root app" wording |
+| Search-result criteria | `_SearchPageState._results` | Text, category, inclusive optional bounds, and local sorting all affect results; clarified the incomplete comment |
+| QRIS modal result | `showPaymentMethodSheet`, `PaymentMethodSheet.build` | QRIS is presented statically; the button dismisses the sheet and no payment choice or transaction is recorded |
+| Cart notification semantics | `DemoCart.add`, `setQuantity`, `remove`, `clear` | Added a focused regression test for successful mutation versus rejection, unknown IDs, unchanged values, and empty-cart operations |
+| Authentication and OTP | `_AuthFormState._submit`, `_OtpPageState._verify` | No network authentication or code delivery; form validation and fixed-code navigation match the documented demo boundary |
+| Preference restoration | `main.dart` and `_PanganKitaAppState._setLocale` | Startup reads preferences before constructing the app; root handles subsequent writes |
+| Cart line aliasing | `DemoCartLine` constructor and `DemoCart.add` | Direct callers can pass mutable add-ons, whereas canonical cart additions normalize and freeze them |
+
+The separate declaration scan is **heuristic**: it cannot prove that every
+multi-line declaration, extension, typedef, inherited member, or private helper
+has the right contract. The native `public_member_api_docs` analyzer rule and
+`dart doc --dry-run .` provide additional syntax/coverage evidence, but neither
+can prove that prose is semantically true.
+
+**Independent behavioral witness:** `test/features/shopping/demo_cart_test.dart`
+now asserts listener counts for both changes and no-ops. The test is useful
+only after `flutter test --coverage` passes on the commit that includes it.
+No new application behavior or API signatures were introduced.
+
+**Scope boundary:** This re-audit concentrates on correctness of meaningful
+state, validation, callback, persistence, routing, and demonstration contracts.
+It does not try to increase comment volume on straightforward layout helpers
+or replace Flutter framework documentation.
+
 ## API documentation certification evidence
 
 **Validated commit:** `d026141893f788fa05f0bbcd50b5ac5e2a24c4a3`
