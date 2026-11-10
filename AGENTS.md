@@ -15,7 +15,8 @@ Always read this root file first.
 Before editing a subtree, read its scoped instructions:
 
 ```text
-app/AGENTS.md       Flutter/mobile implementation
+app/AGENTS.md       app-wide Flutter tooling, validation and platform rules
+app/lib/AGENTS.md   Dart implementation, product/UI contracts and lifecycle
 docs/AGENTS.md      product, architecture, contributor, and technical documentation
 research/AGENTS.md  research, evidence, experiments, metrics, and thesis work
 backend/AGENTS.md   backend/API/data work when the backend exists
