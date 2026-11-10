@@ -33,7 +33,7 @@ class PaymentStatusPage extends StatelessWidget {
       appBar: AppBar(
         leading: const BackButton(),
         title: const I18nText('Pembayaran'),
-        actions: [const _PaymentHelpButton()],
+        actions: const [_PaymentHelpButton()],
       ),
       body: SafeArea(
         top: false,
