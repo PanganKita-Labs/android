@@ -41,6 +41,17 @@ class DuplicateObjectKey(ValueError):
 
 
 def no_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
+    """Builds a JSON object while rejecting duplicate keys.
+
+    Args:
+        pairs: Key-value pairs supplied by the JSON object-pairs hook.
+
+    Returns:
+        A dictionary retaining each unique key and its value.
+
+    Raises:
+        DuplicateObjectKey: If a key occurs more than once.
+    """
     result: dict[str, object] = {}
     for key, value in pairs:
         if key in result:
@@ -50,6 +61,19 @@ def no_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
 
 
 def load_json(file: Path) -> dict[str, object]:
+    """Loads an object-shaped JSON file with duplicate-key detection.
+
+    Args:
+        file: UTF-8 or UTF-8-with-BOM JSON file to read.
+
+    Returns:
+        The decoded top-level JSON object.
+
+    Raises:
+        ValueError: If the top-level value is not an object or a key repeats.
+        OSError: If the file cannot be read.
+        json.JSONDecodeError: If the JSON syntax is invalid.
+    """
     data = json.loads(file.read_text(encoding="utf-8-sig"), object_pairs_hook=no_duplicate_keys)
     if not isinstance(data, dict):
         raise ValueError("expected a JSON object")
@@ -57,10 +81,26 @@ def load_json(file: Path) -> dict[str, object]:
 
 
 def message_keys(data: dict[str, object]) -> set[str]:
+    """Returns the message names excluding metadata entries.
+
+    Args:
+        data: A decoded Flutter localization catalog.
+
+    Returns:
+        Keys not prefixed with the metadata marker at sign.
+    """
     return {key for key in data if not key.startswith("@")}
 
 
 def tokens(message: str) -> Counter[str]:
+    """Counts ordinary and ICU variable placeholders in a message.
+
+    Args:
+        message: Localized message text to examine.
+
+    Returns:
+        Placeholder names with their occurrence counts.
+    """
     return Counter(PLACEHOLDER.findall(message) + ICU_VARIABLE.findall(message))
 
 
@@ -233,6 +273,15 @@ def check_catalogs(
 
 
 def decode_dart_literal(quoted: str) -> str:
+    """Decodes a quoted Dart string for static text inspection.
+
+    Args:
+        quoted: One recognized quoted string literal.
+
+    Returns:
+        Decoded text, using a limited fallback for Dart-specific escapes
+        when Python's literal parser cannot decode the expression.
+    """
     try:
         value = ast.literal_eval(quoted)
         if isinstance(value, str):
@@ -244,6 +293,15 @@ def decode_dart_literal(quoted: str) -> str:
 
 
 def next_literal(text: str, start: int) -> tuple[str, int] | None:
+    """Reads the next Dart quoted literal after optional whitespace.
+
+    Args:
+        text: Source text containing the literal.
+        start: Index from which to begin scanning.
+
+    Returns:
+        Decoded literal and ending index, or None if none is found.
+    """
     pos = start
     while pos < len(text) and text[pos].isspace():
         pos += 1
@@ -254,6 +312,15 @@ def next_literal(text: str, start: int) -> tuple[str, int] | None:
 
 
 def concatenated_literals(text: str, start: int) -> str | None:
+    """Joins consecutive Dart string literals into one display label.
+
+    Args:
+        text: Text containing adjacent quoted literals.
+        start: Index at which the first literal may occur.
+
+    Returns:
+        Concatenated text, or None when the input has no first literal.
+    """
     fragments: list[str] = []
     pos = start
     while parsed := next_literal(text, pos):
@@ -263,6 +330,15 @@ def concatenated_literals(text: str, start: int) -> str | None:
 
 
 def get_exceptions(config: dict[str, object], errors: list[str]) -> dict[tuple[str, str, str], str]:
+    """Validates configured source-literal exceptions.
+
+    Args:
+        config: Parsed exception configuration.
+        errors: Mutable destination for malformed exception diagnostics.
+
+    Returns:
+        A mapping from (source file, kind, literal) to justification.
+    """
     raw = config.get("source_exceptions", [])
     if not isinstance(raw, list):
         errors.append("exception file: source_exceptions must be a list")
@@ -429,6 +505,12 @@ def check_source(
 
 
 def main() -> int:
+    """Runs catalog and optional Dart-source localization checks.
+
+    Returns:
+        Zero for a passing audit, one for reported validation findings,
+        or two when the exception configuration cannot be loaded.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--app", type=Path, default=APP_ROOT, help="Flutter app root (default: script parent)")
     parser.add_argument("--catalogs-only", action="store_true", help="Skip static source check")
