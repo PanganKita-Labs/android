@@ -31,16 +31,18 @@ services are already implemented.
   order represents a placed reservation.
 - If that capability is approved later, reject negative quantities, overselling
   and illegal lifecycle transitions. Document and test actors, legal/illegal
-  transitions, expiry, cancellation, pickup consistency, and restoration rules.
+  transitions, terminal states, expiry, cancellation, pickup consistency,
+  and restoration rules.
   Make retries and duplicate actions safe; do not rely on "best effort" or a
   device clock to enforce server-owned invariants.
 - Food-safety claims require verified policy and evidence. Do not invent BPOM,
   Ministry of Health, shelf-life, allergen, storage, legal-liability, or safety
   certification guarantees. Treat seller-provided data as unverified and seek
   explicit review for eligibility, condition, pickup deadlines and complaints.
-- Design for misleading listings/photos, spam, impersonation, fraud, abusive
-  ratings or reports, and no-shows. Do not automate punishment without an
-  evidence-backed appeal or review process.
+- Design for misleading listings/photos, spam, impersonation, fraudulent
+  reports, duplicate accounts, harassment, account takeover, abusive ratings,
+  and no-shows. Do not automate punishment without an evidence-backed review
+  and appeal process.
 
 ## Accounts, private data, uploads
 
@@ -65,8 +67,9 @@ services are already implemented.
   and text scaling; do not rely on color alone. Respect reduced-motion settings.
 - Mobile-first layouts must consider narrow screens (roughly 320–412 logical
   pixels), landscape where relevant, keyboard and safe-area insets, long copy,
-  large type, and loading/empty/error/retry states. No indefinite spinners,
-  raw exceptions, critical clipping or page-level horizontal overflow.
+  large type, and loading/empty/error/retry states, including network loss.
+  Preserve useful content during background refresh where practical; avoid
+  indefinite spinners, raw exceptions, clipping and horizontal overflow.
 - Indonesian is the default language; **Indonesian, English and Simplified
   Chinese are already implemented**. Preserve the current locale selection,
   supported catalogs and fallback behavior. Keep labels, accessibility text
@@ -95,12 +98,12 @@ services are already implemented.
 
 ## Errors, async and verification
 
-- Do not swallow exceptions silently, leave unmanaged `print`/`debugPrint`
-  in production paths or expose raw errors. Translate failures into useful
-  UI states while protecting private data.
+- Use structured, privacy-conscious logging. Do not swallow exceptions,
+  leave unmanaged `print`/`debugPrint` in production paths, or expose raw
+  errors. Translate failures into useful UI states while protecting data.
 - Check `mounted` after async gaps before using context/state; dispose
-  controllers, listeners and streams. Handle duplicate taps/futures and
-  prevent duplicate mutations or requests.
+  controllers, listeners and streams. Do not ignore futures without intent.
+  Handle duplicate taps and concurrent work to prevent duplicate mutations.
 - Test meaningful business rules outside widgets, and verify user-observable
   behavior with targeted widget tests. Document public API inputs, results,
   callback timing, errors, mutation, and disposal where non-obvious.

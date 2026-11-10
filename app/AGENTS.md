@@ -17,7 +17,7 @@ belong in `lib/AGENTS.md`; architectural explanations belong in
 - Never claim an integration, eligibility or safety certification, authenticated
   identity, payment, merchant verification, live availability, or measured impact
   unless its implementation and evidence establish it.
-- `backend/` is not an operational server. Future server-authoritative concerns
+- `../backend/` is not an operational server. Future server-authoritative concerns
   such as authorization, reservation concurrency, expiry, and inventory truth
   must not be implemented as client-only authority.
 - Protect credentials, signing keys, private user or merchant data, and precise
@@ -41,7 +41,7 @@ belong in `lib/AGENTS.md`; architectural explanations belong in
 ## Dependencies, assets, and toolchain
 
 - Current pinned Flutter baseline: **3.47.4**, with Dart **3.13.3**. Check
-  `.github/workflows/quality.yml` before changing pins.
+  `../.github/workflows/quality.yml` before changing pins.
 - Prefer Flutter/Dart platform APIs or existing packages before adding one.
   Review maintenance, licenses, overlapping responsibilities, lockfiles,
   affected tests, and CI when dependencies change. Do not upgrade unrelated
