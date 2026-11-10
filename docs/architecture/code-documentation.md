@@ -78,12 +78,23 @@ def check_catalog(path: Path) -> list[str]:
 These examples illustrate documentation style; they are not additional app
 APIs or executable snippets expected to compile verbatim.
 
+## Other maintained sources
+
+- Android's hand-written entry activity uses Kotlin KDoc (`/** ... */`)
+  following [Android's Kotlin style guide](https://developer.android.com/kotlin/style-guide).
+  Leave Flutter-generated platform files and build-system boilerplate alone.
+- Maintained Bash scripts use purpose, prerequisite, environment-variable,
+  and failure-behavior comments where they clarify usage, following
+  [Google's Shell Style Guide](https://google.github.io/styleguide/shellguide.html).
+- Do not manufacture repetitive comments for individual test assertions or
+  configuration keys that already have self-explanatory names.
+
 ## Coverage boundary
 
 - **Include:** hand-authored `app/lib/**/*.dart`, public types and useful
   private implementation contracts; maintained `app/tool/*.py` helpers.
-- **Review as needed:** test helpers and fixtures whose contracts are not
-  already clear from their test names.
+- **Review as needed:** test helpers, native Kotlin entry points, and maintained
+  shell scripts whose contracts are not already clear from their names.
 - **Exclude:** generated localization Dart files under `lib/i18n/generated/`,
   generated assets/font files, vendored dependencies and mechanical Flutter
   overrides. These should not be hand-edited just to increase a doc count.
