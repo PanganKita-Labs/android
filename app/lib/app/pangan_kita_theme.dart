@@ -255,10 +255,10 @@ abstract final class PanganKitaColors {
   /// Subtle border color.
   static const borderNeutral = Color(0xFFE8E4DF);
 
-  /// Soft badge behind calculated savings.
+  /// Soft badge behind illustrative fixture savings labels.
   static const savingsSurface = Color(0xFFE8F5E9);
 
-  /// Soft badge behind local stock remaining.
+  /// Soft badge behind illustrative stock-availability captions.
   static const urgencySurface = Color(0xFFFFEBD5);
 
   /// Error and destructive action color.

@@ -135,7 +135,8 @@ def _load_catalogs(root: Path, errors: list[str]) -> dict[str, dict[str, object]
 
     Returns:
         Successfully loaded catalogs keyed by locale. Missing or invalid
-        files are omitted; callers must check whether every locale loaded.
+        files that fail parsing are omitted; locale metadata mismatches are
+        reported but the corresponding decoded catalog remains available.
     """
     catalogs: dict[str, dict[str, object]] = {}
     for loc in LOCALES:

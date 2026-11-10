@@ -133,6 +133,16 @@ def repair_from_staged(
 
     Other text:
     - trailing spaces/tabs are removed.
+
+    Args:
+        path: Repository-relative path used to detect Markdown rules.
+        staged: Source bytes from the Git index, never the working tree.
+        eol: Line-ending bytes to use when reconstructing existing lines.
+
+    Returns:
+        Proposed file bytes and one-based Markdown fenced-code line numbers
+        where trailing whitespace makes an automatic fix unsafe.
+        This helper performs no file or index writes.
     """
     markdown = is_markdown(path)
     in_fence = False

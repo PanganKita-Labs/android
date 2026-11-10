@@ -9,6 +9,9 @@ enum DemoAddon {
   /// Reference sauce option.
   garlic('Saus garlic', 5000);
 
+  /// Creates one example add-on with [label] and whole-rupiah [priceRupiah].
+  ///
+  /// Enum values are fixed fixtures, not real merchant menu options.
   new(this.label, this.priceRupiah);
 
   /// Display label from the supplied reference.
