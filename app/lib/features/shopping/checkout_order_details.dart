@@ -38,6 +38,25 @@ class CheckoutOrderDetails extends StatelessWidget {
   );
 }
 
+class _CheckoutLinePhoto extends StatelessWidget {
+  const new({required this.line});
+
+  final DemoCartLine line;
+
+  @override
+  Widget build(BuildContext context) => ClipRRect(
+    borderRadius: const BorderRadius.all(Radius.circular(10)),
+    child: SizedBox.square(
+      dimension: _orderPhotoSize,
+      child: Image.asset(
+        line.food.image,
+        fit: BoxFit.cover,
+        semanticLabel: line.food.title,
+      ),
+    ),
+  );
+}
+
 class _CheckoutLine extends StatelessWidget {
   const new({required this.line});
   final DemoCartLine line;
@@ -47,17 +66,7 @@ class _CheckoutLine extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     spacing: _orderGap,
     children: [
-      ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        child: SizedBox.square(
-          dimension: _orderPhotoSize,
-          child: Image.asset(
-            line.food.image,
-            fit: BoxFit.cover,
-            semanticLabel: line.food.title,
-          ),
-        ),
-      ),
+      _CheckoutLinePhoto(line: line),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

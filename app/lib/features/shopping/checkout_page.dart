@@ -149,6 +149,77 @@ class _PickupNotice extends StatelessWidget {
   );
 }
 
+class _CheckoutMerchantName extends StatelessWidget {
+  const new({required this.merchant});
+
+  final String merchant;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    spacing: _checkoutLabelGap,
+    children: [
+      Flexible(
+        child: I18nText(
+          merchant,
+          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+        ),
+      ),
+      Semantics(
+        label: 'Badge contoh; merchant belum diverifikasi',
+        child: const Icon(
+          Icons.check_circle,
+          size: 14,
+          color: PanganKitaColors.brandPrimary,
+        ),
+      ),
+    ],
+  );
+}
+
+class _CheckoutPickupTime extends StatelessWidget {
+  const new({required this.pickupTimes});
+
+  final String pickupTimes;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    spacing: _checkoutLabelGap,
+    children: [
+      const Icon(
+        Icons.schedule_outlined,
+        size: 14,
+        color: PanganKitaColors.brandAccent,
+      ),
+      Expanded(
+        child: I18nText(
+          'Pickup hingga $pickupTimes',
+          style: const TextStyle(fontSize: 12, color: _pickupTextColor),
+        ),
+      ),
+    ],
+  );
+}
+
+class _CheckoutTotalLabel extends StatelessWidget {
+  const new({required this.cart});
+
+  final DemoCart cart;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: _checkoutLabelGap,
+    children: [
+      const I18nText('Total pembayaran', style: TextStyle(fontSize: 12)),
+      I18nText(
+        formatRupiah(cart.subtotal),
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+    ],
+  );
+}
+
 class _CheckoutMerchant extends StatelessWidget {
   const new({required this.cart, required this.merchant});
   final DemoCart cart;
@@ -174,48 +245,9 @@ class _CheckoutMerchant extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: _checkoutLabelGap,
                 children: [
-                  Row(
-                    spacing: _checkoutLabelGap,
-                    children: [
-                      Flexible(
-                        child: I18nText(
-                          merchant,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      Semantics(
-                        label: 'Badge contoh; merchant belum diverifikasi',
-                        child: const Icon(
-                          Icons.check_circle,
-                          size: 14,
-                          color: PanganKitaColors.brandPrimary,
-                        ),
-                      ),
-                    ],
-                  ),
+                  _CheckoutMerchantName(merchant: merchant),
                   _MerchantLocation(address: lines.first.food.pickupAddress),
-                  Row(
-                    spacing: _checkoutLabelGap,
-                    children: [
-                      const Icon(
-                        Icons.schedule_outlined,
-                        size: 14,
-                        color: PanganKitaColors.brandAccent,
-                      ),
-                      Expanded(
-                        child: I18nText(
-                          'Pickup hingga $pickupTimes',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: _pickupTextColor,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  _CheckoutPickupTime(pickupTimes: pickupTimes),
                 ],
               ),
             ),
@@ -490,21 +522,7 @@ class _CheckoutFooter extends StatelessWidget {
           spacing: _checkoutPanelGap,
           children: [
             Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: _checkoutLabelGap,
-                children: [
-                  const I18nText(
-                    'Total pembayaran',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  I18nText(
-                    formatRupiah(cart.subtotal),
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ],
-              ),
+              child: _CheckoutTotalLabel(cart: cart),
             ),
             Expanded(
               child: FilledButton(

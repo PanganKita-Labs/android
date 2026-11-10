@@ -161,6 +161,59 @@ class _MerchantCart extends StatelessWidget {
   }
 }
 
+class _CartPickupClock extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const CircleAvatar(
+    radius: 24,
+    backgroundColor: Color(0xFFFFEDD0),
+    child: Icon(
+      Icons.schedule_outlined,
+      size: 28,
+      color: PanganKitaColors.brandAccent,
+    ),
+  );
+}
+
+class _CartNoteHeading extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) => const Row(
+    spacing: 8,
+    children: [
+      Icon(Icons.receipt_long_outlined, size: 20),
+      Expanded(
+        child: I18nText(
+          'Catatan untuk toko',
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+        ),
+      ),
+    ],
+  );
+}
+
+class _CartTotalLabel extends StatelessWidget {
+  const new({required this.cart});
+
+  final DemoCart cart;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    spacing: _labelGap,
+    children: [
+      const I18nText('Total pembayaran', style: TextStyle(fontSize: 12)),
+      I18nText(
+        formatRupiah(cart.subtotal),
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+    ],
+  );
+}
+
 class _PickupCard extends StatelessWidget {
   const new({required this.cart, required this.merchant});
   final DemoCart cart;
@@ -187,15 +240,7 @@ class _PickupCard extends StatelessWidget {
           child: Row(
             spacing: _cartGap,
             children: [
-              const CircleAvatar(
-                radius: 24,
-                backgroundColor: Color(0xFFFFEDD0),
-                child: Icon(
-                  Icons.schedule_outlined,
-                  size: 28,
-                  color: PanganKitaColors.brandAccent,
-                ),
-              ),
+              const _CartPickupClock(),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,18 +280,7 @@ class _CartNotes extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: _cartGap,
         children: [
-          const Row(
-            spacing: 8,
-            children: [
-              Icon(Icons.receipt_long_outlined, size: 20),
-              Expanded(
-                child: I18nText(
-                  'Catatan untuk toko',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                ),
-              ),
-            ],
-          ),
+          const _CartNoteHeading(),
           TextField(
             minLines: 2,
             maxLines: _notesMaxLines,
@@ -372,21 +406,7 @@ class _CartFooter extends StatelessWidget {
           spacing: _panelGap,
           children: [
             Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: _labelGap,
-                children: [
-                  const I18nText(
-                    'Total pembayaran',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  I18nText(
-                    formatRupiah(cart.subtotal),
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ],
-              ),
+              child: _CartTotalLabel(cart: cart),
             ),
             Expanded(
               child: FilledButton(
