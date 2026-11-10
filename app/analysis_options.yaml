@@ -72,6 +72,10 @@ linter:
     # we want explicit use of dynamic to be exceptional.
     avoid_annotating_with_dynamic: true
 
+    # Require API docs for every non-overriding public Dart declaration.
+    # Private visual helpers and inherited Flutter overrides are exempt.
+    public_member_api_docs: true
+
 # ============================================================
 # Dart Code Linter
 # ============================================================
