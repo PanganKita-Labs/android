@@ -24,10 +24,16 @@ final List<DemoFood> _sampleFoods = [
 
 /// Orders tab based on the supplied active-orders design, using demo examples.
 class OrdersPage extends StatefulWidget {
-  /// Creates an order-preview page without a persisted order.
+  /// Creates a fixture orders page initially showing [initialTab].
+  ///
+  /// The default `0` shows active examples; `1` shows completed examples,
+  /// and other indices use the canceled examples section. No order is loaded
+  /// from a server or persisted by this page.
   const new({super.key, this.initialTab = 0});
 
-  /// Tab to display when opening from an illustrative notification.
+  /// Initial tab index, read once when the page state is created.
+  ///
+  /// `0` selects active, `1` completed, and other values canceled examples.
   final int initialTab;
 
   @override

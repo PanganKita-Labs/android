@@ -7,6 +7,9 @@ import 'package:pangankita/shared/demo_notice.dart';
 const Color _profileGreen = PanganKitaColors.brandPrimaryStrong;
 const Color _profileInk = PanganKitaColors.inkDeep;
 
+/// Default area callback: validates without updating app-wide state.
+///
+/// Throws [ArgumentError] for an empty [area].
 void _ignoreAreaChange(String area) {
   if (area.isEmpty) throw ArgumentError.value(area, 'area');
 }
@@ -15,7 +18,11 @@ String _defaultLocation() => 'Mandala by Pass, Medan';
 
 /// Display-only profile based on the first panel of the account reference.
 class ProfilePage extends StatelessWidget {
-  /// Creates the local example without loading account information.
+  /// Creates an example profile with optional area-reader callbacks.
+  ///
+  /// [readLocation] supplies the current area when opening the picker.
+  /// [onLocationChanged] receives a confirmed result while still mounted.
+  /// Defaults do not maintain app-wide area state or authenticate anyone.
   const new({
     this.readLocation = _defaultLocation,
     this.onLocationChanged = _ignoreAreaChange,
@@ -28,7 +35,10 @@ class ProfilePage extends StatelessWidget {
   /// Reports a confirmed area to the app-session owner.
   final ValueChanged<String> onLocationChanged;
 
-  /// Opens the example-area selector and reports its selected value.
+  /// Opens the area picker using the latest [readLocation] value.
+  ///
+  /// A [String] result invokes [onLocationChanged] only while [context]
+  /// is still mounted. Cancellation leaves the area unchanged.
   Future<void> _chooseLocation(BuildContext context) async {
     final selected = await Navigator.pushNamed(
       context,

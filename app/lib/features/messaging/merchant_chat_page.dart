@@ -9,7 +9,10 @@ const _bubbleWidthFraction = .82;
 
 /// A local conversation example without message delivery or persistence.
 class MerchantChatPage extends StatefulWidget {
-  /// Shows the selected merchant and optional list-preview message.
+  /// Displays a local conversation preview for [food].
+  ///
+  /// [previewMessage] is nullable; without it, an empty-chat placeholder
+  /// appears. User drafts remain in widget-local memory and are not sent.
   const new({required this.food, this.previewMessage, super.key});
 
   /// Example listing used only for the merchant and product context.
@@ -35,7 +38,10 @@ class _MerchantChatPageState extends State<MerchantChatPage> {
     super.dispose();
   }
 
-  /// Adds the current draft to the in-memory conversation preview.
+  /// Adds the trimmed draft to the local message list.
+  ///
+  /// Empty or whitespace-only text is ignored without a state update.
+  /// Other drafts are appended and the composer is cleared, without delivery.
   void _addLocalMessage() {
     final message = _controller.text.trim();
     if (message.isEmpty) return;

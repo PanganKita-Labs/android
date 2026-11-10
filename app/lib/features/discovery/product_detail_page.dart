@@ -34,7 +34,10 @@ const _priceSize = 22.0;
 
 /// Full-screen details for a selected offline listing example.
 class ProductDetailPage extends StatefulWidget {
-  /// Displays the same product data as its home card.
+  /// Displays the offline [food] fixture and a shared [cart].
+  ///
+  /// The cart belongs to the app session; this page neither owns nor
+  /// disposes it. Adding configured items changes only local preview data.
   const new({required this.food, required this.cart, super.key});
 
   /// Illustrative listing, not authoritative inventory or a live offer.
@@ -57,9 +60,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   void _selectAddons(Set<DemoAddon> addons) => setState(() => _addons = addons);
 
-  /// Adds the configured local listing to the session cart.
+  /// Adds the chosen quantity and add-ons to the app-session cart.
   ///
-  /// If the per-line quantity limit is exceeded, shows a demo notice instead.
+  /// If [DemoCart.add] rejects the combined line limit, a local notice
+  /// appears. Otherwise, the cart route opens; no inventory is reserved.
   void _addToCart() {
     final added = widget.cart.add(
       widget.food,

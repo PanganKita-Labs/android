@@ -13,7 +13,10 @@ const _emptyDigit = '\u200b';
 
 /// Four-digit local demo verification; no email or SMS is sent.
 class OtpPage extends StatefulWidget {
-  /// Creates verification for registration or recovery.
+  /// Creates the four-digit offline verification example.
+  ///
+  /// [recovery] defaults to `false`, navigating to the demo home route on
+  /// success. When `true`, success opens the password-replacement preview.
   const new({this.recovery = false, super.key});
 
   /// Whether verification continues to password replacement.
@@ -46,7 +49,10 @@ class _OtpPageState extends State<OtpPage> {
     super.dispose();
   }
 
-  /// Checks the fixed demo code and chooses the recovery or home route.
+  /// Checks the assembled input against the fixed example code `5102`.
+  ///
+  /// A mismatch updates local error text without navigation. A match opens
+  /// the route chosen by [OtpPage.recovery]; it does not verify an account.
   void _verify() {
     if (_values.join() != '5102') {
       setState(() => _error = 'Kode demo tidak cocok. Gunakan 5102.');
@@ -72,9 +78,11 @@ class _OtpPageState extends State<OtpPage> {
     );
   }
 
-  /// Handles editing, deletion, and multi-digit paste across OTP inputs.
+  /// Edits the digit field at [index] using the supplied [value].
   ///
-  /// Clears the current error and advances focus within the four-digit range.
+  /// An empty edit clears the digit and may move focus backward. A paste
+  /// spanning four digits starts at field zero; shorter input starts at
+  /// [index]. Excess digits are ignored and any visible error is cleared.
   void _changeDigit(int index, String value) {
     final wasEmpty = _values[index].isEmpty;
     final digits = value.replaceAll(_emptyDigit, '').split('');
