@@ -86,7 +86,7 @@ dart run dart_code_linter:metrics analyze --fatal-style --fatal-performance --fa
 dart run dart_code_linter:metrics check-unused-code --analyze-private-members lib
 dart run dart_code_linter:metrics check-unused-files lib
 dart run dart_code_linter:metrics check-unnecessary-nullable lib
-dart run dartrics analyze lib
+dart run dartrics analyze --snapshot none --strict-dismiss --fatal-warnings lib
 flutter test --coverage
 flutter build apk --debug
 ```

@@ -18,61 +18,19 @@ The client must not become the authoritative source for server-owned concerns
 such as authorization, reservation concurrency, inventory truth, or
 server-governed expiration once a backend exists.
 
-## Flutter architecture
+## Feature-first implementation guardrails
 
-Use a feature-first, shallow architecture.
+Use a shallow feature-first structure that reflects the current app. Add
+subfolders only when they provide real ownership boundaries; do not create
+empty `core/`, `data/`, `domain/`, `repositories/` or `use_cases/` trees for
+ceremony. Avoid both god files and one-function files without clear ownership.
 
-Prefer a structure that emerges only as real features appear:
+Keep business behavior testable outside widgets, and keep UI-dependent state
+separate from any future authoritative backend rules. Prefer clear dependency
+direction from presentation through domain contracts to adapters, introducing
+each layer only when actual requirements justify it.
 
-```text
-lib/
-├── main.dart
-├── app/
-├── core/
-└── features/
-    ├── discovery/
-    ├── listings/
-    ├── reservations/
-    └── pickup/
-```
-
-Do not pre-create empty architecture trees.
-
-A modest feature may remain flat. Add subfolders only when they represent real
-ownership boundaries.
-
-Do not mechanically create all of these for every feature:
-
-```text
-data/
-domain/
-presentation/
-repositories/
-services/
-use_cases/
-entities/
-models/
-```
-
-Widgets and presentation code must not own domain rules.
-
-Prefer dependency direction:
-
-```text
-UI / widgets
-    ↓
-feature state / orchestration
-    ↓
-domain behavior
-    ↓
-repository/service contract
-    ↓
-API / persistence adapter
-```
-
-Business behavior should remain testable without rendering widgets.
-
-## Flutter architecture
+## Architecture source of truth
 
 Before making non-trivial structural or cross-file Flutter changes, read
 `../docs/ARCHITECTURE.md`.
@@ -633,8 +591,8 @@ dart run dart_code_linter:metrics analyze --fatal-style --fatal-performance --fa
 dart run dart_code_linter:metrics check-unused-code --analyze-private-members lib
 dart run dart_code_linter:metrics check-unused-files lib
 dart run dart_code_linter:metrics check-unnecessary-nullable lib
-dart run dartrics analyze lib
-flutter test
+dart run dartrics analyze --snapshot none --strict-dismiss --fatal-warnings lib
+flutter test --coverage
 ```
 
 Never claim a command passed unless it actually ran successfully.
@@ -691,10 +649,10 @@ Use integration tests when real boundaries exist for:
 
 ### E2E timing
 
-E2E is intentionally deferred until PanganKita has a stable, meaningful user
-journey worth automating.
-
-Do not add a large emulator/E2E pipeline prematurely.
+Full end-to-end reservation scenarios remain deferred until a meaningful,
+implemented journey exists. The existing Android API 24/29/35/36 **launch
+smoke** workflow is already active and must not be mistaken for a full E2E
+suite or skipped for relevant changes.
 
 When appropriate, prioritize:
 
@@ -739,20 +697,23 @@ Current CI responsibilities may include:
 ```text
 quality.yml
   formatting
-  analyzer
-  linting
-  complexity
-  unused code
-  tests
+  analyzer and public API documentation lint
+  Dart Code Linter and unused code/files
+  strict Dartrics complexity
+  Dart API generation and Python syntax
+  Flutter tests with coverage
 
 android-build.yml
   Android build validation
 
-dependency-review.yml
-  dependency vulnerability review
+android-smoke.yml
+  Android API 24/29/35/36 launch smoke validation
 
 lychee.yml
   documentation link validation
+
+i18n.yml and check-mojibake.yml
+  localization and text-integrity validation
 
 workflow-lint.yml
   GitHub Actions validation

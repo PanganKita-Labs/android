@@ -52,8 +52,10 @@ Focus on why the change is needed, not only what files changed.
 ## Verification
 
 <!--
-Include the exact commands you ran and their results.
-Remove commands that do not apply, and add relevant ones.
+Include only commands actually run and their results. These are Flutter
+source-change examples, not mandatory commands for Markdown-only PRs.
+For pure documentation changes, show `git diff --check` and applicable link
+checks. See CONTRIBUTING.md. Mark unexecuted checks not applicable.
 -->
 
 ```text
@@ -62,8 +64,8 @@ cd app
 dart format --output=none --set-exit-if-changed .
 flutter analyze --fatal-infos --fatal-warnings
 dart run dart_code_linter:metrics analyze lib
-dart run dartrics analyze lib
-flutter test
+dart run dartrics analyze --snapshot none --strict-dismiss --fatal-warnings lib
+flutter test --coverage
 ```
 
 ## Screenshots or evidence

@@ -3,8 +3,10 @@
 These instructions apply to all AI coding agents, including Codex, working in
 this repository unless the active task provides stricter requirements.
 
-This root file is the repository-wide director/orchestrator. Keep it concise.
-Detailed rules live in scoped `AGENTS.md` files near the work they govern.
+This root file defines repository-wide guardrails. Scoped `AGENTS.md` files
+specialize them near their owners; avoid copying the same long rules between
+files. For human contribution steps, use `CONTRIBUTING.md`. Community conduct
+and security reporting are governed by `CODE_OF_CONDUCT.md` and `SECURITY.md`.
 
 ## Instruction routing
 
@@ -463,7 +465,7 @@ dart run dart_code_linter:metrics analyze --fatal-style --fatal-performance --fa
 dart run dart_code_linter:metrics check-unused-code --analyze-private-members lib
 dart run dart_code_linter:metrics check-unused-files lib
 dart run dart_code_linter:metrics check-unnecessary-nullable lib
-dart run dartrics analyze lib
+dart run dartrics analyze --snapshot none --strict-dismiss --fatal-warnings lib
 flutter test --coverage
 ```
 
@@ -485,8 +487,9 @@ At minimum run:
 git diff --check
 ```
 
-Also run any documentation, link, or workflow-specific checks affected by the
-change.
+Also run documentation, link, or workflow-specific checks affected by the
+change. `CONTRIBUTING.md` is the human-facing command guide; this root file
+remains authoritative for agent scope, permissions, and evidence requirements.
 
 ### Workflow / CI changes
 
