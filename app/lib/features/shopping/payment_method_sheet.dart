@@ -6,6 +6,10 @@ const _logoWidth = 48.0;
 const _logoHeight = 24.0;
 
 /// Shows the only illustrative payment method in the offline prototype.
+///
+/// The returned [Future] completes when the modal is dismissed. QRIS is
+/// displayed as the sole example, not an interactive payment-method choice.
+/// Dismissing the sheet creates no transaction or payment result.
 Future<void> showPaymentMethodSheet(BuildContext context) =>
     showModalBottomSheet<void>(
       context: context,
@@ -50,6 +54,7 @@ class PaymentMethodSheet extends StatelessWidget {
   );
 }
 
+/// Displays a QRIS-branded option for a nonfunctional payment preview.
 class _QrisOption extends StatelessWidget {
   const new();
 

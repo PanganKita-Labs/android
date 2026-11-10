@@ -63,6 +63,10 @@ class ChatPage extends StatefulWidget {
   State<ChatPage> createState() => _ChatPageState();
 }
 
+/// Owns the local query and unread-only conversation filter.
+///
+/// Both controls filter fixed sample messages by merchant and preview text.
+/// They neither read a mailbox nor change unread state on the server.
 class _ChatPageState extends State<ChatPage> {
   String _query = '';
   bool _unreadOnly = false;
@@ -110,6 +114,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 }
 
+/// Displays the fixture conversation entries matching the local query.
 class _ConversationList extends StatelessWidget {
   const new({required this.conversations});
 
@@ -135,6 +140,7 @@ class _ConversationList extends StatelessWidget {
   );
 }
 
+/// Collects text for filtering the on-device example conversations.
 class _ChatSearch extends StatelessWidget {
   const new({required this.onChanged});
 
@@ -153,6 +159,7 @@ class _ChatSearch extends StatelessWidget {
   );
 }
 
+/// Shows static example conversation categories.
 class _ChatFilters extends StatelessWidget {
   const new({required this.unreadOnly, required this.onSelected});
 
@@ -198,6 +205,7 @@ class _ChatFilters extends StatelessWidget {
   );
 }
 
+/// Displays the example timestamp and unread counter.
 class _ConversationMeta extends StatelessWidget {
   const new({required this.time, required this.unreadCount});
 
@@ -225,6 +233,7 @@ class _ConversationMeta extends StatelessWidget {
   );
 }
 
+/// Opens a fixture merchant conversation with preview information.
 class _ConversationRow extends StatelessWidget {
   const new({
     required this.food,

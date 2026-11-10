@@ -21,12 +21,16 @@ const _tabIndicatorHeight = 3.0;
 const _priceGap = 5.0;
 const _cardTopGap = 10.0;
 
+/// Returns the category label displayed for the fixture store.
 String _storeCategory(DemoFood food) =>
     food.id == 'buns' ? 'Roti & Pastry' : food.category;
 
 /// Store preview based on the shopping design, using sample merchant data.
 class StoreDetailPage extends StatefulWidget {
-  /// Receives one sample merchant and the app-session cart.
+  /// Displays the fixture merchant identified by [food].
+  ///
+  /// [cart] belongs to the app session, so this widget does not dispose it.
+  /// Adding a product changes local cart state, not merchant inventory.
   const new({required this.food, required this.cart, super.key});
 
   /// Product used to identify the sample merchant.
@@ -39,10 +43,17 @@ class StoreDetailPage extends StatefulWidget {
   State<StoreDetailPage> createState() => _StoreDetailPageState();
 }
 
+/// Owns the selected example store tab and local cart actions.
+///
+/// No merchant records, availability, or checkout state are fetched remotely.
 class _StoreDetailPageState extends State<StoreDetailPage> {
   bool _favorite = false;
   int _tab = 0;
 
+  /// Attempts to add [food] to the session cart and reports the outcome.
+  ///
+  /// A successful addition notifies the cart's listeners. When its
+  /// quantity limit is reached, feedback appears without modifying the cart.
   void _add(DemoFood food) {
     final added = widget.cart.add(food);
     final notice = ScaffoldMessenger.of(context).showSnackBar(
@@ -57,6 +68,9 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
     unawaited(notice.closed);
   }
 
+  /// Requests copying the fixture merchant name to the clipboard.
+  ///
+  /// Copy completion is not awaited before a local notice appears.
   void _copyMerchant() {
     unawaited(Clipboard.setData(ClipboardData(text: widget.food.merchant)));
     final notice = ScaffoldMessenger.of(context).showSnackBar(
@@ -114,6 +128,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
   );
 }
 
+/// Displays store imagery and page-level navigation actions.
 class _StoreTop extends StatelessWidget {
   const new({required this.food});
 
@@ -156,6 +171,7 @@ class _StoreTop extends StatelessWidget {
   );
 }
 
+/// Shows fixture merchant identity and review information.
 class _MerchantSummary extends StatelessWidget {
   const new({required this.food});
 
@@ -200,6 +216,7 @@ class _MerchantSummary extends StatelessWidget {
   );
 }
 
+/// Displays the static rating of the selected example store.
 class _StoreRating extends StatelessWidget {
   const new({required this.food});
 
@@ -222,6 +239,7 @@ class _StoreRating extends StatelessWidget {
   );
 }
 
+/// Marks merchant information as illustrative.
 class _StoreDemoBadge extends StatelessWidget {
   const new();
 
@@ -238,6 +256,7 @@ class _StoreDemoBadge extends StatelessWidget {
   );
 }
 
+/// Displays sample pickup information without live geolocation.
 class _PickupSummary extends StatelessWidget {
   const new({required this.food});
 
@@ -291,6 +310,7 @@ class _PickupSummary extends StatelessWidget {
   );
 }
 
+/// Selects one of the local merchant detail sections.
 class _StoreTabs extends StatelessWidget {
   const new({required this.selected, required this.onSelected});
 
@@ -334,6 +354,10 @@ class _StoreTabs extends StatelessWidget {
   );
 }
 
+/// Displays [food] from the local example store.
+///
+/// The caller supplies [onAdd], which is invoked by the product action.
+/// This display widget does not own or mutate a cart directly.
 class _StoreProduct extends StatelessWidget {
   const new({required this.food, required this.onAdd});
 
@@ -373,6 +397,7 @@ class _StoreProduct extends StatelessWidget {
   );
 }
 
+/// Renders food name, price, and stock preview metadata.
 class _ProductText extends StatelessWidget {
   const new({required this.food});
 
@@ -430,6 +455,7 @@ class _ProductText extends StatelessWidget {
   );
 }
 
+/// Shows review previews without submitting or fetching reviews.
 class _StoreReviews extends StatelessWidget {
   const new({required this.food});
 
@@ -465,6 +491,7 @@ class _StoreReviews extends StatelessWidget {
   );
 }
 
+/// Displays reference information about the example store.
 class _StoreAbout extends StatelessWidget {
   const new({required this.food});
 
@@ -503,6 +530,7 @@ class _StoreAbout extends StatelessWidget {
   );
 }
 
+/// Provides the local cart action and preview summary.
 class _CartFooter extends StatelessWidget {
   const new({required this.cart});
 

@@ -24,7 +24,9 @@ const _recommendationImageSize = 48.0;
 
 /// Search and filter preview over local listing examples.
 class SearchPage extends StatefulWidget {
-  /// Starts with the query submitted from Home.
+  /// Initializes a fixture search with [initialQuery].
+  ///
+  /// Leading and trailing whitespace is removed at screen initialization.
   const new({this.initialQuery = '', super.key});
 
   /// Initial local query; no remote search is performed.
@@ -34,6 +36,11 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
+/// Owns local search text, filters, and temporary favorites.
+///
+/// Creates and disposes its text controller and search focus node.
+/// Results are derived from [DemoFood] fixtures, without remote search;
+/// favorites and filters are discarded when this state is removed.
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _controller = TextEditingController();
   final _favorites = <String>{};
@@ -58,6 +65,10 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
+  /// Returns fixture results matching the active text, category, and price
+  /// filters. Both non-null price bounds are inclusive.
+  ///
+  /// The optional lowest-price-first sort reorders this local list only.
   List<DemoFood> get _results {
     final minimum = _minimum;
     final maximum = _maximum;
@@ -75,6 +86,7 @@ class _SearchPageState extends State<SearchPage> {
     return foods;
   }
 
+  /// Opens a modal with a temporary copy of the current search filters.
   void _openFilters() {
     unawaited(
       showModalBottomSheet<void>(
@@ -96,6 +108,10 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
+  /// Applies the validated [filters] record to page-local search state.
+  ///
+  /// Nullable price bounds are inclusive; the sorting flag affects only
+  /// local ordering. The filter sheet is then dismissed without persistence.
   void _applyFilters(
     ({String category, int? minimum, int? maximum, bool lowestPriceFirst})
     filters,
@@ -109,6 +125,7 @@ class _SearchPageState extends State<SearchPage> {
     Navigator.pop(context);
   }
 
+  /// Restores the default category, price bounds, and sort order.
   void _resetFilters() => setState(() {
     _category = 'Semua';
     _minimum = null;
@@ -116,6 +133,7 @@ class _SearchPageState extends State<SearchPage> {
     _lowestPriceFirst = false;
   });
 
+  /// Copies a suggested query into the text field and updates local results.
   void _acceptSuggestion(String query) {
     _controller.text = query;
     setState(() => _query = query);
@@ -123,6 +141,9 @@ class _SearchPageState extends State<SearchPage> {
 
   void _editSearch() => _searchFocus.requestFocus();
 
+  /// Toggles the fixture favorite [id] only in this search screen.
+  ///
+  /// No favorites list, profile data, or storage is updated elsewhere.
   void _toggleFavorite(String id) => setState(
     () => _favorites.contains(id) ? _favorites.remove(id) : _favorites.add(id),
   );
@@ -177,6 +198,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 }
 
+/// Shows the fixed illustrative area used by the search preview.
 class _SearchLocation extends StatelessWidget {
   const new();
 
@@ -190,6 +212,7 @@ class _SearchLocation extends StatelessWidget {
   );
 }
 
+/// Displays the active search query and matching fixture count.
 class _ResultHeading extends StatelessWidget {
   const new({required this.query, required this.count});
 
@@ -209,6 +232,7 @@ class _ResultHeading extends StatelessWidget {
   );
 }
 
+/// Shows the result title and toggles a session-only favorite.
 class _SearchTitle extends StatelessWidget {
   const new({
     required this.food,
@@ -246,6 +270,7 @@ class _SearchTitle extends StatelessWidget {
   );
 }
 
+/// Shows merchant information from the local search result.
 class _SearchMerchant extends StatelessWidget {
   const new({required this.food});
 
@@ -277,6 +302,7 @@ class _SearchMerchant extends StatelessWidget {
   );
 }
 
+/// Provides the illustration for a query with no fixture matches.
 class _EmptySearchIcon extends StatelessWidget {
   const new();
 
@@ -294,6 +320,7 @@ class _EmptySearchIcon extends StatelessWidget {
   );
 }
 
+/// Lets the user edit the query or clear local search filters.
 class _EmptySearchButtons extends StatelessWidget {
   const new({required this.onEdit, required this.onReset});
 
@@ -320,6 +347,7 @@ class _EmptySearchButtons extends StatelessWidget {
   );
 }
 
+/// Displays the filter sheet heading and its reset control.
 class _FilterHeading extends StatelessWidget {
   const new({required this.onReset});
 
@@ -339,6 +367,7 @@ class _FilterHeading extends StatelessWidget {
   );
 }
 
+/// Displays local search-price validation feedback.
 class _FilterError extends StatelessWidget {
   const new({required this.error});
 
@@ -349,6 +378,7 @@ class _FilterError extends StatelessWidget {
       I18nText(error, style: const TextStyle(color: PanganKitaColors.danger));
 }
 
+/// Invokes the filter sheet's validated apply callback.
 class _FilterApply extends StatelessWidget {
   const new({required this.onApply});
 
@@ -365,6 +395,7 @@ class _FilterApply extends StatelessWidget {
   );
 }
 
+/// Collects search input and exposes the filter sheet action.
 class _SearchBar extends StatelessWidget {
   const new({
     required this.controller,
@@ -425,6 +456,7 @@ class _SearchBar extends StatelessWidget {
   );
 }
 
+/// Shows predefined filters for the local result set.
 class _QuickFilters extends StatelessWidget {
   const new({
     required this.selected,
@@ -465,6 +497,7 @@ class _QuickFilters extends StatelessWidget {
   );
 }
 
+/// Displays one fixture search result and its navigation action.
 class _SearchResultCard extends StatelessWidget {
   const new({
     required this.food,
@@ -502,6 +535,7 @@ class _SearchResultCard extends StatelessWidget {
   );
 }
 
+/// Renders the product image for a fixture search result.
 class _SearchResultPhoto extends StatelessWidget {
   const new({required this.food});
 
@@ -541,6 +575,7 @@ class _SearchResultPhoto extends StatelessWidget {
   );
 }
 
+/// Groups a local result's title, merchant, and price metadata.
 class _SearchResultInfo extends StatelessWidget {
   const new({
     required this.food,
@@ -582,6 +617,7 @@ class _SearchResultInfo extends StatelessWidget {
   );
 }
 
+/// Shows static pickup and stock captions for a fixture.
 class _SearchPickupMeta extends StatelessWidget {
   const new({required this.pickupTime});
 
@@ -610,6 +646,7 @@ class _SearchPickupMeta extends StatelessWidget {
   );
 }
 
+/// Shows an empty result state with filter reset actions.
 class _EmptySearch extends StatelessWidget {
   const new({
     required this.onSuggestion,
@@ -663,6 +700,7 @@ class _EmptySearch extends StatelessWidget {
   );
 }
 
+/// Collects temporary search filters before notifying its parent.
 class _SearchFilters extends StatefulWidget {
   const new({
     required this.category,
@@ -687,6 +725,10 @@ class _SearchFilters extends StatefulWidget {
 
 // Empty bounds are unbounded. Whitespace-only and malformed bounds are
 // invalid, matching the original search-filter behavior.
+/// Parses optional whole-rupiah bounds from the filter text fields.
+///
+/// Returns `null` for malformed, negative, or reversed ranges; absent bounds
+/// remain unbounded. Whitespace-only nonempty input is invalid.
 ({int? minimum, int? maximum})? _parseSearchPriceRange(
   String minimumInput,
   String maximumInput,
@@ -703,11 +745,15 @@ class _SearchFilters extends StatefulWidget {
   return (minimum: minimum, maximum: maximum);
 }
 
+/// Whether a raw bound is empty or parses as a nonnegative integer.
 bool _isValidPriceBound(String raw, int? parsed) {
   if (raw.isNotEmpty && parsed == null) return false;
   return parsed == null || parsed >= 0;
 }
 
+/// Manages filter-sheet inputs and local validation errors.
+///
+/// Invalid price ranges are not submitted to the owning search page.
 class _SearchFiltersState extends State<_SearchFilters> {
   String _category = 'Semua';
   bool _lowestPriceFirst = false;
@@ -731,6 +777,7 @@ class _SearchFiltersState extends State<_SearchFilters> {
     super.dispose();
   }
 
+  /// Validates the current price range before notifying the search page.
   void _apply() {
     final range = _parseSearchPriceRange(_minimum.text, _maximum.text);
     if (range == null) {
@@ -745,6 +792,7 @@ class _SearchFiltersState extends State<_SearchFilters> {
     ));
   }
 
+  /// Clears all temporary filter values and their validation message.
   void _reset() {
     setState(() {
       _category = 'Semua';
@@ -802,6 +850,7 @@ class _SearchFiltersState extends State<_SearchFilters> {
   );
 }
 
+/// Displays local fixture categories in the filter sheet.
 class _SearchCategoryChoices extends StatelessWidget {
   const new({required this.selected, required this.onSelected});
 
@@ -831,6 +880,7 @@ class _SearchCategoryChoices extends StatelessWidget {
   );
 }
 
+/// Collects optional whole-rupiah minimum and maximum bounds.
 class _SearchPriceFields extends StatelessWidget {
   const new({required this.minimum, required this.maximum});
 
@@ -863,6 +913,7 @@ class _SearchPriceFields extends StatelessWidget {
   );
 }
 
+/// Selects whether local results are ordered by lowest price.
 class _SearchSortChoices extends StatelessWidget {
   const new({required this.lowestPriceFirst, required this.onSelected});
 

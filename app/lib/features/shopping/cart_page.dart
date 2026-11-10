@@ -15,10 +15,14 @@ const _notesMaxLines = 3;
 
 /// Session-only cart preview matching the supplied shopping reference.
 class CartPage extends StatelessWidget {
-  /// Receives state owned by the application, never by a global singleton.
+  /// Reads and updates the app-session [cart] without taking ownership.
+  ///
+  /// The cart notifies this page when its contents change. This page does
+  /// not dispose, persist, or submit the cart to any backend.
   const new({required this.cart, super.key});
 
-  /// Local demo cart; no backend or inventory authority.
+  /// Shared [DemoCart] whose lines and subtotal are observed live.
+  /// No backend persistence or merchant inventory is involved.
   final DemoCart cart;
 
   @override
@@ -73,6 +77,7 @@ class CartPage extends StatelessWidget {
   );
 }
 
+/// Explains the empty cart and provides local browsing navigation.
 class _EmptyCart extends StatelessWidget {
   const new();
   @override
@@ -107,6 +112,7 @@ class _EmptyCart extends StatelessWidget {
   );
 }
 
+/// Groups local cart lines by their example merchant.
 class _MerchantCart extends StatelessWidget {
   const new({required this.cart, required this.merchant});
   final DemoCart cart;
@@ -161,6 +167,7 @@ class _MerchantCart extends StatelessWidget {
   }
 }
 
+/// Displays the decorative pickup-time icon.
 class _CartPickupClock extends StatelessWidget {
   const new();
 
@@ -176,6 +183,7 @@ class _CartPickupClock extends StatelessWidget {
   );
 }
 
+/// Labels the optional merchant-note input.
 class _CartNoteHeading extends StatelessWidget {
   const new();
 
@@ -194,6 +202,7 @@ class _CartNoteHeading extends StatelessWidget {
   );
 }
 
+/// Displays the current session cart subtotal in rupiah.
 class _CartTotalLabel extends StatelessWidget {
   const new({required this.cart});
 
@@ -214,6 +223,7 @@ class _CartTotalLabel extends StatelessWidget {
   );
 }
 
+/// Shows an illustrative pickup window and merchant details.
 class _PickupCard extends StatelessWidget {
   const new({required this.cart, required this.merchant});
   final DemoCart cart;
@@ -269,6 +279,7 @@ class _PickupCard extends StatelessWidget {
   }
 }
 
+/// Collects example instructions without sending them to a merchant.
 class _CartNotes extends StatelessWidget {
   const new();
   @override
@@ -313,6 +324,7 @@ class _CartNotes extends StatelessWidget {
   );
 }
 
+/// Displays fixture quantities and total cost without a service fee.
 class _CartSummary extends StatelessWidget {
   const new({required this.cart});
   final DemoCart cart;
@@ -360,6 +372,7 @@ class _CartSummary extends StatelessWidget {
   );
 }
 
+/// Displays a named amount from the local cart preview.
 class _SummaryRow extends StatelessWidget {
   const new({
     required this.label,
@@ -392,6 +405,7 @@ class _SummaryRow extends StatelessWidget {
   );
 }
 
+/// Displays total and checkout navigation for the session cart.
 class _CartFooter extends StatelessWidget {
   const new({required this.cart});
   final DemoCart cart;

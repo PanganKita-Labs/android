@@ -12,7 +12,9 @@ const _lineGap = 4.0;
 
 /// Read-only checkout lines from the current session cart.
 class CheckoutOrderDetails extends StatelessWidget {
-  /// Displays every configured item and its integer-rupiah line total.
+  /// Shows the current [cart] lines and their whole-rupiah preview totals.
+  ///
+  /// The caller retains ownership of [cart]. No checkout submission occurs.
   const new({required this.cart, super.key});
 
   /// App-owned preview state; no inventory or payment authority.
@@ -38,6 +40,7 @@ class CheckoutOrderDetails extends StatelessWidget {
   );
 }
 
+/// Displays the local product image for a checkout line.
 class _CheckoutLinePhoto extends StatelessWidget {
   const new({required this.line});
 
@@ -57,6 +60,7 @@ class _CheckoutLinePhoto extends StatelessWidget {
   );
 }
 
+/// Renders one selected cart configuration and its example price.
 class _CheckoutLine extends StatelessWidget {
   const new({required this.line});
   final DemoCartLine line;

@@ -14,7 +14,10 @@ const _merchantRadius = 26.0;
 
 /// Read-only completed-pickup example from the local orders preview.
 class PickupPage extends StatelessWidget {
-  /// Shows the selected example without confirming a real pickup.
+  /// Displays a completed-pickup preview for [food] and [quantity].
+  ///
+  /// [quantity] is display input, not confirmation of collected stock.
+  /// A review action forwards both values to another local preview route.
   const new({required this.food, required this.quantity, super.key});
 
   /// Example listing displayed in the completed order.
@@ -65,6 +68,7 @@ class PickupPage extends StatelessWidget {
   );
 }
 
+/// Shows review and navigation actions for a pickup preview.
 class _PickupActions extends StatelessWidget {
   const new({required this.food, required this.quantity});
 
@@ -103,6 +107,7 @@ class _PickupActions extends StatelessWidget {
   );
 }
 
+/// Displays the example food-rescue acknowledgment.
 class _PickupThankYou extends StatelessWidget {
   const new();
 
@@ -131,6 +136,7 @@ class _PickupThankYou extends StatelessWidget {
   );
 }
 
+/// Shows the merchant and address from the supplied fixture.
 class _PickupMerchant extends StatelessWidget {
   const new({required this.food});
 
@@ -160,6 +166,7 @@ class _PickupMerchant extends StatelessWidget {
   );
 }
 
+/// Displays the fixture food and preview quantity.
 class _PickupProduct extends StatelessWidget {
   const new({required this.food, required this.quantity});
 
@@ -193,6 +200,7 @@ class _PickupProduct extends StatelessWidget {
   );
 }
 
+/// Shows illustrative pickup and payment information.
 class _PickupSummary extends StatelessWidget {
   const new({required this.food, required this.quantity});
 
@@ -230,6 +238,7 @@ class _PickupSummary extends StatelessWidget {
   );
 }
 
+/// Formats one key-value entry in the pickup preview.
 class _SummaryRow extends StatelessWidget {
   const new({
     required this.label,

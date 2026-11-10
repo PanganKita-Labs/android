@@ -6,7 +6,11 @@ const _visibilityIconSize = 20.0;
 
 /// Accessible form field with local password visibility state.
 class AuthField extends StatefulWidget {
-  /// Creates a field; [password] enables the visibility control.
+  /// Creates a field using the caller-owned [controller] and [validator].
+  ///
+  /// [label] supplies the visible text and input label. [password] defaults
+  /// to `false`; when enabled, an icon toggles masking for this field only.
+  /// This widget never disposes [controller] or stores its contents.
   const new({
     required this.label,
     required this.controller,
@@ -21,7 +25,9 @@ class AuthField extends StatefulWidget {
   /// Controller owned by the form.
   final TextEditingController controller;
 
-  /// Local input validation.
+  /// Called by the enclosing form when validating this field.
+  ///
+  /// The callback returns an error string or `null` for accepted input.
   final FormFieldValidator<String> validator;
 
   /// Whether the field contains a password.
@@ -31,6 +37,9 @@ class AuthField extends StatefulWidget {
   State<AuthField> createState() => _AuthFieldState();
 }
 
+/// Owns the local password-visibility state of one form field.
+///
+/// Toggling visibility changes presentation only, not stored credentials.
 class _AuthFieldState extends State<AuthField> {
   bool _visible = false;
 
@@ -80,6 +89,7 @@ class _AuthFieldState extends State<AuthField> {
   }
 }
 
+/// Shows or hides password text through its caller callback.
 class _AuthVisibilityButton extends StatelessWidget {
   const new({required this.visible, required this.onToggle});
 

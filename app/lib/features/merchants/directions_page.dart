@@ -21,7 +21,10 @@ const _sheetHeightFraction = .42;
 
 /// Directions preview. It does not use GPS, routing, or live travel times.
 class DirectionsPage extends StatefulWidget {
-  /// Creates directions for an illustrative merchant.
+  /// Displays a fixed route illustration for the example [food].
+  ///
+  /// The merchant is the displayed destination; the route geometry and
+  /// travel-mode choices do not use device GPS or calculate an ETA.
   const new({required this.food, super.key});
 
   /// Local example shown as the destination.
@@ -31,9 +34,17 @@ class DirectionsPage extends StatefulWidget {
   State<DirectionsPage> createState() => _DirectionsPageState();
 }
 
+/// Owns the selected travel-mode preview and back navigation.
+///
+/// The route illustration is static; it does not calculate directions or ETA.
 class _DirectionsPageState extends State<DirectionsPage> {
   int _mode = 0;
 
+  /// Leaves this illustration using the current navigator.
+  ///
+  /// If this route can pop, returns to its preceding route, which need not
+  /// be the map. Otherwise replaces this page with the nearby-map preview.
+  /// Neither path starts a navigation service.
   void _backToMap() {
     final navigator = Navigator.of(context);
     if (navigator.canPop()) {
@@ -69,6 +80,7 @@ class _DirectionsPageState extends State<DirectionsPage> {
   );
 }
 
+/// Shows the page title and the supplied back-to-map action.
 class _DirectionsHeader extends StatelessWidget {
   const new({required this.onBack});
 
@@ -94,6 +106,7 @@ class _DirectionsHeader extends StatelessWidget {
   );
 }
 
+/// Selects one illustrative walking or driving mode.
 class _DirectionsModes extends StatelessWidget {
   const new({required this.selected, required this.onSelected});
 
@@ -136,6 +149,7 @@ class _DirectionsModes extends StatelessWidget {
   );
 }
 
+/// Shows the example merchant destination and pickup information.
 class _Destination extends StatelessWidget {
   const new({required this.food});
 
@@ -178,6 +192,7 @@ class _Destination extends StatelessWidget {
   );
 }
 
+/// Displays a schematic route instead of a live navigation map.
 class _RouteMap extends StatelessWidget {
   const new();
 
@@ -212,6 +227,7 @@ class _RouteMap extends StatelessWidget {
   );
 }
 
+/// Paints the non-geographic route illustration.
 class _RoutePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -255,6 +271,7 @@ class _RoutePainter extends CustomPainter {
   bool shouldRepaint(covariant _RoutePainter oldDelegate) => false;
 }
 
+/// Shows the static travel instructions and preview warnings.
 class _DirectionsSheet extends StatelessWidget {
   const new({required this.food, required this.mode});
 

@@ -13,7 +13,10 @@ const _emptyDigit = '\u200b';
 
 /// Four-digit local demo verification; no email or SMS is sent.
 class OtpPage extends StatefulWidget {
-  /// Creates verification for registration or recovery.
+  /// Creates the four-digit offline verification example.
+  ///
+  /// [recovery] defaults to `false`, navigating to the demo home route on
+  /// success. When `true`, success opens the password-replacement preview.
   const new({this.recovery = false, super.key});
 
   /// Whether verification continues to password replacement.
@@ -23,6 +26,9 @@ class OtpPage extends StatefulWidget {
   State<OtpPage> createState() => _OtpPageState();
 }
 
+/// Owns four digit inputs, focus nodes, and local verification errors.
+///
+/// It checks a fixed example code and does not send or receive OTP messages.
 class _OtpPageState extends State<OtpPage> {
   final List<TextEditingController> _digits = List.generate(
     _otpLength,
@@ -43,6 +49,10 @@ class _OtpPageState extends State<OtpPage> {
     super.dispose();
   }
 
+  /// Checks the assembled input against the fixed example code `5102`.
+  ///
+  /// A mismatch updates local error text without navigation. A match opens
+  /// the route chosen by [OtpPage.recovery]; it does not verify an account.
   void _verify() {
     if (_values.join() != '5102') {
       setState(() => _error = 'Kode demo tidak cocok. Gunakan 5102.');
@@ -54,6 +64,7 @@ class _OtpPageState extends State<OtpPage> {
     ).ignore();
   }
 
+  /// Resets digits and focus, then explains that no message was sent.
   void _resend() {
     for (final digit in _digits) {
       digit.text = _emptyDigit;
@@ -67,6 +78,11 @@ class _OtpPageState extends State<OtpPage> {
     );
   }
 
+  /// Edits the digit field at [index] using the supplied [value].
+  ///
+  /// An empty edit clears the digit and may move focus backward. A paste
+  /// spanning four digits starts at field zero; shorter input starts at
+  /// [index]. Excess digits are ignored and any visible error is cleared.
   void _changeDigit(int index, String value) {
     final wasEmpty = _values[index].isEmpty;
     final digits = value.replaceAll(_emptyDigit, '').split('');
@@ -93,11 +109,13 @@ class _OtpPageState extends State<OtpPage> {
     if (_error != null) setState(() => _error = null);
   }
 
+  /// Focuses one OTP field and selects its existing visible digit.
   void _focusDigit(int index) {
     _focus[index].requestFocus();
     _selectDigit(index);
   }
 
+  /// Selects a field's text, handling the invisible empty placeholder.
   void _selectDigit(int index) {
     final text = _digits[index].text;
     _digits[index].selection = TextSelection(
@@ -151,6 +169,7 @@ class _OtpPageState extends State<OtpPage> {
   );
 }
 
+/// Renders one keyboard-editable OTP input and forwards index-aware events.
 class _OtpDigitField extends StatelessWidget {
   const new({
     required this.index,
@@ -190,6 +209,7 @@ class _OtpDigitField extends StatelessWidget {
   );
 }
 
+/// Clears entered digits and exposes the local resend action.
 class _OtpResend extends StatelessWidget {
   const new({required this.onPressed});
 
@@ -206,6 +226,7 @@ class _OtpResend extends StatelessWidget {
   );
 }
 
+/// Shows the demonstration verification instructions.
 class _OtpHeader extends StatelessWidget {
   const new();
 

@@ -16,6 +16,11 @@ const _merchantRadius = 26.0;
 Set<String> _merchantNames(DemoCart cart) =>
     cart.lines.map((line) => line.food.merchant).toSet();
 
+/// Returns a shared example pickup label for [cart], when available.
+///
+/// Uses the single pickup time only if all lines have one merchant and one
+/// time label. Otherwise returns a per-product Checkout hint. An empty cart
+/// also returns that hint.
 String _pickupTimeLabel(DemoCart cart) {
   final merchants = _merchantNames(cart);
   final times = cart.lines.map((line) => line.food.pickupTime).toSet();
@@ -27,7 +32,10 @@ String _pickupTimeLabel(DemoCart cart) {
 
 /// A success-layout example without payment or order confirmation.
 class PaymentSuccessPage extends StatelessWidget {
-  /// Reads the session cart solely to populate the example layout.
+  /// Renders a hypothetical success layout for the shared [cart].
+  ///
+  /// The caller retains cart ownership. This page neither confirms a
+  /// payment nor clears the cart or creates a real order.
   const new({required this.cart, super.key});
 
   /// App-owned preview cart; it is never charged or cleared here.
@@ -77,6 +85,7 @@ class PaymentSuccessPage extends StatelessWidget {
   );
 }
 
+/// Displays the illustrative success heading and disclaimer.
 class _SuccessHeader extends StatelessWidget {
   const new();
 
@@ -109,6 +118,7 @@ class _SuccessHeader extends StatelessWidget {
   );
 }
 
+/// Shows merchant fixture names from the current cart.
 class _PaymentMerchantIdentity extends StatelessWidget {
   const new({required this.cart});
 
@@ -143,6 +153,7 @@ class _PaymentMerchantIdentity extends StatelessWidget {
   );
 }
 
+/// Displays example order totals without payment confirmation.
 class _PaymentSummary extends StatelessWidget {
   const new({required this.cart});
 
@@ -185,6 +196,7 @@ class _PaymentSummary extends StatelessWidget {
   );
 }
 
+/// Provides illustrative pickup guidance for the preview.
 class _PickupNotice extends StatelessWidget {
   const new({required this.time});
 
@@ -221,6 +233,7 @@ class _PickupNotice extends StatelessWidget {
   );
 }
 
+/// Displays one cart product as a hypothetical purchased item.
 class _ProductCard extends StatelessWidget {
   const new({required this.line});
 
@@ -266,6 +279,7 @@ class _ProductCard extends StatelessWidget {
   );
 }
 
+/// Formats the label and value for a preview payment row.
 class _SummaryRow extends StatelessWidget {
   const new({required this.label, required this.value});
 
@@ -283,6 +297,7 @@ class _SummaryRow extends StatelessWidget {
   );
 }
 
+/// Navigates to other local demonstration screens.
 class _SuccessActions extends StatelessWidget {
   const new();
 

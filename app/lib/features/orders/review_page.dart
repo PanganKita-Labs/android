@@ -23,7 +23,10 @@ const _merchantRadius = 24.0;
 
 /// Local review-form preview without a submitted or saved review.
 class ReviewPage extends StatefulWidget {
-  /// Shows the selected completed-order example.
+  /// Creates a review-form preview for [food] and [quantity].
+  ///
+  /// The example quantity identifies the displayed pickup context; rating,
+  /// tags, and name visibility stay local. No review submission occurs.
   const new({required this.food, required this.quantity, super.key});
 
   /// Example product to describe.
@@ -36,6 +39,9 @@ class ReviewPage extends StatefulWidget {
   State<ReviewPage> createState() => _ReviewPageState();
 }
 
+/// Owns the example rating, selected tags, and name-visibility choice.
+///
+/// No review is submitted, persisted, or associated with an account.
 class _ReviewPageState extends State<ReviewPage> {
   int _rating = 0;
   Set<String> _tags = {};
@@ -90,6 +96,7 @@ class _ReviewPageState extends State<ReviewPage> {
   );
 }
 
+/// Displays the unavailable image-attachment affordance.
 class _PhotoPicker extends StatelessWidget {
   const new();
 
@@ -111,6 +118,7 @@ class _PhotoPicker extends StatelessWidget {
   );
 }
 
+/// Reports the chosen local star rating to its parent.
 class _RatingPicker extends StatelessWidget {
   const new({required this.rating, required this.onSelected});
 
@@ -148,6 +156,7 @@ class _RatingPicker extends StatelessWidget {
   );
 }
 
+/// Displays selectable example review tags.
 class _TagPicker extends StatelessWidget {
   const new({required this.selected, required this.onToggled});
 
@@ -199,6 +208,7 @@ class _TagPicker extends StatelessWidget {
   );
 }
 
+/// Collects optional review text without saving it.
 class _ReviewNarrativeInput extends StatelessWidget {
   const new();
 
@@ -225,6 +235,7 @@ class _ReviewNarrativeInput extends StatelessWidget {
   );
 }
 
+/// Toggles the local name-visibility preview.
 class _ReviewDisplayName extends StatelessWidget {
   const new({required this.value, required this.onChanged});
 
@@ -242,6 +253,7 @@ class _ReviewDisplayName extends StatelessWidget {
   );
 }
 
+/// Explains that submitting reviews is unavailable.
 class _ReviewSubmitButton extends StatelessWidget {
   const new();
 
@@ -254,6 +266,7 @@ class _ReviewSubmitButton extends StatelessWidget {
   );
 }
 
+/// Displays merchant context for the example review.
 class _ReviewMerchant extends StatelessWidget {
   const new({required this.food});
 
@@ -283,6 +296,7 @@ class _ReviewMerchant extends StatelessWidget {
   );
 }
 
+/// Shows the product and quantity associated with the preview.
 class _ReviewFood extends StatelessWidget {
   const new({required this.food, required this.quantity});
 
@@ -316,6 +330,7 @@ class _ReviewFood extends StatelessWidget {
   );
 }
 
+/// Groups fixture product identity and pickup context.
 class _ReviewProduct extends StatelessWidget {
   const new({required this.food, required this.quantity});
 

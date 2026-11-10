@@ -19,6 +19,7 @@ const _fieldGap = 12.0;
 const _submitGap = 24.0;
 const _compactSubmitGap = 8.0;
 
+/// Distinguishes login, registration, and password replacement previews.
 enum _AuthMode {
   login,
   register,
@@ -110,6 +111,7 @@ class AuthPage extends StatelessWidget {
   );
 }
 
+/// Displays the title and supporting text for the selected auth mode.
 class _AuthHeading extends StatelessWidget {
   const new({required this.mode});
   final _AuthMode mode;
@@ -145,6 +147,7 @@ class _AuthHeading extends StatelessWidget {
   );
 }
 
+/// Shows the local route linking related authentication previews.
 class _AuthFooter extends StatelessWidget {
   const new({required this.register});
   final bool register;
@@ -166,6 +169,7 @@ class _AuthFooter extends StatelessWidget {
   );
 }
 
+/// Builds the selected credential form without server authentication.
 class _AuthForm extends StatefulWidget {
   const new({required this.mode});
   final _AuthMode mode;
@@ -174,6 +178,9 @@ class _AuthForm extends StatefulWidget {
   State<_AuthForm> createState() => _AuthFormState();
 }
 
+/// Owns temporary credentials and inline validation feedback.
+///
+/// Form submission only navigates among demonstration routes.
 class _AuthFormState extends State<_AuthForm> {
   final _form = GlobalKey<FormState>();
   final _name = TextEditingController();
@@ -193,11 +200,20 @@ class _AuthFormState extends State<_AuthForm> {
     super.dispose();
   }
 
+  /// Validates the confirmation field against the entered password.
+  ///
+  /// Returns an error for null, empty, or differing [value]; otherwise
+  /// returns `null`.
   String? _confirmation(String? value) =>
       value != _password.text || value == null || value.isEmpty
       ? 'Konfirmasi password tidak cocok.'
       : null;
 
+  /// Validates local fields before navigating to the next demo screen.
+  ///
+  /// Invalid input leaves the route unchanged. Valid input clears password
+  /// controllers, shows a demo notice, then awaits the destination route.
+  /// This does not submit credentials or create an account.
   Future<void> _submit() async {
     if (!(_form.currentState?.validate() ?? false)) return;
     FocusScope.of(context).unfocus();
@@ -259,6 +275,7 @@ class _AuthFormState extends State<_AuthForm> {
   );
 }
 
+/// Opens the local account-recovery demonstration.
 class _ForgotPasswordLink extends StatelessWidget {
   const new();
 

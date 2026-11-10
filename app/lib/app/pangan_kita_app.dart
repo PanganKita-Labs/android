@@ -48,13 +48,21 @@ class PanganKitaApp extends StatefulWidget {
   /// [initialLocale] is the starting language, not a forced override.
   const new({this.initialLocale = const Locale('id'), super.key});
 
-  /// Startup locale; defaults to Indonesian in isolated widget tests.
+  /// Initial locale, defaulting to Indonesian.
+  ///
+  /// The app entry point may restore a saved preference and pass it here;
+  /// this widget does not independently read preference storage.
   final Locale initialLocale;
 
   @override
   State<PanganKitaApp> createState() => _PanganKitaAppState();
 }
 
+/// Owns the session cart, example area, and active UI locale.
+///
+/// Routes share one session cart. The app entry point restores a saved
+/// language into [PanganKitaApp.initialLocale]; this widget applies that
+/// value and writes subsequent language changes to device preferences.
 class _PanganKitaAppState extends State<PanganKitaApp> {
   /// Shared by product, cart, checkout, and payment preview routes.
   /// Disposed with the root application widget.
@@ -71,8 +79,11 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     _locale = widget.initialLocale;
   }
 
-  /// Updates visible language immediately, then attempts persistence.
-  /// If storage fails, the current session keeps its selected locale.
+  /// Applies [locale] immediately, then attempts device persistence.
+  ///
+  /// Simplified Chinese is stored as `zh_Hans`; other choices use their
+  /// language code. A storage [Exception] is logged rather than propagated,
+  /// and the newly selected locale stays active for this session.
   Future<void> _setLocale(Locale locale) async {
     if (_locale == locale) return;
     setState(() => _locale = locale);
@@ -91,6 +102,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     super.dispose();
   }
 
+  /// Registers welcome, authentication, and recovery preview routes.
   Map<String, WidgetBuilder> get _introRoutes => {
     AppRoutes.splash: (context) => const SplashPage(),
     AppRoutes.welcome: (context) => const WelcomePage(),
@@ -103,6 +115,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     AppRoutes.success: (context) => const PasswordSuccessPage(),
   };
 
+  /// Builds profile, search, and settings routes using app-owned state.
   Map<String, WidgetBuilder> get _accountRoutes => {
     AppRoutes.home: (context) => ValueListenableBuilder<String>(
       valueListenable: _selectedArea,
@@ -132,11 +145,16 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     ),
   };
 
+  /// Registers the nearby-stores list and illustrative map routes.
   Map<String, WidgetBuilder> get _merchantRoutes => {
     AppRoutes.nearbyStores: (context) => const NearbyStoresPage(),
     AppRoutes.nearbyMap: (context) => const NearbyMapPage(),
   };
 
+  /// Resolves example order routes from their supplied arguments.
+  ///
+  /// The detail route accepts a [DemoFood] argument. Other argument types
+  /// display an unavailable-example message rather than an order detail.
   Map<String, WidgetBuilder> get _ordersRoutes => {
     AppRoutes.orders: (context) {
       final tab = ModalRoute.of(context)?.settings.arguments;
@@ -152,6 +170,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     },
   };
 
+  /// Builds local messaging and notification previews with argument checks.
   Map<String, WidgetBuilder> get _messagesRoutes => {
     AppRoutes.chat: (context) => const ChatPage(),
     AppRoutes.merchantChat: (context) {
@@ -168,6 +187,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     AppRoutes.notifications: (context) => const NotificationsPage(),
   };
 
+  /// Provides the shared demo cart to checkout and payment preview screens.
   Map<String, WidgetBuilder> get _shoppingRoutes => {
     AppRoutes.cart: (context) => CartPage(cart: _cart),
     AppRoutes.checkout: (context) => CheckoutPage(cart: _cart),
@@ -177,6 +197,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     AppRoutes.paymentFailedPreview: (context) => PaymentFailedPage(cart: _cart),
   };
 
+  /// Builds pickup and review previews from validated fixture arguments.
   Map<String, WidgetBuilder> get _followupRoutes => {
     AppRoutes.pickup: (context) {
       final example = ModalRoute.of(context)?.settings.arguments;
@@ -198,6 +219,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     },
   };
 
+  /// Registers product, directions, and merchant paths for known fixture IDs.
   Map<String, WidgetBuilder> get _dynamicRoutes => {
     for (final food in DemoFood.examples)
       AppRoutes.product(food.id): (context) =>
@@ -211,6 +233,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
           StoreDetailPage(food: food, cart: _cart),
   };
 
+  /// Combines all local route groups into the app's named-route map.
   Map<String, WidgetBuilder> get _routes => {
     ..._introRoutes,
     ..._accountRoutes,

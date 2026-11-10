@@ -29,9 +29,14 @@ class EditProfilePage extends StatefulWidget {
   State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
+/// Owns temporary profile form inputs and validation state.
+///
+/// Saving does not update an account or persist an identity.
 class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
 
+  /// Validates the local form, then explains that profile saving is
+  /// unavailable.
   void _save() {
     if (_formKey.currentState?.validate() ?? false) {
       DemoNotice.show(
@@ -84,6 +89,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   );
 }
 
+/// Shows the edit-profile title and return navigation.
 class _EditProfileHeader extends StatelessWidget {
   const new();
 
@@ -110,6 +116,7 @@ class _EditProfileHeader extends StatelessWidget {
   );
 }
 
+/// Displays the static profile image and unavailable change actions.
 class _EditPhotoControls extends StatelessWidget {
   const new();
 
@@ -153,6 +160,7 @@ class _EditPhotoControls extends StatelessWidget {
   );
 }
 
+/// Shows a password-change option that is not connected to an account.
 class _EditSecurityLink extends StatelessWidget {
   const new();
 
@@ -173,6 +181,7 @@ class _EditSecurityLink extends StatelessWidget {
   );
 }
 
+/// Displays editable example profile fields without account persistence.
 class _ProfileFields extends StatelessWidget {
   const new();
 

@@ -7,6 +7,9 @@ import 'package:pangankita/shared/demo_notice.dart';
 const Color _profileGreen = PanganKitaColors.brandPrimaryStrong;
 const Color _profileInk = PanganKitaColors.inkDeep;
 
+/// Default area callback: validates without updating app-wide state.
+///
+/// Throws [ArgumentError] for an empty [area].
 void _ignoreAreaChange(String area) {
   if (area.isEmpty) throw ArgumentError.value(area, 'area');
 }
@@ -15,7 +18,11 @@ String _defaultLocation() => 'Mandala by Pass, Medan';
 
 /// Display-only profile based on the first panel of the account reference.
 class ProfilePage extends StatelessWidget {
-  /// Creates the local example without loading account information.
+  /// Creates an example profile with optional area-reader callbacks.
+  ///
+  /// [readLocation] supplies the current area when opening the picker.
+  /// [onLocationChanged] receives a confirmed result while still mounted.
+  /// Defaults do not maintain app-wide area state or authenticate anyone.
   const new({
     this.readLocation = _defaultLocation,
     this.onLocationChanged = _ignoreAreaChange,
@@ -28,6 +35,10 @@ class ProfilePage extends StatelessWidget {
   /// Reports a confirmed area to the app-session owner.
   final ValueChanged<String> onLocationChanged;
 
+  /// Opens the area picker using the latest [readLocation] value.
+  ///
+  /// A [String] result invokes [onLocationChanged] only while [context]
+  /// is still mounted. Cancellation leaves the area unchanged.
   Future<void> _chooseLocation(BuildContext context) async {
     final selected = await Navigator.pushNamed(
       context,
@@ -72,6 +83,7 @@ class ProfilePage extends StatelessWidget {
   );
 }
 
+/// Shows profile navigation, title, and settings shortcut.
 class _ProfileHeader extends StatelessWidget {
   const new();
 
@@ -101,6 +113,7 @@ class _ProfileHeader extends StatelessWidget {
   );
 }
 
+/// Displays static demonstration identity and edit navigation.
 class _ProfileIdentity extends StatelessWidget {
   const new();
 
@@ -140,6 +153,7 @@ class _ProfileIdentity extends StatelessWidget {
   );
 }
 
+/// Shows illustrative food-rescue appreciation, not impact metrics.
 class _ProfileImpactNotice extends StatelessWidget {
   const new();
 
@@ -169,6 +183,7 @@ class _ProfileImpactNotice extends StatelessWidget {
   );
 }
 
+/// Connects profile menu actions to existing demo routes.
 class _ProfileNavigation extends StatelessWidget {
   const new({required this.onChooseLocation});
 
@@ -202,6 +217,7 @@ class _ProfileNavigation extends StatelessWidget {
   );
 }
 
+/// Describes one profile menu icon, label, and action.
 class _ProfileItem {
   const new(this.icon, this.label, this.onTap, {this.color});
 
@@ -211,6 +227,7 @@ class _ProfileItem {
   final Color? color;
 }
 
+/// Renders the ordered menu entries for the local profile.
 class _ProfileMenu extends StatelessWidget {
   const new({required this.items});
 

@@ -15,12 +15,16 @@ const _notificationsIndex = 3;
 /// Switching destinations replaces the current named route rather
 /// than pushing another screen onto the navigation stack.
 class AppBottomNavigation extends StatelessWidget {
-  /// Selects Home (0), Orders (1), Chat (2), or Notifications (3).
+  /// Configures the selected tab: Home (0), Orders (1), Chat (2), or
+  /// Notifications (3). The widget does not own tab persistence.
   const new({required this.selectedIndex, super.key});
 
   /// Active destination index.
   final int selectedIndex;
 
+  /// Replaces the current route for a different tab.
+  ///
+  /// An invalid tab index displays a local unavailable-feature notice.
   void _selectDestination(BuildContext context, int index) {
     if (index == selectedIndex) return;
     switch (index) {

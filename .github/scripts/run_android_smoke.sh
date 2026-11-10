@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 # Run inside android-emulator-runner while the emulator remains booted.
+# Requires Flutter, adb, and an active emulator-5554 device.
+# On failure, writes diagnostic artifacts to SMOKE_ARTIFACT_DIR or RUNNER_TEMP.
 set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 artifact_dir="${SMOKE_ARTIFACT_DIR:-${RUNNER_TEMP:-/tmp}/android-smoke}"
 mkdir -p "$artifact_dir"
 
+# Capture device state when the smoke test exits unsuccessfully.
+# Leave the original test exit status unchanged.
 capture_failure() {
   result=$?
   if [[ "$result" -ne 0 ]]; then

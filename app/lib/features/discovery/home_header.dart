@@ -6,13 +6,16 @@ import 'package:pangankita/shared/reference_icon.dart';
 
 /// Reference greeting and selected example area; no geolocation is collected.
 class HomeHeader extends StatelessWidget {
-  /// Creates the demo header.
+  /// Shows [location] as an illustrative area in the home header.
+  ///
+  /// [onLocationTap] runs when the area affordance is activated; the caller
+  /// owns navigation and any resulting application-state update.
   const new({required this.location, required this.onLocationTap, super.key});
 
   /// Area selected in the local preview.
   final String location;
 
-  /// Opens the local area selector.
+  /// Invoked on an area tap; navigation is delegated to the caller.
   final VoidCallback onLocationTap;
 
   @override
@@ -57,6 +60,7 @@ class HomeHeader extends StatelessWidget {
   );
 }
 
+/// Opens the local profile preview from the home screen.
 class _HomeAvatarLink extends StatelessWidget {
   const new();
 
@@ -74,6 +78,7 @@ class _HomeAvatarLink extends StatelessWidget {
   );
 }
 
+/// Displays the current example area and forwards location taps.
 class _HomeLocationSummary extends StatelessWidget {
   const new({required this.location, required this.onLocationTap});
 

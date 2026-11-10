@@ -52,6 +52,10 @@ class NearbyMapPage extends StatefulWidget {
   State<NearbyMapPage> createState() => _NearbyMapPageState();
 }
 
+/// Owns the selected fixture merchant for the nearby-map preview.
+///
+/// A marker tap updates a page-local index, and the details panel reads the
+/// corresponding item from a fixed fixture list. No GPS lookup is performed.
 class _NearbyMapPageState extends State<NearbyMapPage> {
   int _selected = 0;
 
@@ -79,6 +83,7 @@ class _NearbyMapPageState extends State<NearbyMapPage> {
   }
 }
 
+/// Displays the fixed example area above the map.
 class _MapLocationHeadline extends StatelessWidget {
   const new();
 
@@ -111,6 +116,9 @@ class _MapLocationHeadline extends StatelessWidget {
   );
 }
 
+/// Shows the disabled device-location affordance.
+///
+/// Activating it displays an unavailable-feature notice; no GPS is requested.
 class _MapDeviceLocationButton extends StatelessWidget {
   const new();
 
@@ -130,6 +138,7 @@ class _MapDeviceLocationButton extends StatelessWidget {
   );
 }
 
+/// Displays the selected store panel's handle and list action.
 class _MapStoreSheetHeader extends StatelessWidget {
   const new();
 
@@ -165,6 +174,7 @@ class _MapStoreSheetHeader extends StatelessWidget {
   );
 }
 
+/// Displays the chosen fixture's merchant image.
 class _MapStorePhoto extends StatelessWidget {
   const new({required this.food});
 
@@ -185,6 +195,7 @@ class _MapStorePhoto extends StatelessWidget {
   );
 }
 
+/// Shows a sample rating rather than a verified review total.
 class _MapStoreRating extends StatelessWidget {
   const new({required this.food});
 
@@ -201,6 +212,7 @@ class _MapStoreRating extends StatelessWidget {
   );
 }
 
+/// Provides map-list navigation and illustrative filter actions.
 class _MapHeader extends StatelessWidget {
   const new();
 
@@ -230,6 +242,7 @@ class _MapHeader extends StatelessWidget {
   );
 }
 
+/// Positions fixture pins on a hand-drawn schematic map.
 class _MerchantMap extends StatelessWidget {
   const new({
     required this.stores,
@@ -286,6 +299,7 @@ class _MerchantMap extends StatelessWidget {
   );
 }
 
+/// Displays local category choices for the illustrative map.
 class _MapFilterChips extends StatelessWidget {
   const new();
 
@@ -336,6 +350,7 @@ class _MapFilterChips extends StatelessWidget {
   );
 }
 
+/// Renders a selectable merchant marker from fixture data.
 class _MerchantPin extends StatelessWidget {
   const new({required this.food, required this.selected, required this.onTap});
 
@@ -386,6 +401,7 @@ class _MerchantPin extends StatelessWidget {
   );
 }
 
+/// Draws the reference location marker, not live GPS position.
 class _CurrentLocation extends StatelessWidget {
   const new();
 
@@ -410,6 +426,7 @@ class _CurrentLocation extends StatelessWidget {
   );
 }
 
+/// Displays a static name or caption on the map illustration.
 class _RoadLabel extends StatelessWidget {
   const new(this.label, {this.angle = 0});
 
@@ -427,6 +444,7 @@ class _RoadLabel extends StatelessWidget {
   );
 }
 
+/// Shows the locally selected merchant in a bottom sheet.
 class _MapStoreSheet extends StatelessWidget {
   const new({required this.food});
 
@@ -482,6 +500,7 @@ class _MapStoreSheet extends StatelessWidget {
   );
 }
 
+/// Displays selected fixture identity, product, and rating.
 class _MapStoreSummary extends StatelessWidget {
   const new({required this.food});
 
@@ -526,6 +545,7 @@ class _MapStoreSummary extends StatelessWidget {
   );
 }
 
+/// Paints example streets and green areas with fixed geometry.
 class _StreetPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -572,6 +592,7 @@ class _StreetPainter extends CustomPainter {
       );
   }
 
+  /// Draws fixed parcel outlines used by the illustrative map background.
   void _drawBlocks(Canvas canvas, Size size) {
     final block = Paint()..color = const Color(0xFFECE8E1);
     final parcel = Paint()..color = const Color(0xFFF4F0E9);

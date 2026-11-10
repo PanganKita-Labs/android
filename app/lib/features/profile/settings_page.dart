@@ -12,7 +12,10 @@ const _largeTextScale = 1.5;
 
 /// Account-settings preview with local, non-persistent switches.
 class SettingsPage extends StatelessWidget {
-  /// Creates the settings reference page without account integration.
+  /// Creates a settings preview with an optional [onLocaleChanged] callback.
+  ///
+  /// Without a supplied callback, choosing a language does not update
+  /// the root locale or persist a device preference.
   const new({this.onLocaleChanged = _ignoreLocaleChange, super.key});
 
   /// Called when the user selects a supported UI language.
@@ -23,6 +26,10 @@ class SettingsPage extends StatelessWidget {
     return;
   }
 
+  /// Offers Indonesian, English, and Simplified Chinese in a sheet.
+  ///
+  /// Invokes [onLocaleChanged] only when a locale is selected. Dismissing
+  /// the sheet without selection does not notify the app owner.
   Future<void> _chooseLanguage(BuildContext context) async {
     final selected = await showModalBottomSheet<Locale>(
       context: context,
@@ -104,6 +111,7 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
+/// Displays the settings heading and return navigation.
 class _SettingsHeader extends StatelessWidget {
   const new();
 
@@ -136,6 +144,7 @@ class _SettingsHeader extends StatelessWidget {
   }
 }
 
+/// Groups account-related demonstration settings.
 class _SettingsAccountSection extends StatelessWidget {
   const new({required this.onChooseLanguage});
 
@@ -175,6 +184,7 @@ class _SettingsAccountSection extends StatelessWidget {
   }
 }
 
+/// Groups information and support links.
 class _SettingsAboutSection extends StatelessWidget {
   const new();
 
@@ -211,6 +221,7 @@ class _SettingsAboutSection extends StatelessWidget {
   }
 }
 
+/// Labels a group of settings controls.
 class _SectionTitle extends StatelessWidget {
   const new(this.label);
 
@@ -223,6 +234,7 @@ class _SectionTitle extends StatelessWidget {
   );
 }
 
+/// Displays local notification preferences without push integration.
 class _NotificationCard extends StatefulWidget {
   const new();
 
@@ -230,6 +242,7 @@ class _NotificationCard extends StatefulWidget {
   State<_NotificationCard> createState() => _NotificationCardState();
 }
 
+/// Exposes the local merchant-message notification toggle.
 class _MessagesSwitch extends StatelessWidget {
   const new({required this.value, required this.onChanged});
 
@@ -254,6 +267,10 @@ class _MessagesSwitch extends StatelessWidget {
   }
 }
 
+/// Owns three in-memory notification preference toggles.
+///
+/// Orders and messages start enabled while promotions start disabled.
+/// Changes are discarded with the widget, and no device push service is used.
 class _NotificationCardState extends State<_NotificationCard> {
   bool _orders = true;
   bool _messages = true;
@@ -309,6 +326,7 @@ class _NotificationCardState extends State<_NotificationCard> {
   }
 }
 
+/// Describes a settings label, icon, and optional action.
 class _SettingsRow {
   const new(this.icon, this.label, {this.detail, this.route, this.onTap});
 
@@ -319,11 +337,16 @@ class _SettingsRow {
   final VoidCallback? onTap;
 }
 
+/// Renders one settings group with consistent presentation.
 class _SettingsCard extends StatelessWidget {
   const new({required this.rows});
 
   final List<_SettingsRow> rows;
 
+  /// Opens the selected [row] action using [context].
+  ///
+  /// A supplied callback wins over a named route. When neither exists, a
+  /// local unavailable-feature notice is shown instead.
   void _openRow(BuildContext context, _SettingsRow row) {
     if (row.onTap case final tap?) {
       tap();

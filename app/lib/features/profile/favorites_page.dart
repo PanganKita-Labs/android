@@ -26,6 +26,10 @@ class FavoritesPage extends StatefulWidget {
   State<FavoritesPage> createState() => _FavoritesPageState();
 }
 
+/// Owns local favorite item visibility and the food/store tab.
+///
+/// Food removals update an ID set, while the example merchant has a
+/// separate visibility flag. Neither removal updates other pages or storage.
 class _FavoritesPageState extends State<FavoritesPage> {
   final Set<String> _visibleFoodIds = _foodIds.toSet();
   bool _showStores = false;
@@ -78,6 +82,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   }
 }
 
+/// Shows the favorites title and return navigation.
 class _FavoritesHeading extends StatelessWidget {
   const new();
 
@@ -115,6 +120,7 @@ class _FavoritesHeading extends StatelessWidget {
   );
 }
 
+/// Selects food or merchant examples in the local favorites view.
 class _FavoritesTabs extends StatelessWidget {
   const new({
     required this.showStores,
@@ -150,6 +156,7 @@ class _FavoritesTabs extends StatelessWidget {
   );
 }
 
+/// Explains that favorites, prices and availability are sample data.
 class _FavoritesDisclosure extends StatelessWidget {
   const new();
 
@@ -174,6 +181,7 @@ class _FavoritesDisclosure extends StatelessWidget {
   );
 }
 
+/// Renders a selectable label for one favorites category.
 class _TabButton extends StatelessWidget {
   const new({
     required this.label,
@@ -201,6 +209,7 @@ class _TabButton extends StatelessWidget {
   );
 }
 
+/// Shows a fixture food item and its local removal action.
 class _FoodCard extends StatelessWidget {
   const new({required this.food, required this.onRemove});
 
@@ -232,6 +241,7 @@ class _FoodCard extends StatelessWidget {
   );
 }
 
+/// Displays the selected example food image.
 class _FavoriteFoodPhoto extends StatelessWidget {
   const new({required this.food});
 
@@ -249,6 +259,7 @@ class _FavoriteFoodPhoto extends StatelessWidget {
   );
 }
 
+/// Groups merchant, rating, and price preview information.
 class _FavoriteFoodDetails extends StatelessWidget {
   const new({required this.food, required this.onRemove});
 
@@ -281,6 +292,7 @@ class _FavoriteFoodDetails extends StatelessWidget {
   );
 }
 
+/// Shows a food name and locally removes its favorite marker.
 class _FavoriteFoodTitle extends StatelessWidget {
   const new({required this.food, required this.onRemove});
 
@@ -315,6 +327,7 @@ class _FavoriteFoodTitle extends StatelessWidget {
   );
 }
 
+/// Displays merchant identity for an example food.
 class _FavoriteMerchant extends StatelessWidget {
   const new({required this.food});
 
@@ -343,6 +356,7 @@ class _FavoriteMerchant extends StatelessWidget {
   );
 }
 
+/// Shows an illustrative favorited merchant entry.
 class _StoreCard extends StatelessWidget {
   const new({required this.onRemove});
 
@@ -384,6 +398,7 @@ class _StoreCard extends StatelessWidget {
   );
 }
 
+/// Explains how to browse when local favorites have been cleared.
 class _EmptyFavorites extends StatelessWidget {
   const new({required this.label});
 

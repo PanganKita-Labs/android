@@ -3,7 +3,13 @@ import 'package:pangankita/shared/format_rupiah.dart';
 /// Illustrative listing copied from the supplied local prototype.
 /// Prices, stock, ratings, and merchants are display examples, not live offers.
 class DemoFood {
-  /// Creates reference display data.
+  /// Creates a display-only food listing without validating inventory.
+  ///
+  /// [id] identifies a local image asset. [priceRupiah] is used for demo
+  /// cart arithmetic; [original], [saving], [rating], [distance], [stock],
+  /// and [pickupTime] are display labels, not verified measurements.
+  /// [flash] defaults to `false`, [searchTerms] to an empty string, and
+  /// [pickupAddress] to a generic example. No network lookup occurs.
   const new({
     required this.id,
     required this.category,
@@ -66,7 +72,10 @@ class DemoFood {
   /// Additional local keywords for illustrative search.
   final String searchTerms;
 
-  /// Asset used by both the card and detail sheet.
+  /// Resolves the local prototype image path for [id].
+  ///
+  /// Every ID currently resolves to `assets/prototype/<id>.webp`, including
+  /// `garlic-bread`. This getter does not check whether that asset exists.
   String get image => id == 'garlic-bread'
       ? 'assets/prototype/garlic-bread.webp'
       : 'assets/prototype/$id.webp';
@@ -76,6 +85,8 @@ class DemoFood {
   /// The category must exactly match [selectedCategory], unless it is
   /// 'Semua'. [query] is trimmed and matched as a substring against
   /// the example title, merchant, category, and search terms.
+  /// An empty [query] matches all items within the chosen category.
+  /// Returns `true` only when both category and text filters match.
   /// No remote search or live availability lookup occurs.
   bool matches(String query, String selectedCategory) =>
       (selectedCategory == 'Semua' || category == selectedCategory) &&

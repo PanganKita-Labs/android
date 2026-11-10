@@ -18,13 +18,19 @@ const _categoryFontSize = 9.0;
 const _nearbySectionGap = 12.0;
 const _referenceCategoryCount = '18';
 
+/// Default callback which validates an area without saving it.
+///
+/// Throws [ArgumentError] if [area] is empty; other values are ignored.
 void _ignoreAreaChange(String area) {
   if (area.isEmpty) throw ArgumentError.value(area, 'area');
 }
 
 /// Searchable local reference feed with category filtering.
 class HomePage extends StatefulWidget {
-  /// Creates the demo feed.
+  /// Creates a fixture feed starting at [initialLocation].
+  ///
+  /// [onLocationChanged] runs after the area picker returns a string while
+  /// this widget is mounted. Its default callback does not persist changes.
   const new({
     this.initialLocation = 'Mandala by Pass, Medan',
     this.onLocationChanged = _ignoreAreaChange,
@@ -41,6 +47,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+/// Owns the home screen's local query, category, and selected area.
+///
+/// A confirmed area is sent through [HomePage.onLocationChanged]. Only a
+/// caller-supplied callback can propagate it beyond this page.
 class _HomePageState extends State<HomePage> {
   String _query = '';
   String _category = 'Semua';
@@ -60,6 +70,10 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  /// Opens the local picker and awaits the selected area.
+  ///
+  /// Only a [String] result received while mounted updates local state
+  /// and invokes [HomePage.onLocationChanged].
   Future<void> _chooseLocation() async {
     final selected = await Navigator.pushNamed(
       context,
@@ -76,6 +90,9 @@ class _HomePageState extends State<HomePage> {
 
   void _searchChanged(String value) => setState(() => _query = value);
 
+  /// Opens local search with the trimmed [value] as its initial query.
+  ///
+  /// Navigation does not issue any network search request.
   void _submitSearch(String value) => Navigator.pushNamed(
     context,
     AppRoutes.search,
@@ -84,6 +101,7 @@ class _HomePageState extends State<HomePage> {
 
   void _openFilter() => unawaited(_filter());
 
+  /// Displays the category picker for the local food fixtures.
   Future<void> _filter() async {
     await showModalBottomSheet<void>(
       context: context,
@@ -162,6 +180,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+/// Displays the category section's branded title.
 class _HomeCategoryHeading extends StatelessWidget {
   const new();
 
@@ -179,6 +198,7 @@ class _HomeCategoryHeading extends StatelessWidget {
   );
 }
 
+/// Identifies offers, locations, ratings, and stock as examples.
 class _HomeDemoDisclaimer extends StatelessWidget {
   const new();
 
@@ -191,6 +211,7 @@ class _HomeDemoDisclaimer extends StatelessWidget {
   );
 }
 
+/// Displays a feed title and its display-only See All action.
 class _FeedHeading extends StatelessWidget {
   const new({required this.title, required this.flash});
 
@@ -245,6 +266,7 @@ class _FeedHeading extends StatelessWidget {
   );
 }
 
+/// Displays the store illustration in the merchant banner.
 class _MerchantBannerIcon extends StatelessWidget {
   const new();
 
@@ -261,6 +283,7 @@ class _MerchantBannerIcon extends StatelessWidget {
   );
 }
 
+/// Renders one category feed using the provided local food examples.
 class _FeedSection extends StatelessWidget {
   const new({required this.title, required this.foods, required this.flash});
   final String title;
@@ -286,6 +309,7 @@ class _FeedSection extends StatelessWidget {
   );
 }
 
+/// Promotes the nearby-stores preview without querying live merchants.
 class _MerchantBanner extends StatelessWidget {
   const new();
 
@@ -334,6 +358,7 @@ class _MerchantBanner extends StatelessWidget {
   );
 }
 
+/// Connects the home search input and filter button to caller callbacks.
 class _HomeSearch extends StatelessWidget {
   const new({
     required this.onChanged,
@@ -376,6 +401,7 @@ class _HomeSearch extends StatelessWidget {
   );
 }
 
+/// Shows the available fixture categories and selected category.
 class _HomeCategories extends StatelessWidget {
   const new({required this.selected, required this.onSelected});
   final String selected;
@@ -420,6 +446,7 @@ class _HomeCategories extends StatelessWidget {
   );
 }
 
+/// Displays the illustrative count or caption for a category.
 class _ReferenceCategoryCount extends StatelessWidget {
   const new();
 

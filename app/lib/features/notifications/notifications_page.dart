@@ -84,6 +84,11 @@ class NotificationsPage extends StatefulWidget {
   State<NotificationsPage> createState() => _NotificationsPageState();
 }
 
+/// Owns local notification read markers and filter selection.
+///
+/// Read IDs and category filters are discarded when the page is removed.
+/// Marking one notice as read happens before local route navigation. No
+/// device push notification is received or acknowledged.
 class _NotificationsPageState extends State<NotificationsPage> {
   String _filter = 'Semua';
   final Set<int> _read = {};
@@ -131,6 +136,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   }
 }
 
+/// Groups sample notifications by their display category.
 class _NotificationGroup extends StatelessWidget {
   const new({
     required this.today,
@@ -144,6 +150,10 @@ class _NotificationGroup extends StatelessWidget {
   final Set<int> read;
   final ValueChanged<int> onOpened;
 
+  /// Reports [notice] as read via [onOpened] before navigation.
+  ///
+  /// Order notices route to the active or completed example tab; other
+  /// notices route home. [context] is used only for local navigation.
   void _openNotice(BuildContext context, _Notice notice) {
     onOpened(notice.id);
     if (notice.order) {
@@ -185,6 +195,7 @@ class _NotificationGroup extends StatelessWidget {
   }
 }
 
+/// Displays navigation and the local mark-all-read control.
 class _NotificationsHeader extends StatelessWidget {
   const new({required this.onMarkRead});
 
@@ -215,6 +226,7 @@ class _NotificationsHeader extends StatelessWidget {
   );
 }
 
+/// Selects which example notices are visible.
 class _NotificationFilters extends StatelessWidget {
   const new({required this.selected, required this.onSelected});
 
@@ -244,6 +256,7 @@ class _NotificationFilters extends StatelessWidget {
   );
 }
 
+/// Displays a decorative icon based on notice category.
 class _NotificationIcon extends StatelessWidget {
   const new({required this.order});
 
@@ -262,6 +275,7 @@ class _NotificationIcon extends StatelessWidget {
   );
 }
 
+/// Shows a fixture notice with local read-state feedback.
 class _NotificationCard extends StatelessWidget {
   const new({required this.notice, required this.unread, required this.onTap});
 

@@ -14,7 +14,10 @@ const Color _badgeColor = PanganKitaColors.positiveSurfaceMuted;
 
 /// Display-only examples for the completed orders tab.
 class CompletedOrdersSection extends StatelessWidget {
-  /// Creates the sample section without a real order history.
+  /// Displays completed-order examples matching [query].
+  ///
+  /// The empty-string default shows both fixtures. Matching uses local
+  /// food metadata and does not query an account or order service.
   const new({super.key, this.query = ''});
 
   /// Filters the two local examples by product or merchant name.
@@ -49,6 +52,7 @@ class CompletedOrdersSection extends StatelessWidget {
   );
 }
 
+/// Groups completed-order fixtures under a sample date.
 class _DatedCompletedExample extends StatelessWidget {
   const new({required this.date, required this.food, required this.quantity});
 
@@ -95,6 +99,7 @@ class _DatedCompletedExample extends StatelessWidget {
   );
 }
 
+/// Shows the merchant identity for a completed-order example.
 class _MerchantHeader extends StatelessWidget {
   const new({required this.food});
 
@@ -133,6 +138,7 @@ class _MerchantHeader extends StatelessWidget {
   );
 }
 
+/// Displays one historical fixture item, quantity, and price.
 class _CompletedItem extends StatelessWidget {
   const new({required this.food, required this.quantity});
 
@@ -168,6 +174,9 @@ class _CompletedItem extends StatelessWidget {
   );
 }
 
+/// Provides display-only actions for the completed example.
+///
+/// No new purchase, review, or payment is created automatically.
 class _CompletedActions extends StatelessWidget {
   const new({required this.food, required this.quantity});
 

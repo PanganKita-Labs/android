@@ -16,6 +16,9 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
+/// Controls the introductory splash transition to the welcome page.
+///
+/// The splash does not initialize a login session or fetch server data.
 class _SplashPageState extends State<SplashPage> {
   Timer? _timer;
   bool _leaving = false;
@@ -26,6 +29,10 @@ class _SplashPageState extends State<SplashPage> {
     _timer = Timer(const Duration(milliseconds: 1700), _continue);
   }
 
+  /// Replaces the splash with the welcome screen at most once.
+  ///
+  /// Ignores calls after disposal or after departure begins. Cancels the
+  /// pending timer; reduced-motion settings disable the fade duration.
   void _continue() {
     if (!mounted || _leaving) return;
     _leaving = true;

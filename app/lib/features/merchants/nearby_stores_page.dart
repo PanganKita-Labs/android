@@ -25,6 +25,10 @@ class NearbyStoresPage extends StatefulWidget {
   State<NearbyStoresPage> createState() => _NearbyStoresPageState();
 }
 
+/// Owns the local store query for the nearby-stores example.
+///
+/// Searches fixture merchant names and categories case-insensitively.
+/// The list is not discovered through device location or a merchant service.
 class _NearbyStoresPageState extends State<NearbyStoresPage> {
   String _query = '';
 
@@ -74,6 +78,7 @@ class _NearbyStoresPageState extends State<NearbyStoresPage> {
   }
 }
 
+/// Shows the nearby-store heading and map navigation.
 class _StoresHeader extends StatelessWidget {
   const new();
 
@@ -107,6 +112,7 @@ class _StoresHeader extends StatelessWidget {
   );
 }
 
+/// Collects a store query for in-memory fixture matching.
 class _StoresSearch extends StatelessWidget {
   const new({required this.onChanged});
 
@@ -130,6 +136,7 @@ class _StoresSearch extends StatelessWidget {
   );
 }
 
+/// Displays local store-category filter controls.
 class _StoresFilters extends StatelessWidget {
   const new();
 
@@ -164,6 +171,7 @@ class _StoresFilters extends StatelessWidget {
   );
 }
 
+/// Labels the list of available example stores.
 class _StoresSectionHeader extends StatelessWidget {
   const new();
 
@@ -192,11 +200,13 @@ class _StoresSectionHeader extends StatelessWidget {
   );
 }
 
+/// Displays an illustrative merchant preview and opens its detail.
 class _StoreCard extends StatelessWidget {
   const new({required this.food});
 
   final DemoFood food;
 
+  /// Opens the local detail route for the selected fixture merchant.
   void _openStore(BuildContext context) =>
       Navigator.pushNamed(context, AppRoutes.store(food.id)).ignore();
 
@@ -231,6 +241,7 @@ class _StoreCard extends StatelessWidget {
   );
 }
 
+/// Shows the example store cover image and category.
 class _StoreBanner extends StatelessWidget {
   const new({required this.food});
 
@@ -268,6 +279,7 @@ class _StoreBanner extends StatelessWidget {
   );
 }
 
+/// Displays store name, branding, and sample address.
 class _StoreIdentity extends StatelessWidget {
   const new({required this.food});
 
@@ -308,6 +320,7 @@ class _StoreIdentity extends StatelessWidget {
   );
 }
 
+/// Groups static review, distance, and product-count captions.
 class _StoreStats extends StatelessWidget {
   const new({required this.food, required this.reviewCount});
 
@@ -348,6 +361,7 @@ class _StoreStats extends StatelessWidget {
   );
 }
 
+/// Formats one preview statistic and its explanatory caption.
 class _StoreStat extends StatelessWidget {
   const new({required this.value, required this.label, this.isRating = false});
 

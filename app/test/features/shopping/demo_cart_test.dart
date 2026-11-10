@@ -58,6 +58,41 @@ void main() {
     );
   });
 
+  test('listeners fire only for actual cart mutations', () {
+    final cart = DemoCart();
+    addTearDown(cart.dispose);
+    final food = DemoFood.examples.first;
+    var notifications = 0;
+    cart.addListener(() => notifications++);
+
+    expect(cart.add(food), isTrue);
+    expect(notifications, 1);
+
+    final id = cart.lines.single.id;
+    cart
+      ..setQuantity(id, 1)
+      ..setQuantity('unknown-line', 2);
+    expect(notifications, 1);
+
+    expect(cart.add(food, quantity: 9), isTrue);
+    expect(notifications, 2);
+    expect(cart.add(food), isFalse);
+    cart.remove('unknown-line');
+    expect(notifications, 2);
+
+    cart.remove(id);
+    expect(notifications, 3);
+    cart.clear();
+    expect(notifications, 3);
+
+    expect(cart.add(food), isTrue);
+    expect(notifications, 4);
+    cart.clear();
+    expect(notifications, 5);
+    cart.clear();
+    expect(notifications, 5);
+  });
+
   test('rupiah formatting keeps integer precision and thousands grouping', () {
     expect(formatRupiah(0), 'Rp0');
     expect(formatRupiah(8500), 'Rp8.500');

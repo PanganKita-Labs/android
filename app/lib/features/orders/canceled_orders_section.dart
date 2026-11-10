@@ -17,7 +17,10 @@ const _merchantRadius = 18.0;
 
 /// Display-only example for the canceled-orders tab.
 class CanceledOrdersSection extends StatelessWidget {
-  /// Creates the preview without a real canceled order.
+  /// Displays the canceled-order fixture filtered by [query].
+  ///
+  /// [query] defaults to empty and is matched against sample food data.
+  /// No cancellation, refund, or real order history is involved.
   const new({super.key, this.query = ''});
 
   /// Filters the local canceled example by product or merchant name.
@@ -68,6 +71,7 @@ class CanceledOrdersSection extends StatelessWidget {
   );
 }
 
+/// Displays one canceled-order fixture with its preview metadata.
 class _CanceledExampleCard extends StatelessWidget {
   const new();
 
@@ -100,6 +104,7 @@ class _CanceledExampleCard extends StatelessWidget {
   );
 }
 
+/// Shows the example merchant for a canceled order.
 class _CanceledMerchantHeader extends StatelessWidget {
   const new({required this.food});
 
@@ -135,6 +140,7 @@ class _CanceledMerchantHeader extends StatelessWidget {
   );
 }
 
+/// Displays the illustrative total for the canceled order.
 class _CanceledTotal extends StatelessWidget {
   const new({required this.priceRupiah});
 
@@ -153,6 +159,7 @@ class _CanceledTotal extends StatelessWidget {
   );
 }
 
+/// Shows the product fixture associated with the canceled order.
 class _CanceledProduct extends StatelessWidget {
   const new({required this.food});
 
@@ -197,6 +204,9 @@ class _CanceledProduct extends StatelessWidget {
   );
 }
 
+/// Shows demonstration actions for a canceled order.
+///
+/// No cancellation or refund operation is sent to a backend.
 class _CanceledActions extends StatelessWidget {
   const new();
 

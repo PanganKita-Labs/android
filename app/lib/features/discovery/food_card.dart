@@ -26,7 +26,10 @@ String _cardTitle(DemoFood food) => switch (food.id) {
 
 /// Read-only listing card matching the pickup-oriented home reference.
 class FoodCard extends StatelessWidget {
-  /// Creates a card for an illustrative local offer.
+  /// Creates a display-only listing card for the fixture [food].
+  ///
+  /// Tapping the card opens the registered local product route for [food].
+  /// The card neither reserves stock nor verifies merchant information.
   const new({required this.food, super.key});
 
   /// Display data, not live stock or a verified merchant.
@@ -82,6 +85,7 @@ class FoodCard extends StatelessWidget {
   }
 }
 
+/// Displays the illustrative listing title, merchant details, and rating.
 class _FoodSummary extends StatelessWidget {
   const new({required this.food, required this.minHeight});
   final DemoFood food;
@@ -122,6 +126,7 @@ class _FoodSummary extends StatelessWidget {
   );
 }
 
+/// Shows the example merchant identity within a food card.
 class _MerchantLine extends StatelessWidget {
   const new({required this.food});
   final DemoFood food;
@@ -158,6 +163,7 @@ class _MerchantLine extends StatelessWidget {
   );
 }
 
+/// Groups display-only savings and availability labels.
 class _FoodBadges extends StatelessWidget {
   const new({required this.food});
   final DemoFood food;
@@ -174,6 +180,7 @@ class _FoodBadges extends StatelessWidget {
   );
 }
 
+/// Displays fixture pricing without calculating a live discount.
 class _FoodPrice extends StatelessWidget {
   const new({required this.food});
   final DemoFood food;
@@ -206,6 +213,7 @@ class _FoodPrice extends StatelessWidget {
   );
 }
 
+/// Styles one short prototype badge without affecting inventory.
 class _FoodBadge extends StatelessWidget {
   const new({required this.label, required this.icon});
   final String label;
@@ -258,6 +266,7 @@ class _FoodBadge extends StatelessWidget {
   );
 }
 
+/// Groups card actions and pickup information for an example listing.
 class _FoodFooter extends StatelessWidget {
   const new({required this.food});
   final DemoFood food;
@@ -303,6 +312,7 @@ class _FoodFooter extends StatelessWidget {
   );
 }
 
+/// Shows the static rating label from the local listing fixture.
 class _FoodRating extends StatelessWidget {
   const new({required this.rating});
   final String rating;

@@ -6,7 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// Restores the UI locale, registers font licenses, and starts the demo.
 ///
+/// Reads `pangankita.ui.locale` before creating [PanganKitaApp].
+///
 /// Indonesian is used for absent, unknown, or unreadable preferences.
+/// English and Simplified Chinese (`zh_Hans`) are restored when recognized.
 /// Cart contents and the selected example area are not restored.
 Future<void> main() async {
   final _ = WidgetsFlutterBinding.ensureInitialized();

@@ -34,7 +34,10 @@ const _priceSize = 22.0;
 
 /// Full-screen details for a selected offline listing example.
 class ProductDetailPage extends StatefulWidget {
-  /// Displays the same product data as its home card.
+  /// Displays the offline [food] fixture and a shared [cart].
+  ///
+  /// The cart belongs to the app session; this page neither owns nor
+  /// disposes it. Adding configured items changes only local preview data.
   const new({required this.food, required this.cart, super.key});
 
   /// Illustrative listing, not authoritative inventory or a live offer.
@@ -47,13 +50,23 @@ class ProductDetailPage extends StatefulWidget {
   State<ProductDetailPage> createState() => _ProductDetailPageState();
 }
 
+/// Owns the product preview's quantity, add-ons, and favorite state.
+///
+/// Cart mutations remain local to the app-session [DemoCart].
 class _ProductDetailPageState extends State<ProductDetailPage> {
   bool _favorite = false;
   int _quantity = 1;
   Set<DemoAddon> _addons = {};
 
+  /// Replaces page-local add-on choices with [addons].
+  ///
+  /// The selection is sent to [DemoCart.add] only on an add-to-cart action.
   void _selectAddons(Set<DemoAddon> addons) => setState(() => _addons = addons);
 
+  /// Adds the chosen quantity and add-ons to the app-session cart.
+  ///
+  /// If [DemoCart.add] rejects the combined line limit, a local notice
+  /// appears. Otherwise, the cart route opens; no inventory is reserved.
   void _addToCart() {
     final added = widget.cart.add(
       widget.food,
@@ -74,6 +87,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   void _decrease() => setState(() => _quantity--);
   void _increase() => setState(() => _quantity++);
 
+  /// Copies labeled example product details to the device clipboard.
+  ///
+  /// Shows confirmation only while this page remains mounted.
   Future<void> _copyProduct() async {
     await Clipboard.setData(
       ClipboardData(
@@ -123,6 +139,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   );
 }
 
+/// Provides navigation, sharing, and local favorite controls.
 class _DetailToolbar extends StatelessWidget {
   const new({
     required this.favorite,
@@ -167,6 +184,7 @@ final ButtonStyle _toolbarStyle = IconButton.styleFrom(
   ),
 );
 
+/// Displays the merchant's example product image.
 class _MerchantImage extends StatelessWidget {
   const new({required this.food});
 
@@ -189,6 +207,7 @@ class _MerchantImage extends StatelessWidget {
   );
 }
 
+/// Displays the reference rating without a live review query.
 class _MerchantRating extends StatelessWidget {
   const new({required this.food});
 
@@ -227,6 +246,7 @@ class _MerchantRating extends StatelessWidget {
   );
 }
 
+/// Displays sample review content, explicitly marked as illustrative.
 class _DemoReviewBody extends StatelessWidget {
   const new();
 
@@ -270,6 +290,7 @@ class _DemoReviewBody extends StatelessWidget {
   );
 }
 
+/// Shows the merchant identity and static rating for the product.
 class _MerchantSummary extends StatelessWidget {
   const new({required this.food});
   final DemoFood food;
@@ -309,6 +330,7 @@ class _MerchantSummary extends StatelessWidget {
   );
 }
 
+/// Shows the local example's price, stock label, and product details.
 class _ProductSummary extends StatelessWidget {
   const new({required this.food});
   final DemoFood food;
@@ -359,6 +381,7 @@ class _ProductSummary extends StatelessWidget {
   );
 }
 
+/// Renders the reference image with its layout and semantics.
 class _ProductPhoto extends StatelessWidget {
   const new({required this.food});
   final DemoFood food;
@@ -409,6 +432,7 @@ class _ProductPhoto extends StatelessWidget {
   );
 }
 
+/// Styles the listing's example savings label.
 class _SavingsPill extends StatelessWidget {
   const new({required this.food});
   final DemoFood food;
@@ -449,11 +473,15 @@ class _SavingsPill extends StatelessWidget {
   );
 }
 
+/// Displays local add-on choices and reports selected options.
 class _ProductAddons extends StatelessWidget {
   const new({required this.selected, required this.onChanged});
   final Set<DemoAddon> selected;
   final ValueChanged<Set<DemoAddon>> onChanged;
 
+  /// Reports a new add-on set after toggling [option] to [value].
+  ///
+  /// The caller owns the selection; this widget creates a replacement set.
   void _select(DemoAddon option, bool value) => onChanged(
     value
         ? {...selected, option}
@@ -504,6 +532,7 @@ class _ProductAddons extends StatelessWidget {
   );
 }
 
+/// Displays a preview of the review section, not submitted reviews.
 class _ProductReviews extends StatelessWidget {
   const new();
 
@@ -540,6 +569,7 @@ class _ProductReviews extends StatelessWidget {
   );
 }
 
+/// Reports user-requested quantity changes to the page state.
 class _QuantityPicker extends StatelessWidget {
   const new({
     required this.quantity,
@@ -585,6 +615,7 @@ class _QuantityPicker extends StatelessWidget {
   );
 }
 
+/// Shows the local add-to-cart action and price summary.
 class _CartAction extends StatelessWidget {
   const new({required this.onAdd});
   final VoidCallback onAdd;

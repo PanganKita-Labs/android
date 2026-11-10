@@ -20,7 +20,10 @@ const _qrPlaceholderSize = 166.0;
 
 /// Payment layout preview without a transaction, QR code, or order.
 class PaymentStatusPage extends StatelessWidget {
-  /// Reads the session cart without changing inventory or charging anyone.
+  /// Displays a nonfunctional payment status for [cart].
+  ///
+  /// The page observes the app-owned cart and does not dispose or clear it.
+  /// No invoice, payable QR code, transaction, or order is created.
   const new({required this.cart, super.key});
 
   /// App-owned preview cart.
@@ -62,6 +65,7 @@ class PaymentStatusPage extends StatelessWidget {
   );
 }
 
+/// Explains that QR codes, bills, and transactions are unavailable.
 class _PaymentHelpButton extends StatelessWidget {
   const new();
 
@@ -88,6 +92,7 @@ class _PaymentHelpButton extends StatelessWidget {
   );
 }
 
+/// Shows an unavailable payment-time label, not a live countdown.
 class _PaymentTimeNotice extends StatelessWidget {
   const new();
 
@@ -120,6 +125,7 @@ class _PaymentTimeNotice extends StatelessWidget {
   );
 }
 
+/// Formats the session cart subtotal for the payment preview.
 class _PaymentTotalRow extends StatelessWidget {
   const new({required this.cart});
 
@@ -141,6 +147,7 @@ class _PaymentTotalRow extends StatelessWidget {
   );
 }
 
+/// Shows the QRIS example logo without starting payment.
 class _PaymentMethodRow extends StatelessWidget {
   const new();
 
@@ -164,6 +171,7 @@ class _PaymentMethodRow extends StatelessWidget {
   );
 }
 
+/// Explains that payment-status details are illustrative.
 class _PaymentNotice extends StatelessWidget {
   const new();
 
@@ -206,6 +214,7 @@ class _PaymentNotice extends StatelessWidget {
   );
 }
 
+/// Groups fixture merchant and payment information.
 class _PaymentPreviewCard extends StatelessWidget {
   const new({required this.cart});
 
@@ -259,6 +268,7 @@ class _PaymentPreviewCard extends StatelessWidget {
   );
 }
 
+/// Displays example merchant identity from current cart lines.
 class _PaymentMerchant extends StatelessWidget {
   const new({required this.cart});
 
@@ -291,6 +301,7 @@ class _PaymentMerchant extends StatelessWidget {
   );
 }
 
+/// Shows a placeholder instead of a usable payment QR code.
 class _UnavailableQr extends StatelessWidget {
   const new();
 
@@ -317,6 +328,7 @@ class _UnavailableQr extends StatelessWidget {
   );
 }
 
+/// Displays one static step in the sample payment flow.
 class _PreviewStep extends StatelessWidget {
   const new({required this.number, required this.text});
 
@@ -337,6 +349,7 @@ class _PreviewStep extends StatelessWidget {
   );
 }
 
+/// Navigates among example outcomes without issuing a charge.
 class _PaymentActions extends StatelessWidget {
   const new();
 

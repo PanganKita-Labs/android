@@ -6,7 +6,8 @@ import 'package:pangankita/i18n/generated/i18n_presentation_lookup.g.dart';
 ///
 /// Returns [value] unchanged if no localization delegate is available
 /// or if the value has no matching generated translation.
-/// Do not use this function for identifiers or user-provided data.
+/// [context] supplies the active translation delegate; [value] should be a
+/// known presentation phrase, never an identifier or user-provided value.
 String translateDisplayText(BuildContext context, String value) =>
     translateI18nPresentation(
       Localizations.of<AppLocalizations>(context, AppLocalizations),
@@ -18,7 +19,12 @@ String translateDisplayText(BuildContext context, String value) =>
 /// Missing delegates and unrecognized display text retain [data].
 /// Do not translate identifiers, URLs, route names, or user input.
 class I18nText extends StatelessWidget {
-  /// Creates localized text, preserving the caller's rendering preferences.
+  /// Creates a localized rendering of [data] with the given text options.
+  ///
+  /// Only phrases recognized by the generated lookup are translated.
+  /// [locale] controls text shaping, not the active translation language;
+  /// the surrounding localization context selects the language.
+  /// Styling, layout, and accessibility options pass through to [Text].
   const new(
     this.data, {
     super.key,
