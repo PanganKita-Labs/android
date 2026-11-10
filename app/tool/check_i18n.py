@@ -127,7 +127,16 @@ class _SourceCheck:
 
 
 def _load_catalogs(root: Path, errors: list[str]) -> dict[str, dict[str, object]]:
-    """Read each configured locale and verify its declared language code."""
+    """Load the required ARB catalogs and report invalid locale metadata.
+
+    Args:
+        root: Flutter app directory containing the localization catalogs.
+        errors: Mutable list receiving path-specific parse and locale errors.
+
+    Returns:
+        Successfully loaded catalogs keyed by locale. Missing or invalid
+        files are omitted; callers must check whether every locale loaded.
+    """
     catalogs: dict[str, dict[str, object]] = {}
     for loc in LOCALES:
         path = root / "lib" / "i18n" / "arb" / f"app_{loc}.arb"
@@ -143,7 +152,16 @@ def _load_catalogs(root: Path, errors: list[str]) -> dict[str, dict[str, object]
 
 
 def _unchanged_terms(config: dict[str, object], errors: list[str]) -> dict[str, object]:
-    """Read the intentional untranslated-term exceptions."""
+    """Extract the configured exemptions for untranslated messages.
+
+    Args:
+        config: Parsed localization exception configuration.
+        errors: Mutable list receiving invalid configuration diagnostics.
+
+    Returns:
+        Configured per-locale exemptions, or an empty mapping if the
+        `unchanged_from_id` setting is not an object.
+    """
     allowed = config.get("unchanged_from_id", {})
     if not isinstance(allowed, dict):
         errors.append("exception file: unchanged_from_id must be an object")
@@ -245,7 +263,13 @@ def _check_one_catalog(check: _CatalogCheck, source_keys: set[str]) -> None:
 def _check_chinese_fallback(
     catalogs: dict[str, dict[str, object]], base_keys: set[str], errors: list[str]
 ) -> None:
-    """Keep zh fallback and zh_Hans content synchronized."""
+    """Report differences between the two Simplified Chinese catalogs.
+
+    Args:
+        catalogs: Loaded locale catalogs, including zh and zh_Hans.
+        base_keys: Indonesian message keys to compare across catalogs.
+        errors: Mutable list receiving per-key divergence diagnostics.
+    """
     for key in sorted(base_keys):
         if catalogs["zh"].get(key) != catalogs["zh_Hans"].get(key):
             errors.append(f"zh_Hans:{key}: differs from zh fallback; update both Chinese files")
@@ -254,7 +278,17 @@ def _check_chinese_fallback(
 def check_catalogs(
     root: Path, config: dict[str, object], errors: list[str]
 ) -> dict[str, dict[str, object]]:
-    """Validate all configured catalogs against Indonesian messages and metadata."""
+    """Check required locales against Indonesian keys and placeholders.
+
+    Args:
+        root: Flutter app directory containing the ARB catalogs.
+        config: Exception settings for intentionally unchanged translations.
+        errors: Mutable diagnostics list appended to during validation.
+
+    Returns:
+        Loaded catalogs, possibly incomplete when parsing fails. Missing
+        locales prevent full cross-locale comparison but remain reported.
+    """
     catalogs = _load_catalogs(root, errors)
     if len(catalogs) != len(LOCALES):
         return catalogs
@@ -384,7 +418,17 @@ def _check_presentation_entry(
 def _read_presentation_mapping(
     root: Path, catalogs: dict[str, dict[str, object]], errors: list[str]
 ) -> dict[str, str] | None:
-    """Verify the generated lookup and return its display-label mapping."""
+    """Read and validate the generated presentation-to-getter lookup.
+
+    Args:
+        root: Flutter app directory containing the generated lookup.
+        catalogs: Loaded catalogs used for Indonesian getter verification.
+        errors: Mutable list receiving malformed or missing lookup reports.
+
+    Returns:
+        Display-label to getter mapping, or None when the lookup cannot be
+        read. Invalid entries are reported but do not discard the mapping.
+    """
     lookup = root / "lib/i18n/generated/i18n_presentation_lookup.g.dart"
     try:
         lookup_text = lookup.read_text(encoding="utf-8")
@@ -486,7 +530,18 @@ def check_source(
     root: Path, catalogs: dict[str, dict[str, object]],
     config: dict[str, object], errors: list[str]
 ) -> tuple[int, int]:
-    """Validate source display literals against the generated presentation lookup."""
+    """Audit static display literals in non-generated Dart sources.
+
+    Args:
+        root: Flutter app directory containing the source tree.
+        catalogs: Loaded localization catalogs used to resolve getters.
+        config: Exception settings for approved untranslated literals.
+        errors: Mutable diagnostics list for uncovered or stale literals.
+
+    Returns:
+        Count of inspected literals and count of used source exceptions.
+        Returns (0, 0) if the generated lookup cannot be read.
+    """
     mapping = _read_presentation_mapping(root, catalogs, errors)
     if mapping is None:
         return 0, 0

@@ -49,7 +49,14 @@ def git_text_files() -> list[Path]:
 
 
 def utf8_sequence_length(first_byte: int) -> int:
-    """Return the expected UTF-8 sequence length for a valid lead byte."""
+    """Return UTF-8 sequence width for a valid lead byte.
+
+    Args:
+        first_byte: Candidate lead byte, represented as an integer.
+
+    Returns:
+        Two, three, or four for valid multibyte leaders; zero otherwise.
+    """
     if 0xC2 <= first_byte <= 0xDF:
         return 2
     if 0xE0 <= first_byte <= 0xEF:
@@ -64,7 +71,17 @@ def repair_candidate(
     index: int,
     legacy_encoding: str,
 ) -> tuple[str, str] | None:
-    """Return a likely mojibake segment and its repaired form, if one exists."""
+    """Attempt a reversible repair at a source-text position.
+
+    Args:
+        text: Decoded text being scanned without modification.
+        index: Index of the candidate legacy-decoded UTF-8 lead byte.
+        legacy_encoding: Candidate single-byte legacy codec name.
+
+    Returns:
+        Suspected damaged segment and UTF-8 repair, or None if byte
+        reconstruction fails or leaves the original segment unchanged.
+    """
     try:
         lead_bytes = text[index].encode(legacy_encoding)
     except UnicodeEncodeError:
@@ -92,7 +109,14 @@ def repair_candidate(
 
 
 def find_mojibake(text: str) -> tuple[str, str] | None:
-    """Find the first reversible UTF-8-as-legacy-encoding sequence."""
+    """Find the first candidate that can be reconstructed as UTF-8.
+
+    Args:
+        text: Decoded source text to inspect without changing it.
+
+    Returns:
+        Original and repaired segment, or None when no candidate exists.
+    """
     for index in range(len(text)):
         for encoding in LEGACY_ENCODINGS:
             candidate = repair_candidate(text, index, encoding)
