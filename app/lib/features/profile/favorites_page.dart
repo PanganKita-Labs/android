@@ -150,7 +150,7 @@ class _FavoritesTabs extends StatelessWidget {
         ),
       ),
     ],
-  ),
+  );
 }
 
 class _FavoritesDisclosure extends StatelessWidget {
@@ -174,7 +174,7 @@ class _FavoritesDisclosure extends StatelessWidget {
         ),
       ],
     ),
-  ),
+  );
 }
 
 class _TabButton extends StatelessWidget {
