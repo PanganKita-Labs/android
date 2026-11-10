@@ -210,7 +210,11 @@ class _ResultHeading extends StatelessWidget {
 }
 
 class _SearchTitle extends StatelessWidget {
-  const new({required this.food, required this.favorite, required this.onFavorite});
+  const new({
+    required this.food,
+    required this.favorite,
+    required this.onFavorite,
+  });
 
   final DemoFood food;
   final bool favorite;
@@ -341,10 +345,8 @@ class _FilterError extends StatelessWidget {
   final String error;
 
   @override
-  Widget build(BuildContext context) => I18nText(
-    error,
-    style: const TextStyle(color: PanganKitaColors.danger),
-  );
+  Widget build(BuildContext context) =>
+      I18nText(error, style: const TextStyle(color: PanganKitaColors.danger));
 }
 
 class _FilterApply extends StatelessWidget {
@@ -791,8 +793,7 @@ class _SearchFiltersState extends State<_SearchFilters> {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const I18nText('Status buka belum tersedia pada data contoh.'),
-          if (_error case final String error)
-            _FilterError(error: error),
+          if (_error case final String error) _FilterError(error: error),
           const SizedBox(height: 16),
           _FilterApply(onApply: _apply),
         ],

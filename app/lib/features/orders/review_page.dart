@@ -236,9 +236,7 @@ class _ReviewDisplayName extends StatelessWidget {
     value: value,
     onChanged: onChanged,
     title: const I18nText('Tampilkan nama saya'),
-    subtitle: const I18nText(
-      'Pilihan ini hanya contoh dan tidak disimpan.',
-    ),
+    subtitle: const I18nText('Pilihan ini hanya contoh dan tidak disimpan.'),
     controlAffinity: ListTileControlAffinity.leading,
     contentPadding: EdgeInsets.zero,
   );

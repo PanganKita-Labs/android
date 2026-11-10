@@ -252,10 +252,7 @@ class _DemoReviewBody extends StatelessWidget {
           ),
           const I18nText(
             '4.8',
-            style: TextStyle(
-              fontSize: 11,
-              color: PanganKitaColors.brandAccent,
-            ),
+            style: TextStyle(fontSize: 11, color: PanganKitaColors.brandAccent),
           ),
         ],
       ),
