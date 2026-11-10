@@ -187,11 +187,7 @@ class _ProfileNavigation extends StatelessWidget {
         'Favorit Saya',
         () => Navigator.pushNamed(context, AppRoutes.favorites).ignore(),
       ),
-      _ProfileItem(
-        Icons.location_on_outlined,
-        'Lokasi Saya',
-        onChooseLocation,
-      ),
+      _ProfileItem(Icons.location_on_outlined, 'Lokasi Saya', onChooseLocation),
       _ProfileItem(
         Icons.settings_outlined,
         'Pengaturan',

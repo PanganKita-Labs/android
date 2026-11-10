@@ -104,8 +104,7 @@ class _EditProfileHeader extends StatelessWidget {
       const SizedBox(width: 8),
       I18nText(
         'Edit Profil',
-        style: Theme.of(context).textTheme.headlineLarge
-            ?.copyWith(color: _ink),
+        style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: _ink),
       ),
     ],
   );
@@ -162,10 +161,7 @@ class _EditSecurityLink extends StatelessWidget {
     color: Colors.white,
     margin: EdgeInsets.zero,
     child: ListTile(
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 10,
-      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       leading: const Icon(Icons.lock_outline, color: _ink),
       title: I18nText(
         'Ubah Password',
