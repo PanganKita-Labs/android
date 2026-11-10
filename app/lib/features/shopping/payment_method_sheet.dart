@@ -11,11 +11,13 @@ Future<void> showPaymentMethodSheet(BuildContext context) =>
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      builder: (context) => const _PaymentMethodContent(),
+      builder: (context) => const PaymentMethodSheet(),
     );
 
-class _PaymentMethodContent extends StatelessWidget {
-  const new();
+/// QRIS-only preview content displayed within the payment method modal.
+class PaymentMethodSheet extends StatelessWidget {
+  /// Creates payment selection content without issuing a transaction.
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) => SafeArea(
