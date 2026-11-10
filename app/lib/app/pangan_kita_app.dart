@@ -116,9 +116,8 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
       onLocationChanged: (area) => _selectedArea.value = area,
     ),
     AppRoutes.editProfile: (context) => const EditProfilePage(),
-    AppRoutes.settings: (context) => SettingsPage(
-      onLocaleChanged: (locale) => _setLocale(locale).ignore(),
-    ),
+    AppRoutes.settings: (context) =>
+        SettingsPage(onLocaleChanged: (locale) => _setLocale(locale).ignore()),
     AppRoutes.terms: (context) => const TermsPage(),
     AppRoutes.privacy: (context) => const SettingsDocumentPage.privacy(),
     AppRoutes.favorites: (context) => const FavoritesPage(),
@@ -129,8 +128,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
           _selectedArea.value,
     ),
     AppRoutes.search: (context) => SearchPage(
-      initialQuery:
-          ModalRoute.of(context)?.settings.arguments as String? ?? '',
+      initialQuery: ModalRoute.of(context)?.settings.arguments as String? ?? '',
     ),
   };
 
@@ -164,9 +162,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
               previewMessage: example.message,
             )
           : const Scaffold(
-              body: Center(
-                child: I18nText('Contoh chat toko tidak tersedia.'),
-              ),
+              body: Center(child: I18nText('Contoh chat toko tidak tersedia.')),
             );
     },
     AppRoutes.notifications: (context) => const NotificationsPage(),
@@ -178,8 +174,7 @@ class _PanganKitaAppState extends State<PanganKitaApp> {
     AppRoutes.paymentStatus: (context) => PaymentStatusPage(cart: _cart),
     AppRoutes.paymentSuccessPreview: (context) =>
         PaymentSuccessPage(cart: _cart),
-    AppRoutes.paymentFailedPreview: (context) =>
-        PaymentFailedPage(cart: _cart),
+    AppRoutes.paymentFailedPreview: (context) => PaymentFailedPage(cart: _cart),
   };
 
   Map<String, WidgetBuilder> get _followupRoutes => {
