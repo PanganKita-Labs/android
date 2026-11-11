@@ -29,11 +29,39 @@ android {
         versionName = flutter.versionName
     }
 
+    // Release signing is opt-in and reads credentials only from the
+    // ephemeral GitHub Actions environment; no signing secrets enter Git.
+    // Never fall back to debug signing for a distributable APK.
+    val releaseKeystorePath = System.getenv("ANDROID_RELEASE_KEYSTORE_PATH")
+    val releaseStorePassword = System.getenv("ANDROID_RELEASE_STORE_PASSWORD")
+    val releaseKeyAlias = System.getenv("ANDROID_RELEASE_KEY_ALIAS")
+    val releaseKeyPassword = System.getenv("ANDROID_RELEASE_KEY_PASSWORD")
+    val hasReleaseSigning = listOf(
+        releaseKeystorePath,
+        releaseStorePassword,
+        releaseKeyAlias,
+        releaseKeyPassword,
+    ).all { !it.isNullOrBlank() }
+
+    signingConfigs {
+        if (hasReleaseSigning) {
+            create("release") {
+                storeFile = file(releaseKeystorePath!!)
+                storePassword = releaseStorePassword
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            if (hasReleaseSigning) {
+                signingConfig = signingConfigs.getByName("release")
+            }
+            // Without signing secrets this build type remains unsigned.
+            // The manual beta workflow requires valid secrets and verifies
+            // the signing certificate before uploading any release asset.
         }
     }
 }

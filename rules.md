@@ -78,6 +78,8 @@ Before creating or drafting a PR, open `.github/PULL_REQUEST_TEMPLATE.md` and re
 - Product and domain integrity; Mobile quality; Security and privacy.
 - Checklist and Related issue.
 
+Disclose whether a PR used no AI, AI assistance, or was mostly/fully agent-generated, and provide real human review and verification evidence as required by [CONTRIBUTING.md](CONTRIBUTING.md#ai-assisted-contributions-and-human-accountability). AI is welcome when a responsible human understands the changes and communicates with maintainers. Maintainers may close unattended, agent-only submissions with no meaningful human participation without a substantive code review; do not mistake generated descriptions or automated responses for a human review.
+
 Use a focused **Conventional Commit-compatible PR title**, especially when squash merges are used. Mark irrelevant checklist items as not applicable or explain them; never tick checks that did not pass. Clearly disclose limitations, testing gaps, mock-only behavior, compatibility concerns, and any outstanding failures. Do not create, request reviews on, or merge a PR without user approval. Never merge with failed required CI.
 
 ## 6. Flutter implementation and screenshot fidelity

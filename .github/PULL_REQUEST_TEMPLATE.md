@@ -49,6 +49,26 @@ Focus on why the change is needed, not only what files changed.
 - [ ] Documentation
 - [ ] Research
 
+## AI contribution disclosure
+
+<!--
+Select exactly one. Responsible AI use is welcome; human review and
+communication are required for AI-assisted and agent-generated PRs.
+See CONTRIBUTING.md for the policy.
+-->
+
+- [ ] No generative AI used
+- [ ] AI-assisted contribution, reviewed and verified by a human
+- [ ] Mostly or fully agent-generated contribution, reviewed and verified by a human
+
+<!-- If AI was used: tool(s) and affected parts; what you personally reviewed;
+     tests/checks actually performed; remaining uncertainties. Do not disclose
+     private transcripts, secrets, or personal information. -->
+
+**AI tools and scope (if applicable):**
+
+**Human review, validation, and outstanding limitations:**
+
 ## Verification
 
 <!--
@@ -104,6 +124,7 @@ Remove this section when it does not apply.
 - [ ] Logs do not expose tokens, precise location, personal data, or other sensitive information
 - [ ] New data collection is necessary and documented
 - [ ] New dependencies were reviewed before being introduced
+- [ ] Third-party assets have verified source, redistribution permission, and required attribution, or no third-party assets were added
 
 ## Checklist
 
@@ -121,7 +142,7 @@ Remove this section when it does not apply.
 - [ ] I considered security and privacy
 - [ ] I considered food-safety implications where relevant
 - [ ] I did not introduce undocumented assumptions as product requirements
-- [ ] AI-assisted changes were manually reviewed and verified
+- [ ] I disclosed AI involvement accurately and, if AI was used, personally reviewed and verified the changes
 
 ## Related issue
 
