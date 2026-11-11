@@ -108,7 +108,7 @@ Do not invent backend setup instructions.
   screenshots, record the creator, source, license or explicit permission,
   required credit, and rights to distribute them in Git and compiled APKs.
   Unknown provenance is not permission: replace or omit unverified material.
-  Consult the [beta asset checklist](docs/BETA_RELEASE.md#asset-provenance-and-redistribution).
+  Consult the [release asset checklist](docs/RELEASING.md#asset-provenance-and-redistribution).
 
 ## Make a focused change
 
@@ -191,6 +191,9 @@ open a new, responsibly reviewed PR with human context and evidence.
   reservations, food-safety representations, and licensing when applicable.
 - For new or changed third-party assets, supply verifiable source and permission
   evidence in the PR; don't rely on a prototype or non-commercial disclaimer.
+- When a change is user-visible or release-relevant, describe it in the PR;
+  maintainers record noteworthy changes in [CHANGELOG.md](CHANGELOG.md) when
+  preparing a version, without marking unreleased work as published.
 - Keep the PR reviewable and wait for required GitHub Actions and maintainer
   approval before merging.
 - Disclose AI involvement and human verification as described above, whether

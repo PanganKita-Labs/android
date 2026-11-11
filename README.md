@@ -12,7 +12,7 @@
 
 > **Current status: Flutter demonstration.** PanganKita is a non-commercial educational and research prototype with an interactive mobile UI backed by local example data and temporary in-memory state. It does **not** authenticate real accounts, reserve inventory, process payments, send messages, or confirm pickups. Screenshots illustrate the prototype, not a live marketplace.
 >
-> **Asset rights are under review.** Some illustrative food photographs may have originated from third-party menus. Their appearance here does not establish permission to copy or redistribute them, ownership, sponsorship, or endorsement. See the [asset review and release gate](docs/BETA_RELEASE.md#asset-provenance-and-redistribution).
+> **Asset rights are under review.** Some illustrative food photographs may have originated from third-party menus. Their appearance here does not establish permission to copy or redistribute them, ownership, sponsorship, or endorsement. See the [asset review and release gate](docs/RELEASING.md#asset-provenance-and-redistribution).
 
 ## Why PanganKita?
 
@@ -169,6 +169,8 @@ The repository also runs automated formatting, analysis, test, integrity, and An
 | Resource | Purpose |
 | --- | --- |
 | [Flutter app guide](app/README.md) | Setup, local commands, debugging and test workflow |
+| [Changelog](CHANGELOG.md) | Version history and upcoming changes; not a record of published builds until tagged |
+| [Release process](docs/RELEASING.md) | Maintainer-only release gates, signing, asset rights and distribution checks |
 | [Screenshot library](docs/screenshots/README.md) | All captured example screens, grouped by feature |
 | [Product requirements](PRD.md) | Product scope, constraints, future hypotheses and validation goals |
 | [Architecture director](docs/ARCHITECTURE.md) | Engineering principles and dependency boundaries |
@@ -188,4 +190,4 @@ Human contributors should start with the [contributor guide](CONTRIBUTING.md). A
 
 **Code and attribution:** Contributors' source code that they are authorized to license is provided under [Apache License 2.0](LICENSE). Preserve the required notices, including the [project attribution](NOTICE) and maintainer credit to [Yoruxyv](https://github.com/Yoruxyv), when redistributing licensed material. Apache-2.0 permits commercial reuse of licensed code; the project's non-commercial educational purpose does not limit that license grant. Contributor copyright and licensing authority still require confirmation before this preparation PR is merged.
 
-**Assets:** The code license does not automatically grant rights to third-party food/menu photographs, fonts, logos, trademarks, or screenshots containing those works. Some prototype image sources and permissions have not been established. Unverified assets must be removed, replaced, or appropriately licensed before public redistribution, including distribution in an APK. See the [beta asset review checklist](docs/BETA_RELEASE.md#asset-provenance-and-redistribution) and [contribution standards](CONTRIBUTING.md#code-and-documentation-standards).
+**Assets:** The code license does not automatically grant rights to third-party food/menu photographs, fonts, logos, trademarks, or screenshots containing those works. Some prototype image sources and permissions have not been established. Unverified assets must be removed, replaced, or appropriately licensed before public redistribution, including distribution in an APK. See the [release asset review checklist](docs/RELEASING.md#asset-provenance-and-redistribution) and [contribution standards](CONTRIBUTING.md#code-and-documentation-standards).
