@@ -18,11 +18,11 @@ that implemented boundary.
   using an AI coding agent. Follow applicable scoped `AGENTS.md` files; do not
   treat agent instructions as a substitute for human review.
 
-**Licensing:** The repository currently has no repository-wide `LICENSE`.
-Public visibility does not grant permission to redistribute its content, and
-individual fonts and assets have separate terms. Maintainers should establish
-an approved project license before promising general reuse rights. Do not add
-assets or code you lack rights to contribute.
+**Licensing:** Contributors' licensable source code is available under
+[Apache License 2.0](LICENSE) and carries project attribution in [NOTICE](NOTICE).
+Preserve the legal notices when redistributing licensed code. Third-party
+assets and trademarks may have separate terms; check their permissions before
+including them in a distribution.
 
 ## Local setup (Windows / PowerShell)
 

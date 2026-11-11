@@ -180,4 +180,4 @@ The repository also runs automated formatting, analysis, test, integrity, and An
 
 Human contributors should start with the [contributor guide](CONTRIBUTING.md). AI-assisted work also follows [root agent instructions](AGENTS.md) and applicable scoped `AGENTS.md` files. Keep product claims evidence-based, preserve the existing brand identity, use isolated branches for focused changes, and document whether new behavior is **local UI**, **mock/demo**, or **actually connected**.
 
-**Project and asset licensing:** No repository-wide `LICENSE` file is currently declared. Do not assume that public visibility grants blanket reuse rights. Fonts, images and other third-party assets may have separate terms; check their provenance and permissions before redistributing them.
+**Project and asset licensing:** The contributors' licensable source code is available under [Apache License 2.0](LICENSE), with attribution in [NOTICE](NOTICE). Preserve the applicable notices on redistribution. The license does not grant rights in other parties' fonts, images, logos, trademarks or other assets; review their separate terms before distributing a binary.
