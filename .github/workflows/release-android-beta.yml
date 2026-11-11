@@ -1,0 +1,198 @@
+name: Android beta release (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Matching beta tag from app/pubspec.yaml, e.g. v0.1.0-beta.1'
+        required: true
+        default: 'v0.1.0-beta.1'
+        type: string
+
+concurrency:
+  group: android-beta-release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-draft:
+    name: Build signed Android beta and prepare draft
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout approved main branch
+        uses: actions/checkout@v7
+
+      - name: Validate release identity and maintainer approval
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+          BETA_APPROVED: ${{ vars.PANGANKITA_BETA_RELEASE_APPROVED }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
+            echo "::error::Beta releases must originate from main."
+            exit 1
+          fi
+
+          if [[ "$BETA_APPROVED" != "true" ]]; then
+            echo "::error::Review signing, copyright and all redistributed assets, then set PANGANKITA_BETA_RELEASE_APPROVED=true in repository Actions variables."
+            exit 1
+          fi
+
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+-beta\.[1-9][0-9]*$ ]]; then
+            echo "::error::Only semver beta prerelease tags are accepted."
+            exit 1
+          fi
+
+          version="$(awk '/^version:/ { print $2 }' app/pubspec.yaml)"
+          expected="v${version%%+*}"
+          build_number="${version##*+}"
+          if [[ "$RELEASE_TAG" != "$expected" || ! "$build_number" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::Tag must match the pubspec version, with a positive Android build number."
+            exit 1
+          fi
+
+          if grep -Eq 'applicationId[[:space:]]*=[[:space:]]*"com\.example\.' app/android/app/build.gradle.kts; then
+            echo "::error::Replace the template Android application ID before making a beta release."
+            exit 1
+          fi
+
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "::error::A release already exists for this tag."
+            exit 1
+          fi
+
+          tag_ref="$(git ls-remote --tags origin "refs/tags/$RELEASE_TAG")"
+          if [[ -n "$tag_ref" ]]; then
+            echo "::error::Tag already exists. Never reuse a beta tag."
+            exit 1
+          fi
+
+          notes_file="docs/releases/${RELEASE_TAG#v}.md"
+          if [[ ! -s "$notes_file" || ! -s LICENSE || ! -s NOTICE ]]; then
+            echo "::error::Release notes and the Apache LICENSE/NOTICE must exist."
+            exit 1
+          fi
+
+          echo "BETA_TAG=$RELEASE_TAG" >> "$GITHUB_ENV"
+          echo "BETA_BUILD_NUMBER=$build_number" >> "$GITHUB_ENV"
+          echo "BETA_NOTES=$notes_file" >> "$GITHUB_ENV"
+
+      - name: Set up Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+          cache-dependency-path: app/android/**/*.gradle*
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.4
+          cache: true
+
+      - name: Install locked dependencies
+        working-directory: app
+        run: flutter pub get --enforce-lockfile
+
+      - name: Download hash-checked licensed Satoshi font
+        run: python3 .github/scripts/fetch_satoshi.py
+
+      - name: Require and prepare dedicated release signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_RELEASE_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_RELEASE_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          for name in KEYSTORE_BASE64 STORE_PASSWORD KEY_ALIAS KEY_PASSWORD; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing release signing secret: $name"
+              exit 1
+            fi
+          done
+
+          key_path="$RUNNER_TEMP/pangankita-beta-signing.jks"
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$key_path"
+          chmod 600 "$key_path"
+          if [[ ! -s "$key_path" ]]; then
+            echo "::error::Release keystore decode produced an empty file."
+            exit 1
+          fi
+
+          echo "ANDROID_RELEASE_KEYSTORE_PATH=$key_path" >> "$GITHUB_ENV"
+          echo "ANDROID_RELEASE_STORE_PASSWORD=$STORE_PASSWORD" >> "$GITHUB_ENV"
+          echo "ANDROID_RELEASE_KEY_ALIAS=$KEY_ALIAS" >> "$GITHUB_ENV"
+          echo "ANDROID_RELEASE_KEY_PASSWORD=$KEY_PASSWORD" >> "$GITHUB_ENV"
+
+      - name: Build release APK with controlled version and signing
+        working-directory: app
+        run: |
+          set -euo pipefail
+          flutter build apk --release \
+            --build-name "${BETA_TAG#v}" \
+            --build-number "$BETA_BUILD_NUMBER"
+
+      - name: Verify APK signature, prepare hash and legal notices
+        run: |
+          set -euo pipefail
+          apk="app/build/app/outputs/flutter-apk/app-release.apk"
+          if [[ ! -s "$apk" ]]; then
+            echo "::error::No non-empty release APK was generated."
+            exit 1
+          fi
+
+          sdk_dir="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
+          if [[ -z "$sdk_dir" ]]; then
+            echo "::error::Android SDK location is unavailable."
+            exit 1
+          fi
+
+          apksigner="$(find "$sdk_dir/build-tools" -name apksigner -type f | sort -V | tail -n 1)"
+          if [[ -z "$apksigner" ]]; then
+            echo "::error::Could not locate Android apksigner."
+            exit 1
+          fi
+          cert_info="$("$apksigner" verify --verbose --print-certs "$apk")"
+          printf '%s\n' "$cert_info"
+          if grep -q 'CN=Android Debug' <<< "$cert_info"; then
+            echo "::error::Release APK is signed with an Android debug key."
+            exit 1
+          fi
+
+          mkdir -p "$RUNNER_TEMP/beta-release"
+          cd "$RUNNER_TEMP/beta-release"
+          cp "$GITHUB_WORKSPACE/$apk" "PanganKita-$BETA_TAG.apk"
+          cp "$GITHUB_WORKSPACE/LICENSE" "LICENSE"
+          cp "$GITHUB_WORKSPACE/NOTICE" "NOTICE"
+          sha256sum "PanganKita-$BETA_TAG.apk" > SHA256SUMS
+
+      - name: Create a draft GitHub prerelease for maintainer inspection
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create "$BETA_TAG" \
+            "$RUNNER_TEMP/beta-release/PanganKita-$BETA_TAG.apk" \
+            "$RUNNER_TEMP/beta-release/SHA256SUMS" \
+            "$RUNNER_TEMP/beta-release/LICENSE" \
+            "$RUNNER_TEMP/beta-release/NOTICE" \
+            --target "$GITHUB_SHA" \
+            --title "PanganKita $BETA_TAG (Android testing)" \
+            --notes-file "$BETA_NOTES" \
+            --draft --prerelease --latest=false
+
+      - name: Destroy ephemeral signing material
+        if: always()
+        run: rm -f "$RUNNER_TEMP/pangankita-beta-signing.jks"
