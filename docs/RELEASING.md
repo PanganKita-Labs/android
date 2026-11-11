@@ -18,9 +18,10 @@ educational and research prototype, not a live food-ordering service.
    [NOTICE](../NOTICE) preserves applicable contributor and maintainer credit.
 2. **Assets:** Complete the [asset-provenance review](#asset-provenance-and-redistribution).
    Do not distribute a release APK with material lacking verified rights.
-3. **Android identity:** Replace the template `com.example.pangankita` with a
-   unique, lasting application ID before the first public APK. Changing it
-   later makes Android treat the result as another application.
+3. **Android identity:** The chosen application ID is
+   `com.pangankitalabs.pangankita`. Confirm it does not conflict with an
+   existing distribution, and keep it unchanged after the first public APK.
+   Changing it later makes Android treat the result as another application.
 4. **Signing:** Create and securely back up a dedicated release keystore,
    configure the required secrets, and record the approved signing
    certificate SHA-256 fingerprint. Never publish with a debug key.

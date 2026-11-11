@@ -58,8 +58,8 @@ jobs:
             exit 1
           fi
 
-          if grep -Eq 'applicationId[[:space:]]*=[[:space:]]*"com\.example\.' app/android/app/build.gradle.kts; then
-            echo "::error::Replace the template Android application ID before making a beta release."
+          if ! grep -Eq '^[[:space:]]*applicationId[[:space:]]*=[[:space:]]*"com\.pangankitalabs\.pangankita"[[:space:]]*$' app/android/app/build.gradle.kts; then
+            echo "::error::Android application ID must be com.pangankitalabs.pangankita for this release."
             exit 1
           fi
 

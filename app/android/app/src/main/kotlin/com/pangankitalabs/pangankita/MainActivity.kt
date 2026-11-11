@@ -1,4 +1,4 @@
-package com.example.pangankita
+package com.pangankitalabs.pangankita
 
 import io.flutter.embedding.android.FlutterActivity
 
