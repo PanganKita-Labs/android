@@ -4,9 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Matching beta tag from app/pubspec.yaml, e.g. v0.1.0-beta.1'
+        description: 'Beta tag matching the version in app/pubspec.yaml'
         required: true
-        default: 'v0.1.0-beta.1'
         type: string
 
 concurrency:
