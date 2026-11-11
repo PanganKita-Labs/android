@@ -5,6 +5,39 @@ Thank you for helping improve PanganKita. This repository currently contains a
 merchant, payment, or food-safety service. Keep changes and descriptions within
 that implemented boundary.
 
+## Ways to contribute
+
+Contributions do **not** need to be code. We welcome fixes to the README and
+other documentation, clearer setup instructions, reproducible bug reports,
+accessibility reviews, UI feedback, translation improvements, meaningful tests,
+and evidence-backed research. Small, well-explained improvements are valuable.
+Use an issue for discussion or a focused pull request for an actionable change;
+do not claim a feature is implemented when you are only proposing it.
+
+## International collaboration and localization
+
+PanganKita starts with Indonesia's surplus-food and pickup context, but the
+idea of reducing food waste is not limited to one country. We welcome people
+who want to study, fork, translate, or adapt the project for their communities,
+subject to [Apache-2.0](LICENSE) and applicable third-party asset rights.
+International collaborators do not need to be based in Indonesia.
+
+The Flutter demonstration currently includes Indonesian (default), English,
+and Simplified Chinese, using the ARB catalogs in `app/lib/i18n/arb/`. New
+languages and corrections to existing translations are especially welcome.
+When changing localization, keep placeholders and key meaning consistent,
+review accessibility text and food-related terminology with a fluent speaker
+where possible, and update generated-localization configuration and the
+existing `i18n consistency` checks if supported languages or catalogs change.
+Do not hand-edit generated Dart files. Validate source coverage using
+`python3 app/tool/check_i18n.py` and follow the relevant
+[app instructions](app/AGENTS.md).
+
+An additional language does **not** imply that merchant operations, payments,
+food eligibility, location data, legal compliance, or country-specific
+formatting are ready in that country. Present any regional behavior as a
+proposal until it is implemented and tested; do not invent regulatory claims.
+
 ## Before contributing
 
 - Read [the project overview](README.md), [product requirements](PRD.md), and
@@ -122,6 +155,31 @@ CI results are evidence only for the exact commit checked. Do not claim a
 command passed if it was not executed, and do not weaken quality gates to
 make a pull request green.
 
+## AI-assisted contributions and human accountability
+
+We welcome responsible use of AI tools, including coding assistants and
+autonomous agents. Using AI does not disqualify a contribution, but the
+submitter remains accountable for its content, correctness, security,
+licensing, and maintainability.
+
+Every PR must disclose its AI involvement in the
+[PR template](.github/PULL_REQUEST_TEMPLATE.md): **none**, **AI-assisted**,
+or **mostly/fully agent-generated**. When AI was used, briefly identify the
+tool(s), affected areas, what the human reviewed, and verification actually
+performed. Do not paste private prompts, credentials, or chat transcripts.
+
+A responsible human must understand the change, provide a meaningful rationale,
+review the complete diff, report real validation results and limitations, and
+participate in maintainer discussion. A generated PR description, automated
+comments, passing CI, or an unattended agent is not a substitute for human
+communication or review. Reviewers may ask for clarification or changes.
+
+Maintainers **may close without substantive code review** a PR submitted by
+an unattended agent or otherwise showing **no meaningful human participation**.
+This is a case-by-case engagement standard, not an automatic ban on AI-written
+code or a claim that maintainers can reliably detect AI use. Contributors can
+open a new, responsibly reviewed PR with human context and evidence.
+
 ## Pull requests and review
 
 - Use the [actual PR template](.github/PULL_REQUEST_TEMPLATE.md).
@@ -135,6 +193,8 @@ make a pull request green.
   evidence in the PR; don't rely on a prototype or non-commercial disclaimer.
 - Keep the PR reviewable and wait for required GitHub Actions and maintainer
   approval before merging.
+- Disclose AI involvement and human verification as described above, whether
+  the change is code, documentation, translation, or research.
 - The [repository rules](rules.md) and scoped agent instructions may impose
   additional requirements on AI-assisted contributions.
 

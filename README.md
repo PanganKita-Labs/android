@@ -18,7 +18,7 @@
 
 Eligible unsold food often has a short window in which it can still be offered to nearby customers. PanganKita explores a focused flow: a business offers an eligible surplus-food listing, a nearby customer discovers it, and a pickup can be arranged before the listing deadline.
 
-The longer-term product direction is **local discovery → reservation → pickup → measurable outcome**. That end-to-end transaction is a product goal, **not a feature implemented in this repository today**. The project is intended to be validated locally before claiming operational or environmental impact.
+The longer-term product direction is **local discovery → reservation → pickup → measurable outcome**. That end-to-end transaction is a product goal, **not a feature implemented in this repository today**. The project is intended to be validated locally before claiming operational or environmental impact. Although the initial research and prototype focus on Indonesia, we welcome international collaboration and locally appropriate adaptations of this food-waste reduction idea.
 
 ## App preview
 
@@ -179,6 +179,8 @@ The repository also runs automated formatting, analysis, test, integrity, and An
 | [Code of conduct](CODE_OF_CONDUCT.md) | Community expectations and reporting guidance |
 | [AI contribution guardrails](rules.md) | Agent-specific branch, review, and authorization requirements |
 | [Pull request template](.github/PULL_REQUEST_TEMPLATE.md) | Required verification and evidence in contributions |
+
+**Contributions go beyond code:** documentation, README improvements, accessibility feedback, testing, research, and translations are welcome. The app already supports Indonesian, English, and Simplified Chinese; additional languages and responsible adaptations for other countries are encouraged. See [ways to contribute](CONTRIBUTING.md#ways-to-contribute), [international localization guidance](CONTRIBUTING.md#international-collaboration-and-localization), and the [AI disclosure policy](CONTRIBUTING.md#ai-assisted-contributions-and-human-accountability).
 
 Human contributors should start with the [contributor guide](CONTRIBUTING.md). AI-assisted work also follows [root agent instructions](AGENTS.md) and applicable scoped `AGENTS.md` files. Keep product claims evidence-based, preserve the existing brand identity, use isolated branches for focused changes, and document whether new behavior is **local UI**, **mock/demo**, or **actually connected**.
 
