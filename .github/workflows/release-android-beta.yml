@@ -81,9 +81,11 @@ jobs:
             exit 1
           fi
 
-          echo "BETA_TAG=$RELEASE_TAG" >> "$GITHUB_ENV"
-          echo "BETA_BUILD_NUMBER=$build_number" >> "$GITHUB_ENV"
-          echo "BETA_NOTES=$notes_file" >> "$GITHUB_ENV"
+          {
+            echo "BETA_TAG=$RELEASE_TAG"
+            echo "BETA_BUILD_NUMBER=$build_number"
+            echo "BETA_NOTES=$notes_file"
+          } >> "$GITHUB_ENV"
 
       - name: Set up Java
         uses: actions/setup-java@v6
@@ -131,10 +133,12 @@ jobs:
             exit 1
           fi
 
-          echo "ANDROID_RELEASE_KEYSTORE_PATH=$key_path" >> "$GITHUB_ENV"
-          echo "ANDROID_RELEASE_STORE_PASSWORD=$STORE_PASSWORD" >> "$GITHUB_ENV"
-          echo "ANDROID_RELEASE_KEY_ALIAS=$KEY_ALIAS" >> "$GITHUB_ENV"
-          echo "ANDROID_RELEASE_KEY_PASSWORD=$KEY_PASSWORD" >> "$GITHUB_ENV"
+          {
+            echo "ANDROID_RELEASE_KEYSTORE_PATH=$key_path"
+            echo "ANDROID_RELEASE_STORE_PASSWORD=$STORE_PASSWORD"
+            echo "ANDROID_RELEASE_KEY_ALIAS=$KEY_ALIAS"
+            echo "ANDROID_RELEASE_KEY_PASSWORD=$KEY_PASSWORD"
+          } >> "$GITHUB_ENV"
 
       - name: Build release APK with controlled version and signing
         working-directory: app
