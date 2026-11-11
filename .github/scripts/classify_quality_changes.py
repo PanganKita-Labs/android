@@ -51,13 +51,14 @@ OVERRIDES[".github/scripts/fetch_satoshi.py"] = RUNTIME
 
 def _invalid_path(path: str) -> bool:
     """Reject ambiguous or traversal-like input instead of skipping checks."""
-    if not path:
-        return True
-    if "\\" in path:
-        return True
-    if path.startswith("/"):
-        return True
-    return ".." in PurePosixPath(path).parts
+    return any(
+        (
+            not path,
+            "\\" in path,
+            path.startswith("/"),
+            ".." in PurePosixPath(path).parts,
+        )
+    )
 
 
 def _jobs_for_path(path: str) -> frozenset[str]:
@@ -115,8 +116,6 @@ def decide(event: str, base: str, head: str) -> dict[str, bool]:
         print(f"Git diff contains {len(paths)} changed paths")
         for path in paths[:30]:
             print(f"  {path}")
-        if len(paths) > 30:
-            print("  ... remaining paths omitted from display")
         return decisions
     except (OSError, ValueError, UnicodeError, subprocess.CalledProcessError) as exc:
         print(f"::warning::Cannot classify Git changes ({exc}); run all checks")
@@ -126,11 +125,10 @@ def decide(event: str, base: str, head: str) -> dict[str, bool]:
 def main() -> None:
     """Write every required output exactly once for downstream job conditions."""
     event = os.environ.get("GITHUB_EVENT_NAME", "")
-    base = (
-        os.environ.get("PR_BASE_SHA", "")
-        if event == "pull_request"
-        else os.environ.get("PUSH_BEFORE_SHA", "")
+    base_name = {"pull_request": "PR_BASE_SHA", "push": "PUSH_BEFORE_SHA"}.get(
+        event, ""
     )
+    base = os.environ.get(base_name, "")
     head = os.environ.get("GITHUB_SHA", "")
     decisions = decide(event, base, head)
     output = os.environ["GITHUB_OUTPUT"]
