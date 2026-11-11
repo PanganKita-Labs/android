@@ -34,6 +34,15 @@ and messaging are demonstrations backed by fixtures, not live integrations.
 6. **User expectations:** State clearly that no authentication, order,
    inventory, merchant verification or payment operation is live.
 
+## Explicit release approval gate
+
+After checking the asset rights, attribution, application ID, signing identity
+and intended tester audience, a maintainer must create the GitHub Actions
+repository variable `PANGANKITA_BETA_RELEASE_APPROVED` with value `true`.
+The manual workflow refuses to build or create a draft release otherwise.
+Unset the variable when a release is not authorized. This is a repository
+configuration gate, not a substitute for actual legal or security review.
+
 ## GitHub Actions signing secrets
 
 | Secret | Value |
