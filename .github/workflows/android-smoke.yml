@@ -8,18 +8,19 @@ on:
   pull_request:
     branches: [main]
     # Protect Android runtime compatibility on relevant PRs. Keep docs-only
-    # and unrelated tooling changes off the four-emulator matrix.
+    # and unrelated tooling and documentation-only changes off the matrix.
     paths:
       - '.github/workflows/android-smoke.yml'
       - '.github/scripts/run_android_smoke.sh'
       - '.github/scripts/fetch_satoshi.py'
-      - 'app/lib/**'
+      - 'app/lib/**/*.dart'
+      - 'app/lib/i18n/arb/*.arb'
       - 'app/android/**'
       - 'app/assets/**'
       - 'app/pubspec.yaml'
       - 'app/pubspec.lock'
       - 'app/l10n.yaml'
-      - 'app/integration_test/**'
+      - 'app/integration_test/**/*.dart'
 
 concurrency:
   group: android-smoke-${{ github.workflow }}-${{ github.ref }}

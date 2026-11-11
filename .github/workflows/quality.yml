@@ -21,7 +21,53 @@ defaults:
     working-directory: app
 
 jobs:
+  changes:
+    name: Determine affected Quality checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      formatting: ${{ steps.decide.outputs.formatting }}
+      analyzer: ${{ steps.decide.outputs.analyzer }}
+      dcl: ${{ steps.decide.outputs.dcl }}
+      complexity: ${{ steps.decide.outputs.complexity }}
+      documentation: ${{ steps.decide.outputs.documentation }}
+      tests: ${{ steps.decide.outputs.tests }}
+    steps:
+      - name: Checkout full Git history for exact change detection
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Exercise CI change-classification matrix
+        working-directory: .
+        run: python3 -m unittest discover -s .github/scripts -p 'test_classify_quality_changes.py' -v
+
+      - name: Validate maintained Python syntax
+        working-directory: .
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+
+          paths = sorted(Path("app/tool").glob("*.py"))
+          paths += sorted(Path(".github/scripts").glob("*.py"))
+          for path in paths:
+              ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+              print(f"Validated {path}")
+          print(f"Parsed {len(paths)} Python source files")
+          PY
+
+      - name: Select affected Quality jobs (fail closed)
+        id: decide
+        working-directory: .
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PUSH_BEFORE_SHA: ${{ github.event.before }}
+        run: python3 .github/scripts/classify_quality_changes.py
+
   formatting:
+    needs: changes
+    if: ${{ needs.changes.outputs.formatting == 'true' }}
     name: Formatting
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -45,6 +91,8 @@ jobs:
           git diff --exit-code -- .
 
   analyzer:
+    needs: changes
+    if: ${{ needs.changes.outputs.analyzer == 'true' }}
     name: Flutter analyzer
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -69,6 +117,8 @@ jobs:
         run: flutter analyze --fatal-infos --fatal-warnings
 
   dcl:
+    needs: changes
+    if: ${{ needs.changes.outputs.dcl == 'true' }}
     name: Dart Code Linter
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -115,6 +165,8 @@ jobs:
           lib
 
   complexity:
+    needs: changes
+    if: ${{ needs.changes.outputs.complexity == 'true' }}
     name: Complexity (Dartrics strict)
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -136,6 +188,8 @@ jobs:
         run: dart run dartrics analyze --snapshot none --strict-dismiss --fatal-warnings lib
 
   documentation:
+    needs: changes
+    if: ${{ needs.changes.outputs.documentation == 'true' }}
     name: API documentation and Python syntax
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -156,22 +210,10 @@ jobs:
       - name: Validate Dart API documentation
         run: dart doc --dry-run .
 
-      - name: Validate maintained Python syntax
-        working-directory: .
-        run: |
-          python3 - <<'PY'
-          import ast
-          from pathlib import Path
-
-          paths = sorted(Path("app/tool").glob("*.py"))
-          paths += sorted(Path(".github/scripts").glob("*.py"))
-          for path in paths:
-              ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-              print(f"Validated {path}")
-          print(f"Parsed {len(paths)} Python source files")
-          PY
 
   tests:
+    needs: changes
+    if: ${{ needs.changes.outputs.tests == 'true' }}
     name: Flutter tests (coverage)
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -204,6 +246,7 @@ jobs:
     name: Quality gate
     if: ${{ always() }}
     needs:
+      - changes
       - formatting
       - analyzer
       - dcl
@@ -213,30 +256,43 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Verify required jobs
+      - name: Verify required and deliberately skipped jobs
         working-directory: .
         env:
+          CLASSIFIER_RESULT: ${{ needs.changes.result }}
+          FORMATTING_EXPECTED: ${{ needs.changes.outputs.formatting }}
           FORMATTING_RESULT: ${{ needs.formatting.result }}
+          ANALYZER_EXPECTED: ${{ needs.changes.outputs.analyzer }}
           ANALYZER_RESULT: ${{ needs.analyzer.result }}
+          DCL_EXPECTED: ${{ needs.changes.outputs.dcl }}
           DCL_RESULT: ${{ needs.dcl.result }}
+          COMPLEXITY_EXPECTED: ${{ needs.changes.outputs.complexity }}
           COMPLEXITY_RESULT: ${{ needs.complexity.result }}
+          DOCUMENTATION_EXPECTED: ${{ needs.changes.outputs.documentation }}
           DOCUMENTATION_RESULT: ${{ needs.documentation.result }}
+          TESTS_EXPECTED: ${{ needs.changes.outputs.tests }}
           TESTS_RESULT: ${{ needs.tests.result }}
         run: |
           failed=0
+          if [ "$CLASSIFIER_RESULT" != "success" ]; then
+            echo "::error title=Quality gate::Changed-file classifier failed or was skipped."
+            failed=1
+          fi
           for entry in \
-            "Formatting:$FORMATTING_RESULT" \
-            "Flutter analyzer:$ANALYZER_RESULT" \
-            "Dart Code Linter:$DCL_RESULT" \
-            "Complexity:$COMPLEXITY_RESULT" \
-            "API documentation:$DOCUMENTATION_RESULT" \
-            "Flutter tests:$TESTS_RESULT"; do
-            name="${entry%%:*}"
-            result="${entry#*:}"
-            echo "$name: $result"
-            if [ "$result" != "success" ]; then
-              echo "::error title=Quality gate::$name finished with '$result'; required 'success'."
-              failed=1
-            fi
+            "formatting:$FORMATTING_EXPECTED:$FORMATTING_RESULT" \
+            "analyzer:$ANALYZER_EXPECTED:$ANALYZER_RESULT" \
+            "dcl:$DCL_EXPECTED:$DCL_RESULT" \
+            "complexity:$COMPLEXITY_EXPECTED:$COMPLEXITY_RESULT" \
+            "documentation:$DOCUMENTATION_EXPECTED:$DOCUMENTATION_RESULT" \
+            "tests:$TESTS_EXPECTED:$TESTS_RESULT"; do
+            IFS=: read -r name expected result <<< "$entry"
+            echo "$name: expected=$expected actual=$result"
+            case "$expected:$result" in
+              true:success|false:skipped) ;;
+              *)
+                echo "::error title=Quality gate::Unexpected $name status: expected $expected, got $result."
+                failed=1
+                ;;
+            esac
           done
           exit "$failed"
