@@ -34,59 +34,64 @@ APP_CONFIG = frozenset(
 HEX_SHA = re.compile(r"[0-9a-fA-F]{40}\Z")
 
 
-def classify_paths(paths: list[str]) -> dict[str, bool]:
-    """Return the required job decisions for all changed paths.
+# Patterns are ordered from specific source inputs to the conservative app/
+# fallback. Separate from control-file overrides to make job selection auditable.
+FILE_RULES = (
+    (re.compile(r"app/lib/.*\.dart\Z"), ALL),
+    (re.compile(r"app/lib/i18n/arb/.*\.arb\Z"), ALL),
+    (re.compile(r"app/.*\.dart\Z"), DART_TEST),
+    (re.compile(r"app/(?:android|assets)/.*\Z"), RUNTIME),
+    (re.compile(r"app/tool/.*\.(?:py|json)\Z"), frozenset()),
+    (re.compile(r"app/.*\.md\Z"), frozenset()),
+    (re.compile(r"app/.*\Z"), ALL),
+)
+OVERRIDES = {path: ALL for path in CONTROL | APP_CONFIG}
+OVERRIDES[".github/scripts/fetch_satoshi.py"] = RUNTIME
 
-    A source, dependency, or toolchain change affecting multiple checks takes
-    the union of those checks. Unknown app inputs run all checks by default.
-    """
+
+def _invalid_path(path: str) -> bool:
+    """Reject ambiguous or traversal-like input instead of skipping checks."""
+    if not path:
+        return True
+    if "\\" in path:
+        return True
+    if path.startswith("/"):
+        return True
+    return ".." in PurePosixPath(path).parts
+
+
+def _jobs_for_path(path: str) -> frozenset[str]:
+    """Map one repository path to the Quality jobs its changes can affect."""
+    if path in OVERRIDES:
+        return OVERRIDES[path]
+    for pattern, jobs in FILE_RULES:
+        if pattern.fullmatch(path):
+            return jobs
+    return frozenset()
+
+
+def _valid_sha(sha: str) -> bool:
+    """Accept a full nonzero commit SHA for Git diff comparison."""
+    return bool(HEX_SHA.fullmatch(sha)) and int(sha, 16) != 0
+
+
+def classify_paths(paths: list[str]) -> dict[str, bool]:
+    """Union affected jobs; unknown or invalid input always runs all checks."""
     selected: set[str] = set()
     if len(paths) > 300:
         return {job: True for job in JOBS}
 
     for path in paths:
-        if (
-            not path
-            or "\\" in path
-            or path.startswith("/")
-            or ".." in PurePosixPath(path).parts
-        ):
+        if _invalid_path(path):
             return {job: True for job in JOBS}
-
-        if path in CONTROL or path in APP_CONFIG:
-            selected.update(ALL)
-        elif path.startswith("app/") and path.endswith(".md"):
-            # Documentation is linted by Text Integrity and Links.
-            continue
-        elif path.startswith("app/lib/") and path.endswith(".dart"):
-            selected.update(ALL)
-        elif path.startswith("app/lib/i18n/arb/") and path.endswith(".arb"):
-            selected.update(ALL)
-        elif path.startswith("app/") and path.endswith(".dart"):
-            selected.update(DART_TEST)
-        elif path.startswith("app/android/") or path.startswith("app/assets/"):
-            selected.update(RUNTIME)
-        elif path == ".github/scripts/fetch_satoshi.py":
-            selected.update(RUNTIME)
-        elif path.startswith("app/tool/") and path.endswith((".py", ".json")):
-            # Python syntax is checked in the classifier itself; the dedicated
-            # i18n workflow validates checker behavior.
-            continue
-        elif path.startswith("app/"):
-            # Future app inputs are not silently classified as documentation.
-            selected.update(ALL)
+        selected.update(_jobs_for_path(path))
 
     return {job: job in selected for job in JOBS}
 
 
 def diff_paths(base: str, head: str) -> list[str]:
     """Return added, modified, renamed and deleted paths, without a file cap."""
-    if (
-        not HEX_SHA.fullmatch(base)
-        or not HEX_SHA.fullmatch(head)
-        or int(base, 16) == 0
-        or int(head, 16) == 0
-    ):
+    if not _valid_sha(base) or not _valid_sha(head):
         raise ValueError("Git diff commits must be nonzero full-length SHAs")
 
     result = subprocess.run(
