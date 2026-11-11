@@ -18,11 +18,13 @@ that implemented boundary.
   using an AI coding agent. Follow applicable scoped `AGENTS.md` files; do not
   treat agent instructions as a substitute for human review.
 
-**Licensing:** Contributors' licensable source code is available under
-[Apache License 2.0](LICENSE) and carries project attribution in [NOTICE](NOTICE).
-Preserve the legal notices when redistributing licensed code. Third-party
-assets and trademarks may have separate terms; check their permissions before
-including them in a distribution.
+**Licensing:** Contributors may license only work they own or are authorized
+to contribute. The repository uses [Apache License 2.0](LICENSE) for such
+licensed source code, with project and maintainer attribution in [NOTICE](NOTICE).
+Preserve applicable notices when redistributing that code. The project's
+non-commercial educational purpose does not restrict commercial reuse under
+Apache-2.0 and does not grant permission for third-party menu photos, branding,
+fonts, or other assets. Confirm their individual permissions first.
 
 ## Local setup (Windows / PowerShell)
 
@@ -49,6 +51,31 @@ local graphs, build outputs, or private data. Refer to
 
 The `backend/` folder contains future-facing documentation, not a runnable API.
 Do not invent backend setup instructions.
+
+## Code and documentation standards
+
+- Write clean, readable, maintainable code with clear names and small,
+  cohesive responsibilities. Avoid unnecessary duplication, dead code,
+  god widgets, speculative layers, and abstractions without real reuse.
+  Apply KISS, YAGNI, and DRY with judgment, following the
+  [architecture guide](docs/ARCHITECTURE.md) and existing quality gates.
+- Preserve feature boundaries, state ownership, localization, accessibility,
+  and deterministic testability. Add or update meaningful tests for behavior
+  changes; never weaken analyzer, linter, or complexity checks to hide defects.
+- Write concise, task-oriented documentation, using the
+  [Google developer documentation style guide](https://developers.google.com/style)
+  as an editorial reference. Prefer active voice, descriptive headings and
+  links, accessible image descriptions, and accurate, runnable examples.
+  Update relevant docs with the code and remove outdated or repeated claims.
+- Keep the root README an overview and this file the canonical contribution
+  workflow. For source API comments, follow the
+  [Dart and Python documentation conventions](docs/architecture/code-documentation.md)
+  rather than adding comments that merely restate obvious code.
+- Before adding or reusing images, menu photographs, icons, fonts, logos, or
+  screenshots, record the creator, source, license or explicit permission,
+  required credit, and rights to distribute them in Git and compiled APKs.
+  Unknown provenance is not permission: replace or omit unverified material.
+  Consult the [beta asset checklist](docs/BETA_RELEASE.md#asset-provenance-and-redistribution).
 
 ## Make a focused change
 
@@ -104,6 +131,8 @@ make a pull request green.
   unchecked. Do not claim that demonstration flows are production services.
 - Identify risks involving privacy, location, authentication, pricing,
   reservations, food-safety representations, and licensing when applicable.
+- For new or changed third-party assets, supply verifiable source and permission
+  evidence in the PR; don't rely on a prototype or non-commercial disclaimer.
 - Keep the PR reviewable and wait for required GitHub Actions and maintainer
   approval before merging.
 - The [repository rules](rules.md) and scoped agent instructions may impose

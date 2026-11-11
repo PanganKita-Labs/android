@@ -104,6 +104,7 @@ Remove this section when it does not apply.
 - [ ] Logs do not expose tokens, precise location, personal data, or other sensitive information
 - [ ] New data collection is necessary and documented
 - [ ] New dependencies were reviewed before being introduced
+- [ ] Third-party assets have verified source, redistribution permission, and required attribution, or no third-party assets were added
 
 ## Checklist
 

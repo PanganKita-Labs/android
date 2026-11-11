@@ -1,8 +1,10 @@
 # PanganKita v0.1.0 beta release preparation
 
-This release is a **testing prerelease**, not a production service.
-Authentication, merchant inventories, reservations, payments, location tracking
-and messaging are demonstrations backed by fixtures, not live integrations.
+This release is a **non-commercial educational and research prototype** intended
+for testing, not a production service. Authentication, merchant inventories,
+reservations, payments, location tracking and messaging are demonstrations
+backed by fixtures, not live integrations. This purpose does not grant permission
+to redistribute third-party content.
 
 ## Proposed identity and distribution
 
@@ -21,10 +23,13 @@ and messaging are demonstrations backed by fixtures, not live integrations.
 2. **Signing:** Create and safely back up a dedicated release keystore.
    Configure the four GitHub secrets below and record the signing certificate
    fingerprint privately. Never sign a distributed beta using debug keys.
-3. **Copyright:** Confirm the contributors can license all included source
-   under Apache-2.0 and approve the project attribution in NOTICE. The initial
-   text names the `PanganKita-Labs contributors`; named individual owners
-   must be reviewed before claiming their rights or identity.
+   The current workflow verifies that an APK is signed, but does not enforce
+   the expected signing certificate fingerprint; compare it independently
+   before publishing and add an automated identity pin before future releases.
+3. **Copyright:** Confirm every contributor can license their respective work
+   under Apache-2.0. The NOTICE credits PanganKita-Labs contributors and
+   identifies Yoruxyv as a maintainer; neither statement transfers or replaces
+   the copyright of other authors.
 4. **Assets:** Audit the original creator and distribution rights for logos,
    screenshots, prototype photographs and embedded Geist/Satoshi fonts.
    Their licenses or trademark rights do not automatically become Apache-2.0.
@@ -33,6 +38,27 @@ and messaging are demonstrations backed by fixtures, not live integrations.
    including Indonesian, English, Simplified Chinese, navigation and startup.
 6. **User expectations:** State clearly that no authentication, order,
    inventory, merchant verification or payment operation is live.
+
+## Asset provenance and redistribution
+
+The repository contains example food imagery and other visual assets. Some food
+photographs may have been obtained from third-party menus by team members;
+the original sources and permissions have **not** been established by this
+repository review. An educational or non-commercial disclaimer is not a license.
+
+| Content to review | Current evidence boundary | Required action |
+| --- | --- | --- |
+| Food photos in `app/assets/prototype/` (for example, `buns.webp`, `chicken.webp`, `rendang.webp`, `soto.webp`, `store-croissants.webp`) | No verified source or redistribution grant recorded here | Identify the creator and source, obtain appropriate rights, or replace the files |
+| Project branding and third-party marks under `app/assets/brand/` and `app/assets/prototype/` | Attribution or trademark authority is not established by inclusion in Git | Confirm owners, permissions and use of marks |
+| Screenshots under `docs/screenshots/` | Screenshots may reproduce the same third-party materials | Regenerate screenshots after replacing unverified imagery |
+| Geist files in `app/assets/fonts/` and downloaded Satoshi fonts | License files and a hash-checked download mechanism exist | Confirm applicable license terms, required notices, and redistribution with the APK |
+
+Before creating or publishing a draft APK, maintainers must record the creator,
+source, license or permission, attribution requirements, and repository/APK
+redistribution rights for each external asset. Remove or replace anything whose
+rights remain unverified, including affected screenshots. Do not classify an
+asset as cleared solely because it is already committed or the app earns no
+revenue. Keep the approval variable unset until this review is complete.
 
 ## Explicit release approval gate
 
@@ -64,9 +90,10 @@ After merging this preparation PR and completing all above decisions:
 2. The workflow verifies tag/version consistency, rejects the example Android
    application ID, checks required signing secrets, builds a release APK,
    verifies its signature, and creates a **draft** GitHub prerelease.
-3. Inspect the APK checksum, signing certificate and LICENSE/NOTICE, validate
-   installation and application behavior on Android, then explicitly publish
-   the draft prerelease.
+3. Check the APK checksum, compare its signing certificate fingerprint against
+   the approved signing identity, inspect LICENSE/NOTICE and cleared assets,
+   validate installation and application behavior on Android, then explicitly
+   publish the draft prerelease.
 
 Future betas must increment both beta number and Android version code.
 Do not reuse Git tags or downgrade version codes.

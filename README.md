@@ -10,7 +10,9 @@
 
 ---
 
-> **Current status: Flutter demonstration.** PanganKita has an interactive mobile UI backed by local example data and temporary in-memory state. It does **not** authenticate real accounts, reserve inventory, process payments, send messages, or confirm pickups. Screenshots illustrate the prototype, not a live marketplace.
+> **Current status: Flutter demonstration.** PanganKita is a non-commercial educational and research prototype with an interactive mobile UI backed by local example data and temporary in-memory state. It does **not** authenticate real accounts, reserve inventory, process payments, send messages, or confirm pickups. Screenshots illustrate the prototype, not a live marketplace.
+>
+> **Asset rights are under review.** Some illustrative food photographs may have originated from third-party menus. Their appearance here does not establish permission to copy or redistribute them, ownership, sponsorship, or endorsement. See the [asset review and release gate](docs/BETA_RELEASE.md#asset-provenance-and-redistribution).
 
 ## Why PanganKita?
 
@@ -172,7 +174,7 @@ The repository also runs automated formatting, analysis, test, integrity, and An
 | [Architecture director](docs/ARCHITECTURE.md) | Engineering principles and dependency boundaries |
 | [Design contract](docs/DESIGN.md) | Brand, typography and screenshot-fidelity rules |
 | [Implementation notes](docs/IMPLEMENTATION.md) | Screen-level prototype behavior and limitations |
-| [Contributor guide](CONTRIBUTING.md) | Setup, validations, scope and contribution workflow |
+| [Contributor guide](CONTRIBUTING.md) | Clean-code, documentation, asset-provenance and review standards, plus contribution workflow |
 | [Security policy](SECURITY.md) | Responsible disclosure and private reporting prerequisites |
 | [Code of conduct](CODE_OF_CONDUCT.md) | Community expectations and reporting guidance |
 | [AI contribution guardrails](rules.md) | Agent-specific branch, review, and authorization requirements |
@@ -180,4 +182,8 @@ The repository also runs automated formatting, analysis, test, integrity, and An
 
 Human contributors should start with the [contributor guide](CONTRIBUTING.md). AI-assisted work also follows [root agent instructions](AGENTS.md) and applicable scoped `AGENTS.md` files. Keep product claims evidence-based, preserve the existing brand identity, use isolated branches for focused changes, and document whether new behavior is **local UI**, **mock/demo**, or **actually connected**.
 
-**Project and asset licensing:** The contributors' licensable source code is available under [Apache License 2.0](LICENSE), with attribution in [NOTICE](NOTICE). Preserve the applicable notices on redistribution. The license does not grant rights in other parties' fonts, images, logos, trademarks or other assets; review their separate terms before distributing a binary.
+## License and third-party content
+
+**Code and attribution:** Contributors' source code that they are authorized to license is provided under [Apache License 2.0](LICENSE). Preserve the required notices, including the [project attribution](NOTICE) and maintainer credit to [Yoruxyv](https://github.com/Yoruxyv), when redistributing licensed material. Apache-2.0 permits commercial reuse of licensed code; the project's non-commercial educational purpose does not limit that license grant. Contributor copyright and licensing authority still require confirmation before this preparation PR is merged.
+
+**Assets:** The code license does not automatically grant rights to third-party food/menu photographs, fonts, logos, trademarks, or screenshots containing those works. Some prototype image sources and permissions have not been established. Unverified assets must be removed, replaced, or appropriately licensed before public redistribution, including distribution in an APK. See the [beta asset review checklist](docs/BETA_RELEASE.md#asset-provenance-and-redistribution) and [contribution standards](CONTRIBUTING.md#code-and-documentation-standards).

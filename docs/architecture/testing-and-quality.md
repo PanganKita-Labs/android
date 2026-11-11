@@ -5,9 +5,10 @@ Read `docs/ARCHITECTURE.md` first.
 This document defines testing boundaries, test doubles, quality gates,
 structural verification, and Graphify expectations.
 
-**Current implementation:** only a branded bootstrap smoke test is present.
-Unit, feature widget, and integration tests described below become necessary
-when those behaviors are actually implemented.
+**Current implementation:** The Flutter demonstration has unit and feature
+widget tests under `app/test/` and an Android launch smoke test under
+`app/integration_test/`. They validate local prototype behavior, not live
+backend transactions or production integrations.
 
 ## Testing principle
 
@@ -89,7 +90,7 @@ dart run dart_code_linter:metrics analyze --fatal-style --fatal-performance --fa
 dart run dart_code_linter:metrics check-unused-code --analyze-private-members lib
 dart run dart_code_linter:metrics check-unused-files lib
 dart run dart_code_linter:metrics check-unnecessary-nullable lib
-dart run dartrics analyze lib
+dart run dartrics analyze --snapshot none --strict-dismiss --fatal-warnings lib
 flutter test --coverage
 ```
 
